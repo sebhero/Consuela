@@ -30,11 +30,17 @@
  */
 #include <asf.h>
 
+#define pin24 PIO_PA15_IDX
+
+
 int main (void)
 {
 	/* Insert system clock initialization code here (sysclk_init()). */
 
+	sysclk_init();
 	board_init();
+
+	ioport_set_pin_dir(pin24,IOPORT_DIR_OUTPUT);
 
 	/* Insert application code here, after the board has been initialized. */
 }
