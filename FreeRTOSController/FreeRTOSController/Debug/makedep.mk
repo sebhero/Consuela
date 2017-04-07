@@ -2,6 +2,8 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+src\ASF\common\services\delay\sam\cycle_counter.c
+
 src\ASF\common\utils\stdio\read.c
 
 src\ASF\sam\drivers\usart\usart.c
