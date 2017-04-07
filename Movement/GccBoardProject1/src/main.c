@@ -30,15 +30,17 @@
  */
 #include <asf.h>
 #include <inttypes.h>
-#include "DelayFunctions.h"
 
+//Defines pin 24 on the Due-board as a pin to be used.
 #define pin24 PIO_PA15_IDX
-uint16_t motorSpeed = 1000;
+
+//Sets the base pulse width to 1000 micro seconds.
+static uint16_t motorSpeed = 1000;
 
 
 void motor(uint16_t motorSpeed){
 	ioport_set_pin_level(pin24, HIGH);
-	delayMicroseconds(motorSpeed);
+	delay_us(motorSpeed);
 	ioport_set_pin_level(pin24, LOW);
 }
 
@@ -46,22 +48,31 @@ int main (void)
 {
 	sysclk_init();
 	board_init();
+	//Makes pin 24 on the Due-board an output
 	ioport_set_pin_dir(pin24,IOPORT_DIR_OUTPUT);
 	
+	/*while(1){
+		ioport_set_pin_level(pin24, HIGH);
+		delay_ms(3000);
+		ioport_set_pin_level(pin24, LOW);
+		delay_ms(3000);
+	}*/
 	//Loop that runs the temp. program
 	//Turns the motors forward, stops them and lastly turn them backwards
 	while(1){
-		delayMicroseconds(2000000);
-		while (motorSpeed<2100)
+		delay_ms(2000);
+		while (motorSpeed<2050)
 		{
 			motor(motorSpeed);
-			delayMicroseconds(1100);
+			//This delay makes it so the 2nd motor gets the signal
+			delay_us(1100);
 			motor(motorSpeed);
-			motorSpeed +=50;
-			delayMicroseconds(1000000);
+			motorSpeed = motorSpeed+50;
+			//Needs a delay of at least 5.25ms for the "timeout period" to pass
+			delay_ms(1000);
 		}
 		motor(1500);
-		delayMicroseconds(1100);
+		delay_us(1100);
 		motor(1500);
 	}
 	return 0;
