@@ -56,6 +56,20 @@
 #include <compiler.h>
 #include <status_codes.h>
 
+// From module: FreeRTOS mini Real-Time Kernel
+#include <FreeRTOS.h>
+#include <FreeRTOS_CLI.h>
+#include <StackMacros.h>
+#include <croutine.h>
+#include <list.h>
+#include <mpu_wrappers.h>
+#include <portable.h>
+#include <projdefs.h>
+#include <queue.h>
+#include <semphr.h>
+#include <task.h>
+#include <timers.h>
+
 // From module: GPIO - General purpose Input/Output
 #include <gpio.h>
 
@@ -81,8 +95,20 @@
 // From module: SAM3X startup code
 #include <exceptions.h>
 
+// From module: Standard serial I/O (stdio) - SAM implementation
+#include <stdio_serial.h>
+
 // From module: System Clock Control - SAM3X/A implementation
 #include <sysclk.h>
+
+// From module: UART - Univ. Async Rec/Trans
+#include <uart.h>
+
+// From module: USART - Serial interface - SAM implementation for devices with both UART and USART
+#include <serial.h>
+
+// From module: USART - Univ. Syn Async Rec/Trans
+#include <usart.h>
 
 // From module: pio_handler support enabled
 #include <pio_handler.h>
