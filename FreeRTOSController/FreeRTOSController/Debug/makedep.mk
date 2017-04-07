@@ -2,6 +2,8 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+src\ASF\common\services\delay\sam\cycle_counter.c
+
 src\ASF\common\utils\stdio\read.c
 
 src\ASF\sam\drivers\usart\usart.c
@@ -47,6 +49,8 @@ src\ASF\sam\utils\cmsis\sam3x\source\templates\gcc\startup_sam3x.c
 src\ASF\sam\utils\cmsis\sam3x\source\templates\system_sam3x.c
 
 src\ASF\sam\utils\syscalls\gcc\syscalls.c
+
+src\ASF\thirdparty\wireless\addons\sio2host\uart\sio2host.c
 
 src\main.c
 
