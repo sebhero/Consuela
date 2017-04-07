@@ -9,10 +9,13 @@
 #ifndef MOTORFUNC_H_
 #define MOTORFUNC_H_
 #define pin24 PIO_PA15_IDX
+#include <inttypes.h>
 
 void pulse(uint16_t motorSpeed);
-void forward(void);
+void forwardDrive(void);
+void reverseDrive(void);
 void rotate(void);
+void stop(void);
 
 
 
