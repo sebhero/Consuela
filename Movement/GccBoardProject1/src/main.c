@@ -35,7 +35,8 @@
 #define pin24 PIO_PA15_IDX
 
 //Sets the base pulse width to 1000 micro seconds.
-static uint16_t motorSpeed = 1000;
+static uint16_t motorSpeed = 1300;	//Motor 1, under 1500 ger bakåt
+static uint16_t motorSpeed2 = 1700; //Motor 2 över 1500 ger frammåt. 1500 stannar
 
 
 void motor(uint16_t motorSpeed){
@@ -61,18 +62,19 @@ int main (void)
 	//Turns the motors forward, stops them and lastly turn them backwards
 	while(1){
 		delay_ms(2000);
-		while (motorSpeed<2050)
+		while (motorSpeed<1750)
 		{
 			motor(motorSpeed);
 			//This delay makes it so the 2nd motor gets the signal
-			delay_us(1100);
-			motor(motorSpeed);
-			motorSpeed = motorSpeed+50;
+			delay_us(1100); //Man måste ha en viss delay för att nästa puls ska gå till andra hjulet.
+			motor(motorSpeed2);
+			motorSpeed = motorSpeed+50; //Ökar hastigheten för motor 1
+			motorSpeed2 = motorSpeed2-50; //Minskar hastigheten för motor 2
 			//Needs a delay of at least 5.25ms for the "timeout period" to pass
 			delay_ms(1000);
 		}
 		motor(1500);
-		delay_us(1100);
+		delay_us(1100); //Delay i mikrosekunder. För att nästa puls ska kunna gå till nästa hjul
 		motor(1500);
 	}
 	return 0;
