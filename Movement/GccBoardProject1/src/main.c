@@ -31,7 +31,10 @@
 #include <asf.h>
 #include <inttypes.h>
 
+//Defines pin 24 on the Due-board as a pin to be used.
 #define pin24 PIO_PA15_IDX
+
+//Sets the base pulse width to 1000 micro seconds.
 static uint16_t motorSpeed = 1000;
 
 
@@ -45,6 +48,7 @@ int main (void)
 {
 	sysclk_init();
 	board_init();
+	//Makes pin 24 on the Due-board an output
 	ioport_set_pin_dir(pin24,IOPORT_DIR_OUTPUT);
 	
 	/*while(1){
@@ -60,9 +64,11 @@ int main (void)
 		while (motorSpeed<2050)
 		{
 			motor(motorSpeed);
+			//This delay makes it so the 2nd motor gets the signal
 			delay_us(1100);
 			motor(motorSpeed);
 			motorSpeed = motorSpeed+50;
+			//Needs a delay of at least 5.25ms for the "timeout period" to pass
 			delay_ms(1000);
 		}
 		motor(1500);
