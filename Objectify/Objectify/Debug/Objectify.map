@@ -109,21 +109,6 @@ Discarded input sections
  .ARM.exidx     0x00000000        0x8 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m/crt0.o
  .ARM.attributes
                 0x00000000       0x1b c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m/crt0.o
- .group         0x00000000        0x8 Objectify.o
- .text          0x00000000        0x0 Objectify.o
- .data          0x00000000        0x0 Objectify.o
- .bss           0x00000000        0x0 Objectify.o
- .debug_info    0x00000000       0x21 Objectify.o
- .debug_abbrev  0x00000000       0x13 Objectify.o
- .debug_aranges
-                0x00000000       0x18 Objectify.o
- .debug_macro   0x00000000       0x11 Objectify.o
- .debug_macro   0x00000000      0x874 Objectify.o
- .debug_line    0x00000000       0x31 Objectify.o
- .debug_str     0x00000000     0x246c Objectify.o
- .comment       0x00000000       0x5c Objectify.o
- .ARM.attributes
-                0x00000000       0x33 Objectify.o
  .group         0x00000000        0x8 src/ASF/common/services/clock/sam3x/sysclk.o
  .group         0x00000000        0x8 src/ASF/common/services/clock/sam3x/sysclk.o
  .group         0x00000000        0x8 src/ASF/common/services/clock/sam3x/sysclk.o
@@ -371,7 +356,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x5f src/ASF/common/services/clock/sam3x/sysclk.o
  .debug_macro   0x00000000       0x90 src/ASF/common/services/clock/sam3x/sysclk.o
  .debug_line    0x00000000      0xc48 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_str     0x00000000    0x5e453 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_str     0x00000000    0x5e443 src/ASF/common/services/clock/sam3x/sysclk.o
  .comment       0x00000000       0x5c src/ASF/common/services/clock/sam3x/sysclk.o
  .ARM.attributes
                 0x00000000       0x33 src/ASF/common/services/clock/sam3x/sysclk.o
@@ -605,7 +590,7 @@ Discarded input sections
  .debug_macro   0x00000000      0x3ca src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
  .debug_macro   0x00000000       0x3f src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
  .debug_line    0x00000000      0xaf4 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
- .debug_str     0x00000000    0x5a591 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
+ .debug_str     0x00000000    0x5a581 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
  .comment       0x00000000       0x5c src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
  .ARM.attributes
                 0x00000000       0x33 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
@@ -1920,7 +1905,7 @@ Discarded input sections
  .debug_macro   0x00000000      0x2a3 src/ASF/sam/drivers/pmc/sleep.o
  .debug_macro   0x00000000      0x790 src/ASF/sam/drivers/pmc/sleep.o
  .debug_line    0x00000000      0xc47 src/ASF/sam/drivers/pmc/sleep.o
- .debug_str     0x00000000    0x5dde2 src/ASF/sam/drivers/pmc/sleep.o
+ .debug_str     0x00000000    0x5ddd2 src/ASF/sam/drivers/pmc/sleep.o
  .comment       0x00000000       0x5c src/ASF/sam/drivers/pmc/sleep.o
  .ARM.attributes
                 0x00000000       0x33 src/ASF/sam/drivers/pmc/sleep.o
@@ -2582,7 +2567,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x3f src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
  .debug_macro   0x00000000      0x3ca src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
  .debug_line    0x00000000      0xb22 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
- .debug_str     0x00000000    0x5a842 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
+ .debug_str     0x00000000    0x5a832 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
  .comment       0x00000000       0x5c src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
  .ARM.attributes
                 0x00000000       0x33 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
@@ -2661,7 +2646,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x41 src/ASF/sam/utils/syscalls/gcc/syscalls.o
  .debug_macro   0x00000000      0x120 src/ASF/sam/utils/syscalls/gcc/syscalls.o
  .debug_line    0x00000000      0x39b src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_str     0x00000000     0x4f11 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_str     0x00000000     0x4f01 src/ASF/sam/utils/syscalls/gcc/syscalls.o
  .comment       0x00000000       0x5c src/ASF/sam/utils/syscalls/gcc/syscalls.o
  .ARM.attributes
                 0x00000000       0x33 src/ASF/sam/utils/syscalls/gcc/syscalls.o
@@ -3345,7 +3330,6 @@ Linker script and memory map
 LOAD c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m/crti.o
 LOAD c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m/crtbegin.o
 LOAD c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m/crt0.o
-LOAD Objectify.o
 LOAD src/ASF/common/services/clock/sam3x/sysclk.o
 LOAD src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
 LOAD src/ASF/sam/boards/arduino_due_x/init.o
@@ -3723,21 +3707,21 @@ OUTPUT(Objectify.elf elf32-littlearm)
  .debug_line    0x000041aa      0xb05 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
  .debug_line    0x00004caf      0xcf8 src/main.o
 
-.debug_str      0x00000000    0x5faaf
- .debug_str     0x00000000    0x5e8a9 src/ASF/sam/boards/arduino_due_x/init.o
-                              0x5ec0d (size before relaxing)
- .debug_str     0x0005e8a9      0x432 src/ASF/sam/drivers/pio/pio.o
-                              0x5aee5 (size before relaxing)
- .debug_str     0x0005ecdb      0x470 src/ASF/sam/drivers/pio/pio_handler.o
-                              0x5af2d (size before relaxing)
- .debug_str     0x0005f14b      0x785 src/ASF/sam/drivers/pmc/pmc.o
-                              0x5af5b (size before relaxing)
- .debug_str     0x0005f8d0       0x4d src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
-                              0x5a55a (size before relaxing)
- .debug_str     0x0005f91d       0xb2 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
-                              0x5a62f (size before relaxing)
- .debug_str     0x0005f9cf       0xe0 src/main.o
-                              0x5e9dd (size before relaxing)
+.debug_str      0x00000000    0x5fa9f
+ .debug_str     0x00000000    0x5e899 src/ASF/sam/boards/arduino_due_x/init.o
+                              0x5ebfd (size before relaxing)
+ .debug_str     0x0005e899      0x432 src/ASF/sam/drivers/pio/pio.o
+                              0x5aed5 (size before relaxing)
+ .debug_str     0x0005eccb      0x470 src/ASF/sam/drivers/pio/pio_handler.o
+                              0x5af1d (size before relaxing)
+ .debug_str     0x0005f13b      0x785 src/ASF/sam/drivers/pmc/pmc.o
+                              0x5af4b (size before relaxing)
+ .debug_str     0x0005f8c0       0x4d src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
+                              0x5a54a (size before relaxing)
+ .debug_str     0x0005f90d       0xb2 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
+                              0x5a61f (size before relaxing)
+ .debug_str     0x0005f9bf       0xe0 src/main.o
+                              0x5e9cd (size before relaxing)
 
 .debug_frame    0x00000000      0x938
  .debug_frame   0x00000000       0x28 src/ASF/sam/boards/arduino_due_x/init.o

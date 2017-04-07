@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Atmel Studio Solution File, Format Version 11.00
-Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Objectify", "Objectify\Objectify.cproj", "{F46D3817-4259-4D4D-AF4D-FF3318FFD62B}"
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Objectify", "Objectify\Objectify.cproj", "{A8906D15-CE6A-4B1A-9216-B285142DC331}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +9,10 @@ Global
 		Release|ARM = Release|ARM
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F46D3817-4259-4D4D-AF4D-FF3318FFD62B}.Debug|ARM.ActiveCfg = Debug|ARM
-		{F46D3817-4259-4D4D-AF4D-FF3318FFD62B}.Debug|ARM.Build.0 = Debug|ARM
-		{F46D3817-4259-4D4D-AF4D-FF3318FFD62B}.Release|ARM.ActiveCfg = Release|ARM
-		{F46D3817-4259-4D4D-AF4D-FF3318FFD62B}.Release|ARM.Build.0 = Release|ARM
+		{A8906D15-CE6A-4B1A-9216-B285142DC331}.Debug|ARM.ActiveCfg = Debug|ARM
+		{A8906D15-CE6A-4B1A-9216-B285142DC331}.Debug|ARM.Build.0 = Debug|ARM
+		{A8906D15-CE6A-4B1A-9216-B285142DC331}.Release|ARM.ActiveCfg = Release|ARM
+		{A8906D15-CE6A-4B1A-9216-B285142DC331}.Release|ARM.Build.0 = Release|ARM
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
