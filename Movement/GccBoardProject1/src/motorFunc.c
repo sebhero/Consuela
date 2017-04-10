@@ -23,8 +23,8 @@ void pulse(uint16_t motorSpeed){
 void forwardDrive(){
 	pulse(baseSpeed);
 	delay_us(motorSwitch);
-	pulse(baseSpeed);
-	delay_ms(timeOut);
+	pulse(baseSpeedLeft);
+	delay_ms(100);
 }
 
 //Sets both engines to go the same direction with the "same" speed (reverse)
@@ -40,7 +40,7 @@ void rotate(){
 	pulse(baseSpeed);
 	delay_us(motorSwitch);
 	pulse(reverseBaseSpeed);
-	delay_ms(timeOut);
+	delay_ms(700);
 }
 
 //Stops both of the engines
@@ -48,6 +48,20 @@ void stop(){
 	pulse(1500);
 	delay_us(motorSwitch);
 	pulse(1500);
+	delay_ms(timeOut);
+}
+
+void turnLeft(){
+	pulse(baseSpeed);
+	delay_us(motorSwitch);
+	pulse(baseSpeed+100);
+	delay_ms(timeOut);
+}
+
+void turnRight(){
+	pulse(baseSpeed+100);
+	delay_us(motorSwitch);
+	pulse(baseSpeed);
 	delay_ms(timeOut);
 }
 

@@ -440,6 +440,12 @@
     <Folder Include="src\config\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\distanceSensor.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\distanceSensor.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\motorFunc.h">
       <SubType>compile</SubType>
     </Compile>
