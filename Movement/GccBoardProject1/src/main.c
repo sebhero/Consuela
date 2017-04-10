@@ -34,15 +34,6 @@ int main (void)
 	*/
 	//Starting with a stop(); command is also advisable, as to not run into problems when doing a reset
 	while(1){
-<<<<<<< Updated upstream
-		stop();
-		forwardDrive();
-		stop();
-		rotate();
-		stop();
-		reverseDrive();
-		//HELP
-=======
 		distance = distance_forward();
 	
 		if (distance<75)
@@ -55,7 +46,6 @@ int main (void)
 		{
 			forwardDrive();
 		}
->>>>>>> Stashed changes
 	}
 	return 0;
 }

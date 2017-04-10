@@ -21,9 +21,9 @@ void pulse(uint16_t motorSpeed){
 
 //Sets both engines to go the same direction with the "same" speed
 void forwardDrive(){
-	pulse(baseSpeed);
+	pulse(2000);
 	delay_us(motorSwitch);
-	pulse(baseSpeedLeft);
+	pulse(2000);
 	delay_ms(100);
 }
 
