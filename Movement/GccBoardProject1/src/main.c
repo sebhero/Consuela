@@ -6,6 +6,8 @@
 #include <asf.h>
 #include <inttypes.h>
 #include "motorFunc.h"
+#include "distanceSensor.h"
+
 
 
 int main (void)
@@ -14,6 +16,11 @@ int main (void)
 	board_init();
 	//Makes pin 24 on the Due-board an output
 	ioport_set_pin_dir(pin24,IOPORT_DIR_OUTPUT);
+	
+	
+	ioport_set_pin_dir(trig,IOPORT_DIR_OUTPUT);
+	ioport_set_pin_dir(echo, IOPORT_DIR_INPUT);
+	unsigned long distance;
 	
 	//Starts with a delay simply to reduce the chance of an error occuring when reseting the program.
 	delay_ms(2000);
@@ -27,12 +34,28 @@ int main (void)
 	*/
 	//Starting with a stop(); command is also advisable, as to not run into problems when doing a reset
 	while(1){
+<<<<<<< Updated upstream
 		stop();
 		forwardDrive();
 		stop();
 		rotate();
 		stop();
 		reverseDrive();
+		//HELP
+=======
+		distance = distance_forward();
+	
+		if (distance<75)
+		{
+			stop();
+			rotate();
+			
+		} 
+		else
+		{
+			forwardDrive();
+		}
+>>>>>>> Stashed changes
 	}
 	return 0;
 }

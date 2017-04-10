@@ -1,5 +1,11 @@
 Archive member included because of file (symbol)
 
+c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_arm_addsubdf3.o)
+                              src/distanceSensor.o (__aeabi_ui2d)
+c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_arm_muldivdf3.o)
+                              src/distanceSensor.o (__aeabi_ddiv)
+c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_arm_fixdfsi.o)
+                              src/distanceSensor.o (__aeabi_d2iz)
 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_aeabi_uldivmod.o)
                               src/motorFunc.o (__aeabi_uldivmod)
 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(bpabi.o)
@@ -95,6 +101,8 @@ Allocating common symbols
 Common symbol       size              file
 
 errno               0x4               c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-reent.o)
+distance            0x4               src/distanceSensor.o
+duration            0x4               src/distanceSensor.o
 
 Discarded input sections
 
@@ -109,6 +117,131 @@ Discarded input sections
  .ARM.exidx     0x00000000        0x8 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m/crt0.o
  .ARM.attributes
                 0x00000000       0x1b c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .group         0x00000000        0x8 src/distanceSensor.o
+ .text          0x00000000        0x0 src/distanceSensor.o
+ .data          0x00000000        0x0 src/distanceSensor.o
+ .bss           0x00000000        0x0 src/distanceSensor.o
+ .bss.cpu_irq_critical_section_counter
+                0x00000000        0x4 src/distanceSensor.o
+ .bss.cpu_irq_prev_interrupt_state
+                0x00000000        0x1 src/distanceSensor.o
  .group         0x00000000        0x8 src/ASF/common/services/clock/sam3x/sysclk.o
  .group         0x00000000        0x8 src/ASF/common/services/clock/sam3x/sysclk.o
  .group         0x00000000        0x8 src/ASF/common/services/clock/sam3x/sysclk.o
@@ -235,6 +368,116 @@ Discarded input sections
                 0x00000000        0x4 src/ASF/common/services/clock/sam3x/sysclk.o
  .bss.cpu_irq_prev_interrupt_state
                 0x00000000        0x1 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x874 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x4d1 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x34 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x166 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x76 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x16 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x6e4 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x16 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x44 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x209 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x20 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x3a src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x18 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0xb09 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0xab6 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x569 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x2b5 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x31a src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x74f src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x82 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x57b src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x1c src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x6b7 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x52d src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0xbe src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000     0x2342 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x85d src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0xdc9 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x7c src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x263 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x58 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x9a7 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x248 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x4df src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x6b3 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x59f src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x46 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x34d src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x28c src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000     0x14d7 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x7ba src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x76 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x82 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x76 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x4c src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x105 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x105 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x105 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x88 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x88 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x3b4 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0xb8 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0xb8 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0xb8 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0xb8 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x2b8 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x125 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x225 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x225 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x2e src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0xac src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x14d src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x7c src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x205 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x64 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0xa6 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x7c src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x16 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x22 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x22 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x115 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x115 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x115 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x115 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x1c src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x2e src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x22 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x1c src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x58 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x10 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x273 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0xd43 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x131 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x58 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x35 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0xa3 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x16 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x35 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x10 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x52 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x16 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x43 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x180 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x10 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x22 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0xbd src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x16 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x16c src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x22 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x16 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x16 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x29 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x6e src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x45 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x3c3 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000      0x790 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x5e src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x64 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x5f src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00000000       0x90 src/ASF/common/services/clock/sam3x/sysclk.o
  .group         0x00000000        0x8 src/ASF/common/services/delay/sam/cycle_counter.o
  .group         0x00000000        0x8 src/ASF/common/services/delay/sam/cycle_counter.o
  .group         0x00000000        0x8 src/ASF/common/services/delay/sam/cycle_counter.o
@@ -911,7 +1154,10 @@ Discarded input sections
  .debug_macro   0x00000000       0x6e src/ASF/sam/boards/arduino_due_x/init.o
  .debug_macro   0x00000000       0x45 src/ASF/sam/boards/arduino_due_x/init.o
  .debug_macro   0x00000000      0x3c3 src/ASF/sam/boards/arduino_due_x/init.o
+ .debug_macro   0x00000000      0x248 src/ASF/sam/boards/arduino_due_x/init.o
  .debug_macro   0x00000000      0x790 src/ASF/sam/boards/arduino_due_x/init.o
+ .debug_macro   0x00000000       0x94 src/ASF/sam/boards/arduino_due_x/init.o
+ .debug_macro   0x00000000       0x40 src/ASF/sam/boards/arduino_due_x/init.o
  .debug_macro   0x00000000       0x34 src/ASF/sam/boards/arduino_due_x/init.o
  .debug_macro   0x00000000       0x5e src/ASF/sam/boards/arduino_due_x/init.o
  .debug_macro   0x00000000       0x64 src/ASF/sam/boards/arduino_due_x/init.o
@@ -3110,6 +3356,12 @@ Discarded input sections
  .text          0x00000000        0x0 src/motorFunc.o
  .data          0x00000000        0x0 src/motorFunc.o
  .bss           0x00000000        0x0 src/motorFunc.o
+ .text.reverseDrive
+                0x00000000       0x2c src/motorFunc.o
+ .text.turnLeft
+                0x00000000       0x2c src/motorFunc.o
+ .text.turnRight
+                0x00000000       0x2c src/motorFunc.o
  .text.rotateByDegrees
                 0x00000000        0x4 src/motorFunc.o
  .bss.cpu_irq_critical_section_counter
@@ -3227,9 +3479,13 @@ Discarded input sections
  .debug_macro   0x00000000       0x64 src/motorFunc.o
  .debug_macro   0x00000000       0x5f src/motorFunc.o
  .debug_macro   0x00000000       0x90 src/motorFunc.o
+ .debug_macro   0x00000000       0x28 src/motorFunc.o
+ .debug_macro   0x00000000       0x23 src/motorFunc.o
  .debug_macro   0x00000000       0x94 src/motorFunc.o
  .debug_macro   0x00000000       0x40 src/motorFunc.o
+ .debug_macro   0x00000000       0x70 src/motorFunc.o
  .debug_macro   0x00000000       0x34 src/motorFunc.o
+ .group         0x00000000        0x8 src/main.o
  .group         0x00000000        0x8 src/main.o
  .group         0x00000000        0x8 src/main.o
  .group         0x00000000        0x8 src/main.o
@@ -3476,7 +3732,14 @@ Discarded input sections
  .debug_macro   0x00000000       0x34 src/main.o
  .debug_macro   0x00000000       0x10 src/main.o
  .debug_macro   0x00000000      0x452 src/main.o
- .debug_macro   0x00000000       0x28 src/main.o
+ .debug_macro   0x00000000       0x2e src/main.o
+ .debug_macro   0x00000000       0x16 src/main.o
+ .data          0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_arm_addsubdf3.o)
+ .bss           0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_arm_addsubdf3.o)
+ .data          0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_arm_muldivdf3.o)
+ .bss           0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_arm_muldivdf3.o)
+ .data          0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_arm_fixdfsi.o)
+ .bss           0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_arm_fixdfsi.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_aeabi_uldivmod.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_aeabi_uldivmod.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(bpabi.o)
@@ -3899,6 +4162,7 @@ Linker script and memory map
 LOAD c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m/crti.o
 LOAD c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m/crtbegin.o
 LOAD c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+LOAD src/distanceSensor.o
 LOAD src/ASF/common/services/clock/sam3x/sysclk.o
 LOAD src/ASF/common/services/delay/sam/cycle_counter.o
 LOAD src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
@@ -3927,7 +4191,7 @@ LOAD c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gn
                 0x00002000                __stack_size__ = DEFINED (__stack_size__)?__stack_size__:0x2000
                 0x20087ffc                __ram_end__ = ((ORIGIN (ram) + 0x18000) - 0x4)
 
-.text           0x00080000     0x107c
+.text           0x00080000     0x192c
                 0x00080000                . = ALIGN (0x4)
                 0x00080000                _sfixed = .
  *(.vectors .vectors.*)
@@ -3935,244 +4199,270 @@ LOAD c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gn
                 0x00080000                exception_table
  *(.text .text.* .gnu.linkonce.t.*)
  .text          0x000800f4       0x54 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m/crtbegin.o
+ .text.pulseIn  0x00080148       0x98 src/distanceSensor.o
+                0x00080148                pulseIn
+ .text.distance_forward
+                0x000801e0       0x48 src/distanceSensor.o
+                0x000801e0                distance_forward
  .text.sysclk_init
-                0x00080148       0x64 src/ASF/common/services/clock/sam3x/sysclk.o
-                0x00080148                sysclk_init
+                0x00080228       0x64 src/ASF/common/services/clock/sam3x/sysclk.o
+                0x00080228                sysclk_init
  .text.board_init
-                0x000801ac       0x70 src/ASF/sam/boards/arduino_due_x/init.o
-                0x000801ac                board_init
+                0x0008028c       0x70 src/ASF/sam/boards/arduino_due_x/init.o
+                0x0008028c                board_init
  .text.pio_set_peripheral
-                0x0008021c       0x40 src/ASF/sam/drivers/pio/pio.o
-                0x0008021c                pio_set_peripheral
+                0x000802fc       0x40 src/ASF/sam/drivers/pio/pio.o
+                0x000802fc                pio_set_peripheral
  .text.pio_set_input
-                0x0008025c       0x34 src/ASF/sam/drivers/pio/pio.o
-                0x0008025c                pio_set_input
+                0x0008033c       0x34 src/ASF/sam/drivers/pio/pio.o
+                0x0008033c                pio_set_input
  .text.pio_set_output
-                0x00080290       0x28 src/ASF/sam/drivers/pio/pio.o
-                0x00080290                pio_set_output
+                0x00080370       0x28 src/ASF/sam/drivers/pio/pio.o
+                0x00080370                pio_set_output
  .text.pio_get_interrupt_status
-                0x000802b8        0x4 src/ASF/sam/drivers/pio/pio.o
-                0x000802b8                pio_get_interrupt_status
+                0x00080398        0x4 src/ASF/sam/drivers/pio/pio.o
+                0x00080398                pio_get_interrupt_status
  .text.pio_get_interrupt_mask
-                0x000802bc        0x4 src/ASF/sam/drivers/pio/pio.o
-                0x000802bc                pio_get_interrupt_mask
+                0x0008039c        0x4 src/ASF/sam/drivers/pio/pio.o
+                0x0008039c                pio_get_interrupt_mask
  .text.pio_configure_pin
-                0x000802c0       0xd4 src/ASF/sam/drivers/pio/pio.o
-                0x000802c0                pio_configure_pin
+                0x000803a0       0xd4 src/ASF/sam/drivers/pio/pio.o
+                0x000803a0                pio_configure_pin
  .text.pio_configure_pin_group
-                0x00080394       0xa0 src/ASF/sam/drivers/pio/pio.o
-                0x00080394                pio_configure_pin_group
+                0x00080474       0xa0 src/ASF/sam/drivers/pio/pio.o
+                0x00080474                pio_configure_pin_group
  .text.pio_handler_process
-                0x00080434       0x58 src/ASF/sam/drivers/pio/pio_handler.o
-                0x00080434                pio_handler_process
+                0x00080514       0x58 src/ASF/sam/drivers/pio/pio_handler.o
+                0x00080514                pio_handler_process
  .text.PIOA_Handler
-                0x0008048c       0x14 src/ASF/sam/drivers/pio/pio_handler.o
-                0x0008048c                PIOA_Handler
+                0x0008056c       0x14 src/ASF/sam/drivers/pio/pio_handler.o
+                0x0008056c                PIOA_Handler
  .text.PIOB_Handler
-                0x000804a0       0x14 src/ASF/sam/drivers/pio/pio_handler.o
-                0x000804a0                PIOB_Handler
+                0x00080580       0x14 src/ASF/sam/drivers/pio/pio_handler.o
+                0x00080580                PIOB_Handler
  .text.PIOC_Handler
-                0x000804b4       0x14 src/ASF/sam/drivers/pio/pio_handler.o
-                0x000804b4                PIOC_Handler
+                0x00080594       0x14 src/ASF/sam/drivers/pio/pio_handler.o
+                0x00080594                PIOC_Handler
  .text.PIOD_Handler
-                0x000804c8       0x14 src/ASF/sam/drivers/pio/pio_handler.o
-                0x000804c8                PIOD_Handler
+                0x000805a8       0x14 src/ASF/sam/drivers/pio/pio_handler.o
+                0x000805a8                PIOD_Handler
  .text.pmc_switch_mck_to_pllack
-                0x000804dc       0x64 src/ASF/sam/drivers/pmc/pmc.o
-                0x000804dc                pmc_switch_mck_to_pllack
+                0x000805bc       0x64 src/ASF/sam/drivers/pmc/pmc.o
+                0x000805bc                pmc_switch_mck_to_pllack
  .text.pmc_switch_mainck_to_xtal
-                0x00080540       0x54 src/ASF/sam/drivers/pmc/pmc.o
-                0x00080540                pmc_switch_mainck_to_xtal
+                0x00080620       0x54 src/ASF/sam/drivers/pmc/pmc.o
+                0x00080620                pmc_switch_mainck_to_xtal
  .text.pmc_osc_is_ready_mainck
-                0x00080594       0x10 src/ASF/sam/drivers/pmc/pmc.o
-                0x00080594                pmc_osc_is_ready_mainck
+                0x00080674       0x10 src/ASF/sam/drivers/pmc/pmc.o
+                0x00080674                pmc_osc_is_ready_mainck
  .text.pmc_disable_pllack
-                0x000805a4       0x10 src/ASF/sam/drivers/pmc/pmc.o
-                0x000805a4                pmc_disable_pllack
+                0x00080684       0x10 src/ASF/sam/drivers/pmc/pmc.o
+                0x00080684                pmc_disable_pllack
  .text.pmc_is_locked_pllack
-                0x000805b4       0x10 src/ASF/sam/drivers/pmc/pmc.o
-                0x000805b4                pmc_is_locked_pllack
+                0x00080694       0x10 src/ASF/sam/drivers/pmc/pmc.o
+                0x00080694                pmc_is_locked_pllack
  .text.pmc_enable_periph_clk
-                0x000805c4       0x58 src/ASF/sam/drivers/pmc/pmc.o
-                0x000805c4                pmc_enable_periph_clk
+                0x000806a4       0x58 src/ASF/sam/drivers/pmc/pmc.o
+                0x000806a4                pmc_enable_periph_clk
  .text.Dummy_Handler
-                0x0008061c        0x4 src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
-                0x0008061c                DACC_Handler
-                0x0008061c                DebugMon_Handler
-                0x0008061c                DMAC_Handler
-                0x0008061c                TRNG_Handler
-                0x0008061c                HardFault_Handler
-                0x0008061c                TC2_Handler
-                0x0008061c                SysTick_Handler
-                0x0008061c                USART3_Handler
-                0x0008061c                TWI1_Handler
-                0x0008061c                PendSV_Handler
-                0x0008061c                NMI_Handler
-                0x0008061c                TC7_Handler
-                0x0008061c                ADC_Handler
-                0x0008061c                SMC_Handler
-                0x0008061c                USART0_Handler
-                0x0008061c                RTT_Handler
-                0x0008061c                EFC1_Handler
-                0x0008061c                RTC_Handler
-                0x0008061c                UsageFault_Handler
-                0x0008061c                TC6_Handler
-                0x0008061c                WDT_Handler
-                0x0008061c                CAN0_Handler
-                0x0008061c                TC4_Handler
-                0x0008061c                TC1_Handler
-                0x0008061c                HSMCI_Handler
-                0x0008061c                TC3_Handler
-                0x0008061c                Dummy_Handler
-                0x0008061c                TWI0_Handler
-                0x0008061c                USART1_Handler
-                0x0008061c                SSC_Handler
-                0x0008061c                EFC0_Handler
-                0x0008061c                PMC_Handler
-                0x0008061c                PWM_Handler
-                0x0008061c                CAN1_Handler
-                0x0008061c                MemManage_Handler
-                0x0008061c                SUPC_Handler
-                0x0008061c                SVC_Handler
-                0x0008061c                TC8_Handler
-                0x0008061c                USART2_Handler
-                0x0008061c                EMAC_Handler
-                0x0008061c                UART_Handler
-                0x0008061c                BusFault_Handler
-                0x0008061c                RSTC_Handler
-                0x0008061c                TC0_Handler
-                0x0008061c                TC5_Handler
-                0x0008061c                UOTGHS_Handler
-                0x0008061c                SPI0_Handler
+                0x000806fc        0x4 src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
+                0x000806fc                DACC_Handler
+                0x000806fc                DebugMon_Handler
+                0x000806fc                DMAC_Handler
+                0x000806fc                TRNG_Handler
+                0x000806fc                HardFault_Handler
+                0x000806fc                TC2_Handler
+                0x000806fc                SysTick_Handler
+                0x000806fc                USART3_Handler
+                0x000806fc                TWI1_Handler
+                0x000806fc                PendSV_Handler
+                0x000806fc                NMI_Handler
+                0x000806fc                TC7_Handler
+                0x000806fc                ADC_Handler
+                0x000806fc                SMC_Handler
+                0x000806fc                USART0_Handler
+                0x000806fc                RTT_Handler
+                0x000806fc                EFC1_Handler
+                0x000806fc                RTC_Handler
+                0x000806fc                UsageFault_Handler
+                0x000806fc                TC6_Handler
+                0x000806fc                WDT_Handler
+                0x000806fc                CAN0_Handler
+                0x000806fc                TC4_Handler
+                0x000806fc                TC1_Handler
+                0x000806fc                HSMCI_Handler
+                0x000806fc                TC3_Handler
+                0x000806fc                Dummy_Handler
+                0x000806fc                TWI0_Handler
+                0x000806fc                USART1_Handler
+                0x000806fc                SSC_Handler
+                0x000806fc                EFC0_Handler
+                0x000806fc                PMC_Handler
+                0x000806fc                PWM_Handler
+                0x000806fc                CAN1_Handler
+                0x000806fc                MemManage_Handler
+                0x000806fc                SUPC_Handler
+                0x000806fc                SVC_Handler
+                0x000806fc                TC8_Handler
+                0x000806fc                USART2_Handler
+                0x000806fc                EMAC_Handler
+                0x000806fc                UART_Handler
+                0x000806fc                BusFault_Handler
+                0x000806fc                RSTC_Handler
+                0x000806fc                TC0_Handler
+                0x000806fc                TC5_Handler
+                0x000806fc                UOTGHS_Handler
+                0x000806fc                SPI0_Handler
  .text.Reset_Handler
-                0x00080620       0xb0 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
-                0x00080620                Reset_Handler
+                0x00080700       0xb0 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
+                0x00080700                Reset_Handler
  .text.SystemCoreClockUpdate
-                0x000806d0      0x11c src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
-                0x000806d0                SystemCoreClockUpdate
- *fill*         0x000807ec        0x4 
- .text.pulse    0x000807f0       0x50 src/motorFunc.o
-                0x000807f0                pulse
+                0x000807b0      0x11c src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
+                0x000807b0                SystemCoreClockUpdate
+ *fill*         0x000808cc        0x4 
+ .text.pulse    0x000808d0       0x50 src/motorFunc.o
+                0x000808d0                pulse
  .text.forwardDrive
-                0x00080840       0x2c src/motorFunc.o
-                0x00080840                forwardDrive
- .text.reverseDrive
-                0x0008086c       0x2c src/motorFunc.o
-                0x0008086c                reverseDrive
- .text.rotate   0x00080898       0x2c src/motorFunc.o
-                0x00080898                rotate
- .text.stop     0x000808c4       0x2c src/motorFunc.o
-                0x000808c4                stop
- .text.main     0x000808f0       0x58 src/main.o
-                0x000808f0                main
- .text          0x00080948       0x2c c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_aeabi_uldivmod.o)
-                0x00080948                __aeabi_uldivmod
- .text          0x00080974       0x60 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(bpabi.o)
-                0x00080974                __gnu_ldivmod_helper
-                0x000809a4                __gnu_uldivmod_helper
- .text          0x000809d4        0x4 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_dvmd_tls.o)
-                0x000809d4                __aeabi_idiv0
-                0x000809d4                __aeabi_ldiv0
- .text          0x000809d8      0x2a0 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_divdi3.o)
-                0x000809d8                __divdi3
- .text          0x00080c78      0x290 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_udivdi3.o)
-                0x00080c78                __udivdi3
+                0x00080920       0x2c src/motorFunc.o
+                0x00080920                forwardDrive
+ .text.rotate   0x0008094c       0x2c src/motorFunc.o
+                0x0008094c                rotate
+ .text.stop     0x00080978       0x2c src/motorFunc.o
+                0x00080978                stop
+ .text.main     0x000809a4       0x70 src/main.o
+                0x000809a4                main
+ .text          0x00080a14      0x370 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_arm_addsubdf3.o)
+                0x00080a14                __aeabi_drsub
+                0x00080a1c                __aeabi_dsub
+                0x00080a1c                __subdf3
+                0x00080a20                __aeabi_dadd
+                0x00080a20                __adddf3
+                0x00080c98                __floatunsidf
+                0x00080c98                __aeabi_ui2d
+                0x00080cb8                __floatsidf
+                0x00080cb8                __aeabi_i2d
+                0x00080cdc                __aeabi_f2d
+                0x00080cdc                __extendsfdf2
+                0x00080d18                __floatundidf
+                0x00080d18                __aeabi_ul2d
+                0x00080d28                __floatdidf
+                0x00080d28                __aeabi_l2d
+ .text          0x00080d84      0x424 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_arm_muldivdf3.o)
+                0x00080d84                __aeabi_dmul
+                0x00080d84                __muldf3
+                0x00080fd8                __divdf3
+                0x00080fd8                __aeabi_ddiv
+ .text          0x000811a8       0x50 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_arm_fixdfsi.o)
+                0x000811a8                __aeabi_d2iz
+                0x000811a8                __fixdfsi
+ .text          0x000811f8       0x2c c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_aeabi_uldivmod.o)
+                0x000811f8                __aeabi_uldivmod
+ .text          0x00081224       0x60 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(bpabi.o)
+                0x00081224                __gnu_ldivmod_helper
+                0x00081254                __gnu_uldivmod_helper
+ .text          0x00081284        0x4 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_dvmd_tls.o)
+                0x00081284                __aeabi_idiv0
+                0x00081284                __aeabi_ldiv0
+ .text          0x00081288      0x2a0 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_divdi3.o)
+                0x00081288                __divdi3
+ .text          0x00081528      0x290 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_udivdi3.o)
+                0x00081528                __udivdi3
  .text.__libc_init_array
-                0x00080f08       0x50 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-init.o)
-                0x00080f08                __libc_init_array
+                0x000817b8       0x50 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-init.o)
+                0x000817b8                __libc_init_array
  .text.startup.register_fini
-                0x00080f58       0x14 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-__call_atexit.o)
- .text.atexit   0x00080f6c        0xc c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-atexit.o)
-                0x00080f6c                atexit
+                0x00081808       0x14 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-__call_atexit.o)
+ .text.atexit   0x0008181c        0xc c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-atexit.o)
+                0x0008181c                atexit
  .text.__libc_fini_array
-                0x00080f78       0x30 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-fini.o)
-                0x00080f78                __libc_fini_array
+                0x00081828       0x30 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-fini.o)
+                0x00081828                __libc_fini_array
  .text.__register_exitproc
-                0x00080fa8       0xa8 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-__atexit.o)
-                0x00080fa8                __register_exitproc
+                0x00081858       0xa8 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-__atexit.o)
+                0x00081858                __register_exitproc
  *(.glue_7t)
  .glue_7t       0x00000000        0x0 linker stubs
  *(.glue_7)
  .glue_7        0x00000000        0x0 linker stubs
  *(.rodata .rodata* .gnu.linkonce.r.*)
  .rodata.str1.4
-                0x00081050        0x4 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-impure.o)
+                0x00081900        0x4 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-impure.o)
  .rodata._global_impure_ptr
-                0x00081054        0x4 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-impure.o)
-                0x00081054                _global_impure_ptr
+                0x00081904        0x4 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-impure.o)
+                0x00081904                _global_impure_ptr
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x00081058                . = ALIGN (0x4)
+                0x00081908                . = ALIGN (0x4)
  *(.init)
- .init          0x00081058        0x4 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m/crti.o
-                0x00081058                _init
- .init          0x0008105c        0x8 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m/crtn.o
-                0x00081064                . = ALIGN (0x4)
-                0x00081064                __preinit_array_start = .
+ .init          0x00081908        0x4 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m/crti.o
+                0x00081908                _init
+ .init          0x0008190c        0x8 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m/crtn.o
+                0x00081914                . = ALIGN (0x4)
+                0x00081914                __preinit_array_start = .
  *(.preinit_array)
-                0x00081064                __preinit_array_end = .
-                0x00081064                . = ALIGN (0x4)
-                0x00081064                __init_array_start = .
+                0x00081914                __preinit_array_end = .
+                0x00081914                . = ALIGN (0x4)
+                0x00081914                __init_array_start = .
  *(SORT(.init_array.*))
  .init_array.00000
-                0x00081064        0x4 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-__call_atexit.o)
+                0x00081914        0x4 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-__call_atexit.o)
  *(.init_array)
- .init_array    0x00081068        0x4 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m/crtbegin.o
-                0x0008106c                __init_array_end = .
-                0x0008106c                . = ALIGN (0x4)
+ .init_array    0x00081918        0x4 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m/crtbegin.o
+                0x0008191c                __init_array_end = .
+                0x0008191c                . = ALIGN (0x4)
  *crtbegin.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o) .ctors)
  *(SORT(.ctors.*))
  *crtend.o(.ctors)
-                0x0008106c                . = ALIGN (0x4)
+                0x0008191c                . = ALIGN (0x4)
  *(.fini)
- .fini          0x0008106c        0x4 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m/crti.o
-                0x0008106c                _fini
- .fini          0x00081070        0x8 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m/crtn.o
-                0x00081078                . = ALIGN (0x4)
-                0x00081078                __fini_array_start = .
+ .fini          0x0008191c        0x4 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m/crti.o
+                0x0008191c                _fini
+ .fini          0x00081920        0x8 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m/crtn.o
+                0x00081928                . = ALIGN (0x4)
+                0x00081928                __fini_array_start = .
  *(.fini_array)
- .fini_array    0x00081078        0x4 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m/crtbegin.o
+ .fini_array    0x00081928        0x4 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m/crtbegin.o
  *(SORT(.fini_array.*))
-                0x0008107c                __fini_array_end = .
+                0x0008192c                __fini_array_end = .
  *crtbegin.o(.dtors)
  *(EXCLUDE_FILE(*crtend.o) .dtors)
  *(SORT(.dtors.*))
  *crtend.o(.dtors)
-                0x0008107c                . = ALIGN (0x4)
-                0x0008107c                _efixed = .
-                0x0008107c                PROVIDE (__exidx_start, .)
+                0x0008192c                . = ALIGN (0x4)
+                0x0008192c                _efixed = .
+                0x0008192c                PROVIDE (__exidx_start, .)
 
-.vfp11_veneer   0x0008107c        0x0
+.vfp11_veneer   0x0008192c        0x0
  .vfp11_veneer  0x00000000        0x0 linker stubs
 
-.v4_bx          0x0008107c        0x0
+.v4_bx          0x0008192c        0x0
  .v4_bx         0x00000000        0x0 linker stubs
 
-.iplt           0x0008107c        0x0
+.iplt           0x0008192c        0x0
  .iplt          0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m/crtbegin.o
 
-.ARM.exidx      0x0008107c        0x8
+.ARM.exidx      0x0008192c        0x8
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
- .ARM.exidx     0x0008107c        0x8 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_divdi3.o)
- .ARM.exidx     0x00081084        0x0 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_udivdi3.o)
+ .ARM.exidx     0x0008192c        0x8 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_divdi3.o)
+ .ARM.exidx     0x00081934        0x0 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_udivdi3.o)
                                   0x8 (size before relaxing)
-                0x00081084                PROVIDE (__exidx_end, .)
+                0x00081934                PROVIDE (__exidx_end, .)
 
-.eh_frame       0x00081084        0x0
- .eh_frame      0x00081084        0x0 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m/crtbegin.o
+.eh_frame       0x00081934        0x0
+ .eh_frame      0x00081934        0x0 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m/crtbegin.o
 
-.rel.dyn        0x00081084        0x0
+.rel.dyn        0x00081934        0x0
  .rel.iplt      0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m/crtbegin.o
 
-.jcr            0x00081084        0x0
- .jcr           0x00081084        0x0 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m/crtbegin.o
+.jcr            0x00081934        0x0
+ .jcr           0x00081934        0x0 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m/crtbegin.o
 
-.igot.plt       0x00081084        0x0
+.igot.plt       0x00081934        0x0
  .igot.plt      0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m/crtbegin.o
-                0x00081084                . = ALIGN (0x4)
-                0x00081084                _etext = .
+                0x00081934                . = ALIGN (0x4)
+                0x00081934                _etext = .
 
-.relocate       0x20070000      0x568 load address 0x00081084
+.relocate       0x20070000      0x568 load address 0x00081934
                 0x20070000                . = ALIGN (0x4)
                 0x20070000                _srelocate = .
  *(.ramfunc .ramfunc.*)
@@ -4191,7 +4481,7 @@ LOAD c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gn
                 0x20070568                . = ALIGN (0x4)
                 0x20070568                _erelocate = .
 
-.bss            0x20070568       0x8c load address 0x000815ec
+.bss            0x20070568       0x94 load address 0x00081e9c
                 0x20070568                . = ALIGN (0x4)
                 0x20070568                _sbss = .
                 0x20070568                _szero = .
@@ -4200,20 +4490,23 @@ LOAD c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gn
  .bss.gs_interrupt_sources
                 0x20070584       0x70 src/ASF/sam/drivers/pio/pio_handler.o
  *(COMMON)
-                0x200705f4                . = ALIGN (0x4)
-                0x200705f4                _ebss = .
-                0x200705f4                _ezero = .
+ COMMON         0x200705f4        0x8 src/distanceSensor.o
+                0x200705f4                distance
+                0x200705f8                duration
+                0x200705fc                . = ALIGN (0x4)
+                0x200705fc                _ebss = .
+                0x200705fc                _ezero = .
 
-.stack          0x200705f4     0x2004 load address 0x00081678
-                0x200705f8                . = ALIGN (0x8)
- *fill*         0x200705f4        0x4 
-                0x200705f8                _sstack = .
-                0x200725f8                . = (. + __stack_size__)
- *fill*         0x200705f8     0x2000 
-                0x200725f8                . = ALIGN (0x8)
-                0x200725f8                _estack = .
-                0x200725f8                . = ALIGN (0x4)
-                0x200725f8                _end = .
+.stack          0x200705fc     0x2004 load address 0x00081f30
+                0x20070600                . = ALIGN (0x8)
+ *fill*         0x200705fc        0x4 
+                0x20070600                _sstack = .
+                0x20072600                . = (. + __stack_size__)
+ *fill*         0x20070600     0x2000 
+                0x20072600                . = ALIGN (0x8)
+                0x20072600                _estack = .
+                0x20072600                . = ALIGN (0x4)
+                0x20072600                _end = .
 OUTPUT(GccBoardProject1.elf elf32-littlearm)
 
 .ARM.attributes
@@ -4223,55 +4516,64 @@ OUTPUT(GccBoardProject1.elf elf32-littlearm)
  .ARM.attributes
                 0x0000001d       0x2d c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m/crtbegin.o
  .ARM.attributes
-                0x0000004a       0x33 src/ASF/common/services/clock/sam3x/sysclk.o
+                0x0000004a       0x33 src/distanceSensor.o
  .ARM.attributes
-                0x0000007d       0x33 src/ASF/common/services/delay/sam/cycle_counter.o
+                0x0000007d       0x33 src/ASF/common/services/clock/sam3x/sysclk.o
  .ARM.attributes
-                0x000000b0       0x33 src/ASF/sam/boards/arduino_due_x/init.o
+                0x000000b0       0x33 src/ASF/common/services/delay/sam/cycle_counter.o
  .ARM.attributes
-                0x000000e3       0x33 src/ASF/sam/drivers/pio/pio.o
+                0x000000e3       0x33 src/ASF/sam/boards/arduino_due_x/init.o
  .ARM.attributes
-                0x00000116       0x33 src/ASF/sam/drivers/pio/pio_handler.o
+                0x00000116       0x33 src/ASF/sam/drivers/pio/pio.o
  .ARM.attributes
-                0x00000149       0x33 src/ASF/sam/drivers/pmc/pmc.o
+                0x00000149       0x33 src/ASF/sam/drivers/pio/pio_handler.o
  .ARM.attributes
-                0x0000017c       0x33 src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
+                0x0000017c       0x33 src/ASF/sam/drivers/pmc/pmc.o
  .ARM.attributes
-                0x000001af       0x33 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
+                0x000001af       0x33 src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
  .ARM.attributes
-                0x000001e2       0x33 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
+                0x000001e2       0x33 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
  .ARM.attributes
-                0x00000215       0x33 src/motorFunc.o
+                0x00000215       0x33 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
  .ARM.attributes
-                0x00000248       0x33 src/main.o
+                0x00000248       0x33 src/motorFunc.o
  .ARM.attributes
-                0x0000027b       0x1d c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_aeabi_uldivmod.o)
+                0x0000027b       0x33 src/main.o
  .ARM.attributes
-                0x00000298       0x2d c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(bpabi.o)
+                0x000002ae       0x1d c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_arm_addsubdf3.o)
  .ARM.attributes
-                0x000002c5       0x1d c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_dvmd_tls.o)
+                0x000002cb       0x1d c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_arm_muldivdf3.o)
  .ARM.attributes
-                0x000002e2       0x2d c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_divdi3.o)
+                0x000002e8       0x1d c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_arm_fixdfsi.o)
  .ARM.attributes
-                0x0000030f       0x2d c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_udivdi3.o)
+                0x00000305       0x1d c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_aeabi_uldivmod.o)
  .ARM.attributes
-                0x0000033c       0x2d c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-impure.o)
+                0x00000322       0x2d c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(bpabi.o)
  .ARM.attributes
-                0x00000369       0x2d c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-init.o)
+                0x0000034f       0x1d c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_dvmd_tls.o)
  .ARM.attributes
-                0x00000396       0x2d c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-__call_atexit.o)
+                0x0000036c       0x2d c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_divdi3.o)
  .ARM.attributes
-                0x000003c3       0x2d c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-atexit.o)
+                0x00000399       0x2d c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_udivdi3.o)
  .ARM.attributes
-                0x000003f0       0x2d c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-fini.o)
+                0x000003c6       0x2d c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-impure.o)
  .ARM.attributes
-                0x0000041d       0x2d c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-__atexit.o)
+                0x000003f3       0x2d c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-init.o)
  .ARM.attributes
-                0x0000044a       0x1d c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m/crtn.o
+                0x00000420       0x2d c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-__call_atexit.o)
+ .ARM.attributes
+                0x0000044d       0x2d c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-atexit.o)
+ .ARM.attributes
+                0x0000047a       0x2d c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-fini.o)
+ .ARM.attributes
+                0x000004a7       0x2d c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-__atexit.o)
+ .ARM.attributes
+                0x000004d4       0x1d c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m/crtn.o
 
 .comment        0x00000000       0x5b
- .comment       0x00000000       0x5b src/ASF/common/services/clock/sam3x/sysclk.o
+ .comment       0x00000000       0x5b src/distanceSensor.o
                                  0x5c (size before relaxing)
+ .comment       0x00000000       0x5c src/ASF/common/services/clock/sam3x/sysclk.o
  .comment       0x00000000       0x5c src/ASF/common/services/delay/sam/cycle_counter.o
  .comment       0x00000000       0x5c src/ASF/sam/boards/arduino_due_x/init.o
  .comment       0x00000000       0x5c src/ASF/sam/drivers/pio/pio.o
@@ -4283,275 +4585,288 @@ OUTPUT(GccBoardProject1.elf elf32-littlearm)
  .comment       0x00000000       0x5c src/motorFunc.o
  .comment       0x00000000       0x5c src/main.o
 
-.debug_info     0x00000000     0x5c6b
- .debug_info    0x00000000      0x796 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_info    0x00000796      0x134 src/ASF/common/services/delay/sam/cycle_counter.o
- .debug_info    0x000008ca      0x726 src/ASF/sam/boards/arduino_due_x/init.o
- .debug_info    0x00000ff0     0x1385 src/ASF/sam/drivers/pio/pio.o
- .debug_info    0x00002375      0xe52 src/ASF/sam/drivers/pio/pio_handler.o
- .debug_info    0x000031c7     0x1080 src/ASF/sam/drivers/pmc/pmc.o
- .debug_info    0x00004247      0x124 src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
- .debug_info    0x0000436b      0x3bd src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
- .debug_info    0x00004728      0x4c6 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
- .debug_info    0x00004bee      0x955 src/motorFunc.o
- .debug_info    0x00005543      0x728 src/main.o
+.debug_info     0x00000000     0x66f8
+ .debug_info    0x00000000      0x914 src/distanceSensor.o
+ .debug_info    0x00000914      0x796 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_info    0x000010aa      0x134 src/ASF/common/services/delay/sam/cycle_counter.o
+ .debug_info    0x000011de      0x726 src/ASF/sam/boards/arduino_due_x/init.o
+ .debug_info    0x00001904     0x1385 src/ASF/sam/drivers/pio/pio.o
+ .debug_info    0x00002c89      0xe52 src/ASF/sam/drivers/pio/pio_handler.o
+ .debug_info    0x00003adb     0x1080 src/ASF/sam/drivers/pmc/pmc.o
+ .debug_info    0x00004b5b      0x124 src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
+ .debug_info    0x00004c7f      0x3bd src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
+ .debug_info    0x0000503c      0x4c6 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
+ .debug_info    0x00005502      0xa27 src/motorFunc.o
+ .debug_info    0x00005f29      0x7cf src/main.o
 
-.debug_abbrev   0x00000000     0x1268
- .debug_abbrev  0x00000000      0x227 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_abbrev  0x00000227       0x9d src/ASF/common/services/delay/sam/cycle_counter.o
- .debug_abbrev  0x000002c4      0x16d src/ASF/sam/boards/arduino_due_x/init.o
- .debug_abbrev  0x00000431      0x2d5 src/ASF/sam/drivers/pio/pio.o
- .debug_abbrev  0x00000706      0x257 src/ASF/sam/drivers/pio/pio_handler.o
- .debug_abbrev  0x0000095d      0x268 src/ASF/sam/drivers/pmc/pmc.o
- .debug_abbrev  0x00000bc5       0x8c src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
- .debug_abbrev  0x00000c51      0x118 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
- .debug_abbrev  0x00000d69      0x115 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
- .debug_abbrev  0x00000e7e      0x224 src/motorFunc.o
- .debug_abbrev  0x000010a2      0x1c6 src/main.o
+.debug_abbrev   0x00000000     0x14c4
+ .debug_abbrev  0x00000000      0x24d src/distanceSensor.o
+ .debug_abbrev  0x0000024d      0x227 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_abbrev  0x00000474       0x9d src/ASF/common/services/delay/sam/cycle_counter.o
+ .debug_abbrev  0x00000511      0x16d src/ASF/sam/boards/arduino_due_x/init.o
+ .debug_abbrev  0x0000067e      0x2d5 src/ASF/sam/drivers/pio/pio.o
+ .debug_abbrev  0x00000953      0x257 src/ASF/sam/drivers/pio/pio_handler.o
+ .debug_abbrev  0x00000baa      0x268 src/ASF/sam/drivers/pmc/pmc.o
+ .debug_abbrev  0x00000e12       0x8c src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
+ .debug_abbrev  0x00000e9e      0x118 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
+ .debug_abbrev  0x00000fb6      0x115 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
+ .debug_abbrev  0x000010cb      0x224 src/motorFunc.o
+ .debug_abbrev  0x000012ef      0x1d5 src/main.o
 
-.debug_loc      0x00000000     0x1f01
- .debug_loc     0x00000000      0x12d src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_loc     0x0000012d       0x20 src/ASF/sam/boards/arduino_due_x/init.o
- .debug_loc     0x0000014d      0xa83 src/ASF/sam/drivers/pio/pio.o
- .debug_loc     0x00000bd0      0x53d src/ASF/sam/drivers/pio/pio_handler.o
- .debug_loc     0x0000110d      0xc95 src/ASF/sam/drivers/pmc/pmc.o
- .debug_loc     0x00001da2       0x7e src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
- .debug_loc     0x00001e20       0xc1 src/motorFunc.o
- .debug_loc     0x00001ee1       0x20 src/main.o
+.debug_loc      0x00000000     0x2095
+ .debug_loc     0x00000000      0x136 src/distanceSensor.o
+ .debug_loc     0x00000136      0x12d src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_loc     0x00000263       0x20 src/ASF/sam/boards/arduino_due_x/init.o
+ .debug_loc     0x00000283      0xa83 src/ASF/sam/drivers/pio/pio.o
+ .debug_loc     0x00000d06      0x53d src/ASF/sam/drivers/pio/pio_handler.o
+ .debug_loc     0x00001243      0xc95 src/ASF/sam/drivers/pmc/pmc.o
+ .debug_loc     0x00001ed8       0x7e src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
+ .debug_loc     0x00001f56      0x101 src/motorFunc.o
+ .debug_loc     0x00002057       0x3e src/main.o
 
-.debug_aranges  0x00000000      0x4f8
+.debug_aranges  0x00000000      0x530
  .debug_aranges
-                0x00000000       0x40 src/ASF/common/services/clock/sam3x/sysclk.o
+                0x00000000       0x28 src/distanceSensor.o
  .debug_aranges
-                0x00000040       0x20 src/ASF/common/services/delay/sam/cycle_counter.o
+                0x00000028       0x40 src/ASF/common/services/clock/sam3x/sysclk.o
  .debug_aranges
-                0x00000060       0x20 src/ASF/sam/boards/arduino_due_x/init.o
+                0x00000068       0x20 src/ASF/common/services/delay/sam/cycle_counter.o
  .debug_aranges
-                0x00000080      0x148 src/ASF/sam/drivers/pio/pio.o
+                0x00000088       0x20 src/ASF/sam/boards/arduino_due_x/init.o
  .debug_aranges
-                0x000001c8       0x58 src/ASF/sam/drivers/pio/pio_handler.o
+                0x000000a8      0x148 src/ASF/sam/drivers/pio/pio.o
  .debug_aranges
-                0x00000220      0x200 src/ASF/sam/drivers/pmc/pmc.o
+                0x000001f0       0x58 src/ASF/sam/drivers/pio/pio_handler.o
  .debug_aranges
-                0x00000420       0x20 src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
+                0x00000248      0x200 src/ASF/sam/drivers/pmc/pmc.o
  .debug_aranges
-                0x00000440       0x20 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
+                0x00000448       0x20 src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
  .debug_aranges
-                0x00000460       0x30 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
+                0x00000468       0x20 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
  .debug_aranges
-                0x00000490       0x48 src/motorFunc.o
+                0x00000488       0x30 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
  .debug_aranges
-                0x000004d8       0x20 src/main.o
+                0x000004b8       0x58 src/motorFunc.o
+ .debug_aranges
+                0x00000510       0x20 src/main.o
 
-.debug_ranges   0x00000000      0x448
- .debug_ranges  0x00000000       0x30 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_ranges  0x00000030       0x10 src/ASF/common/services/delay/sam/cycle_counter.o
- .debug_ranges  0x00000040       0x10 src/ASF/sam/boards/arduino_due_x/init.o
- .debug_ranges  0x00000050      0x138 src/ASF/sam/drivers/pio/pio.o
- .debug_ranges  0x00000188       0x48 src/ASF/sam/drivers/pio/pio_handler.o
- .debug_ranges  0x000001d0      0x1f0 src/ASF/sam/drivers/pmc/pmc.o
- .debug_ranges  0x000003c0       0x10 src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
- .debug_ranges  0x000003d0       0x10 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
- .debug_ranges  0x000003e0       0x20 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
- .debug_ranges  0x00000400       0x38 src/motorFunc.o
- .debug_ranges  0x00000438       0x10 src/main.o
+.debug_ranges   0x00000000      0x4c0
+ .debug_ranges  0x00000000       0x68 src/distanceSensor.o
+ .debug_ranges  0x00000068       0x30 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_ranges  0x00000098       0x10 src/ASF/common/services/delay/sam/cycle_counter.o
+ .debug_ranges  0x000000a8       0x10 src/ASF/sam/boards/arduino_due_x/init.o
+ .debug_ranges  0x000000b8      0x138 src/ASF/sam/drivers/pio/pio.o
+ .debug_ranges  0x000001f0       0x48 src/ASF/sam/drivers/pio/pio_handler.o
+ .debug_ranges  0x00000238      0x1f0 src/ASF/sam/drivers/pmc/pmc.o
+ .debug_ranges  0x00000428       0x10 src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
+ .debug_ranges  0x00000438       0x10 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
+ .debug_ranges  0x00000448       0x20 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
+ .debug_ranges  0x00000468       0x48 src/motorFunc.o
+ .debug_ranges  0x000004b0       0x10 src/main.o
 
-.debug_macro    0x00000000    0x15a1d
- .debug_macro   0x00000000      0x527 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00000527      0x874 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00000d9b      0x4d1 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000126c       0x34 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x000012a0      0x166 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00001406       0x76 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000147c       0x16 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00001492      0x6e4 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00001b76       0x16 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00001b8c       0x44 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00001bd0      0x209 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00001dd9       0x20 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00001df9       0x3a src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00001e33       0x18 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00001e4b      0xb09 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00002954      0xab6 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000340a      0x569 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00003973      0x2b5 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00003c28      0x31a src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00003f42      0x74f src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00004691       0x82 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00004713      0x57b src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00004c8e       0x1c src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00004caa      0x6b7 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00005361      0x52d src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000588e       0xbe src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000594c     0x2342 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00007c8e      0x85d src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x000084eb      0xdc9 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x000092b4       0x7c src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00009330      0x263 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00009593       0x58 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x000095eb      0x9a7 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00009f92      0x248 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000a1da      0x4df src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000a6b9      0x6b3 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000ad6c      0x59f src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000b30b       0x46 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000b351      0x34d src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000b69e      0x28c src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000b92a     0x14d7 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000ce01      0x7ba src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000d5bb       0x76 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000d631       0x82 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000d6b3       0x76 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000d729       0x4c src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000d775      0x105 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000d87a      0x105 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000d97f      0x105 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000da84       0x88 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000db0c       0x88 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000db94      0x3b4 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000df48       0xb8 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000e000       0xb8 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000e0b8       0xb8 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000e170       0xb8 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000e228      0x2b8 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000e4e0      0x125 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000e605      0x225 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000e82a      0x225 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000ea4f       0x2e src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000ea7d       0xac src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000eb29      0x14d src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000ec76       0x7c src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000ecf2      0x205 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000eef7       0x64 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000ef5b       0xa6 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000f001       0x7c src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000f07d       0x16 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000f093       0x22 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000f0b5       0x22 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000f0d7      0x115 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000f1ec      0x115 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000f301      0x115 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000f416      0x115 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000f52b       0x1c src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000f547       0x2e src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000f575       0x22 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000f597       0x1c src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000f5b3       0x58 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000f60b       0x10 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000f61b      0x273 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0000f88e      0xd43 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x000105d1      0x131 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00010702       0x58 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0001075a       0x35 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0001078f       0xa3 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00010832       0x16 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00010848       0x35 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0001087d       0x10 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0001088d       0x52 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x000108df       0x16 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x000108f5       0x43 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00010938      0x180 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00010ab8       0x10 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00010ac8       0x22 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00010aea       0xbd src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00010ba7       0x16 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00010bbd      0x16c src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00010d29       0x22 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00010d4b       0x16 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00010d61       0x16 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00010d77       0x29 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00010da0       0x6e src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00010e0e       0x45 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00010e53      0x3c3 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00011216      0x242 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00011458      0x790 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00011be8       0x5e src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00011c46       0x64 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00011caa       0x5f src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00011d09       0x90 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00011d99      0x4b6 src/ASF/common/services/delay/sam/cycle_counter.o
- .debug_macro   0x0001224f       0x22 src/ASF/common/services/delay/sam/cycle_counter.o
- .debug_macro   0x00012271      0x566 src/ASF/sam/boards/arduino_due_x/init.o
- .debug_macro   0x000127d7      0x248 src/ASF/sam/boards/arduino_due_x/init.o
- .debug_macro   0x00012a1f       0x58 src/ASF/sam/boards/arduino_due_x/init.o
- .debug_macro   0x00012a77       0x94 src/ASF/sam/boards/arduino_due_x/init.o
- .debug_macro   0x00012b0b       0x40 src/ASF/sam/boards/arduino_due_x/init.o
- .debug_macro   0x00012b4b       0x6a src/ASF/sam/boards/arduino_due_x/init.o
- .debug_macro   0x00012bb5      0x4c2 src/ASF/sam/drivers/pio/pio.o
- .debug_macro   0x00013077       0x8e src/ASF/sam/drivers/pio/pio.o
- .debug_macro   0x00013105      0x4c6 src/ASF/sam/drivers/pio/pio_handler.o
- .debug_macro   0x000135cb      0x4bc src/ASF/sam/drivers/pmc/pmc.o
- .debug_macro   0x00013a87       0x58 src/ASF/sam/drivers/pmc/pmc.o
- .debug_macro   0x00013adf      0x4bb src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
- .debug_macro   0x00013f9a      0x4c9 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
- .debug_macro   0x00014463      0x4c9 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
- .debug_macro   0x0001492c       0x26 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
- .debug_macro   0x00014952      0x5c3 src/motorFunc.o
- .debug_macro   0x00014f15       0x28 src/motorFunc.o
- .debug_macro   0x00014f3d       0x23 src/motorFunc.o
- .debug_macro   0x00014f60       0x70 src/motorFunc.o
- .debug_macro   0x00014fd0       0x28 src/motorFunc.o
- .debug_macro   0x00014ff8       0x10 src/motorFunc.o
- .debug_macro   0x00015008      0x452 src/motorFunc.o
- .debug_macro   0x0001545a      0x5c3 src/main.o
+.debug_macro    0x00000000    0x16022
+ .debug_macro   0x00000000      0x5ab src/distanceSensor.o
+ .debug_macro   0x000005ab      0x874 src/distanceSensor.o
+ .debug_macro   0x00000e1f      0x166 src/distanceSensor.o
+ .debug_macro   0x00000f85      0x4d1 src/distanceSensor.o
+ .debug_macro   0x00001456       0x76 src/distanceSensor.o
+ .debug_macro   0x000014cc       0x16 src/distanceSensor.o
+ .debug_macro   0x000014e2      0x6e4 src/distanceSensor.o
+ .debug_macro   0x00001bc6       0x16 src/distanceSensor.o
+ .debug_macro   0x00001bdc       0x44 src/distanceSensor.o
+ .debug_macro   0x00001c20      0x209 src/distanceSensor.o
+ .debug_macro   0x00001e29       0x20 src/distanceSensor.o
+ .debug_macro   0x00001e49       0x3a src/distanceSensor.o
+ .debug_macro   0x00001e83       0x18 src/distanceSensor.o
+ .debug_macro   0x00001e9b      0xb09 src/distanceSensor.o
+ .debug_macro   0x000029a4      0xab6 src/distanceSensor.o
+ .debug_macro   0x0000345a      0x569 src/distanceSensor.o
+ .debug_macro   0x000039c3      0x2b5 src/distanceSensor.o
+ .debug_macro   0x00003c78      0x31a src/distanceSensor.o
+ .debug_macro   0x00003f92      0x74f src/distanceSensor.o
+ .debug_macro   0x000046e1       0x82 src/distanceSensor.o
+ .debug_macro   0x00004763      0x57b src/distanceSensor.o
+ .debug_macro   0x00004cde       0x1c src/distanceSensor.o
+ .debug_macro   0x00004cfa      0x6b7 src/distanceSensor.o
+ .debug_macro   0x000053b1      0x52d src/distanceSensor.o
+ .debug_macro   0x000058de       0xbe src/distanceSensor.o
+ .debug_macro   0x0000599c     0x2342 src/distanceSensor.o
+ .debug_macro   0x00007cde      0x85d src/distanceSensor.o
+ .debug_macro   0x0000853b      0xdc9 src/distanceSensor.o
+ .debug_macro   0x00009304       0x7c src/distanceSensor.o
+ .debug_macro   0x00009380      0x263 src/distanceSensor.o
+ .debug_macro   0x000095e3       0x58 src/distanceSensor.o
+ .debug_macro   0x0000963b      0x9a7 src/distanceSensor.o
+ .debug_macro   0x00009fe2      0x248 src/distanceSensor.o
+ .debug_macro   0x0000a22a      0x4df src/distanceSensor.o
+ .debug_macro   0x0000a709      0x6b3 src/distanceSensor.o
+ .debug_macro   0x0000adbc      0x59f src/distanceSensor.o
+ .debug_macro   0x0000b35b       0x46 src/distanceSensor.o
+ .debug_macro   0x0000b3a1      0x34d src/distanceSensor.o
+ .debug_macro   0x0000b6ee      0x28c src/distanceSensor.o
+ .debug_macro   0x0000b97a     0x14d7 src/distanceSensor.o
+ .debug_macro   0x0000ce51      0x7ba src/distanceSensor.o
+ .debug_macro   0x0000d60b       0x76 src/distanceSensor.o
+ .debug_macro   0x0000d681       0x82 src/distanceSensor.o
+ .debug_macro   0x0000d703       0x76 src/distanceSensor.o
+ .debug_macro   0x0000d779       0x4c src/distanceSensor.o
+ .debug_macro   0x0000d7c5      0x105 src/distanceSensor.o
+ .debug_macro   0x0000d8ca      0x105 src/distanceSensor.o
+ .debug_macro   0x0000d9cf      0x105 src/distanceSensor.o
+ .debug_macro   0x0000dad4       0x88 src/distanceSensor.o
+ .debug_macro   0x0000db5c       0x88 src/distanceSensor.o
+ .debug_macro   0x0000dbe4      0x3b4 src/distanceSensor.o
+ .debug_macro   0x0000df98       0xb8 src/distanceSensor.o
+ .debug_macro   0x0000e050       0xb8 src/distanceSensor.o
+ .debug_macro   0x0000e108       0xb8 src/distanceSensor.o
+ .debug_macro   0x0000e1c0       0xb8 src/distanceSensor.o
+ .debug_macro   0x0000e278      0x2b8 src/distanceSensor.o
+ .debug_macro   0x0000e530      0x125 src/distanceSensor.o
+ .debug_macro   0x0000e655      0x225 src/distanceSensor.o
+ .debug_macro   0x0000e87a      0x225 src/distanceSensor.o
+ .debug_macro   0x0000ea9f       0x2e src/distanceSensor.o
+ .debug_macro   0x0000eacd       0xac src/distanceSensor.o
+ .debug_macro   0x0000eb79      0x14d src/distanceSensor.o
+ .debug_macro   0x0000ecc6       0x7c src/distanceSensor.o
+ .debug_macro   0x0000ed42      0x205 src/distanceSensor.o
+ .debug_macro   0x0000ef47       0x64 src/distanceSensor.o
+ .debug_macro   0x0000efab       0xa6 src/distanceSensor.o
+ .debug_macro   0x0000f051       0x7c src/distanceSensor.o
+ .debug_macro   0x0000f0cd       0x16 src/distanceSensor.o
+ .debug_macro   0x0000f0e3       0x22 src/distanceSensor.o
+ .debug_macro   0x0000f105       0x22 src/distanceSensor.o
+ .debug_macro   0x0000f127      0x115 src/distanceSensor.o
+ .debug_macro   0x0000f23c      0x115 src/distanceSensor.o
+ .debug_macro   0x0000f351      0x115 src/distanceSensor.o
+ .debug_macro   0x0000f466      0x115 src/distanceSensor.o
+ .debug_macro   0x0000f57b       0x1c src/distanceSensor.o
+ .debug_macro   0x0000f597       0x2e src/distanceSensor.o
+ .debug_macro   0x0000f5c5       0x22 src/distanceSensor.o
+ .debug_macro   0x0000f5e7       0x1c src/distanceSensor.o
+ .debug_macro   0x0000f603       0x58 src/distanceSensor.o
+ .debug_macro   0x0000f65b       0x10 src/distanceSensor.o
+ .debug_macro   0x0000f66b      0x273 src/distanceSensor.o
+ .debug_macro   0x0000f8de      0xd43 src/distanceSensor.o
+ .debug_macro   0x00010621      0x131 src/distanceSensor.o
+ .debug_macro   0x00010752       0x58 src/distanceSensor.o
+ .debug_macro   0x000107aa       0x35 src/distanceSensor.o
+ .debug_macro   0x000107df       0xa3 src/distanceSensor.o
+ .debug_macro   0x00010882       0x16 src/distanceSensor.o
+ .debug_macro   0x00010898       0x35 src/distanceSensor.o
+ .debug_macro   0x000108cd       0x10 src/distanceSensor.o
+ .debug_macro   0x000108dd       0x52 src/distanceSensor.o
+ .debug_macro   0x0001092f       0x16 src/distanceSensor.o
+ .debug_macro   0x00010945       0x43 src/distanceSensor.o
+ .debug_macro   0x00010988      0x180 src/distanceSensor.o
+ .debug_macro   0x00010b08       0x10 src/distanceSensor.o
+ .debug_macro   0x00010b18       0x22 src/distanceSensor.o
+ .debug_macro   0x00010b3a       0xbd src/distanceSensor.o
+ .debug_macro   0x00010bf7       0x16 src/distanceSensor.o
+ .debug_macro   0x00010c0d      0x16c src/distanceSensor.o
+ .debug_macro   0x00010d79       0x22 src/distanceSensor.o
+ .debug_macro   0x00010d9b       0x16 src/distanceSensor.o
+ .debug_macro   0x00010db1       0x16 src/distanceSensor.o
+ .debug_macro   0x00010dc7       0x29 src/distanceSensor.o
+ .debug_macro   0x00010df0       0x6e src/distanceSensor.o
+ .debug_macro   0x00010e5e       0x45 src/distanceSensor.o
+ .debug_macro   0x00010ea3      0x3c3 src/distanceSensor.o
+ .debug_macro   0x00011266       0x34 src/distanceSensor.o
+ .debug_macro   0x0001129a      0x248 src/distanceSensor.o
+ .debug_macro   0x000114e2      0x790 src/distanceSensor.o
+ .debug_macro   0x00011c72       0x5e src/distanceSensor.o
+ .debug_macro   0x00011cd0       0x64 src/distanceSensor.o
+ .debug_macro   0x00011d34       0x5f src/distanceSensor.o
+ .debug_macro   0x00011d93       0x90 src/distanceSensor.o
+ .debug_macro   0x00011e23       0x28 src/distanceSensor.o
+ .debug_macro   0x00011e4b       0x23 src/distanceSensor.o
+ .debug_macro   0x00011e6e       0x94 src/distanceSensor.o
+ .debug_macro   0x00011f02       0x40 src/distanceSensor.o
+ .debug_macro   0x00011f42       0x70 src/distanceSensor.o
+ .debug_macro   0x00011fb2       0x34 src/distanceSensor.o
+ .debug_macro   0x00011fe6       0x16 src/distanceSensor.o
+ .debug_macro   0x00011ffc      0x527 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00012523      0x242 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00012765      0x4b6 src/ASF/common/services/delay/sam/cycle_counter.o
+ .debug_macro   0x00012c1b       0x22 src/ASF/common/services/delay/sam/cycle_counter.o
+ .debug_macro   0x00012c3d      0x566 src/ASF/sam/boards/arduino_due_x/init.o
+ .debug_macro   0x000131a3       0x58 src/ASF/sam/boards/arduino_due_x/init.o
+ .debug_macro   0x000131fb       0x6a src/ASF/sam/boards/arduino_due_x/init.o
+ .debug_macro   0x00013265      0x4c2 src/ASF/sam/drivers/pio/pio.o
+ .debug_macro   0x00013727       0x8e src/ASF/sam/drivers/pio/pio.o
+ .debug_macro   0x000137b5      0x4c6 src/ASF/sam/drivers/pio/pio_handler.o
+ .debug_macro   0x00013c7b      0x4bc src/ASF/sam/drivers/pmc/pmc.o
+ .debug_macro   0x00014137       0x58 src/ASF/sam/drivers/pmc/pmc.o
+ .debug_macro   0x0001418f      0x4bb src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
+ .debug_macro   0x0001464a      0x4c9 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
+ .debug_macro   0x00014b13      0x4c9 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
+ .debug_macro   0x00014fdc       0x26 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
+ .debug_macro   0x00015002      0x5c3 src/motorFunc.o
+ .debug_macro   0x000155c5       0x2e src/motorFunc.o
+ .debug_macro   0x000155f3       0x10 src/motorFunc.o
+ .debug_macro   0x00015603      0x452 src/motorFunc.o
+ .debug_macro   0x00015a55      0x5cd src/main.o
 
-.debug_line     0x00000000     0x8ac7
- .debug_line    0x00000000      0xc48 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_line    0x00000c48      0xae0 src/ASF/common/services/delay/sam/cycle_counter.o
- .debug_line    0x00001728      0xcda src/ASF/sam/boards/arduino_due_x/init.o
- .debug_line    0x00002402      0xe42 src/ASF/sam/drivers/pio/pio.o
- .debug_line    0x00003244      0xb8d src/ASF/sam/drivers/pio/pio_handler.o
- .debug_line    0x00003dd1     0x1045 src/ASF/sam/drivers/pmc/pmc.o
- .debug_line    0x00004e16      0xab5 src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
- .debug_line    0x000058cb      0xb05 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
- .debug_line    0x000063d0      0xb22 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
- .debug_line    0x00006ef2      0xe0a src/motorFunc.o
- .debug_line    0x00007cfc      0xdcb src/main.o
+.debug_line     0x00000000     0x993b
+ .debug_line    0x00000000      0xe4c src/distanceSensor.o
+ .debug_line    0x00000e4c      0xc48 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_line    0x00001a94      0xae0 src/ASF/common/services/delay/sam/cycle_counter.o
+ .debug_line    0x00002574      0xcda src/ASF/sam/boards/arduino_due_x/init.o
+ .debug_line    0x0000324e      0xe42 src/ASF/sam/drivers/pio/pio.o
+ .debug_line    0x00004090      0xb8d src/ASF/sam/drivers/pio/pio_handler.o
+ .debug_line    0x00004c1d     0x1045 src/ASF/sam/drivers/pmc/pmc.o
+ .debug_line    0x00005c62      0xab5 src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
+ .debug_line    0x00006717      0xb05 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
+ .debug_line    0x0000721c      0xb22 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
+ .debug_line    0x00007d3e      0xe31 src/motorFunc.o
+ .debug_line    0x00008b6f      0xdcc src/main.o
 
-.debug_str      0x00000000    0x5f6af
- .debug_str     0x00000000    0x5c626 src/ASF/common/services/clock/sam3x/sysclk.o
+.debug_str      0x00000000    0x5f781
+ .debug_str     0x00000000    0x5d215 src/distanceSensor.o
+                              0x5d58b (size before relaxing)
+ .debug_str     0x0005d215      0x244 src/ASF/common/services/clock/sam3x/sysclk.o
                               0x5c953 (size before relaxing)
- .debug_str     0x0005c626      0x1a5 src/ASF/common/services/delay/sam/cycle_counter.o
+ .debug_str     0x0005d459       0x35 src/ASF/common/services/delay/sam/cycle_counter.o
                               0x58cf4 (size before relaxing)
- .debug_str     0x0005c7cb      0xb78 src/ASF/sam/boards/arduino_due_x/init.o
+ .debug_str     0x0005d48e      0x1de src/ASF/sam/boards/arduino_due_x/init.o
                               0x5d21c (size before relaxing)
- .debug_str     0x0005d343      0x432 src/ASF/sam/drivers/pio/pio.o
+ .debug_str     0x0005d66c      0x432 src/ASF/sam/drivers/pio/pio.o
                               0x59528 (size before relaxing)
- .debug_str     0x0005d775      0x45d src/ASF/sam/drivers/pio/pio_handler.o
+ .debug_str     0x0005da9e      0x445 src/ASF/sam/drivers/pio/pio_handler.o
                               0x59570 (size before relaxing)
- .debug_str     0x0005dbd2      0x691 src/ASF/sam/drivers/pmc/pmc.o
+ .debug_str     0x0005dee3      0x691 src/ASF/sam/drivers/pmc/pmc.o
                               0x5959e (size before relaxing)
- .debug_str     0x0005e263       0x4d src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
+ .debug_str     0x0005e574       0x4d src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
                               0x58b9d (size before relaxing)
- .debug_str     0x0005e2b0       0xb2 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
+ .debug_str     0x0005e5c1       0xb2 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
                               0x58c72 (size before relaxing)
- .debug_str     0x0005e362      0x1cd src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
+ .debug_str     0x0005e673      0x1cd src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
                               0x58e85 (size before relaxing)
- .debug_str     0x0005e52f     0x1121 src/motorFunc.o
-                              0x5e3a1 (size before relaxing)
- .debug_str     0x0005f650       0x5f src/main.o
-                              0x5e351 (size before relaxing)
+ .debug_str     0x0005e840      0xee2 src/motorFunc.o
+                              0x5e3c7 (size before relaxing)
+ .debug_str     0x0005f722       0x5f src/main.o
+                              0x5e3a4 (size before relaxing)
 
-.debug_frame    0x00000000      0xb90
- .debug_frame   0x00000000       0x88 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_frame   0x00000088       0x20 src/ASF/common/services/delay/sam/cycle_counter.o
- .debug_frame   0x000000a8       0x28 src/ASF/sam/boards/arduino_due_x/init.o
- .debug_frame   0x000000d0      0x2a8 src/ASF/sam/drivers/pio/pio.o
- .debug_frame   0x00000378       0xf8 src/ASF/sam/drivers/pio/pio_handler.o
- .debug_frame   0x00000470      0x410 src/ASF/sam/drivers/pmc/pmc.o
- .debug_frame   0x00000880       0x20 src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
- .debug_frame   0x000008a0       0x28 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
- .debug_frame   0x000008c8       0x40 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
- .debug_frame   0x00000908       0xb0 src/motorFunc.o
- .debug_frame   0x000009b8       0x28 src/main.o
- .debug_frame   0x000009e0       0x58 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(bpabi.o)
- .debug_frame   0x00000a38       0x34 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_divdi3.o)
- .debug_frame   0x00000a6c       0x34 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_udivdi3.o)
- .debug_frame   0x00000aa0       0x2c c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-init.o)
- .debug_frame   0x00000acc       0x48 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-__call_atexit.o)
- .debug_frame   0x00000b14       0x20 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-atexit.o)
- .debug_frame   0x00000b34       0x2c c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-fini.o)
- .debug_frame   0x00000b60       0x30 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-__atexit.o)
+.debug_frame    0x00000000      0xc10
+ .debug_frame   0x00000000       0x44 src/distanceSensor.o
+ .debug_frame   0x00000044       0x88 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_frame   0x000000cc       0x20 src/ASF/common/services/delay/sam/cycle_counter.o
+ .debug_frame   0x000000ec       0x28 src/ASF/sam/boards/arduino_due_x/init.o
+ .debug_frame   0x00000114      0x2a8 src/ASF/sam/drivers/pio/pio.o
+ .debug_frame   0x000003bc       0xf8 src/ASF/sam/drivers/pio/pio_handler.o
+ .debug_frame   0x000004b4      0x410 src/ASF/sam/drivers/pmc/pmc.o
+ .debug_frame   0x000008c4       0x20 src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
+ .debug_frame   0x000008e4       0x28 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
+ .debug_frame   0x0000090c       0x40 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
+ .debug_frame   0x0000094c       0xe8 src/motorFunc.o
+ .debug_frame   0x00000a34       0x2c src/main.o
+ .debug_frame   0x00000a60       0x58 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(bpabi.o)
+ .debug_frame   0x00000ab8       0x34 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_divdi3.o)
+ .debug_frame   0x00000aec       0x34 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_udivdi3.o)
+ .debug_frame   0x00000b20       0x2c c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-init.o)
+ .debug_frame   0x00000b4c       0x48 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-__call_atexit.o)
+ .debug_frame   0x00000b94       0x20 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-atexit.o)
+ .debug_frame   0x00000bb4       0x2c c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-fini.o)
+ .debug_frame   0x00000be0       0x30 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-__atexit.o)
 
 Cross Reference Table
 
@@ -4664,9 +4979,24 @@ WDT_Handler                                       src/ASF/sam/utils/cmsis/sam3x/
                                                   src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
 _Jv_RegisterClasses                               c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m/crtbegin.o
 _PathLocale                                       c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-locale.o)
+__adddf3                                          c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_arm_addsubdf3.o)
+__aeabi_d2iz                                      c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_arm_fixdfsi.o)
+                                                  src/distanceSensor.o
+__aeabi_dadd                                      c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_arm_addsubdf3.o)
+__aeabi_ddiv                                      c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_arm_muldivdf3.o)
+                                                  src/distanceSensor.o
+__aeabi_dmul                                      c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_arm_muldivdf3.o)
+__aeabi_drsub                                     c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_arm_addsubdf3.o)
+__aeabi_dsub                                      c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_arm_addsubdf3.o)
+__aeabi_f2d                                       c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_arm_addsubdf3.o)
+__aeabi_i2d                                       c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_arm_addsubdf3.o)
 __aeabi_idiv0                                     c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_dvmd_tls.o)
+__aeabi_l2d                                       c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_arm_addsubdf3.o)
 __aeabi_ldiv0                                     c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_dvmd_tls.o)
                                                   c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_aeabi_uldivmod.o)
+__aeabi_ui2d                                      c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_arm_addsubdf3.o)
+                                                  src/distanceSensor.o
+__aeabi_ul2d                                      c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_arm_addsubdf3.o)
 __aeabi_uldivmod                                  c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_aeabi_uldivmod.o)
                                                   c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-vfiprintf.o)
                                                   src/motorFunc.o
@@ -4676,11 +5006,18 @@ __bss_start__                                     c:/program files (x86)/atmel/a
 __call_exitprocs                                  c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-__call_atexit.o)
                                                   c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-exit.o)
 __deregister_frame_info                           c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m/crtbegin.o
+__divdf3                                          c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_arm_muldivdf3.o)
 __divdi3                                          c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_divdi3.o)
                                                   c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(bpabi.o)
 __dso_handle                                      c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m/crtbegin.o
+__extendsfdf2                                     c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_arm_addsubdf3.o)
 __fini_array_end                                  c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-fini.o)
 __fini_array_start                                c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-fini.o)
+__fixdfsi                                         c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_arm_fixdfsi.o)
+__floatdidf                                       c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_arm_addsubdf3.o)
+__floatsidf                                       c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_arm_addsubdf3.o)
+__floatundidf                                     c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_arm_addsubdf3.o)
+__floatunsidf                                     c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_arm_addsubdf3.o)
 __fp_lock_all                                     c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-findfp.o)
 __fp_unlock_all                                   c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-findfp.o)
 __gnu_ldivmod_helper                              c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(bpabi.o)
@@ -4725,6 +5062,7 @@ __malloc_unlock                                   c:/program files (x86)/atmel/a
                                                   c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-freer.o)
 __mb_cur_max                                      c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-locale.o)
 __mlocale_changed                                 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-locale.o)
+__muldf3                                          c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_arm_muldivdf3.o)
 __nlocale_changed                                 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-locale.o)
 __preinit_array_end                               c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-init.o)
 __preinit_array_start                             c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-init.o)
@@ -4762,6 +5100,7 @@ __sseek                                           c:/program files (x86)/atmel/a
                                                   c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-makebuf.o)
                                                   c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-findfp.o)
 __stack                                           c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m/crt0.o
+__subdf3                                          c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_arm_addsubdf3.o)
 __swbuf                                           c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-wbuf.o)
 __swbuf_r                                         c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-wbuf.o)
                                                   c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-fputwc.o)
@@ -4886,6 +5225,10 @@ board_init                                        src/ASF/sam/boards/arduino_due
 cleanup_glue                                      c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-reent.o)
 cpu_irq_enter_critical                            src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
 cpu_irq_leave_critical                            src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
+distance                                          src/distanceSensor.o
+distance_forward                                  src/distanceSensor.o
+                                                  src/main.o
+duration                                          src/distanceSensor.o
 errno                                             c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-reent.o)
                                                   c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-readr.o)
                                                   c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-lseekr.o)
@@ -5060,9 +5403,10 @@ pmc_wait_wakeup_clocks_restore                    src/ASF/sam/drivers/pmc/sleep.
 portable_delay_cycles                             src/ASF/common/services/delay/sam/cycle_counter.o
                                                   src/main.o
                                                   src/motorFunc.o
+                                                  src/distanceSensor.o
 pulse                                             src/motorFunc.o
+pulseIn                                           src/distanceSensor.o
 reverseDrive                                      src/motorFunc.o
-                                                  src/main.o
 rotate                                            src/motorFunc.o
                                                   src/main.o
 rotateByDegrees                                   src/motorFunc.o
@@ -5105,5 +5449,7 @@ tc_sync_trigger                                   src/ASF/sam/drivers/tc/tc.o
 tc_write_ra                                       src/ASF/sam/drivers/tc/tc.o
 tc_write_rb                                       src/ASF/sam/drivers/tc/tc.o
 tc_write_rc                                       src/ASF/sam/drivers/tc/tc.o
+turnLeft                                          src/motorFunc.o
+turnRight                                         src/motorFunc.o
 vfiprintf                                         c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-vfiprintf.o)
 wcrtomb                                           c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-wcrtomb.o)
