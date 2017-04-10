@@ -36,9 +36,9 @@
 #define trig PIO_PC26_IDX
 #define echo PIO_PC25_IDX
 
-//"scaling" är sammansättning av tiden för ljudets färd i "width-ticks" per mikro_s (3.64) gånger 2 (p.g.a ljudets sträcka är dubbbelt
-//så lång än avståndet som ska mätas) och sedan delas detta med ljudets hastighet i cm / us (0.034).
-// 'scaling' är alltså (3.64 * 2) / 0.34 = 214.
+//"scaling" ï¿½r sammansï¿½ttning av tiden fï¿½r ljudets fï¿½rd i "width-ticks" per mikro_s (3.64) gï¿½nger 2 (p.g.a ljudets strï¿½cka ï¿½r dubbbelt
+//sï¿½ lï¿½ng ï¿½n avstï¿½ndet som ska mï¿½tas) och sedan delas detta med ljudets hastighet i cm / us (0.034).
+// 'scaling' ï¿½r alltsï¿½ (3.64 * 2) / 0.34 = 214.
 #define scaling 214;
 
 
