@@ -1,0 +1,102 @@
+#include <asf.h>
+#include <indirections.h>
+#include "buttons.h"
+
+/**
+ * \file
+ *
+ * \brief Helper function to get the peripheral ID from a pin
+ *
+ */
+static uint32_t ioport_pin_to_ID_Port(ioport_pin_t pin) {
+     uint32_t ID = 0;
+    switch(arch_ioport_pin_to_port_id(pin)) {
+        case(IOPORT_PIOA):
+        ID = ID_PIOA;
+        break;
+        case(IOPORT_PIOB):
+        ID = ID_PIOB;
+        break;
+        case(IOPORT_PIOC):
+        ID = ID_PIOC;
+        break;
+        case(IOPORT_PIOD):
+        ID = ID_PIOD;
+        break;        
+    }
+    return ID;
+}
+
+/**
+ * \file
+ *
+ * \brief Helper function to get the port IRQn froma pin
+ *
+ */
+static IRQn_Type ioport_pin_to_Port_IRQn(ioport_pin_t pin) {
+    IRQn_Type IRQn = 0;    
+    switch(arch_ioport_pin_to_port_id(pin)) {
+        case(IOPORT_PIOA):
+        IRQn = PIOA_IRQn;        
+        break;
+        case(IOPORT_PIOB):
+        IRQn = PIOB_IRQn;
+        break;
+        case(IOPORT_PIOC):
+        IRQn = PIOC_IRQn;
+        break;
+        case(IOPORT_PIOD):
+        IRQn = PIOD_IRQn;
+        break;
+    }
+    return IRQn;
+}
+
+/**
+ * \file
+ *
+ * \brief Handler for BTN1
+ *
+ */
+static void btn1_handler(const uint32_t id, const uint32_t index) {
+    if ((id == ioport_pin_to_ID_Port(BTN1)) && (index == ioport_pin_to_mask(BTN1))){
+        button_1_event = 1;
+    }
+}
+
+static void door_handler(const uint32_t id, const uint32_t index) {
+	 if ((id == ioport_pin_to_ID_Port(DOOR)) && (index == ioport_pin_to_mask(DOOR))){
+		 door_event = 1;		 
+	 }			
+}
+
+static void pool_handler(const uint32_t id, const uint32_t index) {
+	if ((id == ioport_pin_to_ID_Port(POOL)) && (index == ioport_pin_to_mask(POOL))){
+		pool_event = 1;
+	}
+}	
+
+/**
+ * \file
+ *
+ * \brief Template configuration for a button
+ *
+ */
+static void configure_button(ioport_pin_t pin, void (*handler)(const uint32_t, const uint32_t), uint32_t pin_attr, uint32_t trig_attr) {
+    Pio *pio_base = arch_ioport_pin_to_base(pin);
+    uint32_t pin_mask = arch_ioport_pin_to_mask(pin);
+    IRQn_Type IRQn = ioport_pin_to_Port_IRQn(pin);
+    uint32_t ID = ioport_pin_to_ID_Port(pin);
+    
+    pio_set_input(pio_base, pin_mask, pin_attr);
+    pio_handler_set(pio_base, ID, pin_mask, trig_attr, handler);
+    pio_enable_interrupt(pio_base, pin_mask);
+    NVIC_ClearPendingIRQ(IRQn);
+    NVIC_EnableIRQ(IRQn);
+}
+
+void configure_buttons() {
+    configure_button(BTN1, btn1_handler, (PIO_PULLUP | PIO_DEBOUNCE),  PIO_IT_FALL_EDGE);
+	configure_button(DOOR, door_handler, PIO_PULLUP | PIO_DEBOUNCE, PIO_IT_RISE_EDGE);
+	configure_button(POOL, pool_handler,  PIO_DEBOUNCE, PIO_IT_RISE_EDGE);
+}
