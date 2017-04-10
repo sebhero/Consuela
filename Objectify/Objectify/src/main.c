@@ -36,6 +36,10 @@
 #define trig PIO_PC26_IDX
 #define echo PIO_PC25_IDX
 
+//"scaling" är sammansättning av tiden för ljudets färd i "width-ticks" per mikro_s (3.64) gånger 2 (p.g.a ljudets sträcka är dubbbelt
+//så lång än avståndet som ska mätas) och sedan delas detta med ljudets hastighet i cm / us (0.034).
+// 'scaling' är alltså (3.64 * 2) / 0.34 = 214.
+#define scaling 214;
 
 
 void configureConsole()
@@ -56,26 +60,29 @@ long pulseIn()
 	//printf("pulseread");
 	//timeout zone
 	unsigned long numloops = 0;
-	unsigned long maxloops = 5000000;
+	unsigned long maxloops = 500000;
 	unsigned long width = 0;
-	// wait for any previous pulse to end
-	while ( ioport_get_pin_level(echo) == HIGH)
-	{
-		if (numloops++ == maxloops) break;
-	}
 	// wait for the pulse to start
 	while (ioport_get_pin_level(echo)== LOW)
 	{
-		if (numloops++ == maxloops) break;
+		if (numloops++ == maxloops)
+		{
+			printf("brokenLOW");
+			break;
+		}
 	}
 	
 	// wait for the pulse to stop @ here we are measuring the pulse width = incrementing the WIDTH value by one each cycle. atmega328 1 micro second is equal to 16 cycles.
 	while (ioport_get_pin_level(echo)==HIGH)
 	{
-		if (numloops++ == maxloops) break;
+		if (numloops++ == maxloops) 
+		{
+			printf("brokenHIGH");
+			break;
+		}
 		width++;
 	}
-	return width/5.1;
+	return width/scaling;
 }
 
 int main (void)
@@ -87,7 +94,7 @@ int main (void)
 	configureConsole();
 	ioport_set_pin_dir(trig,IOPORT_DIR_OUTPUT);
 	ioport_set_pin_dir(echo, IOPORT_DIR_INPUT);
-	unsigned long duration, distance;
+	unsigned long distance;
 	while(1)
 	{
 	
@@ -96,8 +103,7 @@ int main (void)
  		ioport_set_pin_level(trig, HIGH);
  		delay_us(10);
  		ioport_set_pin_level(trig, LOW);
- 		duration = pulseIn();
- 		distance = duration / 58;
+ 		distance = pulseIn();
 		printf("%d cm\n", distance);
 		delay_ms(500);
 	}
