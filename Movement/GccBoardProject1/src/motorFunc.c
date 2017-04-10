@@ -2,43 +2,56 @@
  * CFile1.c
  *
  * Created: 07/04/2017 12:53:10
- *  Author: Robin_2
+ *  Author: Robin Johnsson
+ *
+ *
+ *	Alot of these will be changed when integrated with RTOS.
+ *	The delays etc will be removed since RTOS will call functions correctly
+ *
  */ 
 #include <asf.h>
 #include "motorFunc.h"
 
-uint16_t baseSpeed = 1750;
-uint16_t reverseBaseSpeed = 1250; 
-
-//Sends the pulse to the motor
+//Sends the pulse to the engine
 void pulse(uint16_t motorSpeed){
 	ioport_set_pin_level(pin24, HIGH);
 	delay_us(motorSpeed);
 	ioport_set_pin_level(pin24, LOW);
 };
 
-//Sets both motors to go the same direction with the "same" speed
+//Sets both engines to go the same direction with the "same" speed
 void forwardDrive(){
 	pulse(baseSpeed);
-	delay_us(1100);
+	delay_us(motorSwitch);
 	pulse(baseSpeed);
+	delay_ms(timeOut);
 }
 
+//Sets both engines to go the same direction with the "same" speed (reverse)
 void reverseDrive(){
 	pulse(reverseBaseSpeed);
-	delay_us(1100);
+	delay_us(motorSwitch);
 	pulse(reverseBaseSpeed);
+	delay_ms(timeOut);
 }
 
-//Rotates the platform by setting the directions of the motors the opposite
+//Rotates the platform by setting the directions of the engines the opposite of each other
 void rotate(){
 	pulse(baseSpeed);
-	delay_us(1100);
+	delay_us(motorSwitch);
 	pulse(reverseBaseSpeed);
+	delay_ms(timeOut);
 }
 
+//Stops both of the engines
 void stop(){
 	pulse(1500);
-	delay_us(1100);
+	delay_us(motorSwitch);
 	pulse(1500);
+	delay_ms(timeOut);
+}
+
+void rotateByDegrees(uint8_t degree, uint16_t speed){
+	//Code / equation to figure this out!
+	//then normal rotation with calculated parameters
 }
