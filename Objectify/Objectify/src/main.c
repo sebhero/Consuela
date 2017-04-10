@@ -107,5 +107,8 @@ int main (void)
 		printf("%d cm\n", distance);
 		delay_ms(500);
 	}
+
+//ioport_set_pin_dir(pin24,IOPORT_DIR_OUTPUT);
+
 	/* Insert application code here, after the board has been initialized. */
 }
