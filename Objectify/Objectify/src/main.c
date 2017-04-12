@@ -33,9 +33,11 @@
 #include <stdio.h>
 #include <stdio_serial.h>
 
+//ultrasound
 #define trig PIO_PC26_IDX
 #define echo PIO_PC25_IDX
 
+//ultrasound
 //"scaling" �r sammans�ttning av tiden f�r ljudets f�rd i "width-ticks" per mikro_s (3.64) g�nger 2 (p.g.a ljudets str�cka �r dubbbelt
 //s� l�ng �n avst�ndet som ska m�tas) och sedan delas detta med ljudets hastighet i cm / us (0.034).
 // 'scaling' �r allts� (3.64 * 2) / 0.34 = 214.
@@ -85,28 +87,44 @@ long pulseIn()
 	return width/scaling;
 }
 
-int main (void)
+public void testingUltraSound()
 {
-	/* Insert system clock initialization code here (sysclk_init()). */
-
-	sysclk_init();
-	board_init();
-	configureConsole();
+	
 	ioport_set_pin_dir(trig,IOPORT_DIR_OUTPUT);
 	ioport_set_pin_dir(echo, IOPORT_DIR_INPUT);
 	unsigned long distance;
 	while(1)
 	{
-	
- 		ioport_set_pin_level(trig, LOW);
- 		delay_us(2);
- 		ioport_set_pin_level(trig, HIGH);
- 		delay_us(10);
- 		ioport_set_pin_level(trig, LOW);
- 		distance = pulseIn();
+		
+		ioport_set_pin_level(trig, LOW);
+		delay_us(2);
+		ioport_set_pin_level(trig, HIGH);
+		delay_us(10);
+		ioport_set_pin_level(trig, LOW);
+		distance = pulseIn();
 		printf("%d cm\n", distance);
 		delay_ms(500);
-	}
+	}	
+}
+
+int main (void)
+{
+	/* Insert system clock initialization code here (sysclk_init()). */
+
+	//init clock
+	sysclk_init();
+	//init board
+	board_init();
+	//init serial communication, printf ..
+	configureConsole();
+	
+	//test ultrasound sensor
+	//testingUltraSound();
+	
+	//test rfid
+	testingRFID();
+	
+	
 
 	/* Insert application code here, after the board has been initialized. */
 
