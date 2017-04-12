@@ -14,9 +14,9 @@ void configure_pwm() {
 	ioport_set_pin_mode(PIO_PC2_IDX, IOPORT_MODE_MUX_B);
 	ioport_disable_pin(PIO_PC2_IDX);
 	
-	// PC4 <-> Digital 36
-	ioport_set_pin_mode(PIO_PC4_IDX, IOPORT_MODE_MUX_B);
-	ioport_disable_pin(PIO_PC4_IDX);
+	//// PC4 <-> Digital 36
+	//ioport_set_pin_mode(PIO_PC4_IDX, IOPORT_MODE_MUX_B);
+	//ioport_disable_pin(PIO_PC4_IDX);
 	
 	pwm_clock_t clock_setting = {
 		.ul_clka = 50000,
@@ -37,10 +37,10 @@ void configure_pwm() {
 	pwm_channel_init(PWM, &pwm_channel_instance);
 	pwm_channel_enable(PWM, PWM_CHANNEL_0);
 	
-	pwm_channel_instance.channel = PWM_CHANNEL_1;
-	pwm_channel_instance.ul_duty = 0;
-	pwm_channel_disable(PWM, PWM_CHANNEL_1);
-	pwm_init(PWM, &clock_setting);
-	pwm_channel_init(PWM, &pwm_channel_instance);
-	//pwm_channel_enable(PWM, PWM_CHANNEL_1);
+	//pwm_channel_instance.channel = PWM_CHANNEL_1;
+	//pwm_channel_instance.ul_duty = 0;
+	//pwm_channel_disable(PWM, PWM_CHANNEL_1);
+	//pwm_init(PWM, &clock_setting);
+	//pwm_channel_init(PWM, &pwm_channel_instance);
+	////pwm_channel_enable(PWM, PWM_CHANNEL_1);
 }
