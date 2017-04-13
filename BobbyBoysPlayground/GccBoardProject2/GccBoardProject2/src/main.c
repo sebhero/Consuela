@@ -11,9 +11,7 @@ void TC2_Handler() {
 	}
 	if(status & TC_SR_CPCS) {
 		ioport_set_pin_level(LED, IOPORT_PIN_LEVEL_HIGH);		
-	}
-	
-	
+	}	
 }
 
 void configure_tc(uint32_t freq, uint32_t dty_pct) {
