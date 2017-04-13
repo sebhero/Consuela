@@ -4,6 +4,8 @@
 
 src\distanceSensor.c
 
+src\motorFunc.c
+
 src\ASF\common\services\clock\sam3x\sysclk.c
 
 src\ASF\common\services\delay\sam\cycle_counter.c
@@ -29,8 +31,6 @@ src\ASF\sam\utils\cmsis\sam3x\source\templates\gcc\startup_sam3x.c
 src\ASF\sam\utils\cmsis\sam3x\source\templates\system_sam3x.c
 
 src\ASF\sam\utils\syscalls\gcc\syscalls.c
-
-src\motorFunc.c
 
 src\main.c
 

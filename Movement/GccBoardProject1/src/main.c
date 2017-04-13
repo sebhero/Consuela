@@ -21,6 +21,9 @@ int main (void)
 	ioport_set_pin_dir(trig,IOPORT_DIR_OUTPUT);
 	ioport_set_pin_dir(echo, IOPORT_DIR_INPUT);
 	unsigned long distance;
+	uint16_t distanceArray[5] = {0,0,0,0,0};
+	uint8_t i= 0;
+	uint16_t speed;
 	
 	//Starts with a delay simply to reduce the chance of an error occuring when reseting the program.
 	delay_ms(2000);
@@ -35,7 +38,7 @@ int main (void)
 	//Starting with a stop(); command is also advisable, as to not run into problems when doing a reset
 	while(1){
 		distance = distance_forward();
-	
+		distanceArray[i] = distance;
 		if (distance<75)
 		{
 			stop();
@@ -44,7 +47,17 @@ int main (void)
 		} 
 		else
 		{
-			forwardDrive();
+			speed = calculateSpeed(distanceArray);
+			regulatedForward(speed,speed);
+		}
+		
+		if (i<4)
+		{
+			i++;
+		} 
+		else
+		{
+			i=0;
 		}
 	}
 	return 0;

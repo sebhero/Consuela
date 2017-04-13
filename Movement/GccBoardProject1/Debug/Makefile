@@ -86,6 +86,7 @@ SUBDIRS :=  \
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
 ../src/distanceSensor.c \
+../src/motorFunc.c \
 ../src/ASF/common/services/clock/sam3x/sysclk.c \
 ../src/ASF/common/services/delay/sam/cycle_counter.c \
 ../src/ASF/common/utils/interrupt/interrupt_sam_nvic.c \
@@ -99,7 +100,6 @@ C_SRCS +=  \
 ../src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.c \
 ../src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.c \
 ../src/ASF/sam/utils/syscalls/gcc/syscalls.c \
-../src/motorFunc.c \
 ../src/main.c
 
 
@@ -111,6 +111,7 @@ ASM_SRCS +=
 
 OBJS +=  \
 src/distanceSensor.o \
+src/motorFunc.o \
 src/ASF/common/services/clock/sam3x/sysclk.o \
 src/ASF/common/services/delay/sam/cycle_counter.o \
 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o \
@@ -124,11 +125,11 @@ src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o \
 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o \
 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o \
 src/ASF/sam/utils/syscalls/gcc/syscalls.o \
-src/motorFunc.o \
 src/main.o
 
 OBJS_AS_ARGS +=  \
 src/distanceSensor.o \
+src/motorFunc.o \
 src/ASF/common/services/clock/sam3x/sysclk.o \
 src/ASF/common/services/delay/sam/cycle_counter.o \
 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o \
@@ -142,11 +143,11 @@ src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o \
 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o \
 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o \
 src/ASF/sam/utils/syscalls/gcc/syscalls.o \
-src/motorFunc.o \
 src/main.o
 
 C_DEPS +=  \
 src/distanceSensor.d \
+src/motorFunc.d \
 src/ASF/common/services/clock/sam3x/sysclk.d \
 src/ASF/common/services/delay/sam/cycle_counter.d \
 src/ASF/common/utils/interrupt/interrupt_sam_nvic.d \
@@ -160,11 +161,11 @@ src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.d \
 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.d \
 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.d \
 src/ASF/sam/utils/syscalls/gcc/syscalls.d \
-src/motorFunc.d \
 src/main.d
 
 C_DEPS_AS_ARGS +=  \
 src/distanceSensor.d \
+src/motorFunc.d \
 src/ASF/common/services/clock/sam3x/sysclk.d \
 src/ASF/common/services/delay/sam/cycle_counter.d \
 src/ASF/common/utils/interrupt/interrupt_sam_nvic.d \
@@ -178,7 +179,6 @@ src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.d \
 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.d \
 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.d \
 src/ASF/sam/utils/syscalls/gcc/syscalls.d \
-src/motorFunc.d \
 src/main.d
 
 OUTPUT_FILE_PATH +=GccBoardProject1.elf

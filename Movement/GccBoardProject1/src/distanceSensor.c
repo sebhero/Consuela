@@ -7,6 +7,7 @@
 #include <asf.h>
 #include "distanceSensor.h"
 
+
 unsigned long duration, distance;
 
 long pulseIn()
@@ -45,4 +46,17 @@ long distance_forward(){
 	duration = pulseIn();
 	distance = duration / 58;
 	return distance;
+}
+
+
+uint16_t calculateSpeed(uint16_t distanceArray[]){
+	uint16_t dist = 0;
+	uint8_t i;
+	for (i = 0; i < 5; ++i) {
+		dist += distanceArray[i];
+	}
+	dist = dist/5;
+	uint16_t speed = dist * 1.85;
+	speed =1500 + MIN(speed,500);
+	return speed;
 }

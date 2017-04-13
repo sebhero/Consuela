@@ -446,6 +446,9 @@
     <Compile Include="src\distanceSensor.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\motorFunc.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\motorFunc.h">
       <SubType>compile</SubType>
     </Compile>
@@ -873,9 +876,6 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\ASF\sam\utils\syscalls\gcc\syscalls.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\motorFunc.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\main.c">
