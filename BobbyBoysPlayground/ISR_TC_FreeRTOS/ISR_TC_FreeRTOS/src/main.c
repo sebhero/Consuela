@@ -3,6 +3,30 @@
 #include "pwm/pwm.h"
 #include "callbacks/callbacks.h"
 
+xTimerHandle timer_switchDuty;
+pwm_t 	pwm = {
+	.pwm_ch_id = 0,
+	.freq = 10,
+	.pct_dty = 30,
+	.cpra_callback = cpra_func,
+	.cprc_callback = cprc_func
+};
+
+
+void vSwitchDuty(xTimerHandle pxTimer) {
+	static uint32_t state = 0;
+	if(state) {
+		pwm.pct_dty = 10;
+		change_pct_dty(pwm);
+		state = 0;
+	} else {
+		pwm.pct_dty = 90;
+		change_pct_dty(pwm);	
+		state = 1;
+	}
+	
+}
+
 int main (void) {
 	sysclk_init();
 
@@ -13,22 +37,14 @@ int main (void) {
 	
 	init_pwm();
 	
-	pwm_t pwm = {
-		.pwm_ch_id = 0,
-		.freq = 10,
-		.pct_dty = 30,
-		.cpra_callback = cpra_func,
-		.cprc_callback = cprc_func
-	};
+
 	
 	configure_pwm(pwm);
-
+	
+	timer_switchDuty = xTimerCreate("Switch duty", 1000, pdTRUE, 0, vSwitchDuty);
+	xTimerStart(timer_switchDuty, 0);
+    vTaskStartScheduler();
 	while(1) {
-		delay_ms(1000);
-		pwm.pct_dty = 10;
-		change_pct_dty(pwm);
-		delay_ms(1000);
-		pwm.pct_dty = 90;
-		change_pct_dty(pwm);
+		// spin
 	}
 }
