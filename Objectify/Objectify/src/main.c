@@ -141,11 +141,6 @@ void testingRFID()
 {
 	//NPCS0
 	
-	struct spi_device spi_dev ={
-		.id=IOPORT_CREATE_PIN(PIO_PA28_IDX,1)
-		};
-	spi_master_init(SPI_MASTER_BASE);
-	spi_master_setup_device(SPI_MASTER_BASE,)
 	
 }
 

@@ -66,13 +66,3 @@ Thumbs.db
 
 # Atmel Studio files
 # *.atsuo
-# *.cproj
-Objectify/Objectify\.atsuo
-
-Objectify/Objectify/Debug/Objectify\.map
-
-Objectify/Objectify/Debug/Objectify\.lss
-
-Objectify/Objectify/Debug/
-
-Objectify/Objectify/Objectify\.cproj
