@@ -81,7 +81,8 @@ int main (void)
 	ioport_set_pin_dir(greenLED, IOPORT_DIR_OUTPUT);
 	ioport_set_pin_dir(pin24, IOPORT_DIR_OUTPUT);
 	//button_config(ID_PIOC, PIOC, PIO_PC13);
-	pulseCounter_config(ID_PIOC, PIOC, PIO_PC28);
+	pulseCounter_configA(ID_PIOC, PIOC, PIO_PC28);
+	pulseCounter_configB(ID_PIOC, PIOC, PIO_PC23);
 	delay_ms(2000);
 	forwardDrive();
 	
@@ -92,7 +93,9 @@ int main (void)
 		delay_ms(1000);*/
 		
 		ioport_get_pin_level(A);
-		printf("Pulse counter = %i\n", counterA);
+		ioport_get_pin_level(B);
+		printf("Pulse counter A = %i\n", counterA);
+		printf("Pulse counter B = %i\n", counterB);
 
 	}
 	/* Insert application code here, after the board has been initialized. */
