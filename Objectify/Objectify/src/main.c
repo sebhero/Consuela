@@ -32,6 +32,8 @@
 #include <delay.h>
 #include <stdio.h>
 #include <stdio_serial.h>
+#include <spi.h>
+#include <spi_master.h>
 
 //ultrasound
 #define trig PIO_PC26_IDX
@@ -87,7 +89,7 @@ long pulseIn()
 	return width/scaling;
 }
 
-public void testingUltraSound()
+void testingUltraSound()
 {
 	
 	ioport_set_pin_dir(trig,IOPORT_DIR_OUTPUT);
@@ -107,9 +109,45 @@ public void testingUltraSound()
 	}	
 }
 
+#define SPI_Handler     SPI0_Handler
+#define SPI_IRQn SPI0_IRQn
+
+/** Spi Hw ID . */
+#define SPI_ID ID_SPI0
+
+//spio address
+#define SPI_MASTER_BASE SPI0
+
+/** SPI base address for SPI slave mode, (on different board) */
+#define SPI_SLAVE_BASE SPI0
+
+#define SPI_CHIP_SEL 0 //use spi chip select 0
+#define SPI_CHIP_PCS spi_get_pcs(SPI_CHIP_SEL)
+//clock polarity
+#define SPI_CLK_POLARITY 0
+//clock phase
+#define SPI_CLK_PHASE 0
+/* Delay before SPCK. */
+//#define SPI_DLYBS 0x40
+#define SPI_DLYBS 0xFF
+
+/* Delay between consecutive transfers. */
+#define SPI_DLYBCT 0x10
+/* SPI clock setting (Hz). */
+static uint32_t gs_ul_spi_clock = 1000000;
+
+
+void testingRFID()
+{
+	//NPCS0
+	
+	
+}
+
 int main (void)
 {
-	/* Insert system clock initialization code here (sysclk_init()). */
+	//turn of watchdog
+	WDT->WDT_MR = WDT_MR_WDDIS;
 
 	//init clock
 	sysclk_init();
