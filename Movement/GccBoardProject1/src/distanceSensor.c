@@ -4,11 +4,12 @@
  * Created: 10/04/2017 10:32:36
  *  Author: Robin_2
  */ 
-#include <asf.h>
 #include "distanceSensor.h"
 
 
 unsigned long duration, distance;
+//unsigned double kValue = 500.0/270.0;
+
 
 long pulseIn()
 {
@@ -48,15 +49,16 @@ long distance_forward(){
 	return distance;
 }
 
-
+/*
 uint16_t calculateSpeed(uint16_t distanceArray[]){
 	uint16_t dist = 0;
 	uint8_t i;
 	for (i = 0; i < 5; ++i) {
 		dist += distanceArray[i];
 	}
-	dist = dist/5;
-	uint16_t speed = dist * 1.85;
+	dist = dist/4;
+	uint16_t speed = dist * kValue;
 	speed =1500 + MIN(speed,500);
 	return speed;
 }
+*/

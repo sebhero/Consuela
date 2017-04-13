@@ -87,6 +87,7 @@ SUBDIRS :=  \
 C_SRCS +=  \
 ../src/distanceSensor.c \
 ../src/motorFunc.c \
+../src/regulation.c \
 ../src/ASF/common/services/clock/sam3x/sysclk.c \
 ../src/ASF/common/services/delay/sam/cycle_counter.c \
 ../src/ASF/common/utils/interrupt/interrupt_sam_nvic.c \
@@ -112,6 +113,7 @@ ASM_SRCS +=
 OBJS +=  \
 src/distanceSensor.o \
 src/motorFunc.o \
+src/regulation.o \
 src/ASF/common/services/clock/sam3x/sysclk.o \
 src/ASF/common/services/delay/sam/cycle_counter.o \
 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o \
@@ -130,6 +132,7 @@ src/main.o
 OBJS_AS_ARGS +=  \
 src/distanceSensor.o \
 src/motorFunc.o \
+src/regulation.o \
 src/ASF/common/services/clock/sam3x/sysclk.o \
 src/ASF/common/services/delay/sam/cycle_counter.o \
 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o \
@@ -148,6 +151,7 @@ src/main.o
 C_DEPS +=  \
 src/distanceSensor.d \
 src/motorFunc.d \
+src/regulation.d \
 src/ASF/common/services/clock/sam3x/sysclk.d \
 src/ASF/common/services/delay/sam/cycle_counter.d \
 src/ASF/common/utils/interrupt/interrupt_sam_nvic.d \
@@ -166,6 +170,7 @@ src/main.d
 C_DEPS_AS_ARGS +=  \
 src/distanceSensor.d \
 src/motorFunc.d \
+src/regulation.d \
 src/ASF/common/services/clock/sam3x/sysclk.d \
 src/ASF/common/services/delay/sam/cycle_counter.d \
 src/ASF/common/utils/interrupt/interrupt_sam_nvic.d \
@@ -196,6 +201,8 @@ LINKER_SCRIPT_DEP+=  \
 
 
 # AVR32/GNU C Compiler
+
+
 
 
 

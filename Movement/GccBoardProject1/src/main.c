@@ -4,9 +4,16 @@
  *
  */
 #include <asf.h>
-#include <inttypes.h>
+//#include <inttypes.h>
 #include "motorFunc.h"
 #include "distanceSensor.h"
+#include "regulation.h"
+
+//Variables
+unsigned long distance;
+uint16_t distanceArray[5] = {0,0,0,0,0};
+uint8_t i= 0;
+uint16_t speed;
 
 //Need to add more comments
 
@@ -17,13 +24,11 @@ int main (void)
 	//Makes pin 24 on the Due-board an output
 	ioport_set_pin_dir(pin24,IOPORT_DIR_OUTPUT);
 	
-	
+	//Sets up the pins for input/output
 	ioport_set_pin_dir(trig,IOPORT_DIR_OUTPUT);
 	ioport_set_pin_dir(echo, IOPORT_DIR_INPUT);
-	unsigned long distance;
-	uint16_t distanceArray[5] = {0,0,0,0,0};
-	uint8_t i= 0;
-	uint16_t speed;
+	
+	
 	
 	//Starts with a delay simply to reduce the chance of an error occuring when reseting the program.
 	delay_ms(2000);
@@ -38,7 +43,7 @@ int main (void)
 	//Starting with a stop(); command is also advisable, as to not run into problems when doing a reset
 	while(1){
 		distance = distance_forward();
-		distanceArray[i] = distance;
+		distanceArray[i%4] = distance;
 		if (distance<75)
 		{
 			stop();
@@ -49,15 +54,6 @@ int main (void)
 		{
 			speed = calculateSpeed(distanceArray);
 			regulatedForward(speed,speed);
-		}
-		
-		if (i<4)
-		{
-			i++;
-		} 
-		else
-		{
-			i=0;
 		}
 	}
 	return 0;

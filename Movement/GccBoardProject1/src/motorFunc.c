@@ -72,9 +72,11 @@ void rotateByDegrees(uint8_t degree, uint16_t speed){
 	//then normal rotation with calculated parameters
 }
 
-uint16_t regulatedForward(uint16_t speedLeft, uint16_t speedRight){
+/*
+void regulatedForward(uint16_t speedLeft, uint16_t speedRight){
 	pulse(speedRight);
 	delay_us(motorSwitch);
 	pulse(speedLeft);
 	delay_ms(10);
 }
+*/
