@@ -2,17 +2,21 @@
  * pulseCounterHandler.h
  *
  * Created: 2017-04-12 10:29:32
- *  Author: Spellabbet
+ *  Author: Danial Mahmoud
  */ 
 
+#include <asf.h>
 
 #ifndef PULSECOUNTERHANDLER_H_
 #define PULSECOUNTERHANDLER_H_
 
 extern int counterA; /* Declaration of the variable */
 extern int counterB;
-void pulseCounter_handler(int counterA); //const uint32_t idA, const uint32_t indexA, const uint32_t idB, const uint32_t indexB
-//void pulseCounter_config(uint32_t ul_idA, Pio *p_pioA, const uint32_t ul_maskA, uint32_t ul_idB, Pio *p_pioB, const uint32_t ul_maskB);
+
+#define A IOPORT_CREATE_PIN(PIOC, 28) //digital pin 3
+
+void pulseCounter_handler(const uint32_t id, const uint32_t index); 
+void pulseCounter_config(uint32_t ul_id, Pio *p_pio, const uint32_t ul_mask);
 
 
 #endif /* PULSECOUNTERHANDLER_H_ */

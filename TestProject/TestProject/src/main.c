@@ -36,6 +36,7 @@
 
 #define redLED  IOPORT_CREATE_PIN(PIOA, 14) // digital pin 23
 #define greenLED  IOPORT_CREATE_PIN(PIOB, 26) // digital pin 22
+#define pin24 PIO_PA15_IDX
 
 static void configure_console(void)
 /* Enables feedback through the USB-cable back to terminal within Atmel Studio */
@@ -53,6 +54,21 @@ static void configure_console(void)
 	printf("=============\n");
 }
 
+//Sends the pulse to the engine
+void pulse(uint16_t motorSpeed){
+	ioport_set_pin_level(pin24, HIGH);
+	delay_us(motorSpeed);
+	ioport_set_pin_level(pin24, LOW);
+}
+
+//Sets both engines to go the same direction with the "same" speed
+void forwardDrive(){
+	pulse(2000);
+	delay_us(1100);
+	pulse(2000);
+	delay_ms(100);
+}
+
 int main (void)
 {
 	/* Insert system clock initialization code here (sysclk_init()). */
@@ -63,17 +79,21 @@ int main (void)
 	ioport_init();
 	ioport_set_pin_dir(redLED, IOPORT_DIR_OUTPUT);
 	ioport_set_pin_dir(greenLED, IOPORT_DIR_OUTPUT);
-	button_config(ID_PIOC, PIOC, PIO_PC13);
+	ioport_set_pin_dir(pin24, IOPORT_DIR_OUTPUT);
+	//button_config(ID_PIOC, PIOC, PIO_PC13);
+	pulseCounter_config(ID_PIOC, PIOC, PIO_PC28);
+	delay_ms(2000);
+	forwardDrive();
 	
-	int counterA = 0;
 	while(1){
 		/*ioport_set_pin_level(redLED, 1);
 		delay_ms(1000);
 		ioport_set_pin_level(redLED, 0);
 		delay_ms(1000);*/
-		pulseCounter_handler(counterA);
-		printf("Character = %i\n", counterA);
-		delay_ms(1000);
+		
+		ioport_get_pin_level(A);
+		printf("Pulse counter = %i\n", counterA);
+
 	}
 	/* Insert application code here, after the board has been initialized. */
 }
