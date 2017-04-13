@@ -2,7 +2,9 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
-src\ASF\sam\drivers\tc\tc.c
+src\buttonInterrupt.c
+
+src\pulseCounterHandler.c
 
 src\ASF\common\services\delay\sam\cycle_counter.c
 
@@ -53,8 +55,6 @@ src\ASF\sam\utils\cmsis\sam3x\source\templates\gcc\startup_sam3x.c
 src\ASF\sam\utils\cmsis\sam3x\source\templates\system_sam3x.c
 
 src\ASF\sam\utils\syscalls\gcc\syscalls.c
-
-src\buttonInterrupt.c
 
 src\main.c
 

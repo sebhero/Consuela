@@ -33,6 +33,7 @@ void stop(void);
 void turnLeft(void);
 void turnRight(void);
 void rotateByDegrees(uint8_t degree, uint16_t speed);
+void regulatedForward(uint16_t motorRight, uint16_t motorLeft);
 
 
 
