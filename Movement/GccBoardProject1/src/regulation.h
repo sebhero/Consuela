@@ -10,9 +10,8 @@
 #define REGULATION_H_
 #include <inttypes.h>
 
-regulatedForward(uint16_t speedR,uint16_t speedL);
-calculateSpeed(uint16_t distanceArray[]);
-
+uint16_t calculateSpeed(uint16_t distanceArray[]);
+void regulatedForward(uint16_t speedR,uint16_t speedL);
 
 
 #endif /* REGULATION_H_ */

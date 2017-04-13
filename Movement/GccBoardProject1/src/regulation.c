@@ -12,10 +12,6 @@
 double kValue = 500.0/270.0;
 
 
-regulatedForward(uint16_t speedR,uint16_t speedL){
-	
-}
-
 uint16_t calculateSpeed(uint16_t distanceArray[]){
 	uint16_t dist = 0;
 	uint8_t i;
