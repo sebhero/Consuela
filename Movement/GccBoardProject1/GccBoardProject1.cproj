@@ -452,6 +452,12 @@
     <Compile Include="src\motorFunc.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\regulation.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\regulation.h">
+      <SubType>compile</SubType>
+    </Compile>
     <None Include="src\asf.h">
       <SubType>compile</SubType>
     </None>

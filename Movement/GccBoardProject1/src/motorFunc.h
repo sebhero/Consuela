@@ -8,6 +8,8 @@
 
 #ifndef MOTORFUNC_H_
 #define MOTORFUNC_H_
+
+#include <inttypes.h>
 //Defines pin 24 on the Due-board as a pin to be used.
 #define pin24 PIO_PA15_IDX
 
@@ -23,7 +25,7 @@
 
 
 
-#include <inttypes.h>
+
 
 void pulse(uint16_t motorSpeed);
 void forwardDrive(void);
@@ -33,7 +35,7 @@ void stop(void);
 void turnLeft(void);
 void turnRight(void);
 void rotateByDegrees(uint8_t degree, uint16_t speed);
-uint16_t regulatedForward(uint16_t speedLeft, uint16_t speedRight);
+//void regulatedForward(uint16_t speedLeft, uint16_t speedRight);
 
 
 

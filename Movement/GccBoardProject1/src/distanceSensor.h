@@ -8,6 +8,7 @@
 
 #ifndef DISTANCESENSOR_H_
 #define DISTANCESENSOR_H_
+#include <asf.h>
 
 #define trig PIO_PC26_IDX
 #define echo PIO_PC25_IDX
@@ -17,7 +18,7 @@
 
 long pulseIn(void);
 long distance_forward(void);
-uint16_t calculateSpeed(uint16_t distanceArray[]);
+//uint16_t calculateSpeed(uint16_t distanceArray[]);
 
 
 
