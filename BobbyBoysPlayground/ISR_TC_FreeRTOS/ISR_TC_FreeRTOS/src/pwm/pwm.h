@@ -20,15 +20,15 @@ typedef struct {
 typedef struct {
 	uint32_t pwm_ch_id;
 	uint32_t freq;
-	uint32_t pct_dty;
+	uint32_t pulse_us;
 	void (*cpra_callback)(void);
 	void (*cprc_callback)(void);
 	} pwm_t;
 
 
-extern pwm_ch channels[1];
+extern pwm_ch channels[];
 void init_pwm();
-void change_pct_dty(pwm_t pwm);
+void change_pulse_us(pwm_t pwm);
 void configure_pwm(pwm_t pwm);
 
 #endif /* PWM_H_ */
