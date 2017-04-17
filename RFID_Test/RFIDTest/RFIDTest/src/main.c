@@ -21,13 +21,11 @@
  * 
  */
  
-#include <avr/io.h>
-#include <util/delay.h>
-#include <lcd.h>
+#include <asf.h>
+#include <delay.h>
 #include <utils.h>
 #include <spi.h>
 #include <mfrc522.h>
-
 uint8_t SelfTestBuffer[64];
  
 int main()
@@ -35,15 +33,9 @@ int main()
 	uint8_t byte;
 	uint8_t str[MAX_LEN];
 	_delay_ms(50);
-	LCDInit(LS_BLINK);
-	LCDWriteStringXY(2,0,"RFID Reader");
-	LCDWriteStringXY(5,1,VERSION_STR);
-	
 	
 	spi_init();
 	_delay_ms(1000);
-	LCDClear();
-	
 	//init reader
 	mfrc522_init();
 	
@@ -51,15 +43,15 @@ int main()
 	byte = mfrc522_read(VersionReg);
 	if(byte == 0x92)
 	{
-		LCDWriteStringXY(2,0,"MIFARE RC522v2");
-		LCDWriteStringXY(4,1,"Detected");
+		printf("MIFARE RC522v2\n");
+		printf("Detected");
 	}else if(byte == 0x91 || byte==0x90)
 	{
-		LCDWriteStringXY(2,0,"MIFARE RC522v1");
-		LCDWriteStringXY(4,1,"Detected");
+		printf("MIFARE RC522v1");
+		printf("Detected");
 	}else
 	{
-		LCDWriteStringXY(0,0,"No reader found");
+		printf("No reader found");
 	}
 	
 	byte = mfrc522_read(ComIEnReg);
@@ -68,11 +60,9 @@ int main()
 	mfrc522_write(DivIEnReg,byte|0x80);
 	
 	_delay_ms(1500);
-	LCDClear();
 	
 	while(1){
 		byte = mfrc522_request(PICC_REQALL,str);
-		LCDHexDumpXY(0,0,byte);
 		_delay_ms(1000);
 	} 
 }

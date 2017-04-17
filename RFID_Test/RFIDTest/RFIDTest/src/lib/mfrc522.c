@@ -20,12 +20,9 @@
  * 
  * 
  */
-#include <mfrc522.h>
-#include <spi.h>
-
-#if 1
-#include <lcd.h>
-#endif
+#include <asf.h>
+#include "include/mfrc522.h"
+#include "include/spi.h"
 
 void mfrc522_init()
 {
@@ -49,7 +46,7 @@ void mfrc522_init()
 void mfrc522_write(uint8_t reg, uint8_t data)
 {
 	ENABLE_CHIP();
-	spi_transmit((reg<<1)&0x7E);
+	spi_transmit((reg<<1)&0x7e);
 	spi_transmit(data);
 	DISABLE_CHIP();
 }

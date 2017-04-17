@@ -24,8 +24,8 @@
 #define MFRC522_H
 
 #include <stdint.h>
-#include <mfrc522_cmd.h>
-#include <mfrc522_reg.h>
+#include <include/mfrc522_cmd.h>
+#include <include/mfrc522_reg.h>
 
 #define CARD_FOUND		1
 #define CARD_NOT_FOUND	2

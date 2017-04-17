@@ -20,6 +20,7 @@
  * 
  * 
  */
+#include <asf.h>
 #include <spi.h>
 
 #if SPI_CONFIG_AS_MASTER

@@ -23,7 +23,7 @@
 #ifndef SPI_H
 #define SPI_H
 
-#include <spi_config.h>
+#include <include/spi_config.h>
 #include <stdint.h>
 
 void spi_init();

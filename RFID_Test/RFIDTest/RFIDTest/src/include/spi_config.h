@@ -23,7 +23,7 @@
 #ifndef SPI_CONFIG_H
 #define SPI_CONFIG_H
 
-#include <avr/io.h>
+#include <asf.h>
 
 /*
  * Set to 1, spi api will work in master mode
