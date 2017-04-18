@@ -74,10 +74,12 @@ int main (void)
     char ch;
     printf("Enter period for channel %lu", channel);
 	while(1) {
-
+        // Read the period from stdin
         result = scanf("%lu", &pulse_length);
         if(result) {
+            // Set the new period of the pulse generator
             pulse_set_period(channel, pulse_length);
+            // Switch over to the next pulse channel
             channel  = (channel + 1)%2;
             printf("Enter period for channel %lu", channel);
         }
