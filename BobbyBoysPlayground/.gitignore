@@ -65,8 +65,8 @@ ehthumbs.db
 Thumbs.db
 
 # Atmel Studio files
-# *.atsuo
-# *.cproj
+*.atsuo
+*.cproj
 !**/src/*
 **/asf.h
 *.atsln
