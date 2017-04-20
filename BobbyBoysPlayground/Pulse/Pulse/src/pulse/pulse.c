@@ -45,13 +45,14 @@
  };
 
 #define TC1_Handler_pulse_timer_idx 0
+#define TC2_Handler_pulse_timer_idx 1
 pulse_timer_t pulse_timers[] = {
 	{
 		.tc = TC0,
 		.tc_ch = 1,
 		.id = ID_TC1,
 		.IRQn = TC1_IRQn,
-		.tc_mode = TC_CMR_TCCLKS_TIMER_CLOCK1 
+		.tc_mode = TC_CMR_TCCLKS_TIMER_CLOCK1
 			| TC_CMR_LDRA_RISING 
 			| TC_CMR_LDRB_FALLING
 			| TC_CMR_ABETRG 
@@ -60,7 +61,22 @@ pulse_timer_t pulse_timers[] = {
 		.mux = IOPORT_MODE_MUX_A,
 		.ioport_mode = IOPORT_MODE_PULLUP,
 		.divider = 2
-	}	
+	},
+	{
+		.tc = TC0,
+		.tc_ch = 0,
+		.id = ID_TC0,
+		.IRQn = TC0_IRQn,
+		.tc_mode = TC_CMR_TCCLKS_TIMER_CLOCK1
+		| TC_CMR_LDRA_RISING
+		| TC_CMR_LDRB_FALLING
+		| TC_CMR_ABETRG
+		| TC_CMR_ETRGEDG_FALLING,
+		.pin = PIO_PB25_IDX,
+		.mux = IOPORT_MODE_MUX_B,
+		.ioport_mode = IOPORT_MODE_PULLUP,
+		.divider = 2
+	}
 };
 
 
@@ -80,6 +96,10 @@ pulse_timer_t pulse_timers[] = {
     pwm_init(pulse_channels[ch_n].pwm, &pulse_clock_setting);
  }
 
+ /*
+ * \brief Initialize the specified pulse timer channel
+ *
+ */
 static void pulse_timer_init_channel(uint32_t ch_n) {
 
 	ioport_set_pin_dir(pulse_timers[ch_n].pin, IOPORT_DIR_INPUT);
@@ -107,7 +127,9 @@ uint32_t pulse_timer_get(uint32_t ch_n) {
 	uint32_t rb = tc_read_rb(pulse_timers[ch_n].tc, pulse_timers[ch_n].tc_ch);
 	uint32_t ra = tc_read_ra(pulse_timers[ch_n].tc, pulse_timers[ch_n].tc_ch);
 	uint32_t diff = rb - ra;
-	uint32_t duration = (diff ) / (((CHIP_FREQ_CPU_MAX/1000)/1000) / pulse_timers[ch_n].divider);
+	// Need a better way to do this calculation
+	// Calculate the duration in microseconds.
+	uint32_t duration = (diff ) / (((CHIP_FREQ_CPU_MAX / pulse_timers[ch_n].divider)/1000)/1000);
 	return duration;
 }
 
@@ -116,10 +138,17 @@ void TC1_Handler(void) {
 	NVIC_DisableIRQ(pulse_timers[TC1_Handler_pulse_timer_idx].IRQn);
 }
 
+void TC0_Handler(void) {
+	tc_get_status(pulse_timers[TC2_Handler_pulse_timer_idx].tc, pulse_timers[TC2_Handler_pulse_timer_idx].tc_ch);
+	NVIC_DisableIRQ(pulse_timers[TC2_Handler_pulse_timer_idx].IRQn);
+}
+
+
 void pulse_init() {
     pulse_init_channel(0);
     pulse_init_channel(1);
 	pulse_timer_init_channel(0);
+	pulse_timer_init_channel(1);
 }
 
 void pulse_start(uint32_t ch_n) {

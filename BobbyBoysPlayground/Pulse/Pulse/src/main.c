@@ -27,6 +27,7 @@ int main (void)
 	
 	configure_console();
 	printf("\nHello, World!");
+	
 	// Initialize the pulse channels
 	pulse_init();
 	// Set the period
@@ -34,14 +35,63 @@ int main (void)
 	pulse_set_period(pulseB_ch, pulseB_period);
 	// Start the pulse output
 	// Output will be on digital pin 35(PIO_PC3_IDX) for pulse channel 0
+	// and on digital pin 37(PIO_PC5_IDX) for channel 1
 	pulse_start(pulseA_ch);
 	pulse_start(pulseB_ch);
+	
+	uint32_t state = 0;
+	uint32_t channel = 0;
+	uint32_t period = 0;
+	uint32_t result = 0;
 	while(1) {
-		pulse_timer_start(0);
-		delay_ms(500);
-		uint32_t pulse_us = pulse_timer_get(0);
-		printf("\nPulse length: %u", pulse_us);
-		delay_ms(2000);
+		switch(state) {
+			case 0:				
+				printf("\nSelect channel [0|1]: ");
+				state = 1;
+				break;
+			case 1:
+				result = scanf("%lu", &channel);
+				if(result && channel < 2) {
+					state = 2;
+				} else {
+					state = 0;
+				}
+				break;
+			case 2:
+				printf("\nEnter period in us [0-2000]: ");
+				state = 3;
+				break;
+			case 3:
+				result = scanf("%lu", &period);
+				if(result && period <= 2000) {
+					state = 4;
+					} else {
+					state = 2;
+				}
+				break;
+			case 4:
+				pulse_set_period(channel, period);
+				state = 5;
+				break;
+			case 5:
+				// Start the timer channels and measure the period
+				pulse_timer_start(0);
+				pulse_timer_start(1);
+				delay_ms(500);
+				uint32_t pulse0_us = pulse_timer_get(0);
+				uint32_t pulse1_us = pulse_timer_get(1);
+				printf("\n\rPulse 0 length: %lu", pulse0_us);
+				printf("\n\rPulse 1 length: %lu", pulse1_us);
+				state = 0;
+				break;
+			default:
+				state = 0;				
+		}
+		
+		
+		
+		
+		
 	}
 
 }

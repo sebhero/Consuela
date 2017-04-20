@@ -41,14 +41,26 @@ typedef struct {
 	ioport_pin_t pin;
 	// Timer channel peripheral MUX
 	ioport_mode_t mux;
-	// additinal mode
+	// additional mode
 	ioport_mode_t ioport_mode;
 	// clock divider
 	uint32_t divider;	
 } pulse_timer_t;
 
-
+/*
+* \brief Start timer on the specified channel
+*
+* This starts a one-off timer. When the timer has triggered, it has to be
+* restarted if performing another measurement.
+*
+*/
 void pulse_timer_start(uint32_t ch_n);
+
+/*
+* \brief Get the timer result
+*
+* \retval The timer inteval in micro-seconds
+*/
 uint32_t pulse_timer_get(uint32_t ch_n);
 
 /*
