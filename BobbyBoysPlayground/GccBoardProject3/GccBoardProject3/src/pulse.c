@@ -26,7 +26,7 @@
         .id = ID_PWM,
         .pin = PIO_PC3_IDX,
         .mux = IOPORT_MODE_MUX_B,
-        .dty_max = 2000
+        .dty_max = 2100
     },
     {
         .pwm = PWM,
@@ -40,7 +40,7 @@
         .id = ID_PWM,
         .pin = PIO_PC5_IDX,
         .mux = IOPORT_MODE_MUX_B,
-        .dty_max = 2000
+        .dty_max = 2100
     }
  };
 
