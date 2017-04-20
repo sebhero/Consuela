@@ -12,20 +12,18 @@
 #include <asf.h>
 #include "motorFunc.h"
 
-
-
 //Sends the pulse to the engine
 void pulse(uint16_t motorSpeed){
 	ioport_set_pin_level(pin24, HIGH);
 	delay_us(motorSpeed);
 	ioport_set_pin_level(pin24, LOW);
-}
+};
 
 //Sets both engines to go the same direction with the "same" speed
 void forwardDrive(){
-	pulse(2000);
+	pulse(baseSpeed);
 	delay_us(motorSwitch);
-	pulse(2000);
+	pulse(baseSpeedLeft);
 	delay_ms(100);
 }
 
@@ -71,12 +69,3 @@ void rotateByDegrees(uint8_t degree, uint16_t speed){
 	//Code / equation to figure this out!
 	//then normal rotation with calculated parameters
 }
-
-/*
-void regulatedForward(uint16_t speedLeft, uint16_t speedRight){
-	pulse(speedRight);
-	delay_us(motorSwitch);
-	pulse(speedLeft);
-	delay_ms(10);
-}
-*/

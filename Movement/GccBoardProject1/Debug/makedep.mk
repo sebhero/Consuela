@@ -2,11 +2,25 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+src\ASF\common\services\serial\usart_serial.c
+
+src\ASF\common\utils\stdio\read.c
+
+src\ASF\common\utils\stdio\write.c
+
+src\ASF\sam\drivers\uart\uart.c
+
+src\ASF\sam\drivers\usart\usart.c
+
+src\ASF\thirdparty\wireless\addons\sio2host\uart\sio2host.c
+
+src\buttonInterrupt.c
+
 src\distanceSensor.c
 
-src\motorFunc.c
+src\Hjulreglering.c
 
-src\regulation.c
+src\pulseCounterHandler.c
 
 src\ASF\common\services\clock\sam3x\sysclk.c
 
@@ -33,6 +47,8 @@ src\ASF\sam\utils\cmsis\sam3x\source\templates\gcc\startup_sam3x.c
 src\ASF\sam\utils\cmsis\sam3x\source\templates\system_sam3x.c
 
 src\ASF\sam\utils\syscalls\gcc\syscalls.c
+
+src\motorFunc.c
 
 src\main.c
 

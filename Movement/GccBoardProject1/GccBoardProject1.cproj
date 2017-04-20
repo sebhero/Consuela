@@ -30,11 +30,12 @@
       <framework-data>
         <options>
           <option id="common.boards" value="Add" config="" content-id="Atmel.ASF" />
+          <option id="common.services.delay" value="Add" config="" content-id="Atmel.ASF" />
           <option id="common.services.basic.gpio" value="Add" config="" content-id="Atmel.ASF" />
           <option id="common.services.ioport" value="Add" config="" content-id="Atmel.ASF" />
           <option id="sam.drivers.pio" value="Add" config="" content-id="Atmel.ASF" />
           <option id="sam.drivers.tc.appnote" value="Add" config="" content-id="Atmel.ASF" />
-          <option id="common.services.delay" value="Add" config="" content-id="Atmel.ASF" />
+          <option id="thirdparty.wireless.addons.sio2host" value="Add" config="uart" content-id="Atmel.ASF" />
           <option id="common.applications.user_application" value="Add" config="" content-id="Atmel.ASF" />
           <option id="sam.utils.cmsis.sam3x.source.template" value="Add" config="" content-id="Atmel.ASF" />
         </options>
@@ -189,6 +190,20 @@
           <file path="src/ASF/common/services/delay/sam/cycle_counter.c" framework="" version="3.21.0" source="common\services\delay\sam\cycle_counter.c" changed="False" content-id="Atmel.ASF" />
           <file path="src/ASF/common/services/delay/sam/cycle_counter.h" framework="" version="3.21.0" source="common\services\delay\sam\cycle_counter.h" changed="False" content-id="Atmel.ASF" />
           <file path="src/ASF/common/services/delay/delay.h" framework="" version="3.21.0" source="common\services\delay\delay.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam/drivers/uart/uart.c" framework="" version="3.21.0" source="sam\drivers\uart\uart.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam/drivers/uart/uart.h" framework="" version="3.21.0" source="sam\drivers\uart\uart.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/common/services/serial/usart_serial.c" framework="" version="3.21.0" source="common\services\serial\usart_serial.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/common/services/serial/sam_uart/uart_serial.h" framework="" version="3.21.0" source="common\services\serial\sam_uart\uart_serial.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/common/services/serial/serial.h" framework="" version="3.21.0" source="common\services\serial\serial.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/Config/conf_uart_serial.h" framework="" version="3.21.0" source="common\services\serial\sam_uart\module_config\conf_uart_serial.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/common/utils/stdio/read.c" framework="" version="3.21.0" source="common\utils\stdio\read.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/common/utils/stdio/write.c" framework="" version="3.21.0" source="common\utils\stdio\write.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/common/utils/stdio/stdio_serial/stdio_serial.h" framework="" version="3.21.0" source="common\utils\stdio\stdio_serial\stdio_serial.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam/drivers/usart/usart.c" framework="" version="3.21.0" source="sam\drivers\usart\usart.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam/drivers/usart/usart.h" framework="" version="3.21.0" source="sam\drivers\usart\usart.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/wireless/addons/sio2host/uart/sio2host.c" framework="" version="3.21.0" source="thirdparty\wireless\addons\sio2host\uart\sio2host.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/thirdparty/wireless/addons/sio2host/uart/sio2host.h" framework="" version="3.21.0" source="thirdparty\wireless\addons\sio2host\uart\sio2host.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/Config/conf_sio2host.h" framework="" version="3.21.0" source="thirdparty\wireless\addons\sio2host\module_config\conf_sio2host.h" changed="False" content-id="Atmel.ASF" />
         </files>
         <documentation help="http://asf.atmel.com/docs/3.21.0/common.applications.user_application.arduino_due_x/html/index.html" />
         <offline-documentation help="" />
@@ -242,6 +257,12 @@
       <Value>../src/ASF/thirdparty/CMSIS/Include</Value>
       <Value>../src/ASF/sam/drivers/tc</Value>
       <Value>../src/ASF/common/services/delay</Value>
+      <Value>../src/ASF/sam/drivers/uart</Value>
+      <Value>../src/ASF/common/services/serial/sam_uart</Value>
+      <Value>../src/ASF/common/services/serial</Value>
+      <Value>../src/ASF/common/utils/stdio/stdio_serial</Value>
+      <Value>../src/ASF/sam/drivers/usart</Value>
+      <Value>../src/ASF/thirdparty/wireless/addons/sio2host/uart</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize for size (-Os)</armgcc.compiler.optimization.level>
@@ -288,6 +309,12 @@
       <Value>../src/ASF/thirdparty/CMSIS/Include</Value>
       <Value>../src/ASF/sam/drivers/tc</Value>
       <Value>../src/ASF/common/services/delay</Value>
+      <Value>../src/ASF/sam/drivers/uart</Value>
+      <Value>../src/ASF/common/services/serial/sam_uart</Value>
+      <Value>../src/ASF/common/services/serial</Value>
+      <Value>../src/ASF/common/utils/stdio/stdio_serial</Value>
+      <Value>../src/ASF/sam/drivers/usart</Value>
+      <Value>../src/ASF/thirdparty/wireless/addons/sio2host/uart</Value>
     </ListValues>
   </armgcc.preprocessingassembler.general.IncludePaths>
 </ArmGcc>
@@ -335,6 +362,12 @@
       <Value>../src/ASF/thirdparty/CMSIS/Include</Value>
       <Value>../src/ASF/sam/drivers/tc</Value>
       <Value>../src/ASF/common/services/delay</Value>
+      <Value>../src/ASF/sam/drivers/uart</Value>
+      <Value>../src/ASF/common/services/serial/sam_uart</Value>
+      <Value>../src/ASF/common/services/serial</Value>
+      <Value>../src/ASF/common/utils/stdio/stdio_serial</Value>
+      <Value>../src/ASF/sam/drivers/usart</Value>
+      <Value>../src/ASF/thirdparty/wireless/addons/sio2host/uart</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize (-O1)</armgcc.compiler.optimization.level>
@@ -383,6 +416,12 @@
       <Value>../src/ASF/thirdparty/CMSIS/Include</Value>
       <Value>../src/ASF/sam/drivers/tc</Value>
       <Value>../src/ASF/common/services/delay</Value>
+      <Value>../src/ASF/sam/drivers/uart</Value>
+      <Value>../src/ASF/common/services/serial/sam_uart</Value>
+      <Value>../src/ASF/common/services/serial</Value>
+      <Value>../src/ASF/common/utils/stdio/stdio_serial</Value>
+      <Value>../src/ASF/sam/drivers/usart</Value>
+      <Value>../src/ASF/thirdparty/wireless/addons/sio2host/uart</Value>
     </ListValues>
   </armgcc.preprocessingassembler.general.IncludePaths>
   <armgcc.preprocessingassembler.debugging.DebugLevel>Default (-Wa,-g)</armgcc.preprocessingassembler.debugging.DebugLevel>
@@ -403,8 +442,12 @@
     <Folder Include="src\ASF\common\services\gpio\sam_gpio\" />
     <Folder Include="src\ASF\common\services\ioport\" />
     <Folder Include="src\ASF\common\services\ioport\sam\" />
+    <Folder Include="src\ASF\common\services\serial\" />
+    <Folder Include="src\ASF\common\services\serial\sam_uart\" />
     <Folder Include="src\ASF\common\utils\" />
     <Folder Include="src\ASF\common\utils\interrupt\" />
+    <Folder Include="src\ASF\common\utils\stdio\" />
+    <Folder Include="src\ASF\common\utils\stdio\stdio_serial\" />
     <Folder Include="src\ASF\sam\" />
     <Folder Include="src\ASF\sam\boards\" />
     <Folder Include="src\ASF\sam\boards\arduino_due_x\" />
@@ -413,6 +456,8 @@
     <Folder Include="src\ASF\sam\drivers\pmc\" />
     <Folder Include="src\ASF\sam\drivers\tc\" />
     <Folder Include="src\ASF\sam\drivers\tc\tc_capture_waveform_example\" />
+    <Folder Include="src\ASF\sam\drivers\uart\" />
+    <Folder Include="src\ASF\sam\drivers\usart\" />
     <Folder Include="src\ASF\sam\utils\" />
     <Folder Include="src\ASF\sam\utils\cmsis\" />
     <Folder Include="src\ASF\sam\utils\cmsis\sam3x\" />
@@ -437,25 +482,80 @@
     <Folder Include="src\ASF\thirdparty\CMSIS\Include\" />
     <Folder Include="src\ASF\thirdparty\CMSIS\Lib\" />
     <Folder Include="src\ASF\thirdparty\CMSIS\Lib\GCC\" />
+    <Folder Include="src\ASF\thirdparty\wireless\" />
+    <Folder Include="src\ASF\thirdparty\wireless\addons\" />
+    <Folder Include="src\ASF\thirdparty\wireless\addons\sio2host\" />
+    <Folder Include="src\ASF\thirdparty\wireless\addons\sio2host\uart\" />
     <Folder Include="src\config\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="src\ASF\common\services\serial\sam_uart\uart_serial.h">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\common\services\serial\serial.h">
+      <SubType>compile</SubType>
+    </None>
+    <Compile Include="src\ASF\common\services\serial\usart_serial.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\common\utils\stdio\read.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <None Include="src\ASF\common\utils\stdio\stdio_serial\stdio_serial.h">
+      <SubType>compile</SubType>
+    </None>
+    <Compile Include="src\ASF\common\utils\stdio\write.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\sam\drivers\uart\uart.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <None Include="src\ASF\sam\drivers\uart\uart.h">
+      <SubType>compile</SubType>
+    </None>
+    <Compile Include="src\ASF\sam\drivers\usart\usart.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <None Include="src\ASF\sam\drivers\usart\usart.h">
+      <SubType>compile</SubType>
+    </None>
+    <Compile Include="src\ASF\thirdparty\wireless\addons\sio2host\uart\sio2host.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <None Include="src\ASF\thirdparty\wireless\addons\sio2host\uart\sio2host.h">
+      <SubType>compile</SubType>
+    </None>
+    <Compile Include="src\buttonInterrupt.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\buttonInterrupt.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <None Include="src\config\conf_uart_serial.h">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\config\conf_sio2host.h">
+      <SubType>compile</SubType>
+    </None>
     <Compile Include="src\distanceSensor.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\distanceSensor.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\motorFunc.c">
+    <Compile Include="src\Hjulreglering.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Hjulreglering.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\motorFunc.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\regulation.c">
+    <Compile Include="src\pulseCounterHandler.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\regulation.h">
+    <Compile Include="src\pulseCounterHandler.h">
       <SubType>compile</SubType>
     </Compile>
     <None Include="src\asf.h">
@@ -882,6 +982,9 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\ASF\sam\utils\syscalls\gcc\syscalls.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\motorFunc.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\main.c">
