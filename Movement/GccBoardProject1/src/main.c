@@ -1,34 +1,50 @@
 /**
  * Main file for testing different movement things for motors
- *	Author: Robin Johnsson, Viktor Malmgren
+ *	Author: Robin Johnsson, Viktor Malmgren, Daniel M
  *
  */
 #include <asf.h>
-//#include <inttypes.h>
+#include <inttypes.h>
+#include <stdio_serial.h>
+#include "conf_board.h"
 #include "motorFunc.h"
 #include "distanceSensor.h"
-#include "regulation.h"
+#include "pulseCounterHandler.h"
+#include "buttonInterrupt.h"
+#include "Hjulreglering.h"
 
-//Variables
-unsigned long distance;
-uint16_t distanceArray[5] = {0,0,0,0,0};
-uint8_t i= 0;
-uint16_t speed;
 
-//Need to add more comments
+
+static void configure_console(void)
+/* Enables feedback through the USB-cable back to terminal within Atmel Studio */
+{
+	const usart_serial_options_t uart_serial_options = {
+		.baudrate = CONF_UART_BAUDRATE,
+		.paritytype = CONF_UART_PARITY
+	};
+
+	/* Configure console UART. */
+	sysclk_enable_peripheral_clock(CONSOLE_UART_ID);
+	stdio_serial_init(CONF_UART, &uart_serial_options);
+	
+	printf("Console ready\n");
+	printf("=============\n");
+}
 
 int main (void)
 {
 	sysclk_init();
 	board_init();
+	configure_console();
 	//Makes pin 24 on the Due-board an output
 	ioport_set_pin_dir(pin24,IOPORT_DIR_OUTPUT);
 	
-	//Sets up the pins for input/output
+	
 	ioport_set_pin_dir(trig,IOPORT_DIR_OUTPUT);
 	ioport_set_pin_dir(echo, IOPORT_DIR_INPUT);
-	
-	
+	pulseCounter_configA(ID_PIOC, PIOC, PIO_PC28);
+	pulseCounter_configB(ID_PIOC, PIOC, PIO_PC23);
+	unsigned long distance;
 	
 	//Starts with a delay simply to reduce the chance of an error occuring when reseting the program.
 	delay_ms(2000);
@@ -40,22 +56,40 @@ int main (void)
 		DO NOT go: forwardDrive into reverseDrive	
 		This is to ensure that the motors don't get damaged.
 	*/
-	//Starting with a stop(); command is also advisable, as to not run into problems when doing a reset
+	pulse(baseSpeed);
+	
+	
 	while(1){
-		distance = distance_forward();
-		distanceArray[i%4] = distance;
-		if (distance<75)
+		ioport_get_pin_level(A);
+		ioport_get_pin_level(B);
+	int ek = counterA - counterB;
+		//distance = distance_forward();
+	//	printf("Pulse counter A = %i\n", counterA);
+	//	printf("Pulse counter B = %i\n", counterB);
+	
+	/*	if (distance<75)
 		{
 			stop();
 			rotate();
+			 counterA = 0;
+			 counterB = 0;
 			
 		} 
 		else
 		{
-			speed = calculateSpeed(distanceArray);
-			regulatedForward(speed,speed);
-		}
-	}
+			reglerahjul();
+		} */
+	
+	//reglerahjul(ek);
+	reglerahjul2(ek);
+	//forwardDrive();
+	printf("Awheel: %d\n", counterA);
+	printf("Bwheel: %d\n", counterB);
+	//printf(counterB);
+	//turnLeft();
+	delay_ms(100);
+
+	} 
 	return 0;
 }
 
