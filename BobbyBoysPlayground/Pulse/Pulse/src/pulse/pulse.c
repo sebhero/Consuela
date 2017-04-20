@@ -44,6 +44,7 @@
     }
  };
 
+#define TC1_Handler_pulse_timer_idx 0
 pulse_timer_t pulse_timers[] = {
 	{
 		.tc = TC0,
@@ -57,9 +58,12 @@ pulse_timer_t pulse_timers[] = {
 			| TC_CMR_ETRGEDG_FALLING,
 		.pin = PIO_PA2_IDX,
 		.mux = IOPORT_MODE_MUX_A,
-		.ioport_mode = IOPORT_MODE_PULLUP		
+		.ioport_mode = IOPORT_MODE_PULLUP,
+		.divider = 2
 	}	
 };
+
+
 
  /*
  * \brief Initialize the specified pulse channel
@@ -93,6 +97,9 @@ static void pulse_timer_init_channel(uint32_t ch_n) {
 }
 
 void pulse_timer_start(uint32_t ch_n) {
+	//tc_write_ra(pulse_timers[ch_n].tc, pulse_timers[ch_n].tc_ch, 0U);
+	//tc_write_rb(pulse_timers[ch_n].tc, pulse_timers[ch_n].tc_ch, 0U);
+	//tc_write_rb(pulse_timers[ch_n].tc, pulse_timers[ch_n].tc_ch, 0U);
 	NVIC_EnableIRQ(pulse_timers[ch_n].IRQn);
 }
 
@@ -100,13 +107,13 @@ uint32_t pulse_timer_get(uint32_t ch_n) {
 	uint32_t rb = tc_read_rb(pulse_timers[ch_n].tc, pulse_timers[ch_n].tc_ch);
 	uint32_t ra = tc_read_ra(pulse_timers[ch_n].tc, pulse_timers[ch_n].tc_ch);
 	uint32_t diff = rb - ra;
-	uint32_t duration = (diff ) / (((CHIP_FREQ_CPU_MAX/1000)/1000) / 2);
+	uint32_t duration = (diff ) / (((CHIP_FREQ_CPU_MAX/1000)/1000) / pulse_timers[ch_n].divider);
 	return duration;
 }
 
 void TC1_Handler(void) {
-	tc_get_status(pulse_timers[0].tc, pulse_timers[0].tc_ch);
-	NVIC_DisableIRQ(pulse_timers[0].IRQn);
+	tc_get_status(pulse_timers[TC1_Handler_pulse_timer_idx].tc, pulse_timers[TC1_Handler_pulse_timer_idx].tc_ch);
+	NVIC_DisableIRQ(pulse_timers[TC1_Handler_pulse_timer_idx].IRQn);
 }
 
 void pulse_init() {

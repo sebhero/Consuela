@@ -42,8 +42,9 @@ typedef struct {
 	// Timer channel peripheral MUX
 	ioport_mode_t mux;
 	// additinal mode
-	ioport_mode_t ioport_mode;	
-	
+	ioport_mode_t ioport_mode;
+	// clock divider
+	uint32_t divider;	
 } pulse_timer_t;
 
 
