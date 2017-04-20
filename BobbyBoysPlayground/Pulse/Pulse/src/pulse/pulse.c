@@ -44,6 +44,23 @@
     }
  };
 
+pulse_timer_t pulse_timers[] = {
+	{
+		.tc = TC0,
+		.tc_ch = 1,
+		.id = ID_TC1,
+		.IRQn = TC1_IRQn,
+		.tc_mode = TC_CMR_TCCLKS_TIMER_CLOCK1 
+			| TC_CMR_LDRA_RISING 
+			| TC_CMR_LDRB_FALLING
+			| TC_CMR_ABETRG 
+			| TC_CMR_ETRGEDG_FALLING,
+		.pin = PIO_PA2_IDX,
+		.mux = IOPORT_MODE_MUX_A,
+		.ioport_mode = IOPORT_MODE_PULLUP		
+	}	
+};
+
  /*
  * \brief Initialize the specified pulse channel
  *
@@ -59,10 +76,43 @@
     pwm_init(pulse_channels[ch_n].pwm, &pulse_clock_setting);
  }
 
+static void pulse_timer_init_channel(uint32_t ch_n) {
+
+	ioport_set_pin_dir(pulse_timers[ch_n].pin, IOPORT_DIR_INPUT);
+	ioport_set_pin_mode(pulse_timers[ch_n].pin, pulse_timers[ch_n].mux | pulse_timers[ch_n].ioport_mode);
+	ioport_disable_pin(pulse_timers[ch_n].pin);
+
+	pmc_set_writeprotect(false);
+	pmc_enable_periph_clk(pulse_timers[ch_n].id);
+
+	tc_init(pulse_timers[ch_n].tc, pulse_timers[ch_n].tc_ch, pulse_timers[ch_n].tc_mode);
+
+	tc_start(pulse_timers[ch_n].tc, pulse_timers[ch_n].tc_ch);
+	tc_enable_interrupt(pulse_timers[ch_n].tc, pulse_timers[ch_n].tc_ch, TC_IER_LDRBS );
+	NVIC_DisableIRQ(pulse_timers[ch_n].IRQn);
+}
+
+void pulse_timer_start(uint32_t ch_n) {
+	NVIC_EnableIRQ(pulse_timers[ch_n].IRQn);
+}
+
+uint32_t pulse_timer_get(uint32_t ch_n) {
+	uint32_t rb = tc_read_rb(pulse_timers[ch_n].tc, pulse_timers[ch_n].tc_ch);
+	uint32_t ra = tc_read_ra(pulse_timers[ch_n].tc, pulse_timers[ch_n].tc_ch);
+	uint32_t diff = rb - ra;
+	uint32_t duration = (diff ) / (((CHIP_FREQ_CPU_MAX/1000)/1000) / 2);
+	return duration;
+}
+
+void TC1_Handler(void) {
+	tc_get_status(pulse_timers[0].tc, pulse_timers[0].tc_ch);
+	NVIC_DisableIRQ(pulse_timers[0].IRQn);
+}
 
 void pulse_init() {
     pulse_init_channel(0);
     pulse_init_channel(1);
+	pulse_timer_init_channel(0);
 }
 
 void pulse_start(uint32_t ch_n) {
