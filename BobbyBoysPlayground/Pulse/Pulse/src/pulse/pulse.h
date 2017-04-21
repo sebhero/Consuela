@@ -47,6 +47,14 @@ typedef struct {
 	uint32_t divider;	
 } pulse_timer_t;
 
+typedef struct {
+	ioport_pin_t pin;
+	uint32_t mode;
+	void (*handler)(const uint32_t, const uint32_t);
+	uint32_t trigg_attr;
+	uint32_t cnt;
+} pulse_ioport_t;
+
 /*
 * \brief Start timer on the specified channel
 *
@@ -100,5 +108,8 @@ void pulse_stop(uint32_t ch_n);
 *
 */
 uint32_t pulse_set_period(uint32_t ch_n, uint32_t period_us);
+
+void ch0_handler(const uint32_t id, const uint32_t index);
+uint32_t pulse_ioport_get_cnt(uint32_t ch_n);
 
 #endif /* PULSE_H_ */
