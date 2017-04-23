@@ -8,7 +8,9 @@
 #define pulseA_period 1560
 
 #define pulseB_ch 1
-#define pulseB_period 1540
+#define pulseB_period 18000
+
+uint32_t flag_ISR = 0;
 
 void configure_console() {
 	const usart_serial_options_t uart_serial_options = {
@@ -19,6 +21,27 @@ void configure_console() {
 	stdio_serial_init(CONF_UART, &uart_serial_options);
 }
 
+void configure_tc() {
+	ioport_set_pin_dir(PIO_PB26_IDX, IOPORT_DIR_INPUT);
+	ioport_set_pin_mode(PIO_PB26_IDX,  IOPORT_MODE_MUX_B);
+	ioport_disable_pin(PIO_PB26_IDX);
+
+	pmc_set_writeprotect(false);
+	pmc_enable_periph_clk(ID_TC2);
+
+	tc_init(TC0, 2, TC_CMR_TCCLKS_XC0 | TC_CMR_CPCTRG);
+	tc_enable_interrupt(TC0, 2, TC_IER_CPCS);
+	tc_write_rc(TC0, 2, 3);
+	NVIC_EnableIRQ(TC2_IRQn);
+}
+
+void TC2_Handler() {
+	uint32_t status = tc_get_status(TC0, 2);
+	//pulse_stop(pulseB_ch);
+	printf("\nISR cv: %lu", tc_read_cv(TC0, 2));
+	flag_ISR = 1;
+}
+
 int main (void)
 {
 	sysclk_init();
@@ -26,72 +49,66 @@ int main (void)
 	board_init();
 	
 	configure_console();
+	
+	configure_tc();
+	
 	printf("\nHello, World!");
+	ioport_set_pin_dir(PIO_PC5_IDX, IOPORT_DIR_OUTPUT);
+	ioport_set_pin_level(PIO_PC5_IDX, IOPORT_PIN_LEVEL_LOW);
 	
 	// Initialize the pulse channels
-	pulse_init();
+	//pulse_init();
 	// Set the period
-	pulse_set_period(pulseA_ch, pulseA_period);
-	pulse_set_period(pulseB_ch, pulseB_period);
+	//pulse_set_period(pulseB_ch, pulseB_period);
+	
 	// Start the pulse output
 	// Output will be on digital pin 35(PIO_PC3_IDX) for pulse channel 0
 	// and on digital pin 37(PIO_PC5_IDX) for channel 1
-	pulse_start(pulseA_ch);
-	pulse_start(pulseB_ch);
 	
 	uint32_t state = 0;
-	uint32_t channel = 0;
-	uint32_t period = 0;
 	uint32_t result = 0;
+	char c;
 	while(1) {
 		switch(state) {
-			case 0:				
-				printf("\nSelect channel [0|1]: ");
+			case 0:
+				printf("\nType 's' to start: ");
+				ioport_set_pin_level(PIO_PC5_IDX, IOPORT_PIN_LEVEL_LOW);
 				state = 1;
 				break;
 			case 1:
-				result = scanf("%lu", &channel);
-				if(result && channel < 2) {
+				result = scanf("%c", &c);
+				if(result) {
 					state = 2;
 				} else {
 					state = 0;
 				}
 				break;
 			case 2:
-				printf("\nEnter period in us [0-2000]: ");
-				state = 3;
-				break;
-			case 3:
-				result = scanf("%lu", &period);
-				if(result && period <= 2000) {
-					state = 4;
-					} else {
-					state = 2;
+				if(c == 's') {
+					state = 3;
+				} else {
+					state = 0;
 				}
-				break;
+				break;				
+			case 3:
+				tc_start(TC0, 2);
+				TC0->TC_CHANNEL[2].TC_CCR = TC_CCR_SWTRG;
+				printf("\n#cv: %lu", tc_read_cv(TC0,2));
+				delay_ms(200);				
+				state = 4;
+				flag_ISR = 0;
+				break;	
 			case 4:
-				pulse_set_period(channel, period);
-				state = 5;
-				break;
-			case 5:
-				// Start the timer channels and measure the period
-				pulse_timer_start(0);
-				pulse_timer_start(1);
-				delay_ms(500);
-				uint32_t pulse0_us = pulse_timer_get(0);
-				uint32_t pulse1_us = pulse_timer_get(1);
-				printf("\n\rPulse 0 length: %lu", pulse0_us);
-				printf("\n\rPulse 1 length: %lu", pulse1_us);
-				state = 0;
-				break;
+				ioport_toggle_pin_level(PIO_PC5_IDX);
+				delay_ms(500);				
+				printf("\ncv: %lu", tc_read_cv(TC0,2));
+				if(flag_ISR) {
+					state = 0;
+				}
+				break;		
 			default:
 				state = 0;				
 		}
-		
-		
-		
-		
-		
 	}
 
 }

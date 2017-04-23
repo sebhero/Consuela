@@ -20,9 +20,17 @@ void configure_tc() {
     pmc_set_writeprotect(false);
     pmc_enable_periph_clk(ID_TC0);
 
-    tc_init(TC0, 0, TC_CMR_TCCLKS_XC0 | TC_CMR_CLKI);
+    tc_init(TC0, 0, TC_CMR_TCCLKS_XC0 | TC_CMR_CLKI | TC_CMR_CPCTRG);
+    tc_enable_interrupt(TC0,0,TC_IER_CPCS);
+    tc_write_rc(TC0, 0, 10);
+    NVIC_EnableIRQ(TC0_IRQn);
     tc_start(TC0, 0);
+}
 
+void TC0_Handler() {
+    uint32_t status = tc_get_status(TC0,0);
+
+    printf("\ncv: %u", tc_read_cv(TC0,0));
 }
 
 

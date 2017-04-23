@@ -5,15 +5,24 @@
  #include <asf.h>
  #include "pulse.h"
 
+ // Forward declare the static functions
+ static void pulse_generator_init_channel(uint32_t ch_n);
+ static void pulse_ioport_init_channel(uint32_t ch);
+ static void pulse_timer_init_channel(uint32_t ch_n);
+ static void pulse_ioport_configure(ioport_pin_t pin, void (*handler)(const uint32_t, const uint32_t), uint32_t pin_attr, uint32_t trig_attr);
+ static uint32_t pulse_ioport_pin_to_ID_Port(ioport_pin_t pin);
+ static IRQn_Type pulse_ioport_pin_to_Port_IRQn(ioport_pin_t pin);
+ static void pulse_counter_init_channel(uint32_t ch_n);
+ 
  // Define the clock, see pwm_clock_t
  pwm_clock_t pulse_clock_setting = {
-    .ul_clka = 1000000L,
+    .ul_clka = 100000L,
     .ul_clkb = 0,
     .ul_mck = BOARD_MCK // or CHIP_FREQ_CPU_MAX
  };
 
  // Define the pulse channels, ie. the supporting PWM channels
- pulse_channel_t pulse_channels[] = {
+ pulse_generator_t pulse_channels[] = {
     {
         .pwm = PWM,
         .pwm_channel = {
@@ -26,7 +35,7 @@
         .id = ID_PWM,
         .pin = PIO_PC3_IDX,
         .mux = IOPORT_MODE_MUX_B,
-        .dty_max = 2000
+        .dty_max = 20000
     },
     {
         .pwm = PWM,
@@ -40,7 +49,7 @@
         .id = ID_PWM,
         .pin = PIO_PC5_IDX,
         .mux = IOPORT_MODE_MUX_B,
-        .dty_max = 2000
+        .dty_max = 20000
     }
  };
 
@@ -52,7 +61,7 @@ pulse_timer_t pulse_timers[] = {
 		.tc_ch = 1,
 		.id = ID_TC1,
 		.IRQn = TC1_IRQn,
-		.tc_mode = TC_CMR_TCCLKS_TIMER_CLOCK1
+		.tc_mode = TC_CMR_TCCLKS_TIMER_CLOCK4
 			| TC_CMR_LDRA_RISING 
 			| TC_CMR_LDRB_FALLING
 			| TC_CMR_ABETRG 
@@ -60,14 +69,14 @@ pulse_timer_t pulse_timers[] = {
 		.pin = PIO_PA2_IDX,
 		.mux = IOPORT_MODE_MUX_A,
 		.ioport_mode = IOPORT_MODE_PULLUP,
-		.divider = 2
+		.divider = 128
 	},
 	{
 		.tc = TC0,
 		.tc_ch = 0,
 		.id = ID_TC0,
 		.IRQn = TC0_IRQn,
-		.tc_mode = TC_CMR_TCCLKS_TIMER_CLOCK1
+		.tc_mode = TC_CMR_TCCLKS_TIMER_CLOCK4
 		| TC_CMR_LDRA_RISING
 		| TC_CMR_LDRB_FALLING
 		| TC_CMR_ABETRG
@@ -75,7 +84,7 @@ pulse_timer_t pulse_timers[] = {
 		.pin = PIO_PB25_IDX,
 		.mux = IOPORT_MODE_MUX_B,
 		.ioport_mode = IOPORT_MODE_PULLUP,
-		.divider = 2
+		.divider = 128
 	}
 };
 
@@ -89,93 +98,12 @@ pulse_ioport_t pulse_ioports[] = {
 	}	
 };
 
-/**
- * \file
- *
- * \brief Helper function to get the peripheral ID from a pin
- *
- */
-static uint32_t ioport_pin_to_ID_Port(ioport_pin_t pin) {
-     uint32_t ID = 0;
-    switch(arch_ioport_pin_to_port_id(pin)) {
-        case(IOPORT_PIOA):
-        ID = ID_PIOA;
-        break;
-        case(IOPORT_PIOB):
-        ID = ID_PIOB;
-        break;
-        case(IOPORT_PIOC):
-        ID = ID_PIOC;
-        break;
-        case(IOPORT_PIOD):
-        ID = ID_PIOD;
-        break;        
-    }
-    return ID;
-}
-
-/**
- * \file
- *
- * \brief Helper function to get the port IRQn froma pin
- *
- */
-static IRQn_Type ioport_pin_to_Port_IRQn(ioport_pin_t pin) {
-    IRQn_Type IRQn = 0;    
-    switch(arch_ioport_pin_to_port_id(pin)) {
-        case(IOPORT_PIOA):
-        IRQn = PIOA_IRQn;        
-        break;
-        case(IOPORT_PIOB):
-        IRQn = PIOB_IRQn;
-        break;
-        case(IOPORT_PIOC):
-        IRQn = PIOC_IRQn;
-        break;
-        case(IOPORT_PIOD):
-        IRQn = PIOD_IRQn;
-        break;
-    }
-    return IRQn;
-}
-
-/**
- * \file
- *
- * \brief Template configuration for a ioport
- *
- */
-static void pulse_configure_ioport(ioport_pin_t pin, void (*handler)(const uint32_t, const uint32_t), uint32_t pin_attr, uint32_t trig_attr) {
-    Pio *pio_base = arch_ioport_pin_to_base(pin);
-    uint32_t pin_mask = arch_ioport_pin_to_mask(pin);
-    IRQn_Type IRQn = ioport_pin_to_Port_IRQn(pin);
-    uint32_t ID = ioport_pin_to_ID_Port(pin);
-    
-    pio_set_input(pio_base, pin_mask, pin_attr);
-    pio_handler_set(pio_base, ID, pin_mask, trig_attr, handler);
-    pio_enable_interrupt(pio_base, pin_mask);
-    NVIC_ClearPendingIRQ(IRQn);
-    NVIC_EnableIRQ(IRQn);
-}
-
-/**
- * \file
- *
- * \brief Handler for ch0
- *
- */
-void ch0_handler(const uint32_t id, const uint32_t index) {
-    if ((id == ioport_pin_to_ID_Port(pulse_ioports[0].pin)) && (index == ioport_pin_to_mask(pulse_ioports[0].pin))){
-        pulse_ioports[0].cnt += 1;
-    }
-}
-
-/*
-* \brief Configure a ioport channel for input
-*
-*/
-static void pulse_init_ioport(uint32_t ch) {
-	pulse_configure_ioport(pulse_ioports[ch].pin, pulse_ioports[ch].handler, pulse_ioports[ch].mode,  pulse_ioports[ch].trigg_attr);
+void pulse_init() {
+    pulse_generator_init_channel(0);
+    pulse_generator_init_channel(1);
+	pulse_timer_init_channel(0);
+	pulse_timer_init_channel(1);
+	pulse_ioport_init_channel(0);
 }
 
  /*
@@ -184,7 +112,7 @@ static void pulse_init_ioport(uint32_t ch) {
  * \note Need to call pulse_start(ch_n) to start output
  *
  */
- static void pulse_init_channel(uint32_t ch_n) {
+ static void pulse_generator_init_channel(uint32_t ch_n) {
     ioport_set_pin_mode(pulse_channels[ch_n].pin, pulse_channels[ch_n].mux);
     ioport_disable_pin(pulse_channels[ch_n].pin);
 
@@ -193,10 +121,22 @@ static void pulse_init_ioport(uint32_t ch) {
     pwm_init(pulse_channels[ch_n].pwm, &pulse_clock_setting);
  }
 
-uint32_t pulse_ioport_get_cnt(uint32_t ch_n) {
-	return pulse_ioports[ch_n].cnt;
+void pulse_generator_start(uint32_t ch_n) {
+    pwm_channel_init(pulse_channels[ch_n].pwm, &(pulse_channels[ch_n].pwm_channel));
+    pwm_channel_enable(pulse_channels[ch_n].pwm, pulse_channels[ch_n].pwm_channel.channel);
 }
 
+void pulse_generator_stop(uint32_t ch_n) {
+    pwm_channel_disable(pulse_channels[ch_n].pwm, pulse_channels[ch_n].pwm_channel.channel);
+}
+
+uint32_t pulse_generator_set_period(uint32_t ch_n, uint32_t period_us) {
+    if(period_us > pulse_channels[ch_n].dty_max) {
+        return 1;
+    }
+    pwm_channel_update_duty(pulse_channels[ch_n].pwm, &(pulse_channels[ch_n].pwm_channel), period_us);
+    return 0;
+}
  /*
  * \brief Initialize the specified pulse timer channel
  *
@@ -230,8 +170,118 @@ uint32_t pulse_timer_get(uint32_t ch_n) {
 	uint32_t diff = rb - ra;
 	// Need a better way to do this calculation
 	// Calculate the duration in microseconds.
-	uint32_t duration = (diff ) / (((CHIP_FREQ_CPU_MAX / pulse_timers[ch_n].divider)/1000)/1000);
+	uint32_t duration = (diff*1000 ) / ((CHIP_FREQ_CPU_MAX / pulse_timers[ch_n].divider)/1000);
 	return duration;
+}
+
+/*
+* \brief Configure a ioport channel for input
+*
+*/
+static void pulse_ioport_init_channel(uint32_t ch) {
+	pulse_ioport_configure(pulse_ioports[ch].pin, pulse_ioports[ch].handler, pulse_ioports[ch].mode,  pulse_ioports[ch].trigg_attr);
+}
+
+/**
+ * \file
+ *
+ * \brief Template configuration for a ioport
+ *
+ */
+static void pulse_ioport_configure(ioport_pin_t pin, void (*handler)(const uint32_t, const uint32_t), uint32_t pin_attr, uint32_t trig_attr) {
+    Pio *pio_base = arch_ioport_pin_to_base(pin);
+    uint32_t pin_mask = arch_ioport_pin_to_mask(pin);
+    IRQn_Type IRQn = pulse_ioport_pin_to_Port_IRQn(pin);
+    uint32_t ID = pulse_ioport_pin_to_ID_Port(pin);
+    
+    pio_set_input(pio_base, pin_mask, pin_attr);
+    pio_handler_set(pio_base, ID, pin_mask, trig_attr, handler);
+    pio_enable_interrupt(pio_base, pin_mask);
+    NVIC_ClearPendingIRQ(IRQn);
+    NVIC_EnableIRQ(IRQn);
+}
+
+uint32_t pulse_ioport_get_cnt(uint32_t ch_n) {
+	return pulse_ioports[ch_n].cnt;
+}
+
+/**
+ * \file
+ *
+ * \brief Helper function to get the peripheral ID from a pin
+ *
+ */
+static uint32_t pulse_ioport_pin_to_ID_Port(ioport_pin_t pin) {
+     uint32_t ID = 0;
+    switch(arch_ioport_pin_to_port_id(pin)) {
+        case(IOPORT_PIOA):
+        ID = ID_PIOA;
+        break;
+        case(IOPORT_PIOB):
+        ID = ID_PIOB;
+        break;
+        case(IOPORT_PIOC):
+        ID = ID_PIOC;
+        break;
+        case(IOPORT_PIOD):
+        ID = ID_PIOD;
+        break;        
+    }
+    return ID;
+}
+
+/**
+ * \file
+ *
+ * \brief Helper function to get the port IRQn from a pin
+ *
+ */
+static IRQn_Type pulse_ioport_pin_to_Port_IRQn(ioport_pin_t pin) {
+    IRQn_Type IRQn = 0;    
+    switch(arch_ioport_pin_to_port_id(pin)) {
+        case(IOPORT_PIOA):
+        IRQn = PIOA_IRQn;        
+        break;
+        case(IOPORT_PIOB):
+        IRQn = PIOB_IRQn;
+        break;
+        case(IOPORT_PIOC):
+        IRQn = PIOC_IRQn;
+        break;
+        case(IOPORT_PIOD):
+        IRQn = PIOD_IRQn;
+        break;
+    }
+    return IRQn;
+}
+
+
+static void pulse_counter_init_channel(uint32_t ch_n) {
+	
+}
+
+void pulse_counter_start(uint32_t ch_n) {
+	
+}
+
+void pulse_counter_stop(uint32_t ch_n) {
+	
+}
+
+uint32_t pulse_counter_get_cnt(uint32_t cn_n) {
+	return -1;	
+}
+
+/**
+ * \file
+ *
+ * \brief Handler for ch0
+ *
+ */
+void ch0_handler(const uint32_t id, const uint32_t index) {
+    if ((id == pulse_ioport_pin_to_ID_Port(pulse_ioports[0].pin)) && (index == ioport_pin_to_mask(pulse_ioports[0].pin))){
+        pulse_ioports[0].cnt += 1;
+    }
 }
 
 void TC1_Handler(void) {
@@ -244,28 +294,3 @@ void TC0_Handler(void) {
 	NVIC_DisableIRQ(pulse_timers[TC2_Handler_pulse_timer_idx].IRQn);
 }
 
-
-void pulse_init() {
-    pulse_init_channel(0);
-    pulse_init_channel(1);
-	pulse_timer_init_channel(0);
-	pulse_timer_init_channel(1);
-	pulse_init_ioport(0);
-}
-
-void pulse_start(uint32_t ch_n) {
-    pwm_channel_init(pulse_channels[ch_n].pwm, &(pulse_channels[ch_n].pwm_channel));
-    pwm_channel_enable(pulse_channels[ch_n].pwm, pulse_channels[ch_n].pwm_channel.channel);
-}
-
-void pulse_stop(uint32_t ch_n) {
-    pwm_channel_enable(pulse_channels[ch_n].pwm, pulse_channels[ch_n].pwm_channel.channel);
-}
-
-uint32_t pulse_set_period(uint32_t ch_n, uint32_t period_us) {
-    if(period_us > pulse_channels[ch_n].dty_max) {
-        return 1;
-    }
-    pwm_channel_update_duty(pulse_channels[ch_n].pwm, &(pulse_channels[ch_n].pwm_channel), period_us);
-    return 0;
-}
