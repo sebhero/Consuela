@@ -12,10 +12,10 @@
 #define pin24 PIO_PA15_IDX
 
 //Temporary "baseSpeed" that will be used until we get positioning and regulation
-#define baseSpeed 1600
+#define baseSpeed 1750
 
 //Tested that this 1713 on the left wheel gives a kinda straight line when the other motor is 1750 (forward driving)
-#define baseSpeedLeft 1600
+#define baseSpeedLeft 1750
 
 #define reverseBaseSpeed 1250
 #define motorSwitch 1100

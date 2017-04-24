@@ -45,6 +45,7 @@ int main (void)
 	pulseCounter_configA(ID_PIOC, PIOC, PIO_PC28);
 	pulseCounter_configB(ID_PIOC, PIOC, PIO_PC23);
 	unsigned long distance;
+	double ratio;
 	
 	//Starts with a delay simply to reduce the chance of an error occuring when reseting the program.
 	delay_ms(2000);
@@ -57,17 +58,24 @@ int main (void)
 		This is to ensure that the motors don't get damaged.
 	*/
 	pulse(baseSpeed);
+	delay_us(1100);
+	pulse(baseSpeed);
 	
-	
+	delay_ms(2000);
 	while(1){
 		ioport_get_pin_level(A);
 		ioport_get_pin_level(B);
-	int ek = counterA - counterB;
+		printf("Awheel: %d\n", counterA);
+		printf("Bwheel: %d\n", counterB);
+		//int ek = counterA - counterB;
+		double aVal= (double)counterA;
+		double bVal = (double)counterB;
+		ratio = aVal/bVal;
 		//distance = distance_forward();
 	//	printf("Pulse counter A = %i\n", counterA);
 	//	printf("Pulse counter B = %i\n", counterB);
 	
-	/*	if (distance<75)
+/*		if (distance<75)
 		{
 			stop();
 			rotate();
@@ -77,14 +85,14 @@ int main (void)
 		} 
 		else
 		{
-			reglerahjul();
+			
 		} */
+		reglerahjul3(ratio);
+		//forwardDrive();
 	
 	//reglerahjul(ek);
-	reglerahjul2(ek);
+	//reglerahjul2(ek);
 	//forwardDrive();
-	printf("Awheel: %d\n", counterA);
-	printf("Bwheel: %d\n", counterB);
 	//printf(counterB);
 	//turnLeft();
 	delay_ms(100);

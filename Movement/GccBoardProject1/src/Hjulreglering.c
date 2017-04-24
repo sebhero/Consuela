@@ -68,3 +68,22 @@ void reglerahjul2(int ek){ //Den som fungerar
 
 
 }
+
+void reglerahjul3(double ratio){
+	counterA = 0; //Nollställer räknarna
+	counterB = 0;
+	if (ratio == 1)
+	{
+		pulse(bS);
+		delay_us(1100);
+		pulse(bSL);
+	} 
+	else
+	{
+		bSL = bSL * ratio;
+		pulse(bS);
+		delay_us(1100);
+		pulse(bSL);
+	}
+	
+}
