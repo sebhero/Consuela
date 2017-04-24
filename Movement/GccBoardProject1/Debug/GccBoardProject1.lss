@@ -31,9 +31,9 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
  13 .debug_line   00010c74  00000000  00000000  000401fb  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_str    0006195a  00000000  00000000  00050e6f  2**0
+ 14 .debug_str    000619a4  00000000  00000000  00050e6f  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_frame  00002044  00000000  00000000  000b27cc  2**2
+ 15 .debug_frame  00002044  00000000  00000000  000b2814  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -756,10 +756,10 @@ void reglerahjul2(int ek){ //Den som fungerar
 	}
 	
 	if(ek>0){
-		bSL = bSL+2; //Om höger hjul går för snabbt så ökar vi hastigheten på vänster hjul
+		bSL = bSL+4; //Om höger hjul går för snabbt så ökar vi hastigheten på vänster hjul
    803ca:	4c17      	ldr	r4, [pc, #92]	; (80428 <reglerahjul2+0x94>)
    803cc:	8823      	ldrh	r3, [r4, #0]
-   803ce:	3302      	adds	r3, #2
+   803ce:	3304      	adds	r3, #4
    803d0:	8023      	strh	r3, [r4, #0]
 		pulse(bS);
    803d2:	4b14      	ldr	r3, [pc, #80]	; (80424 <reglerahjul2+0x90>)
@@ -774,17 +774,18 @@ void reglerahjul2(int ek){ //Den som fungerar
    803e2:	8820      	ldrh	r0, [r4, #0]
    803e4:	47a8      	blx	r5
    803e6:	bd38      	pop	{r3, r4, r5, pc}
-		delay_us(1100);
 		pulse(bSL);
 		
 	}
 	else{
-		bS = bS+3; bSL+2; //Om vänster hjul går för snabbt så ökar vi hastigheten på höger hjul
+		
+		bS = bS+5; 
    803e8:	4b0e      	ldr	r3, [pc, #56]	; (80424 <reglerahjul2+0x90>)
    803ea:	8818      	ldrh	r0, [r3, #0]
-   803ec:	3003      	adds	r0, #3
+   803ec:	3005      	adds	r0, #5
    803ee:	b280      	uxth	r0, r0
    803f0:	8018      	strh	r0, [r3, #0]
+		//bSL = bSL+2; //Om vänster hjul går för snabbt så ökar vi hastigheten på höger hjul
 		pulse(bS);
    803f2:	4c10      	ldr	r4, [pc, #64]	; (80434 <reglerahjul2+0xa0>)
    803f4:	47a0      	blx	r4
@@ -801,7 +802,7 @@ void reglerahjul2(int ek){ //Den som fungerar
 		pulse(bSL);
 	}
 	
-	else if(ek == 0){
+	else if(ek == 0){ 
 		pulse(bS);
    80406:	4b07      	ldr	r3, [pc, #28]	; (80424 <reglerahjul2+0x90>)
    80408:	8818      	ldrh	r0, [r3, #0]
@@ -3084,6 +3085,12 @@ int main (void)
 	board_init();
    80e68:	4b32      	ldr	r3, [pc, #200]	; (80f34 <main+0xd4>)
    80e6a:	4798      	blx	r3
+ *
+ * \param ul_id Id (number) of the peripheral clock.
+ */
+static inline void sysclk_enable_peripheral_clock(uint32_t ul_id)
+{
+	pmc_enable_periph_clk(ul_id);
    80e6c:	2008      	movs	r0, #8
    80e6e:	4d32      	ldr	r5, [pc, #200]	; (80f38 <main+0xd8>)
    80e70:	47a8      	blx	r5

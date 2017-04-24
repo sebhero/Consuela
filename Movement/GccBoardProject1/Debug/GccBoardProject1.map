@@ -7395,7 +7395,7 @@ OUTPUT(GccBoardProject1.elf elf32-littlearm)
  .debug_line    0x0000ed1a      0xf3c src/motorFunc.o
  .debug_line    0x0000fc56     0x101e src/main.o
 
-.debug_str      0x00000000    0x6195a
+.debug_str      0x00000000    0x619a4
  .debug_str     0x00000000    0x5c81e src/ASF/common/services/serial/usart_serial.o
                               0x5cb57 (size before relaxing)
  .debug_str     0x0005c81e       0x3f src/ASF/common/utils/stdio/read.o
@@ -7408,36 +7408,36 @@ OUTPUT(GccBoardProject1.elf elf32-littlearm)
                               0x597f9 (size before relaxing)
  .debug_str     0x0005d57e     0x1537 src/ASF/thirdparty/wireless/addons/sio2host/uart/sio2host.o
                               0x5e16a (size before relaxing)
- .debug_str     0x0005eab5      0xf2a src/Hjulreglering.o
-                              0x5e65c (size before relaxing)
- .debug_str     0x0005f9df      0x313 src/pulseCounterHandler.o
+ .debug_str     0x0005eab5      0xf74 src/Hjulreglering.o
+                              0x5e65a (size before relaxing)
+ .debug_str     0x0005fa29      0x313 src/pulseCounterHandler.o
                               0x5dce9 (size before relaxing)
- .debug_str     0x0005fcf2      0x23a src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_str     0x0005fd3c      0x23a src/ASF/common/services/clock/sam3x/sysclk.o
                               0x5c952 (size before relaxing)
- .debug_str     0x0005ff2c       0x35 src/ASF/common/services/delay/sam/cycle_counter.o
+ .debug_str     0x0005ff76       0x35 src/ASF/common/services/delay/sam/cycle_counter.o
                               0x58cf3 (size before relaxing)
- .debug_str     0x0005ff61       0x73 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
+ .debug_str     0x0005ffab       0x73 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
                               0x58bd3 (size before relaxing)
- .debug_str     0x0005ffd4      0x1bf src/ASF/sam/boards/arduino_due_x/init.o
+ .debug_str     0x0006001e      0x1bf src/ASF/sam/boards/arduino_due_x/init.o
                               0x5d21b (size before relaxing)
- .debug_str     0x00060193      0x424 src/ASF/sam/drivers/pio/pio.o
+ .debug_str     0x000601dd      0x424 src/ASF/sam/drivers/pio/pio.o
                               0x59527 (size before relaxing)
- .debug_str     0x000605b7      0x1bf src/ASF/sam/drivers/pio/pio_handler.o
+ .debug_str     0x00060601      0x1bf src/ASF/sam/drivers/pio/pio_handler.o
                               0x5956f (size before relaxing)
- .debug_str     0x00060776      0x67e src/ASF/sam/drivers/pmc/pmc.o
+ .debug_str     0x000607c0      0x67e src/ASF/sam/drivers/pmc/pmc.o
                               0x5959d (size before relaxing)
- .debug_str     0x00060df4       0x4d src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
+ .debug_str     0x00060e3e       0x4d src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
                               0x58b9c (size before relaxing)
- .debug_str     0x00060e41       0xb2 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
+ .debug_str     0x00060e8b       0xb2 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
                               0x58c71 (size before relaxing)
- .debug_str     0x00060ef3      0x1cd src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
+ .debug_str     0x00060f3d      0x1cd src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
                               0x58e84 (size before relaxing)
- .debug_str     0x000610c0      0x741 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_str     0x0006110a      0x741 src/ASF/sam/utils/syscalls/gcc/syscalls.o
                                0x4f16 (size before relaxing)
- .debug_str     0x00061801       0x94 src/motorFunc.o
+ .debug_str     0x0006184b       0x94 src/motorFunc.o
                               0x5e928 (size before relaxing)
- .debug_str     0x00061895       0xc5 src/main.o
-                              0x5ee7e (size before relaxing)
+ .debug_str     0x000618df       0xc5 src/main.o
+                              0x5ee7c (size before relaxing)
 
 .debug_frame    0x00000000     0x2044
  .debug_frame   0x00000000       0x60 src/ASF/common/services/serial/usart_serial.o

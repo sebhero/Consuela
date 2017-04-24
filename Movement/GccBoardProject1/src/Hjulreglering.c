@@ -45,19 +45,22 @@ void reglerahjul2(int ek){ //Den som fungerar
 	}
 	
 	if(ek>0){
-		bSL = bSL+2; //Om höger hjul går för snabbt så ökar vi hastigheten på vänster hjul
+		bSL = bSL+4; //Om höger hjul går för snabbt så ökar vi hastigheten på vänster hjul
 		pulse(bS);
 		delay_us(1100);
 		pulse(bSL);
 	}
 	
 	else if(ek == 0){ 
+		pulse(bS);
 		delay_us(1100);
 		pulse(bSL);
 		
 	}
 	else{
-		bS = bS+3; bSL+2; //Om vänster hjul går för snabbt så ökar vi hastigheten på höger hjul
+		
+		bS = bS+5; 
+		//bSL = bSL+2; //Om vänster hjul går för snabbt så ökar vi hastigheten på höger hjul
 		pulse(bS);
 		delay_us(1100);
 		pulse(bSL);
