@@ -63,14 +63,14 @@ int main (void)
 	
 	delay_ms(2000);
 	while(1){
-		ioport_get_pin_level(A);
-		ioport_get_pin_level(B);
-		printf("Awheel: %d\n", counterA);
-		printf("Bwheel: %d\n", counterB);
-		//int ek = counterA - counterB;
-		double aVal= (double)counterA;
-		double bVal = (double)counterB;
-		ratio = aVal/bVal;
+		//ioport_get_pin_level(A);
+		//ioport_get_pin_level(B);
+		//printf("Awheel: %d\n", counterA);
+		//printf("Bwheel: %d\n", counterB);
+		int ek = counterA - counterB;
+		//printf("ek: %d\n",ek);
+		//printf("ek: %d", ek);
+		
 		//distance = distance_forward();
 	//	printf("Pulse counter A = %i\n", counterA);
 	//	printf("Pulse counter B = %i\n", counterB);
@@ -87,7 +87,7 @@ int main (void)
 		{
 			
 		} */
-		reglerahjul3(ratio);
+		reglerahjul3(ek);
 		//forwardDrive();
 	
 	//reglerahjul(ek);
@@ -95,7 +95,7 @@ int main (void)
 	//forwardDrive();
 	//printf(counterB);
 	//turnLeft();
-	delay_ms(100);
+	delay_ms(10);
 
 	} 
 	return 0;
