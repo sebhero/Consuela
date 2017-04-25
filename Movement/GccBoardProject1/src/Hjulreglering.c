@@ -14,6 +14,13 @@
 uint16_t bS= baseSpeed;
 uint16_t bSL= baseSpeedLeft;
 
+double kD = 1.0;
+double kI = 1.0;
+double i_del = 0.0;
+double d_del = 0.0;
+int ek_1 = 0;
+double tS = 0.01;
+
 /*
 void reglerahjul(int ek){
 	//int ek = counterA - counterB;
@@ -69,21 +76,33 @@ void reglerahjul2(int ek){ //Den som fungerar
 
 }
 
-void reglerahjul3(double ratio){
+//simpel P-reglering
+void reglerahjul3(int ek){
 	counterA = 0; //Nollställer räknarna
 	counterB = 0;
-	if (ratio == 1)
-	{
-		pulse(bS);
-		delay_us(1100);
-		pulse(bSL);
-	} 
-	else
-	{
-		bSL = bSL * ratio;
-		pulse(bS);
-		delay_us(1100);
-		pulse(bSL);
-	}
+	bSL = bSL+ek;
+	pulse(bS);
+	delay_us(1200);
+	pulse(bSL);
+}
+
+//PID-reglering
+//kI och kD är inte framtagna på ordentligt sätt, utan bara satta till 1
+//Detta är en mockup på hur regleringen kan se ut
+void pidReg(int ek){
+	counterA = 0; //Nollställer räknarna
+	counterB = 0;
 	
+	if ()
+	{
+	i_del = (i_del+ek)*kI/tS;
+	d_del = (ek-ek_1)*tS/kD;
+	}
+	ek_1 = ek;
+	
+	bSL += (ek + i_del + d_del);
+	bSL=min(2000, bSL);
+	pulse(bS);
+	delay_us(1200);
+	pulse(bSL);
 }

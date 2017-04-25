@@ -10,7 +10,8 @@
 #define HJULREGLERING_H_
 void reglerahjul(int ek);
 void reglerahjul2(int ek);
-void reglerahjul3(double ratio);
+void reglerahjul3(int ek);
+void pidReg(int ek);
 
 
 
