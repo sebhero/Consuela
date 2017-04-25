@@ -98,12 +98,28 @@ pulse_ioport_t pulse_ioports[] = {
 	}	
 };
 
+pulse_counter_t pulse_counters[] = {
+	{
+		.tc = TC0,
+		.tc_ch = 2,
+		.id = ID_TC2,
+		.IRQn = TC2_IRQn,
+		.tc_mode = (TC_CMR_TCCLKS_XC0 | TC_CMR_CPCTRG),
+		.pin = PIO_PB26_IDX,
+		.mux = IOPORT_MODE_MUX_B,
+		.ioport_mode = IOPORT_DIR_INPUT,
+		.trig_cnt = 0
+	}
+};
+
 void pulse_init() {
     pulse_generator_init_channel(0);
     pulse_generator_init_channel(1);
 	pulse_timer_init_channel(0);
 	pulse_timer_init_channel(1);
 	pulse_ioport_init_channel(0);
+	
+	pulse_counter_init_channel(0);
 }
 
  /*
@@ -258,18 +274,44 @@ static IRQn_Type pulse_ioport_pin_to_Port_IRQn(ioport_pin_t pin) {
 
 static void pulse_counter_init_channel(uint32_t ch_n) {
 	
+	ioport_set_pin_dir(pulse_counters[ch_n].pin, pulse_counters[ch_n].ioport_mode);
+	ioport_set_pin_mode(pulse_counters[ch_n].pin,  pulse_counters[ch_n].mux);
+	ioport_disable_pin(pulse_counters[ch_n].pin);
+
+	pmc_set_writeprotect(false);
+	pmc_enable_periph_clk(pulse_counters[ch_n].id);
+
+	tc_init(pulse_counters[ch_n].tc, pulse_counters[ch_n].tc_ch, pulse_counters[ch_n].tc_mode);
+	tc_enable_interrupt(pulse_counters[ch_n].tc, pulse_counters[ch_n].tc_ch, TC_IER_CPCS);
+	tc_write_rc(pulse_counters[ch_n].tc, pulse_counters[ch_n].tc_ch, pulse_counters[ch_n].trig_cnt);
+	NVIC_EnableIRQ(pulse_counters[ch_n].IRQn);
+	/*
+	ioport_set_pin_dir(PIO_PB26_IDX, IOPORT_DIR_INPUT);
+	ioport_set_pin_mode(PIO_PB26_IDX,  IOPORT_MODE_MUX_B);
+	ioport_disable_pin(PIO_PB26_IDX);
+
+	pmc_set_writeprotect(false);
+	pmc_enable_periph_clk(ID_TC2);
+
+	tc_init(TC0, 2, TC_CMR_TCCLKS_XC0 | TC_CMR_CPCTRG);
+	tc_enable_interrupt(TC0, 2, TC_IER_CPCS);
+	tc_write_rc(TC0, 2, 3);
+	NVIC_EnableIRQ(TC2_IRQn);	
+	*/
 }
 
 void pulse_counter_start(uint32_t ch_n) {
-	
+	//tc_start(TC0, 2);
+	tc_start(pulse_counters[ch_n].tc, pulse_counters[ch_n].tc_ch);
 }
 
-void pulse_counter_stop(uint32_t ch_n) {
-	
+void pulse_counter_set_cnt(uint32_t ch_n, uint32_t n) {	
+	tc_write_rc(pulse_counters[ch_n].tc, pulse_counters[ch_n].tc_ch, n-1);
 }
 
-uint32_t pulse_counter_get_cnt(uint32_t cn_n) {
-	return -1;	
+uint32_t pulse_counter_get_cnt(uint32_t ch_n) {
+	//return tc_read_cv(TC0, 2);
+	return tc_read_cv(pulse_counters[ch_n].tc, pulse_counters[ch_n].tc_ch);	
 }
 
 /**

@@ -21,7 +21,6 @@ void configure_console() {
 	stdio_serial_init(CONF_UART, &uart_serial_options);
 }
 
-/*
 void configure_tc() {
 	ioport_set_pin_dir(PIO_PB26_IDX, IOPORT_DIR_INPUT);
 	ioport_set_pin_mode(PIO_PB26_IDX,  IOPORT_MODE_MUX_B);
@@ -35,11 +34,9 @@ void configure_tc() {
 	tc_write_rc(TC0, 2, 3);
 	NVIC_EnableIRQ(TC2_IRQn);
 }
-*/
 
 void TC2_Handler() {
 	uint32_t status = tc_get_status(TC0, 2);
-	pulse_generator_stop(1);
 	//pulse_stop(pulseB_ch);
 	printf("\nISR cv: %lu", tc_read_cv(TC0, 2));
 	flag_ISR = 1;
@@ -53,13 +50,11 @@ int main (void)
 	
 	configure_console();
 	
-	pulse_init();
-	
-	pulse_generator_set_period(1, 20000);
-	pulse_counter_set_cnt(0, 10);
+	configure_tc();
 	
 	printf("\nHello, World!");
-
+	ioport_set_pin_dir(PIO_PC5_IDX, IOPORT_DIR_OUTPUT);
+	ioport_set_pin_level(PIO_PC5_IDX, IOPORT_PIN_LEVEL_LOW);
 	
 	// Initialize the pulse channels
 	//pulse_init();
@@ -76,39 +71,43 @@ int main (void)
 	while(1) {
 		switch(state) {
 			case 0:
-				printf("\nType 's' to start: ");
-				state = 1;
-				break;
+			printf("\nType 's' to start: ");
+			ioport_set_pin_level(PIO_PC5_IDX, IOPORT_PIN_LEVEL_LOW);
+			state = 1;
+			break;
 			case 1:
-				result = scanf("%c", &c);
-				if(result) {
-					state = 2;
+			result = scanf("%c", &c);
+			if(result) {
+				state = 2;
 				} else {
-					state = 0;
-				}
-				break;
+				state = 0;
+			}
+			break;
 			case 2:
-				if(c == 's') {
-					state = 3;
+			if(c == 's') {
+				state = 3;
 				} else {
-					state = 0;
-				}
-				break;				
+				state = 0;
+			}
+			break;
 			case 3:
-				pulse_generator_start(1);
-				pulse_counter_start(0);
-				state = 4;
-				flag_ISR = 0;
-				break;	
+			tc_start(TC0, 2);
+			TC0->TC_CHANNEL[2].TC_CCR = TC_CCR_SWTRG;
+			printf("\n#cv: %lu", tc_read_cv(TC0,2));
+			delay_ms(200);
+			state = 4;
+			flag_ISR = 0;
+			break;
 			case 4:
-				delay_ms(100);
-				printf("\ncnt: %lu", pulse_counter_get_cnt(0));
-				if(flag_ISR) {
-					state = 0;
-				}
-				break;		
+			ioport_toggle_pin_level(PIO_PC5_IDX);
+			delay_ms(500);
+			printf("\ncv: %lu", tc_read_cv(TC0,2));
+			if(flag_ISR) {
+				state = 0;
+			}
+			break;
 			default:
-				state = 0;				
+			state = 0;
 		}
 	}
 
