@@ -11,6 +11,10 @@
 void reglerahjul(int ek);
 void reglerahjul2(int ek);
 void reglerahjul3(int ek);
+<<<<<<< HEAD
+=======
+void pidReg(int ek);
+>>>>>>> 7161bf78166452a59f3daf615bc2df30b291a37b
 
 
 

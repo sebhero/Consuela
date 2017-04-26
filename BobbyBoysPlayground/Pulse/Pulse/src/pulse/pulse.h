@@ -56,7 +56,24 @@ typedef struct {
 } pulse_ioport_t;
 
 typedef struct {
-	
+	// The TC instance to use
+	Tc *tc;
+	// the channel
+	uint32_t tc_ch;
+	// TC channel ID
+	uint32_t id;
+	// IRQ
+	IRQn_Type IRQn;
+	// TC mode
+	uint32_t tc_mode;
+	// Timer channel input pin
+	ioport_pin_t pin;
+	// Timer channel peripheral MUX
+	ioport_mode_t mux;
+	// additional mode
+	ioport_mode_t ioport_mode;
+	// Trigger counter
+	uint32_t trig_cnt;
 } pulse_counter_t;
 
 /*
@@ -115,12 +132,10 @@ uint32_t pulse_timer_get(uint32_t ch_n);
 
 uint32_t pulse_ioport_get_cnt(uint32_t ch_n);
 
-
 void pulse_counter_start(uint32_t ch_n);
 
-void pulse_counter_stop(uint32_t ch_n);
-
-uint32_t pulse_counter_get_cnt(uint32_t cn_n);
+uint32_t pulse_counter_get_cnt(uint32_t ch_n);
+void pulse_counter_set_cnt(uint32_t ch_n, uint32_t n);
 
 void ch0_handler(const uint32_t id, const uint32_t index);
 #endif /* PULSE_H_ */
