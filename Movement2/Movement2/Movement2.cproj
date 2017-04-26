@@ -488,6 +488,12 @@
     <Folder Include="src\config\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\pulseCounterHandler.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\pulseCounterHandler.h">
+      <SubType>compile</SubType>
+    </Compile>
     <None Include="src\ASF\common\services\delay\delay.h">
       <SubType>compile</SubType>
     </None>
@@ -545,6 +551,12 @@
     <None Include="src\ASF\sam\drivers\usart\usart.h">
       <SubType>compile</SubType>
     </None>
+    <Compile Include="src\buttonInterrupt.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\buttonInterrupt.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\pulse.c">
       <SubType>compile</SubType>
     </Compile>
