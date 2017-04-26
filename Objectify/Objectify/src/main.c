@@ -38,13 +38,23 @@
 //ultrasound
 #define trig PIO_PC26_IDX
 #define echo PIO_PC25_IDX
-
+#define led	 PIO_PC24_IDX
+#define STATUS_FOUND 1
+#define STATUS_SEARCHING 0
+//#define STATUS_MAPPING 2
 //ultrasound
 //"scaling" �r sammans�ttning av tiden f�r ljudets f�rd i "width-ticks" per mikro_s (3.64) g�nger 2 (p.g.a ljudets str�cka �r dubbbelt
 //s� l�ng �n avst�ndet som ska m�tas) och sedan delas detta med ljudets hastighet i cm / us (0.034).
 // 'scaling' �r allts� (3.64 * 2) / 0.34 = 214.
 #define scaling 214;
+uint8_t preDist = 0;
+uint8_t status = STATUS_SEARCHING;
+uint8_t deg = 0;
+int8_t dir = 0;
+uint16_t sum = 0;
+uint16_t tick = 0;
 
+void servoControll(unsigned long dist);
 
 void configureConsole()
 {
@@ -91,12 +101,9 @@ long pulseIn()
 
 void testingUltraSound()
 {
+		unsigned long distance;
 	
-	ioport_set_pin_dir(trig,IOPORT_DIR_OUTPUT);
-	ioport_set_pin_dir(echo, IOPORT_DIR_INPUT);
-	unsigned long distance;
-	while(1)
-	{
+
 		
 		ioport_set_pin_level(trig, LOW);
 		delay_us(2);
@@ -105,36 +112,51 @@ void testingUltraSound()
 		ioport_set_pin_level(trig, LOW);
 		distance = pulseIn();
 		printf("%d cm\n", distance);
-		delay_ms(500);
-	}	
+		servoControll(distance);
+		delay_us(500);
+		
+}
+void servoControll(unsigned long dist)
+{
+	
+	if(status == STATUS_SEARCHING)
+	{
+		deg++;
+		if(preDist >0 && dist <= (preDist/2))
+		{
+			sum = sum + deg;
+			tick++;
+		}
+		
+		if(deg == 120 && tick>10)
+		{
+			status = STATUS_FOUND;
+			deg = sum / tick;
+			
+			if(dir) dir = 0;
+			else dir = 1;
+			
+			tick = 0;
+			
+		}else if(deg == 120)
+		{
+			if(dir) dir = 0;
+			else dir = 1;
+			deg = 0;
+		}
+	}else
+	{
+		if(dist < (preDist*0.95) || dist > (preDist*1.05))
+		{
+			status = STATUS_SEARCHING;
+		}
+	}
+	
+	
+	
+preDist = dist;
 }
 
-#define SPI_Handler     SPI0_Handler
-#define SPI_IRQn SPI0_IRQn
-
-/** Spi Hw ID . */
-#define SPI_ID ID_SPI0
-
-//spio address
-#define SPI_MASTER_BASE SPI0
-
-/** SPI base address for SPI slave mode, (on different board) */
-#define SPI_SLAVE_BASE SPI0
-
-#define SPI_CHIP_SEL 0 //use spi chip select 0
-#define SPI_CHIP_PCS spi_get_pcs(SPI_CHIP_SEL)
-//clock polarity
-#define SPI_CLK_POLARITY 0
-//clock phase
-#define SPI_CLK_PHASE 0
-/* Delay before SPCK. */
-//#define SPI_DLYBS 0x40
-#define SPI_DLYBS 0xFF
-
-/* Delay between consecutive transfers. */
-#define SPI_DLYBCT 0x10
-/* SPI clock setting (Hz). */
-static uint32_t gs_ul_spi_clock = 1000000;
 
 
 void testingRFID()
@@ -146,21 +168,49 @@ void testingRFID()
 
 int main (void)
 {
+	ioport_set_pin_dir(trig,IOPORT_DIR_OUTPUT);
+	ioport_set_pin_dir(echo, IOPORT_DIR_INPUT);
+	ioport_set_pin_dir(led, IOPORT_DIR_OUTPUT);
+	ioport_set_pin_level(led,LOW);
 	//turn of watchdog
 	WDT->WDT_MR = WDT_MR_WDDIS;
-
+	
 	//init clock
 	sysclk_init();
 	//init board
 	board_init();
 	//init serial communication, printf ..
 	configureConsole();
-	
 	//test ultrasound sensor
-	//testingUltraSound();
+	while(1)
+	{	
+	if(status == STATUS_FOUND)
+		{
+			ioport_set_pin_level(led, HIGH);
+			delay_us(1500);
+			ioport_set_pin_level(led, LOW);
+			delay_ms(20);
+		}
+	else if(dir = 0)
+	{
+		ioport_set_pin_level(led, HIGH);
+		delay_ms(2);
+		ioport_set_pin_level(led, LOW);
+		delay_ms(20);
+	}else if(dir = 1)
+	{
+		ioport_set_pin_level(led, HIGH);
+		delay_ms(1);
+		ioport_set_pin_level(led, LOW);
+		delay_ms(20);
+	}
+	testingUltraSound();
+	
+	}
+	
 	
 	//test rfid
-	testingRFID();
+	//testingRFID();
 	
 	
 
