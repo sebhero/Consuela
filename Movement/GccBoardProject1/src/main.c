@@ -44,8 +44,7 @@ int main (void)
 	ioport_set_pin_dir(echo, IOPORT_DIR_INPUT);
 	pulseCounter_configA(ID_PIOC, PIOC, PIO_PC28);
 	pulseCounter_configB(ID_PIOC, PIOC, PIO_PC23);
-	//unsigned long distance;
-	//double ratio;
+	uint32_t rotateVal = 90;
 	
 	//Starts with a delay simply to reduce the chance of an error occuring when reseting the program.
 	delay_ms(2000);
@@ -68,12 +67,12 @@ int main (void)
 		
 	//int ek = (counterA - counterB);	
 	//printf("ek: %d\n", ek);
-	rotateRightByDegrees(90);
-	delay_ms(1000);
-	rotateLeftByDegrees(90);
+	rotateRightByDegrees(rotateVal);
+	delay_ms(5000);
+	rotateLeftByDegrees(rotateVal);
 	//reglerahjul3(ek);
-	
-	delay_ms(1000);
+	//rotateVal +=90;
+	delay_ms(5000);
 	
 	} 
 	return 0;

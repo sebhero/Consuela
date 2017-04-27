@@ -67,11 +67,9 @@ void turnRight(){
 }
 
 void rotateRightByDegrees(int degree){
-	//Code / equation to figure this out!
-	//then normal rotation with calculated parameters
 	stop();
-	
-	degree=(degree/4);
+	degree=degree*1.1;
+	degree=(degree/4)-1;
 	
 	pulse(reverseBaseSpeed);
 	delay_us(motorSwitch);
@@ -79,7 +77,7 @@ void rotateRightByDegrees(int degree){
 	
 	counterA = 0;
 	counterB = 0;
-	while((counterA<degree)&&(counterB<degree)){
+	while((counterA<degree)){
 		delay_ms(1);
 	}
 	stop();
@@ -90,8 +88,8 @@ void rotateRightByDegrees(int degree){
 void rotateLeftByDegrees(int degree){
 	
 	stop();
-	
-	degree=(degree/4);
+	degree = degree*1.05;
+	degree=(degree/4)-1;
 	
 	pulse(baseSpeed);
 	delay_us(motorSwitch);
@@ -99,7 +97,7 @@ void rotateLeftByDegrees(int degree){
 	
 	counterA = 0;
 	counterB = 0;
-	while((counterA<degree)&&(counterB<degree)){
+	while((counterA<degree)){
 		delay_ms(1);
 	}
 	stop();
