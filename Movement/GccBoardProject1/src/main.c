@@ -44,8 +44,7 @@ int main (void)
 	ioport_set_pin_dir(echo, IOPORT_DIR_INPUT);
 	pulseCounter_configA(ID_PIOC, PIOC, PIO_PC28);
 	pulseCounter_configB(ID_PIOC, PIOC, PIO_PC23);
-	unsigned long distance;
-	double ratio;
+	uint32_t rotateVal = 90;
 	
 	//Starts with a delay simply to reduce the chance of an error occuring when reseting the program.
 	delay_ms(2000);
@@ -57,46 +56,24 @@ int main (void)
 		DO NOT go: forwardDrive into reverseDrive	
 		This is to ensure that the motors don't get damaged.
 	*/
-	pulse(baseSpeed);
+	/*
+	pulse(reverseBaseSpeed);
 	delay_us(1100);
-	pulse(baseSpeed);
-	
+	pulse(baseSpeedLeft);
+	*/
 	delay_ms(2000);
+	
 	while(1){
-		//ioport_get_pin_level(A);
-		//ioport_get_pin_level(B);
-		//printf("Awheel: %d\n", counterA);
-		//printf("Bwheel: %d\n", counterB);
-		int ek = counterA - counterB;
-		//printf("ek: %d\n",ek);
-		//printf("ek: %d", ek);
 		
-		//distance = distance_forward();
-	//	printf("Pulse counter A = %i\n", counterA);
-	//	printf("Pulse counter B = %i\n", counterB);
+	//int ek = (counterA - counterB);	
+	//printf("ek: %d\n", ek);
+	rotateRightByDegrees(rotateVal);
+	delay_ms(5000);
+	rotateLeftByDegrees(rotateVal);
+	//reglerahjul3(ek);
+	//rotateVal +=90;
+	delay_ms(5000);
 	
-/*		if (distance<75)
-		{
-			stop();
-			rotate();
-			 counterA = 0;
-			 counterB = 0;
-			
-		} 
-		else
-		{
-			
-		} */
-		reglerahjul3(ek);
-		//forwardDrive();
-	
-	//reglerahjul(ek);
-	//reglerahjul2(ek);
-	//forwardDrive();
-	//printf(counterB);
-	//turnLeft();
-	delay_ms(10);
-
 	} 
 	return 0;
 }

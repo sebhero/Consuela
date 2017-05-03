@@ -14,12 +14,14 @@
 uint16_t bS= baseSpeed;
 uint16_t bSL= baseSpeedLeft;
 
+double kP = 1.0;
 double kD = 1.0;
 double kI = 1.0;
 double i_del = 0.0;
 double d_del = 0.0;
 int ek_1 = 0;
 double tS = 0.01;
+uint8_t foo = 1;
 
 /*
 void reglerahjul(int ek){
@@ -80,9 +82,15 @@ void reglerahjul2(int ek){ //Den som fungerar
 void reglerahjul3(int ek){
 	counterA = 0; //Nollställer räknarna
 	counterB = 0;
-	bSL = bSL+ek;
+	/*
+	if (0==ek)
+	{
+		printf("Reverse right speed: %d\n",bS);
+	}
+	*/
+	bSL = bSL+(ek*kP);
 	pulse(bS);
-	delay_us(1200);
+	delay_us(motorSwitch);
 	pulse(bSL);
 }
 
@@ -93,14 +101,15 @@ void pidReg(int ek){
 	counterA = 0; //Nollställer räknarna
 	counterB = 0;
 	
-	if ()
+	if (foo)
 	{
 	i_del = (i_del+ek)*kI/tS;
 	d_del = (ek-ek_1)*tS/kD;
+	foo = 0;
 	}
 	ek_1 = ek;
 	
-	bSL += (ek + i_del + d_del);
+	bSL += kP * (ek + i_del + d_del);
 	bSL=min(2000, bSL);
 	pulse(bS);
 	delay_us(1200);

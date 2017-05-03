@@ -11,6 +11,7 @@
  */ 
 #include <asf.h>
 #include "motorFunc.h"
+#include "pulseCounterHandler.h"
 
 //Sends the pulse to the engine
 void pulse(uint16_t motorSpeed){
@@ -40,7 +41,7 @@ void rotate(){
 	pulse(baseSpeed);
 	delay_us(motorSwitch);
 	pulse(reverseBaseSpeed);
-	delay_ms(700);
+	delay_ms(timeOut);
 }
 
 //Stops both of the engines
@@ -65,7 +66,41 @@ void turnRight(){
 	delay_ms(timeOut);
 }
 
-void rotateByDegrees(uint8_t degree, uint16_t speed){
-	//Code / equation to figure this out!
-	//then normal rotation with calculated parameters
+void rotateRightByDegrees(int degree){
+	stop();
+	degree=degree*1.1;
+	degree=(degree/4)-1;
+	
+	pulse(reverseBaseSpeed);
+	delay_us(motorSwitch);
+	pulse(baseSpeedLeft);
+	
+	counterA = 0;
+	counterB = 0;
+	while((counterA<degree)){
+		delay_ms(1);
+	}
+	stop();
+	counterA = 0;
+	counterB = 0;
+}
+
+void rotateLeftByDegrees(int degree){
+	
+	stop();
+	degree = degree*1.05;
+	degree=(degree/4)-1;
+	
+	pulse(baseSpeed);
+	delay_us(motorSwitch);
+	pulse(reverseBaseSpeed);
+	
+	counterA = 0;
+	counterB = 0;
+	while((counterA<degree)){
+		delay_ms(1);
+	}
+	stop();
+	counterA = 0;
+	counterB = 0;
 }

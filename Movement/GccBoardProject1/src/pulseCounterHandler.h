@@ -12,6 +12,8 @@
 
 extern int counterA; /* Declaration of the variable */
 extern int counterB;
+extern int totA;
+extern int totB;
 
 #define A IOPORT_CREATE_PIN(PIOC, 28) //digital pin 3
 #define B IOPORT_CREATE_PIN(PIOC, 23) //digital pin 7
@@ -21,9 +23,6 @@ void pulseCounter_configA(uint32_t ul_id, Pio *p_pio, const uint32_t ul_mask);
 
 void pulseCounter_handlerB(const uint32_t id, const uint32_t index);
 void pulseCounter_configB(uint32_t ul_id, Pio *p_pio, const uint32_t ul_mask);
-
- int getA();
-  int getB();
 
 
 #endif /* PULSECOUNTERHANDLER_H_ */
