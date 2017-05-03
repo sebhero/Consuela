@@ -41,6 +41,10 @@
 #define led	 PIO_PC24_IDX
 #define STATUS_FOUND 1
 #define STATUS_SEARCHING 0
+#define STATUS_MAPPING 2
+#define RIGHT 0
+#define LEFT 1
+#define STOP 2
 //#define STATUS_MAPPING 2
 //ultrasound
 //"scaling" �r sammans�ttning av tiden f�r ljudets f�rd i "width-ticks" per mikro_s (3.64) g�nger 2 (p.g.a ljudets str�cka �r dubbbelt
@@ -48,12 +52,15 @@
 // 'scaling' �r allts� (3.64 * 2) / 0.34 = 214.
 #define scaling 214;
 uint8_t preDist = 0;
+uint8_t mappingDist = 0;
+uint8_t mappingDir = 0;
+uint8_t mappingDeg = 0;
 uint8_t status = STATUS_SEARCHING;
 uint8_t deg = 0;
 int8_t dir = 0;
 uint16_t sum = 0;
 uint16_t tick = 0;
-
+uint8_t errors = 0;
 void servoControll(unsigned long dist);
 
 void configureConsole()
@@ -111,52 +118,82 @@ void testingUltraSound()
 		delay_us(10);
 		ioport_set_pin_level(trig, LOW);
 		distance = pulseIn();
-		printf("%d cm\n", distance);
+		//distance = 0;
+		//printf("%d cm\n", distance);
 		servoControll(distance);
-		delay_us(500);
+		
 		
 }
 void servoControll(unsigned long dist)
 {
-	
-	if(status == STATUS_SEARCHING)
-	{
-		deg++;
-		if(preDist >0 && dist <= (preDist/2))
+	deg++;
+	switch(status){
+		case STATUS_SEARCHING:
+		if(preDist>0 && dist <= (preDist/2) && dist<50)
 		{
-			sum = sum + deg;
+			mappingDist = dist;
+			status = STATUS_MAPPING;
+			//sum = deg;
 			tick++;
+			printf("Mapping started");
 		}
+		break;
 		
-		if(deg == 120 && tick>10)
-		{
+		case STATUS_MAPPING:
+		
+		if(dist >= (mappingDist*0.50) && dist <= (mappingDist*1.50)){
+			tick++;
+			//sum = sum + deg;
+			
+		}
+		printf("%d ", deg);
+		
+			if(tick>5){
 			status = STATUS_FOUND;
-			deg = sum / tick;
-			
-			if(dir) dir = 0;
-			else dir = 1;
-			
+			mappingDir = dir;
+			mappingDeg = deg;
+			dir = STOP;
+			printf("FOUND SOMETHING");
 			tick = 0;
-			
-		}else if(deg == 120)
-		{
-			if(dir) dir = 0;
-			else dir = 1;
-			deg = 0;
-		}
-	}else
-	{
-		if(dist < (preDist*0.95) || dist > (preDist*1.05))
-		{
+			} else if(deg == 20)
+			{
+			tick = 0;
 			status = STATUS_SEARCHING;
+			printf("Started Search");
+			}
+		break;
+		
+		case STATUS_FOUND:
+			
+		if(dist < (mappingDist*0.50) || dist > (mappingDist*1.50))
+		{
+			errors++;
+			if(errors >5)
+			{
+				errors = 0;
+				deg = mappingDeg;
+				dir = mappingDir;
+				
+				printf("SEARCHING");
+				status = STATUS_SEARCHING;
+			}
+			break;
 		}
+		dir = STOP;
+		printf("FOUND");
+		errors = 0;
+		break;
 	}
 	
-	
-	
-preDist = dist;
-}
 
+	if(deg == 20)
+	{
+		if(dir == LEFT) dir = RIGHT;
+		else if(dir== RIGHT) dir = LEFT;
+		deg = 0;
+	}
+	preDist = dist;
+	}
 
 
 void testingRFID()
@@ -182,32 +219,46 @@ int main (void)
 	//init serial communication, printf ..
 	configureConsole();
 	//test ultrasound sensor
+	tick = 20;
 	while(1)
 	{	
-	if(status == STATUS_FOUND)
-		{
+		switch(dir){
+		case STOP:
 			ioport_set_pin_level(led, HIGH);
 			delay_us(1500);
 			ioport_set_pin_level(led, LOW);
-			delay_ms(20);
-		}
-	else if(dir = 0)
-	{
-		ioport_set_pin_level(led, HIGH);
-		delay_ms(2);
-		ioport_set_pin_level(led, LOW);
-		delay_ms(20);
-	}else if(dir = 1)
-	{
-		ioport_set_pin_level(led, HIGH);
-		delay_ms(1);
-		ioport_set_pin_level(led, LOW);
-		delay_ms(20);
-	}
-	testingUltraSound();
+			delay_us(100000);
+			break;
 	
+		case RIGHT:
+		//printf("SEARCHING DIR 0");
+		ioport_set_pin_level(led, HIGH);
+		delay_us(1671);
+		ioport_set_pin_level(led, LOW);
+		delay_us(100000);
+		break;
+		
+		case LEFT:
+		//printf("SEARCHING DIR 1");
+		ioport_set_pin_level(led, HIGH);
+		delay_us(1300); 
+		ioport_set_pin_level(led, LOW);
+		delay_us(100000);
+		break;
 	}
+	//testingUltraSound();
 	
+	/**TESTNING AV SYMMETRISK VRIDNING.
+	**/
+	if(tick == 0){
+		tick = 20;
+		if(dir==LEFT) dir = RIGHT;
+		else dir = LEFT;
+		//dir = STOP;
+	}
+	tick--;
+	//**/
+	}
 	
 	//test rfid
 	//testingRFID();
