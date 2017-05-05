@@ -484,8 +484,6 @@
     <Folder Include="src\ASF\thirdparty\CMSIS\Lib\GCC\" />
     <Folder Include="src\ASF\thirdparty\wireless\" />
     <Folder Include="src\ASF\thirdparty\wireless\addons\" />
-    <Folder Include="src\ASF\thirdparty\wireless\addons\sio2host\" />
-    <Folder Include="src\ASF\thirdparty\wireless\addons\sio2host\uart\" />
     <Folder Include="src\config\" />
   </ItemGroup>
   <ItemGroup>
@@ -519,12 +517,6 @@
     <None Include="src\ASF\sam\drivers\usart\usart.h">
       <SubType>compile</SubType>
     </None>
-    <Compile Include="src\ASF\thirdparty\wireless\addons\sio2host\uart\sio2host.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <None Include="src\ASF\thirdparty\wireless\addons\sio2host\uart\sio2host.h">
-      <SubType>compile</SubType>
-    </None>
     <Compile Include="src\buttonInterrupt.c">
       <SubType>compile</SubType>
     </Compile>
@@ -532,9 +524,6 @@
       <SubType>compile</SubType>
     </Compile>
     <None Include="src\config\conf_uart_serial.h">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="src\config\conf_sio2host.h">
       <SubType>compile</SubType>
     </None>
     <Compile Include="src\distanceSensor.c">
@@ -550,6 +539,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\motorFunc.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\navigation.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\navigation.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\pulseCounterHandler.c">

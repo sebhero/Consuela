@@ -12,13 +12,13 @@ src\ASF\sam\drivers\uart\uart.c
 
 src\ASF\sam\drivers\usart\usart.c
 
-src\ASF\thirdparty\wireless\addons\sio2host\uart\sio2host.c
-
 src\buttonInterrupt.c
 
 src\distanceSensor.c
 
 src\Hjulreglering.c
+
+src\navigation.c
 
 src\pulseCounterHandler.c
 

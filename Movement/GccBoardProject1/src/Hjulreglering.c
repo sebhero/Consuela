@@ -82,12 +82,6 @@ void reglerahjul2(int ek){ //Den som fungerar
 void reglerahjul3(int ek){
 	counterA = 0; //Nollställer räknarna
 	counterB = 0;
-	/*
-	if (0==ek)
-	{
-		printf("Reverse right speed: %d\n",bS);
-	}
-	*/
 	bSL = bSL+(ek*kP);
 	pulse(bS);
 	delay_us(motorSwitch);

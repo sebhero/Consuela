@@ -12,6 +12,7 @@
 #include "pulseCounterHandler.h"
 #include "buttonInterrupt.h"
 #include "Hjulreglering.h"
+#include "navigation.h"
 
 
 
@@ -44,7 +45,6 @@ int main (void)
 	ioport_set_pin_dir(echo, IOPORT_DIR_INPUT);
 	pulseCounter_configA(ID_PIOC, PIOC, PIO_PC28);
 	pulseCounter_configB(ID_PIOC, PIOC, PIO_PC23);
-	uint32_t rotateVal = 90;
 	
 	//Starts with a delay simply to reduce the chance of an error occuring when reseting the program.
 	delay_ms(2000);
@@ -61,20 +61,33 @@ int main (void)
 	delay_us(1100);
 	pulse(baseSpeedLeft);
 	*/
-	delay_ms(2000);
-	
-	while(1){
+	uint8_t foo = 0;
+	int degreesToPos;
+	double tempVariabel = 0;
+	while(foo<4){
 		
-	//int ek = (counterA - counterB);	
-	//printf("ek: %d\n", ek);
-	rotateRightByDegrees(rotateVal);
-	delay_ms(5000);
-	rotateLeftByDegrees(rotateVal);
-	//reglerahjul3(ek);
-	//rotateVal +=90;
-	delay_ms(5000);
-	
+		valuesCalc(foo);
+		degreesToPos = angleToPos();
+		if (degreesToPos<0){
+			degreesToPos = abs(degreesToPos);
+			rotateRightByDegrees(degreesToPos);
+			updateAngle();
+		} else{
+			rotateLeftByDegrees(degreesToPos);
+			updateAngle();
+		}
+		while (distanceToPosition(foo)>30.0){
+			delay_ms(500);
+			int ek = counterA-counterB;
+			tempVariabel = counterA*1.355;
+			reglerahjul3(ek);
+			updatePos(tempVariabel);
+			tempVariabel = 0;
+		}
+		foo++;
+		stop();
 	} 
+	
 	return 0;
 }
 

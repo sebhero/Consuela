@@ -77,9 +77,11 @@ void rotateRightByDegrees(int degree){
 	
 	counterA = 0;
 	counterB = 0;
+	
 	while((counterA<degree)){
 		delay_ms(1);
 	}
+	
 	stop();
 	counterA = 0;
 	counterB = 0;
@@ -97,6 +99,7 @@ void rotateLeftByDegrees(int degree){
 	
 	counterA = 0;
 	counterB = 0;
+	
 	while((counterA<degree)){
 		delay_ms(1);
 	}

@@ -12,8 +12,6 @@
 
 extern int counterA; /* Declaration of the variable */
 extern int counterB;
-extern int totA;
-extern int totB;
 
 #define A IOPORT_CREATE_PIN(PIOC, 28) //digital pin 3
 #define B IOPORT_CREATE_PIN(PIOC, 23) //digital pin 7
