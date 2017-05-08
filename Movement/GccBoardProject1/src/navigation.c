@@ -7,8 +7,8 @@
 #include "navigation.h"
 
 //Dummy-värden för nuvarande
-uint16_t x1_pos = 50;
-uint16_t y1_pos = 50;
+uint16_t x1_pos = 0;
+uint16_t y1_pos = 0;
 uint16_t x2_pos = 0;
 uint16_t y2_pos = 0;
 
@@ -24,6 +24,7 @@ double angleRad;
 int platformAngle;
 int objectAngle;
 int angleVal;
+int angleTemp;
 
 static uint16_t mid_x;
 static uint16_t mid_y;
@@ -62,18 +63,20 @@ object_pos_t objects[] = {
 	Function that calls the navigation-unit and receives the data representing coordinates.
 	This then gets placed at the correct positions and the values can then be used.
 */
-/*
-void callForData(){
+
+void callForData(uint16_t x1, uint16_t x2){
 	//data;//Function call
-	
+	x1_pos = x1;
+	y1_pos = x2;
+	/*
 	x1_pos = (data[0] << 8) | (data[1] << 0);
 	
 	y1_pos = (data[2] << 8) | (data[3] << 0);
 	
 	x2_pos = (data[4] << 8) | (data[5] << 0);
 	
-	y2_pos = (data[6] << 8) | (data[7] << 0);
-}*/
+	y2_pos = (data[6] << 8) | (data[7] << 0);*/
+}
 
 void calcMidPos(){
 	/*	Används då navigeringsgruppen ger oss 2 sätt av koordinater
@@ -95,9 +98,7 @@ int angleToPos(){
 	platformAngle = currentAngle;
 	objectAngle = 180 - angle;
 	angleVal = abs(((abs(platformAngle-360) + objectAngle)%360) - 360);
-	/*if (dummy>180){
-		dummy = dummy - 360;
-	}*/
+	
 	(angleVal > 180) ? (angleVal -= 360) : (0);
 	return angleVal;
 }
@@ -128,4 +129,36 @@ void updatePos(double hyp){
 	mid_y = mid_y+(sin(angleRad) * hyp);
 	x1_pos = mid_x;
 	y1_pos = mid_y;
+}
+
+uint16_t last_x;
+uint16_t last_y;
+void angleCheck(){
+	last_x = mid_x;
+	last_y = mid_y;
+	calcMidPos();
+	deltaX = mid_x - last_x;
+	deltaY = mid_y - last_y;
+	angleRad = atan2(deltaY,deltaX);
+	angleTemp = (angleRad*180)/PI;
+	
+	if (abs(angle-currentAngle)>4)
+	{
+		stop();
+		currentAngle = angle;
+		rotationChooser(angleToPos());
+		
+	}
+	
+}
+
+void rotationChooser(int degreesToPos){
+	if (degreesToPos<0){
+		degreesToPos = abs(degreesToPos);
+		rotateRightByDegrees(degreesToPos);
+		updateAngle();
+		} else{
+		rotateLeftByDegrees(degreesToPos);
+		updateAngle();
+	}
 }

@@ -11,29 +11,31 @@
 #include <inttypes.h>
 #include <math.h>
 #include <stdio_serial.h>
+#include "motorFunc.h"
 
-#define sock_x 300
-#define sock_y 50
-#define glass_x 300
-#define glass_y 350
-#define cube_x 200
-#define cube_y 200
-#define dropOff_x 100
-#define dropOff_y 300
+#define sock_x 133
+#define sock_y 186
+#define glass_x 23
+#define glass_y 382
+#define cube_x 472
+#define cube_y 23
+#define dropOff_x 478
+#define dropOff_y 371
 #define PI 3.141592
 
-//static uint16_t mid_x;
-//static uint16_t mid_y;
+extern uint16_t x1_pos;
+extern uint16_t y1_pos;
 extern int currentAngle;
 
-void callForData(void);
+void callForData(uint16_t,uint16_t);
 void calcMidPos(void);
 double distanceToPosition(uint8_t obj);
 void updatePos(double hyp);
 int angleToPos(void);
 void valuesCalc(uint8_t obj);
 void updateAngle(void);
-
+void angleCheck(void);
+void rotationChooser(int degreesToPos);
 
 
 #endif /* NAVIGATION_H_ */

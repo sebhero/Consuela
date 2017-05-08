@@ -14,7 +14,9 @@
 #include "Hjulreglering.h"
 #include "navigation.h"
 
-
+//Cancer from Gustaf
+uint8_t c_counter = 0;
+char rx[16];
 
 static void configure_console(void)
 /* Enables feedback through the USB-cable back to terminal within Atmel Studio */
@@ -23,9 +25,10 @@ static void configure_console(void)
 	/*const usart_serial_options_t uart_serial_options = {
 		.baudrate = CONF_UART_BAUDRATE,
 		.paritytype = CONF_UART_PARITY
-	};
+	};*/
 
-	 Configure console UART. 
+	 //Configure console UART. 
+	 /*
 	sysclk_enable_peripheral_clock(CONSOLE_UART_ID);
 	stdio_serial_init(CONF_UART, &uart_serial_options);
 	
@@ -33,6 +36,7 @@ static void configure_console(void)
 	printf("=============\n");*/
 	
 	//THis is for navigation
+	
 	const usart_serial_options_t uart_serial_options = {
 		.baudrate = CONF_UART_BAUDRATE,
 		.paritytype = CONF_UART_PARITY,
@@ -41,10 +45,51 @@ static void configure_console(void)
 	};
 	sysclk_enable_peripheral_clock(BOARD_USART1_BASE);
 	usart_serial_init(CONF_UART, &uart_serial_options);
+	
 }
 
 void USART1_Handler(){
-	CONF_UART->US_CR |=(1<<US_CR_RSTRX);
+	CONF_UART->US_CR |= (1 << US_CR_RSTRX);
+	rx[c_counter++] = CONF_UART->US_RHR & US_RHR_RXCHR_Msk;
+	if (c_counter > 15)
+	{
+		c_counter = 0;
+	}
+}
+void stringToInt(uint16_t *p_variable, char *p_string) {
+	*p_variable = (*p_string++ - '0') * 1000;
+	*p_variable = *p_variable + (*p_string++ - '0') * 100;
+	*p_variable = *p_variable + (*p_string++ - '0') * 10;
+	*p_variable = *p_variable + (*p_string - '0');
+}
+
+
+uint16_t x_coordinate(){
+		char str1[4];
+		str1[0] = rx[0];
+		str1[1] = rx[1];
+		str1[2] = rx[2];
+		str1[3] = rx[3];
+		
+		uint16_t x1 = 0;
+
+		stringToInt(&x1, str1);
+		
+		return x1;
+}
+
+uint16_t y_coordinate(){
+			char str2[4];
+			str2[0] = rx[4];
+			str2[1] = rx[5];
+			str2[2] = rx[6];
+			str2[3] = rx[7];
+			
+			uint16_t x2 = 0;
+			
+			stringToInt(&x2, str2);
+			
+			return x2;
 }
 
 int main (void)
@@ -76,6 +121,7 @@ int main (void)
 		DO NOT go: forwardDrive into reverseDrive	
 		This is to ensure that the motors don't get damaged.
 	*/
+	
 	/*
 	pulse(reverseBaseSpeed);
 	delay_us(1100);
@@ -88,22 +134,35 @@ int main (void)
 		
 		valuesCalc(foo);
 		degreesToPos = angleToPos();
-		if (degreesToPos<0){
+		rotationChooser(degreesToPos);
+		/*if (degreesToPos<0){
 			degreesToPos = abs(degreesToPos);
 			rotateRightByDegrees(degreesToPos);
 			updateAngle();
 		} else{
 			rotateLeftByDegrees(degreesToPos);
 			updateAngle();
-		}
+		}*/
+		//callForData(x_coordinate(),y_coordinate());
+		x1_pos = x_coordinate();
+		y1_pos = y_coordinate();
 		while (distanceToPosition(foo)>30.0){
-			delay_ms(500);
+			/*delay_ms(500);
 			int ek = counterA-counterB;
 			tempVariabel = counterA*1.355;
 			reglerahjul3(ek);
 			updatePos(tempVariabel);
-			tempVariabel = 0;
+			tempVariabel = 0;*/
+			
+			delay_ms(500);
+			int ek = counterA-counterB;
+			reglerahjul3(ek);
+			x1_pos = x_coordinate();
+			y1_pos = y_coordinate();
+			angleCheck();
+			
 		}
+		delay_ms(8);
 		foo++;
 		stop();
 	} 
