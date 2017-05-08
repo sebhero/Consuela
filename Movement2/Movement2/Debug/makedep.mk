@@ -2,7 +2,15 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+src\Hjulreglering.c
+
+src\Motorfunc.c
+
+src\navigation.c
+
 src\pulseCounterHandler.c
+
+src\TimerCounter.c
 
 src\ASF\common\services\delay\sam\cycle_counter.c
 

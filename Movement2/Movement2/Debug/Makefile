@@ -92,7 +92,11 @@ SUBDIRS :=  \
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../src/Hjulreglering.c \
+../src/Motorfunc.c \
+../src/navigation.c \
 ../src/pulseCounterHandler.c \
+../src/TimerCounter.c \
 ../src/ASF/common/services/delay/sam/cycle_counter.c \
 ../src/ASF/common/services/serial/usart_serial.c \
 ../src/ASF/common/utils/stdio/read.c \
@@ -124,7 +128,11 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+src/Hjulreglering.o \
+src/Motorfunc.o \
+src/navigation.o \
 src/pulseCounterHandler.o \
+src/TimerCounter.o \
 src/ASF/common/services/delay/sam/cycle_counter.o \
 src/ASF/common/services/serial/usart_serial.o \
 src/ASF/common/utils/stdio/read.o \
@@ -149,7 +157,11 @@ src/ASF/sam/utils/syscalls/gcc/syscalls.o \
 src/main.o
 
 OBJS_AS_ARGS +=  \
+src/Hjulreglering.o \
+src/Motorfunc.o \
+src/navigation.o \
 src/pulseCounterHandler.o \
+src/TimerCounter.o \
 src/ASF/common/services/delay/sam/cycle_counter.o \
 src/ASF/common/services/serial/usart_serial.o \
 src/ASF/common/utils/stdio/read.o \
@@ -174,7 +186,11 @@ src/ASF/sam/utils/syscalls/gcc/syscalls.o \
 src/main.o
 
 C_DEPS +=  \
+src/Hjulreglering.d \
+src/Motorfunc.d \
+src/navigation.d \
 src/pulseCounterHandler.d \
+src/TimerCounter.d \
 src/ASF/common/services/delay/sam/cycle_counter.d \
 src/ASF/common/services/serial/usart_serial.d \
 src/ASF/common/utils/stdio/read.d \
@@ -199,7 +215,11 @@ src/ASF/sam/utils/syscalls/gcc/syscalls.d \
 src/main.d
 
 C_DEPS_AS_ARGS +=  \
+src/Hjulreglering.d \
+src/Motorfunc.d \
+src/navigation.d \
 src/pulseCounterHandler.d \
+src/TimerCounter.d \
 src/ASF/common/services/delay/sam/cycle_counter.d \
 src/ASF/common/services/serial/usart_serial.d \
 src/ASF/common/utils/stdio/read.d \
@@ -238,6 +258,14 @@ LINKER_SCRIPT_DEP+=  \
 
 
 # AVR32/GNU C Compiler
+
+
+
+
+
+
+
+
 
 
 

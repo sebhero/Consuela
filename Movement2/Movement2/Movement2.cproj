@@ -488,10 +488,34 @@
     <Folder Include="src\config\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\Hjulreglering.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Hjulreglering.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Motorfunc.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\Motorfunc.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\navigation.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\navigation.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\pulseCounterHandler.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\pulseCounterHandler.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\TimerCounter.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\TimerCounter.h">
       <SubType>compile</SubType>
     </Compile>
     <None Include="src\ASF\common\services\delay\delay.h">
