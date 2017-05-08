@@ -2461,8 +2461,6 @@ Discarded input sections
  .text          0x00000000        0x0 src/navigation.o
  .data          0x00000000        0x0 src/navigation.o
  .bss           0x00000000        0x0 src/navigation.o
- .text.callForData
-                0x00000000       0x14 src/navigation.o
  .text.updatePos
                 0x00000000       0xf8 src/navigation.o
  .bss.y2_pos    0x00000000        0x2 src/navigation.o
@@ -7520,39 +7518,39 @@ OUTPUT(GccBoardProject1.elf elf32-littlearm)
  .comment       0x00000000       0x5c src/motorFunc.o
  .comment       0x00000000       0x5c src/main.o
 
-.debug_info     0x00000000     0xcb49
+.debug_info     0x00000000     0xcb17
  .debug_info    0x00000000     0x1bfa src/ASF/sam/drivers/usart/usart.o
  .debug_info    0x00001bfa      0xd67 src/Hjulreglering.o
- .debug_info    0x00002961      0xed2 src/navigation.o
- .debug_info    0x00003833     0x14a7 src/pulseCounterHandler.o
- .debug_info    0x00004cda      0x796 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_info    0x00005470      0x134 src/ASF/common/services/delay/sam/cycle_counter.o
- .debug_info    0x000055a4      0x8a7 src/ASF/sam/boards/arduino_due_x/init.o
- .debug_info    0x00005e4b     0x1385 src/ASF/sam/drivers/pio/pio.o
- .debug_info    0x000071d0      0xe52 src/ASF/sam/drivers/pio/pio_handler.o
- .debug_info    0x00008022     0x1080 src/ASF/sam/drivers/pmc/pmc.o
- .debug_info    0x000090a2      0x124 src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
- .debug_info    0x000091c6      0x3bd src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
- .debug_info    0x00009583      0x4c6 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
- .debug_info    0x00009a49     0x1462 src/motorFunc.o
- .debug_info    0x0000aeab     0x1c9e src/main.o
+ .debug_info    0x00002961      0xea0 src/navigation.o
+ .debug_info    0x00003801     0x14a7 src/pulseCounterHandler.o
+ .debug_info    0x00004ca8      0x796 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_info    0x0000543e      0x134 src/ASF/common/services/delay/sam/cycle_counter.o
+ .debug_info    0x00005572      0x8a7 src/ASF/sam/boards/arduino_due_x/init.o
+ .debug_info    0x00005e19     0x1385 src/ASF/sam/drivers/pio/pio.o
+ .debug_info    0x0000719e      0xe52 src/ASF/sam/drivers/pio/pio_handler.o
+ .debug_info    0x00007ff0     0x1080 src/ASF/sam/drivers/pmc/pmc.o
+ .debug_info    0x00009070      0x124 src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
+ .debug_info    0x00009194      0x3bd src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
+ .debug_info    0x00009551      0x4c6 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
+ .debug_info    0x00009a17     0x1462 src/motorFunc.o
+ .debug_info    0x0000ae79     0x1c9e src/main.o
 
-.debug_abbrev   0x00000000     0x2086
+.debug_abbrev   0x00000000     0x205d
  .debug_abbrev  0x00000000      0x2dc src/ASF/sam/drivers/usart/usart.o
  .debug_abbrev  0x000002dc      0x259 src/Hjulreglering.o
- .debug_abbrev  0x00000535      0x274 src/navigation.o
- .debug_abbrev  0x000007a9      0x315 src/pulseCounterHandler.o
- .debug_abbrev  0x00000abe      0x227 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_abbrev  0x00000ce5       0x9d src/ASF/common/services/delay/sam/cycle_counter.o
- .debug_abbrev  0x00000d82      0x1c4 src/ASF/sam/boards/arduino_due_x/init.o
- .debug_abbrev  0x00000f46      0x2d5 src/ASF/sam/drivers/pio/pio.o
- .debug_abbrev  0x0000121b      0x257 src/ASF/sam/drivers/pio/pio_handler.o
- .debug_abbrev  0x00001472      0x268 src/ASF/sam/drivers/pmc/pmc.o
- .debug_abbrev  0x000016da       0x8c src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
- .debug_abbrev  0x00001766      0x118 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
- .debug_abbrev  0x0000187e      0x115 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
- .debug_abbrev  0x00001993      0x2dc src/motorFunc.o
- .debug_abbrev  0x00001c6f      0x417 src/main.o
+ .debug_abbrev  0x00000535      0x24b src/navigation.o
+ .debug_abbrev  0x00000780      0x315 src/pulseCounterHandler.o
+ .debug_abbrev  0x00000a95      0x227 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_abbrev  0x00000cbc       0x9d src/ASF/common/services/delay/sam/cycle_counter.o
+ .debug_abbrev  0x00000d59      0x1c4 src/ASF/sam/boards/arduino_due_x/init.o
+ .debug_abbrev  0x00000f1d      0x2d5 src/ASF/sam/drivers/pio/pio.o
+ .debug_abbrev  0x000011f2      0x257 src/ASF/sam/drivers/pio/pio_handler.o
+ .debug_abbrev  0x00001449      0x268 src/ASF/sam/drivers/pmc/pmc.o
+ .debug_abbrev  0x000016b1       0x8c src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
+ .debug_abbrev  0x0000173d      0x118 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
+ .debug_abbrev  0x00001855      0x115 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
+ .debug_abbrev  0x0000196a      0x2dc src/motorFunc.o
+ .debug_abbrev  0x00001c46      0x417 src/main.o
 
 .debug_loc      0x00000000     0x37b5
  .debug_loc     0x00000000     0x128d src/ASF/sam/drivers/usart/usart.o
@@ -7568,54 +7566,54 @@ OUTPUT(GccBoardProject1.elf elf32-littlearm)
  .debug_loc     0x000034a3      0x1d3 src/motorFunc.o
  .debug_loc     0x00003676      0x13f src/main.o
 
-.debug_aranges  0x00000000      0x8a0
+.debug_aranges  0x00000000      0x898
  .debug_aranges
                 0x00000000      0x2a8 src/ASF/sam/drivers/usart/usart.o
  .debug_aranges
                 0x000002a8       0x30 src/Hjulreglering.o
  .debug_aranges
-                0x000002d8       0x60 src/navigation.o
+                0x000002d8       0x58 src/navigation.o
  .debug_aranges
-                0x00000338       0x38 src/pulseCounterHandler.o
+                0x00000330       0x38 src/pulseCounterHandler.o
  .debug_aranges
-                0x00000370       0x40 src/ASF/common/services/clock/sam3x/sysclk.o
+                0x00000368       0x40 src/ASF/common/services/clock/sam3x/sysclk.o
  .debug_aranges
-                0x000003b0       0x20 src/ASF/common/services/delay/sam/cycle_counter.o
+                0x000003a8       0x20 src/ASF/common/services/delay/sam/cycle_counter.o
  .debug_aranges
-                0x000003d0       0x20 src/ASF/sam/boards/arduino_due_x/init.o
+                0x000003c8       0x20 src/ASF/sam/boards/arduino_due_x/init.o
  .debug_aranges
-                0x000003f0      0x148 src/ASF/sam/drivers/pio/pio.o
+                0x000003e8      0x148 src/ASF/sam/drivers/pio/pio.o
  .debug_aranges
-                0x00000538       0x58 src/ASF/sam/drivers/pio/pio_handler.o
+                0x00000530       0x58 src/ASF/sam/drivers/pio/pio_handler.o
  .debug_aranges
-                0x00000590      0x200 src/ASF/sam/drivers/pmc/pmc.o
+                0x00000588      0x200 src/ASF/sam/drivers/pmc/pmc.o
  .debug_aranges
-                0x00000790       0x20 src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
+                0x00000788       0x20 src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
  .debug_aranges
-                0x000007b0       0x20 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
+                0x000007a8       0x20 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
  .debug_aranges
-                0x000007d0       0x30 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
+                0x000007c8       0x30 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
  .debug_aranges
-                0x00000800       0x60 src/motorFunc.o
+                0x000007f8       0x60 src/motorFunc.o
  .debug_aranges
-                0x00000860       0x40 src/main.o
+                0x00000858       0x40 src/main.o
 
-.debug_ranges   0x00000000      0x7b0
+.debug_ranges   0x00000000      0x7a8
  .debug_ranges  0x00000000      0x298 src/ASF/sam/drivers/usart/usart.o
  .debug_ranges  0x00000298       0x20 src/Hjulreglering.o
- .debug_ranges  0x000002b8       0x50 src/navigation.o
- .debug_ranges  0x00000308       0x28 src/pulseCounterHandler.o
- .debug_ranges  0x00000330       0x30 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_ranges  0x00000360       0x10 src/ASF/common/services/delay/sam/cycle_counter.o
- .debug_ranges  0x00000370       0x10 src/ASF/sam/boards/arduino_due_x/init.o
- .debug_ranges  0x00000380      0x138 src/ASF/sam/drivers/pio/pio.o
- .debug_ranges  0x000004b8       0x48 src/ASF/sam/drivers/pio/pio_handler.o
- .debug_ranges  0x00000500      0x1f0 src/ASF/sam/drivers/pmc/pmc.o
- .debug_ranges  0x000006f0       0x10 src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
- .debug_ranges  0x00000700       0x10 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
- .debug_ranges  0x00000710       0x20 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
- .debug_ranges  0x00000730       0x50 src/motorFunc.o
- .debug_ranges  0x00000780       0x30 src/main.o
+ .debug_ranges  0x000002b8       0x48 src/navigation.o
+ .debug_ranges  0x00000300       0x28 src/pulseCounterHandler.o
+ .debug_ranges  0x00000328       0x30 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_ranges  0x00000358       0x10 src/ASF/common/services/delay/sam/cycle_counter.o
+ .debug_ranges  0x00000368       0x10 src/ASF/sam/boards/arduino_due_x/init.o
+ .debug_ranges  0x00000378      0x138 src/ASF/sam/drivers/pio/pio.o
+ .debug_ranges  0x000004b0       0x48 src/ASF/sam/drivers/pio/pio_handler.o
+ .debug_ranges  0x000004f8      0x1f0 src/ASF/sam/drivers/pmc/pmc.o
+ .debug_ranges  0x000006e8       0x10 src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
+ .debug_ranges  0x000006f8       0x10 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
+ .debug_ranges  0x00000708       0x20 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
+ .debug_ranges  0x00000728       0x50 src/motorFunc.o
+ .debug_ranges  0x00000778       0x30 src/main.o
 
 .debug_macro    0x00000000     0x5bcc
  .debug_macro   0x00000000      0x4f2 src/ASF/sam/drivers/usart/usart.o
@@ -7652,88 +7650,88 @@ OUTPUT(GccBoardProject1.elf elf32-littlearm)
  .debug_macro   0x00004f66      0x60c src/motorFunc.o
  .debug_macro   0x00005572      0x65a src/main.o
 
-.debug_line     0x00000000     0xcc4d
+.debug_line     0x00000000     0xcc3c
  .debug_line    0x00000000     0x11aa src/ASF/sam/drivers/usart/usart.o
  .debug_line    0x000011aa      0xf42 src/Hjulreglering.o
- .debug_line    0x000020ec      0xddf src/navigation.o
- .debug_line    0x00002ecb      0xf18 src/pulseCounterHandler.o
- .debug_line    0x00003de3      0xc48 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_line    0x00004a2b      0xae0 src/ASF/common/services/delay/sam/cycle_counter.o
- .debug_line    0x0000550b      0xcec src/ASF/sam/boards/arduino_due_x/init.o
- .debug_line    0x000061f7      0xe42 src/ASF/sam/drivers/pio/pio.o
- .debug_line    0x00007039      0xb8d src/ASF/sam/drivers/pio/pio_handler.o
- .debug_line    0x00007bc6     0x1045 src/ASF/sam/drivers/pmc/pmc.o
- .debug_line    0x00008c0b      0xab5 src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
- .debug_line    0x000096c0      0xb05 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
- .debug_line    0x0000a1c5      0xb22 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
- .debug_line    0x0000ace7      0xf85 src/motorFunc.o
- .debug_line    0x0000bc6c      0xfe1 src/main.o
+ .debug_line    0x000020ec      0xdce src/navigation.o
+ .debug_line    0x00002eba      0xf18 src/pulseCounterHandler.o
+ .debug_line    0x00003dd2      0xc48 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_line    0x00004a1a      0xae0 src/ASF/common/services/delay/sam/cycle_counter.o
+ .debug_line    0x000054fa      0xcec src/ASF/sam/boards/arduino_due_x/init.o
+ .debug_line    0x000061e6      0xe42 src/ASF/sam/drivers/pio/pio.o
+ .debug_line    0x00007028      0xb8d src/ASF/sam/drivers/pio/pio_handler.o
+ .debug_line    0x00007bb5     0x1045 src/ASF/sam/drivers/pmc/pmc.o
+ .debug_line    0x00008bfa      0xab5 src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
+ .debug_line    0x000096af      0xb05 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
+ .debug_line    0x0000a1b4      0xb22 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
+ .debug_line    0x0000acd6      0xf85 src/motorFunc.o
+ .debug_line    0x0000bc5b      0xfe1 src/main.o
 
-.debug_str      0x00000000    0x617bb
+.debug_str      0x00000000    0x617af
  .debug_str     0x00000000    0x594d1 src/ASF/sam/drivers/usart/usart.o
                               0x597fa (size before relaxing)
  .debug_str     0x000594d1     0x5a63 src/Hjulreglering.o
                               0x5e6d7 (size before relaxing)
- .debug_str     0x0005ef34      0xbd9 src/navigation.o
-                              0x5e617 (size before relaxing)
- .debug_str     0x0005fb0d      0x59e src/pulseCounterHandler.o
+ .debug_str     0x0005ef34      0xbcd src/navigation.o
+                              0x5e60b (size before relaxing)
+ .debug_str     0x0005fb01      0x59e src/pulseCounterHandler.o
                               0x5dd38 (size before relaxing)
- .debug_str     0x000600ab      0x23a src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_str     0x0006009f      0x23a src/ASF/common/services/clock/sam3x/sysclk.o
                               0x5c953 (size before relaxing)
- .debug_str     0x000602e5       0x35 src/ASF/common/services/delay/sam/cycle_counter.o
+ .debug_str     0x000602d9       0x35 src/ASF/common/services/delay/sam/cycle_counter.o
                               0x58cf4 (size before relaxing)
- .debug_str     0x0006031a      0x21f src/ASF/sam/boards/arduino_due_x/init.o
+ .debug_str     0x0006030e      0x21f src/ASF/sam/boards/arduino_due_x/init.o
                               0x5d2ea (size before relaxing)
- .debug_str     0x00060539      0x424 src/ASF/sam/drivers/pio/pio.o
+ .debug_str     0x0006052d      0x424 src/ASF/sam/drivers/pio/pio.o
                               0x59528 (size before relaxing)
- .debug_str     0x0006095d      0x1bf src/ASF/sam/drivers/pio/pio_handler.o
+ .debug_str     0x00060951      0x1bf src/ASF/sam/drivers/pio/pio_handler.o
                               0x59570 (size before relaxing)
- .debug_str     0x00060b1c      0x67e src/ASF/sam/drivers/pmc/pmc.o
+ .debug_str     0x00060b10      0x67e src/ASF/sam/drivers/pmc/pmc.o
                               0x5959e (size before relaxing)
- .debug_str     0x0006119a       0x4d src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
+ .debug_str     0x0006118e       0x4d src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
                               0x58b9d (size before relaxing)
- .debug_str     0x000611e7       0xb2 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
+ .debug_str     0x000611db       0xb2 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
                               0x58c72 (size before relaxing)
- .debug_str     0x00061299      0x1cd src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
+ .debug_str     0x0006128d      0x1cd src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
                               0x58e85 (size before relaxing)
- .debug_str     0x00061466       0xa7 src/motorFunc.o
+ .debug_str     0x0006145a       0xa7 src/motorFunc.o
                               0x5e9d3 (size before relaxing)
- .debug_str     0x0006150d      0x2ae src/main.o
+ .debug_str     0x00061501      0x2ae src/main.o
                               0x5fbfc (size before relaxing)
 
-.debug_frame    0x00000000     0x157c
+.debug_frame    0x00000000     0x156c
  .debug_frame   0x00000000      0x5c8 src/ASF/sam/drivers/usart/usart.o
  .debug_frame   0x000005c8       0x70 src/Hjulreglering.o
- .debug_frame   0x00000638       0xf8 src/navigation.o
- .debug_frame   0x00000730       0x70 src/pulseCounterHandler.o
- .debug_frame   0x000007a0       0x88 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_frame   0x00000828       0x20 src/ASF/common/services/delay/sam/cycle_counter.o
- .debug_frame   0x00000848       0x28 src/ASF/sam/boards/arduino_due_x/init.o
- .debug_frame   0x00000870      0x2a8 src/ASF/sam/drivers/pio/pio.o
- .debug_frame   0x00000b18       0xf8 src/ASF/sam/drivers/pio/pio_handler.o
- .debug_frame   0x00000c10      0x410 src/ASF/sam/drivers/pmc/pmc.o
- .debug_frame   0x00001020       0x20 src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
- .debug_frame   0x00001040       0x28 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
- .debug_frame   0x00001068       0x40 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
- .debug_frame   0x000010a8      0x118 src/motorFunc.o
- .debug_frame   0x000011c0       0x88 src/main.o
- .debug_frame   0x00001248       0x20 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libm.a(lib_a-w_atan2.o)
- .debug_frame   0x00001268       0x38 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libm.a(lib_a-w_sqrt.o)
- .debug_frame   0x000012a0       0x38 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libm.a(lib_a-e_atan2.o)
- .debug_frame   0x000012d8       0x34 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libm.a(lib_a-e_sqrt.o)
- .debug_frame   0x0000130c       0x38 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libm.a(lib_a-s_atan.o)
- .debug_frame   0x00001344       0x20 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libm.a(lib_a-s_fabs.o)
- .debug_frame   0x00001364       0x28 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libm.a(lib_a-s_fpclassify.o)
- .debug_frame   0x0000138c       0x20 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libm.a(lib_a-s_matherr.o)
- .debug_frame   0x000013ac       0x58 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(bpabi.o)
- .debug_frame   0x00001404       0x34 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_divdi3.o)
- .debug_frame   0x00001438       0x34 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_udivdi3.o)
- .debug_frame   0x0000146c       0x20 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-errno.o)
- .debug_frame   0x0000148c       0x2c c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-init.o)
- .debug_frame   0x000014b8       0x48 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-__call_atexit.o)
- .debug_frame   0x00001500       0x20 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-atexit.o)
- .debug_frame   0x00001520       0x2c c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-fini.o)
- .debug_frame   0x0000154c       0x30 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-__atexit.o)
+ .debug_frame   0x00000638       0xe8 src/navigation.o
+ .debug_frame   0x00000720       0x70 src/pulseCounterHandler.o
+ .debug_frame   0x00000790       0x88 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_frame   0x00000818       0x20 src/ASF/common/services/delay/sam/cycle_counter.o
+ .debug_frame   0x00000838       0x28 src/ASF/sam/boards/arduino_due_x/init.o
+ .debug_frame   0x00000860      0x2a8 src/ASF/sam/drivers/pio/pio.o
+ .debug_frame   0x00000b08       0xf8 src/ASF/sam/drivers/pio/pio_handler.o
+ .debug_frame   0x00000c00      0x410 src/ASF/sam/drivers/pmc/pmc.o
+ .debug_frame   0x00001010       0x20 src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
+ .debug_frame   0x00001030       0x28 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
+ .debug_frame   0x00001058       0x40 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
+ .debug_frame   0x00001098      0x118 src/motorFunc.o
+ .debug_frame   0x000011b0       0x88 src/main.o
+ .debug_frame   0x00001238       0x20 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libm.a(lib_a-w_atan2.o)
+ .debug_frame   0x00001258       0x38 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libm.a(lib_a-w_sqrt.o)
+ .debug_frame   0x00001290       0x38 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libm.a(lib_a-e_atan2.o)
+ .debug_frame   0x000012c8       0x34 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libm.a(lib_a-e_sqrt.o)
+ .debug_frame   0x000012fc       0x38 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libm.a(lib_a-s_atan.o)
+ .debug_frame   0x00001334       0x20 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libm.a(lib_a-s_fabs.o)
+ .debug_frame   0x00001354       0x28 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libm.a(lib_a-s_fpclassify.o)
+ .debug_frame   0x0000137c       0x20 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libm.a(lib_a-s_matherr.o)
+ .debug_frame   0x0000139c       0x58 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(bpabi.o)
+ .debug_frame   0x000013f4       0x34 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_divdi3.o)
+ .debug_frame   0x00001428       0x34 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_udivdi3.o)
+ .debug_frame   0x0000145c       0x20 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-errno.o)
+ .debug_frame   0x0000147c       0x2c c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-init.o)
+ .debug_frame   0x000014a8       0x48 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-__call_atexit.o)
+ .debug_frame   0x000014f0       0x20 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-atexit.o)
+ .debug_frame   0x00001510       0x2c c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-fini.o)
+ .debug_frame   0x0000153c       0x30 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-__atexit.o)
 
 Cross Reference Table
 
@@ -8206,7 +8204,6 @@ button_config                                     src/buttonInterrupt.o
 button_handler                                    src/buttonInterrupt.o
 c_counter                                         src/main.o
 calcMidPos                                        src/navigation.o
-callForData                                       src/navigation.o
 cleanup_glue                                      c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libc.a(lib_a-reent.o)
 copysign                                          c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libm.a(lib_a-s_copysign.o)
                                                   c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/../../../../arm-none-eabi/lib/armv7-m\libm.a(lib_a-s_scalbn.o)
