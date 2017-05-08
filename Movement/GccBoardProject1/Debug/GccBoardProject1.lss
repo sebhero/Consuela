@@ -17,23 +17,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   6 .comment      0000005b  00000000  00000000  000105cd  2**0
                   CONTENTS, READONLY
-  7 .debug_info   0000cb49  00000000  00000000  00010628  2**0
+  7 .debug_info   0000cb17  00000000  00000000  00010628  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_abbrev 00002086  00000000  00000000  0001d171  2**0
+  8 .debug_abbrev 0000205d  00000000  00000000  0001d13f  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_loc    000037b5  00000000  00000000  0001f1f7  2**0
+  9 .debug_loc    000037b5  00000000  00000000  0001f19c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_aranges 000008a0  00000000  00000000  000229ac  2**0
+ 10 .debug_aranges 00000898  00000000  00000000  00022951  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 000007b0  00000000  00000000  0002324c  2**0
+ 11 .debug_ranges 000007a8  00000000  00000000  000231e9  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_macro  00005bcc  00000000  00000000  000239fc  2**0
+ 12 .debug_macro  00005bcc  00000000  00000000  00023991  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_line   0000cc4d  00000000  00000000  000295c8  2**0
+ 13 .debug_line   0000cc3c  00000000  00000000  0002955d  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_str    000617bb  00000000  00000000  00036215  2**0
+ 14 .debug_str    000617af  00000000  00000000  00036199  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_frame  0000157c  00000000  00000000  000979d0  2**2
+ 15 .debug_frame  0000156c  00000000  00000000  00097948  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -470,11 +470,11 @@ void reglerahjul3(int ek){
    802b8:	20070001 	.word	0x20070001
 
 000802bc <calcMidPos>:
-void calcMidPos(){
-	/*	Används då navigeringsgruppen ger oss 2 sätt av koordinater
+	/*	This part is used if 2 sets of coordinates are given
 		mid_x = (x1_pos+x2_pos)/2;
 		mid_y = (y1_pos+y2_pos)/2;
 	*/
+	//Use this part if only 1 set of coordinates are given.
 	mid_x = x1_pos;
    802bc:	4b04      	ldr	r3, [pc, #16]	; (802d0 <calcMidPos+0x14>)
    802be:	881a      	ldrh	r2, [r3, #0]
@@ -493,22 +493,25 @@ void calcMidPos(){
    802dc:	200705cc 	.word	0x200705cc
 
 000802e0 <angleToPos>:
-	distanceLeft = sqrt(pow(deltaX,2)+pow(deltaY,2));
-	return distanceLeft;
-}
-
+	Calculate the angle from the platform to the given position/object.
+	Returns a negative number if the angle is closer clockwise than anti-clockwise
+*/
 int angleToPos(){
+	//Sets the current angle into a temp variable
 	platformAngle = currentAngle;
    802e0:	4b14      	ldr	r3, [pc, #80]	; (80334 <angleToPos+0x54>)
    802e2:	681a      	ldr	r2, [r3, #0]
    802e4:	4b14      	ldr	r3, [pc, #80]	; (80338 <angleToPos+0x58>)
    802e6:	601a      	str	r2, [r3, #0]
+	//Transforms the angle to the objective to a usable value(0-360)
 	objectAngle = 180 - angle;
    802e8:	4b14      	ldr	r3, [pc, #80]	; (8033c <angleToPos+0x5c>)
    802ea:	681b      	ldr	r3, [r3, #0]
    802ec:	f1c3 03b4 	rsb	r3, r3, #180	; 0xb4
    802f0:	4913      	ldr	r1, [pc, #76]	; (80340 <angleToPos+0x60>)
    802f2:	600b      	str	r3, [r1, #0]
+	
+	//Calculates the angle-difference between the platform and the objective
 	angleVal = abs(((abs(platformAngle-360) + objectAngle)%360) - 360);
    802f4:	f5a2 71b4 	sub.w	r1, r2, #360	; 0x168
    802f8:	2900      	cmp	r1, #0
@@ -527,12 +530,14 @@ int angleToPos(){
    8031c:	bfb8      	it	lt
    8031e:	4249      	neglt	r1, r1
 	
+	//If the angle-difference is greater than 180, make it negative
 	(angleVal > 180) ? (angleVal -= 360) : (0);
    80320:	29b4      	cmp	r1, #180	; 0xb4
    80322:	bfc8      	it	gt
    80324:	f5a1 71b4 	subgt.w	r1, r1, #360	; 0x168
    80328:	4b07      	ldr	r3, [pc, #28]	; (80348 <angleToPos+0x68>)
    8032a:	6019      	str	r1, [r3, #0]
+	
 	return angleVal;
 }
    8032c:	4b06      	ldr	r3, [pc, #24]	; (80348 <angleToPos+0x68>)
@@ -549,12 +554,19 @@ int angleToPos(){
 
 00080350 <valuesCalc>:
 
+/*
+	Calculates the difference in X/Y between the platform and a given position
+	Also calculates the angle to the object from the platform
+*/
 void valuesCalc(uint8_t obj){
    80350:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
    80352:	4604      	mov	r4, r0
+	//Calculates the position of the platform
 	calcMidPos();
    80354:	4b1a      	ldr	r3, [pc, #104]	; (803c0 <valuesCalc+0x70>)
    80356:	4798      	blx	r3
+	
+	//Calculates the X/Y difference
 	deltaX = objects[obj].x_pos - mid_x;
    80358:	4b1a      	ldr	r3, [pc, #104]	; (803c4 <valuesCalc+0x74>)
    8035a:	f833 7034 	ldrh.w	r7, [r3, r4, lsl #3]
@@ -571,6 +583,8 @@ void valuesCalc(uint8_t obj){
    80372:	1ac0      	subs	r0, r0, r3
    80374:	4b17      	ldr	r3, [pc, #92]	; (803d4 <valuesCalc+0x84>)
    80376:	6018      	str	r0, [r3, #0]
+	
+	//Calculates the angle between the platform and object in radians
 	angleRad = atan2(deltaY,deltaX);
    80378:	4e17      	ldr	r6, [pc, #92]	; (803d8 <valuesCalc+0x88>)
    8037a:	47b0      	blx	r6
@@ -586,6 +600,8 @@ void valuesCalc(uint8_t obj){
    8038e:	47a0      	blx	r4
    80390:	4b13      	ldr	r3, [pc, #76]	; (803e0 <valuesCalc+0x90>)
    80392:	e9c3 0100 	strd	r0, r1, [r3]
+	
+	//Converts the angle from radians to degrees
 	angle = (angleRad*180)/PI;
    80396:	2200      	movs	r2, #0
    80398:	4b12      	ldr	r3, [pc, #72]	; (803e4 <valuesCalc+0x94>)
@@ -620,16 +636,18 @@ void valuesCalc(uint8_t obj){
    803f4:	20070660 	.word	0x20070660
 
 000803f8 <distanceToPosition>:
-	mid_x = x1_pos;
-	mid_y = y1_pos;
-	
 }
 
+/*
+	Calculates the distance from the platform to a given object
+*/
 double distanceToPosition(uint8_t obj){
    803f8:	e92d 4ff8 	stmdb	sp!, {r3, r4, r5, r6, r7, r8, r9, sl, fp, lr}
+	//Call that calculates angle of the object and X/Y differences
 	valuesCalc(obj);
    803fc:	4b14      	ldr	r3, [pc, #80]	; (80450 <distanceToPosition+0x58>)
    803fe:	4798      	blx	r3
+	//Calculates the hypotenuse 
 	distanceLeft = sqrt(pow(deltaX,2)+pow(deltaY,2));
    80400:	4e14      	ldr	r6, [pc, #80]	; (80454 <distanceToPosition+0x5c>)
    80402:	4b15      	ldr	r3, [pc, #84]	; (80458 <distanceToPosition+0x60>)
@@ -665,6 +683,7 @@ double distanceToPosition(uint8_t obj){
    80442:	4798      	blx	r3
    80444:	4b07      	ldr	r3, [pc, #28]	; (80464 <distanceToPosition+0x6c>)
    80446:	e9c3 0100 	strd	r0, r1, [r3]
+	//Returns the distance/hypotenuse
 	return distanceLeft;
 }
    8044a:	e8bd 8ff8 	ldmia.w	sp!, {r3, r4, r5, r6, r7, r8, r9, sl, fp, pc}
@@ -705,31 +724,37 @@ void updateAngle(){
    804a0:	b60b60b7 	.word	0xb60b60b7
 
 000804a4 <rotationChooser>:
-		
-	}
-	
 }
 
+/*
+	Choose the direction of the rotation depending on the value of input
+*/
 void rotationChooser(int degreesToPos){
    804a4:	b508      	push	{r3, lr}
+	//If the value is negative rotate right, else left
 	if (degreesToPos<0){
    804a6:	2800      	cmp	r0, #0
    804a8:	da07      	bge.n	804ba <rotationChooser+0x16>
+		//Makes the value into a positive value
 		degreesToPos = abs(degreesToPos);
+		//Rotates the platform clockwise by the input value
 		rotateRightByDegrees(degreesToPos);
    804aa:	2800      	cmp	r0, #0
    804ac:	bfb8      	it	lt
    804ae:	4240      	neglt	r0, r0
    804b0:	4b04      	ldr	r3, [pc, #16]	; (804c4 <rotationChooser+0x20>)
    804b2:	4798      	blx	r3
+		//Update the angle
 		updateAngle();
    804b4:	4b04      	ldr	r3, [pc, #16]	; (804c8 <rotationChooser+0x24>)
    804b6:	4798      	blx	r3
    804b8:	bd08      	pop	{r3, pc}
 		} else{
+		//Rotates the platform anti-clockwise by the input value
 		rotateLeftByDegrees(degreesToPos);
    804ba:	4b04      	ldr	r3, [pc, #16]	; (804cc <rotationChooser+0x28>)
    804bc:	4798      	blx	r3
+		//Update the angle
 		updateAngle();
    804be:	4b02      	ldr	r3, [pc, #8]	; (804c8 <rotationChooser+0x24>)
    804c0:	4798      	blx	r3
@@ -739,13 +764,14 @@ void rotationChooser(int degreesToPos){
    804cc:	00080e71 	.word	0x00080e71
 
 000804d0 <angleCheck>:
-	y1_pos = mid_y;
-}
-
-uint16_t last_x;
-uint16_t last_y;
+	Checks if the angle that the platform actually travels in is the same as the believed one.
+	If they differ to much, the platform will stop and recalibrate to fix this.
+	
+	Still not tested! 
+*/
 void angleCheck(){
    804d0:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+	//Saves the last position
 	last_x = mid_x;
    804d2:	4e25      	ldr	r6, [pc, #148]	; (80568 <angleCheck+0x98>)
    804d4:	4f25      	ldr	r7, [pc, #148]	; (8056c <angleCheck+0x9c>)
@@ -756,9 +782,13 @@ void angleCheck(){
    804dc:	4d25      	ldr	r5, [pc, #148]	; (80574 <angleCheck+0xa4>)
    804de:	882b      	ldrh	r3, [r5, #0]
    804e0:	8023      	strh	r3, [r4, #0]
+	
+	//Calculates the new position of the platform
 	calcMidPos();
    804e2:	4b25      	ldr	r3, [pc, #148]	; (80578 <angleCheck+0xa8>)
    804e4:	4798      	blx	r3
+	
+	//Calculates the X/Y-difference of the platform and the object
 	deltaX = mid_x - last_x;
    804e6:	883f      	ldrh	r7, [r7, #0]
    804e8:	8833      	ldrh	r3, [r6, #0]
@@ -771,6 +801,8 @@ void angleCheck(){
    804f4:	1ac0      	subs	r0, r0, r3
    804f6:	4b22      	ldr	r3, [pc, #136]	; (80580 <angleCheck+0xb0>)
    804f8:	6018      	str	r0, [r3, #0]
+	
+	//Calculates the angle to the object from the platform
 	angleRad = atan2(deltaY,deltaX);
    804fa:	4e22      	ldr	r6, [pc, #136]	; (80584 <angleCheck+0xb4>)
    804fc:	47b0      	blx	r6
@@ -797,33 +829,39 @@ void angleCheck(){
    80528:	47a0      	blx	r4
    8052a:	4b1c      	ldr	r3, [pc, #112]	; (8059c <angleCheck+0xcc>)
    8052c:	4798      	blx	r3
-   8052e:	4b1c      	ldr	r3, [pc, #112]	; (805a0 <angleCheck+0xd0>)
-   80530:	6018      	str	r0, [r3, #0]
+	angleTemp = 180 - angleTemp;
+   8052e:	f1c0 00b4 	rsb	r0, r0, #180	; 0xb4
+   80532:	4b1b      	ldr	r3, [pc, #108]	; (805a0 <angleCheck+0xd0>)
+   80534:	6018      	str	r0, [r3, #0]
 	
-	if (abs(angle-currentAngle)>4)
-   80532:	4b1c      	ldr	r3, [pc, #112]	; (805a4 <angleCheck+0xd4>)
-   80534:	681a      	ldr	r2, [r3, #0]
-   80536:	4b1c      	ldr	r3, [pc, #112]	; (805a8 <angleCheck+0xd8>)
+	//If the angle-difference of the current travel-angle and the angle to the object is bigger than 4
+	//then fix the positioning so that the angle is equal.
+	if (abs(angleTemp-currentAngle)>4)
+   80536:	4b1b      	ldr	r3, [pc, #108]	; (805a4 <angleCheck+0xd4>)
    80538:	681b      	ldr	r3, [r3, #0]
-   8053a:	1ad3      	subs	r3, r2, r3
-   8053c:	2b00      	cmp	r3, #0
+   8053a:	1ac0      	subs	r0, r0, r3
+   8053c:	2800      	cmp	r0, #0
    8053e:	bfb8      	it	lt
-   80540:	425b      	neglt	r3, r3
-   80542:	2b04      	cmp	r3, #4
+   80540:	4240      	neglt	r0, r0
+   80542:	2804      	cmp	r0, #4
    80544:	dd09      	ble.n	8055a <angleCheck+0x8a>
 	{
+		//Stops the movement
 		stop();
-   80546:	4b19      	ldr	r3, [pc, #100]	; (805ac <angleCheck+0xdc>)
+   80546:	4b18      	ldr	r3, [pc, #96]	; (805a8 <angleCheck+0xd8>)
    80548:	4798      	blx	r3
-		currentAngle = angle;
-   8054a:	4b16      	ldr	r3, [pc, #88]	; (805a4 <angleCheck+0xd4>)
+		//Sets currentAngle to the actual angle of the platform
+		currentAngle = angleTemp;
+   8054a:	4b15      	ldr	r3, [pc, #84]	; (805a0 <angleCheck+0xd0>)
    8054c:	681a      	ldr	r2, [r3, #0]
-   8054e:	4b16      	ldr	r3, [pc, #88]	; (805a8 <angleCheck+0xd8>)
+   8054e:	4b15      	ldr	r3, [pc, #84]	; (805a4 <angleCheck+0xd4>)
    80550:	601a      	str	r2, [r3, #0]
+		
+		//Rotates the platform the needed amount in the correct direction.
 		rotationChooser(angleToPos());
-   80552:	4b17      	ldr	r3, [pc, #92]	; (805b0 <angleCheck+0xe0>)
+   80552:	4b16      	ldr	r3, [pc, #88]	; (805ac <angleCheck+0xdc>)
    80554:	4798      	blx	r3
-   80556:	4b17      	ldr	r3, [pc, #92]	; (805b4 <angleCheck+0xe4>)
+   80556:	4b16      	ldr	r3, [pc, #88]	; (805b0 <angleCheck+0xe0>)
    80558:	4798      	blx	r3
    8055a:	bdf8      	pop	{r3, r4, r5, r6, r7, pc}
    8055c:	f3af 8000 	nop.w
@@ -844,11 +882,11 @@ void angleCheck(){
    80598:	00081f31 	.word	0x00081f31
    8059c:	00082211 	.word	0x00082211
    805a0:	20070680 	.word	0x20070680
-   805a4:	20070660 	.word	0x20070660
-   805a8:	2007014c 	.word	0x2007014c
-   805ac:	00080da9 	.word	0x00080da9
-   805b0:	000802e1 	.word	0x000802e1
-   805b4:	000804a5 	.word	0x000804a5
+   805a4:	2007014c 	.word	0x2007014c
+   805a8:	00080da9 	.word	0x00080da9
+   805ac:	000802e1 	.word	0x000802e1
+   805b0:	000804a5 	.word	0x000804a5
+   805b4:	f3af 8000 	nop.w
 
 000805b8 <pulseCounter_handlerA>:
 	base->PIO_CODR = mask & ~level;
