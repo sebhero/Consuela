@@ -2,12 +2,11 @@
 #include <asf.h>
 
 static uint32_t tx_complete = 1;
-#define tx_buff_size 256
-static char tx_buff[tx_buff_size];
+#define tx_buff_size 1
+static char tx_buff[2][tx_buff_size];
 
-#define rx_buff_size 8
+#define rx_buff_size 1
 static char rx_buff[2][rx_buff_size];
-
 
 
 typedef struct {
@@ -44,6 +43,7 @@ void configure_usart(uint32_t ch_n) {
 
     ioport_set_pin_dir(usarts[ch_n].usart_rx_pin, IOPORT_DIR_INPUT);
     ioport_disable_pin(usarts[ch_n].usart_rx_pin);
+
     ioport_set_pin_dir(usarts[ch_n].usart_tx_pin, IOPORT_DIR_OUTPUT);
     ioport_set_pin_mode(usarts[ch_n].usart_tx_pin, IOPORT_MODE_PULLUP);
     ioport_disable_pin(usarts[ch_n].usart_tx_pin);
@@ -136,11 +136,11 @@ int main() {
 
     configure_usarts();
 
+    clear_usart(0);
+
     Pdc *pdc = usart_get_pdc_base(usarts[0].usart);
 
     pdc_enable_transfer(pdc, PERIPH_PTCR_RXTEN | PERIPH_PTCR_TXTEN);
-
-    clear_usart(0);
 
     usart_disable_interrupt(usarts[0].usart, US_IDR_RXRDY);
 

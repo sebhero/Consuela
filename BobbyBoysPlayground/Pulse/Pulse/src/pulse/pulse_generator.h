@@ -51,7 +51,8 @@ void pulse_generator_start(uint32_t ch_n);
 void pulse_generator_stop(uint32_t ch_n);
 
 /*
-* \brief Set the pulse high period of the specified channel to the specified period in us
+* \brief Set the pulse high period of the specified channel to the specified
+*  period in us
 *
 * \param ch_n Pulse channel number
 * \param period_us Pulse high period in microseconds

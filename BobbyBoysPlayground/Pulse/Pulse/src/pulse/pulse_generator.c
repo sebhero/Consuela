@@ -13,8 +13,8 @@ pwm_clock_t pulse_generator_clock_setting = {
 	.ul_clkb = 0,
 	.ul_mck = BOARD_MCK // or CHIP_FREQ_CPU_MAX or get_freq_max
 };
- 
- 
+
+
  // Define the pulse channels, ie. the supporting PWM channels
 pulse_generator_t pulse_channels[] = {
 	{
@@ -77,33 +77,42 @@ pulse_generator_t pulse_channels[] = {
 	// If needed they do exists but the polarity might have to
 	// be switched to give high period instead of low
 };
- 
- 
+
+
 void pulse_generator_init_channel(uint32_t ch_n) {
-    ioport_set_pin_mode(pulse_channels[ch_n].pin, pulse_channels[ch_n].mux);
+    ioport_set_pin_mode(pulse_channels[ch_n].pin,
+                        pulse_channels[ch_n].mux);
     ioport_disable_pin(pulse_channels[ch_n].pin);
 
     pmc_enable_periph_clk(pulse_channels[ch_n].id);
-    pwm_channel_disable(pulse_channels[ch_n].pwm, pulse_channels[ch_n].pwm_channel.channel);
-    pwm_init(pulse_channels[ch_n].pwm, &pulse_generator_clock_setting);
+
+    pwm_channel_disable(pulse_channels[ch_n].pwm,
+                        pulse_channels[ch_n].pwm_channel.channel);
+    pwm_init(pulse_channels[ch_n].pwm,
+            &pulse_generator_clock_setting);
  }
- 
- 
+
+
  void pulse_generator_start(uint32_t ch_n) {
-	 pwm_channel_init(pulse_channels[ch_n].pwm, &(pulse_channels[ch_n].pwm_channel));
-	 pwm_channel_enable(pulse_channels[ch_n].pwm, pulse_channels[ch_n].pwm_channel.channel);
+	 pwm_channel_init(pulse_channels[ch_n].pwm,
+                    &(pulse_channels[ch_n].pwm_channel));
+	 pwm_channel_enable(pulse_channels[ch_n].pwm,
+                        pulse_channels[ch_n].pwm_channel.channel);
  }
 
 
  void pulse_generator_stop(uint32_t ch_n) {
-	 pwm_channel_disable(pulse_channels[ch_n].pwm, pulse_channels[ch_n].pwm_channel.channel);
+	 pwm_channel_disable(pulse_channels[ch_n].pwm,
+                            pulse_channels[ch_n].pwm_channel.channel);
  }
- 
+
 
  uint32_t pulse_generator_set_period(uint32_t ch_n, uint32_t period_us) {
 	 if(period_us > pulse_channels[ch_n].dty_max) {
 		 return 1;
 	 }
-	 pwm_channel_update_duty(pulse_channels[ch_n].pwm, &(pulse_channels[ch_n].pwm_channel), period_us);
+	 pwm_channel_update_duty(pulse_channels[ch_n].pwm,
+                            &(pulse_channels[ch_n].pwm_channel),
+                            period_us);
 	 return 0;
  }

@@ -35,13 +35,14 @@ typedef struct {
 * This starts a one-off timer. When the timer has triggered, it has to be
 * restarted if performing another measurement.
 *
+* TODO: This is not really correct, the timer is always running
 */
 void pulse_timer_start(uint32_t ch_n);
 
 /*
 * \brief Get the timer result
 *
-* \retval The timer inteval in micro-seconds
+* \retval The timer inteval in micro-seconds, 0 if no valid measurement has been made yet.
 */
 uint32_t pulse_timer_get(uint32_t ch_n);
 
