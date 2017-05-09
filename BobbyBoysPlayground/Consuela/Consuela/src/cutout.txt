@@ -1,0 +1,79 @@
+/*
+void vController(void *pvParameters) {
+
+    for(;;) {
+        uint8_t objectID = 0;
+        int degreesToPos;
+        double tempVariabel = 0;
+        while(objectID<4){
+
+            valuesCalc(objectID);
+            degreesToPos = angleToPos();
+            if (degreesToPos<0){
+                degreesToPos = abs(degreesToPos);
+                rotateRightByDegrees(degreesToPos);
+                updateAngle();
+            } else {
+                rotateLeftByDegrees(degreesToPos);
+                updateAngle();
+            }
+            while (distanceToPosition(objectID)>30.0){
+                delay_ms(500);
+                int ek = counterA-counterB;
+                tempVariabel = counterA*1.355;
+                reglerahjul3(ek);
+                updatePos(tempVariabel);
+                tempVariabel = 0;
+            }
+            objectID++;
+            stop();
+        }
+    }
+}
+*/
+
+/*
+freertos_usart_if fd;
+void configure_FreeRTOS_USART() {
+    Usart *usart = USART0;
+    ioport_pin_t usart_rx_pin = PIO_PA10_IDX;
+    ioport_pin_t usart_tx_pin = PIO_PA11_IDX;
+
+    sam_usart_opt_t usart_opt = {
+        .baudrate = 115200,
+        .char_length = US_MR_CHRL_8_BIT,
+        .parity_type = US_MR_PAR_NO,
+        .stop_bits = US_MR_NBSTOP_1_BIT,
+        .channel_mode = US_MR_CHMODE_NORMAL,
+        .irda_filter = 0
+    };
+    freertos_peripheral_options_t peripheral_options = {
+        .receive_buffer = rx_buffer,
+        .receive_buffer_size = rx_buffer_size,
+        .interrupt_priority = 10,
+        .operation_mode = USART_RS232,
+        .options_flags = USE_RX_ACCESS_MUTEX
+    };
+
+    ioport_set_pin_dir(usart_rx_pin, IOPORT_DIR_INPUT);
+    ioport_disable_pin(usart_rx_pin);
+
+    ioport_set_pin_dir(usart_tx_pin, IOPORT_DIR_OUTPUT);
+    ioport_set_pin_mode(usart_tx_pin, IOPORT_MODE_PULLUP);
+    ioport_disable_pin(usart_tx_pin);
+
+    fd = freertos_usart_serial_init(usart, &usart_opt, &peripheral_options);
+    configASSERT(fd);
+    printf("USART configured\n");
+}
+*/
+    //uint8_t buff[10];
+        //uint32_t read_bytes =  freertos_usart_serial_read_packet(fd, buff, 2, 1000);
+        //printf("Read %lu bytes %c\n", read_bytes, buff[0]);
+
+            //configure_FreeRTOS_USART();
+
+
+    //xTaskCreate(vController, "Controller", configMINIMAL_STACK_SIZE + 100, NULL, 1, &xControllerHandle);
+
+    //configure_FreeRTOS_USART();
