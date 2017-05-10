@@ -564,8 +564,15 @@
     <Folder Include="src\ASF\thirdparty\wireless\addons\sio2host\" />
     <Folder Include="src\ASF\thirdparty\wireless\addons\sio2host\uart\" />
     <Folder Include="src\config\" />
+    <Folder Include="src\UltraServo" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\UltraServo\ultra_servo.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\UltraServo\ultra_servo.h">
+      <SubType>compile</SubType>
+    </Compile>
     <None Include="atmel_devices_cdc.cat">
       <SubType>compile</SubType>
     </None>
