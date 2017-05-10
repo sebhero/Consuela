@@ -2,6 +2,8 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+src\UltraServo\ultra_servo.c
+
 src\ASF\common\services\clock\sam3x\sysclk.c
 
 src\ASF\common\services\delay\sam\cycle_counter.c
