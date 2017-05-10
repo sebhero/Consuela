@@ -6579,7 +6579,7 @@ Discarded input sections
  .debug_macro   0x00000000       0x16 src/main.o
  .debug_macro   0x00000000       0x1c src/main.o
  .debug_macro   0x00000000      0x192 src/main.o
- .debug_macro   0x00000000       0x4c src/main.o
+ .debug_macro   0x00000000       0x3a src/main.o
  .data          0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_arm_addsubdf3.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_arm_addsubdf3.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/atmel toolchain/arm gcc/native/4.8.1443/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/4.8.4/armv7-m\libgcc.a(_arm_muldivdf3.o)
@@ -7990,7 +7990,7 @@ OUTPUT(Objectify.elf elf32-littlearm)
  .debug_ranges  0x00000c00       0x50 src/ASF/thirdparty/wireless/addons/sio2host/uart/sio2host.o
  .debug_ranges  0x00000c50       0x28 src/main.o
 
-.debug_macro    0x00000000    0x1b946
+.debug_macro    0x00000000    0x1b934
  .debug_macro   0x00000000      0x6c3 src/UltraServo/ultra_servo.o
  .debug_macro   0x000006c3      0x87a src/UltraServo/ultra_servo.o
  .debug_macro   0x00000f3d      0x166 src/UltraServo/ultra_servo.o
@@ -8123,56 +8123,56 @@ OUTPUT(Objectify.elf elf32-littlearm)
  .debug_macro   0x00012b53       0x16 src/UltraServo/ultra_servo.o
  .debug_macro   0x00012b69       0x1c src/UltraServo/ultra_servo.o
  .debug_macro   0x00012b85      0x192 src/UltraServo/ultra_servo.o
- .debug_macro   0x00012d17       0x4c src/UltraServo/ultra_servo.o
- .debug_macro   0x00012d63      0x529 src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x0001328c      0x29d src/ASF/common/services/clock/sam3x/sysclk.o
- .debug_macro   0x00013529      0x4b8 src/ASF/common/services/delay/sam/cycle_counter.o
- .debug_macro   0x000139e1       0x22 src/ASF/common/services/delay/sam/cycle_counter.o
- .debug_macro   0x00013a03      0x55d src/ASF/common/services/serial/usart_serial.o
- .debug_macro   0x00013f60      0x4cf src/ASF/common/services/sleepmgr/sam/sleepmgr.o
- .debug_macro   0x0001442f      0x5f2 src/ASF/common/services/usb/class/cdc/device/udi_cdc.o
- .debug_macro   0x00014a21       0x80 src/ASF/common/services/usb/class/cdc/device/udi_cdc.o
- .debug_macro   0x00014aa1      0x2a6 src/ASF/common/services/usb/class/cdc/device/udi_cdc.o
- .debug_macro   0x00014d47       0x10 src/ASF/common/services/usb/class/cdc/device/udi_cdc.o
- .debug_macro   0x00014d57       0x1f src/ASF/common/services/usb/class/cdc/device/udi_cdc.o
- .debug_macro   0x00014d76      0x546 src/ASF/common/services/usb/class/cdc/device/udi_cdc_desc.o
- .debug_macro   0x000152bc      0x532 src/ASF/common/services/usb/udc/udc.o
- .debug_macro   0x000157ee      0x4b3 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
- .debug_macro   0x00015ca1       0x3f src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
- .debug_macro   0x00015ce0      0x4a9 src/ASF/common/utils/stdio/read.o
- .debug_macro   0x00016189      0x4a9 src/ASF/common/utils/stdio/write.o
- .debug_macro   0x00016632      0x568 src/ASF/sam/boards/arduino_due_x/init.o
- .debug_macro   0x00016b9a       0x16 src/ASF/sam/boards/arduino_due_x/init.o
- .debug_macro   0x00016bb0       0x6a src/ASF/sam/boards/arduino_due_x/init.o
- .debug_macro   0x00016c1a      0x4c4 src/ASF/sam/drivers/pio/pio.o
- .debug_macro   0x000170de       0x8e src/ASF/sam/drivers/pio/pio.o
- .debug_macro   0x0001716c      0x4c8 src/ASF/sam/drivers/pio/pio_handler.o
- .debug_macro   0x00017634      0x4be src/ASF/sam/drivers/pmc/pmc.o
- .debug_macro   0x00017af2       0x58 src/ASF/sam/drivers/pmc/pmc.o
- .debug_macro   0x00017b4a      0x4de src/ASF/sam/drivers/pmc/sleep.o
- .debug_macro   0x00018028      0x4b8 src/ASF/sam/drivers/uart/uart.o
- .debug_macro   0x000184e0       0x16 src/ASF/sam/drivers/uart/uart.o
- .debug_macro   0x000184f6      0x689 src/ASF/sam/drivers/uotghs/uotghs_device.o
- .debug_macro   0x00018b7f      0x1c8 src/ASF/sam/drivers/uotghs/uotghs_device.o
- .debug_macro   0x00018d47      0x5c7 src/ASF/sam/drivers/uotghs/uotghs_device.o
- .debug_macro   0x0001930e      0x4f4 src/ASF/sam/drivers/usart/usart.o
- .debug_macro   0x00019802       0x28 src/ASF/sam/drivers/usart/usart.o
- .debug_macro   0x0001982a      0x4bd src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
- .debug_macro   0x00019ce7      0x4cb src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
- .debug_macro   0x0001a1b2      0x4cb src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
- .debug_macro   0x0001a67d       0x26 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
- .debug_macro   0x0001a6a3      0x129 src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x0001a7cc       0x97 src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x0001a863       0xef src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x0001a952       0x4a src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x0001a99c       0x52 src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x0001a9ee       0x16 src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x0001aa04       0x10 src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x0001aa14       0x41 src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x0001aa55      0x120 src/ASF/sam/utils/syscalls/gcc/syscalls.o
- .debug_macro   0x0001ab75      0x6ce src/ASF/thirdparty/wireless/addons/sio2host/uart/sio2host.o
- .debug_macro   0x0001b243       0x40 src/ASF/thirdparty/wireless/addons/sio2host/uart/sio2host.o
- .debug_macro   0x0001b283      0x6c3 src/main.o
+ .debug_macro   0x00012d17       0x3a src/UltraServo/ultra_servo.o
+ .debug_macro   0x00012d51      0x529 src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x0001327a      0x29d src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_macro   0x00013517      0x4b8 src/ASF/common/services/delay/sam/cycle_counter.o
+ .debug_macro   0x000139cf       0x22 src/ASF/common/services/delay/sam/cycle_counter.o
+ .debug_macro   0x000139f1      0x55d src/ASF/common/services/serial/usart_serial.o
+ .debug_macro   0x00013f4e      0x4cf src/ASF/common/services/sleepmgr/sam/sleepmgr.o
+ .debug_macro   0x0001441d      0x5f2 src/ASF/common/services/usb/class/cdc/device/udi_cdc.o
+ .debug_macro   0x00014a0f       0x80 src/ASF/common/services/usb/class/cdc/device/udi_cdc.o
+ .debug_macro   0x00014a8f      0x2a6 src/ASF/common/services/usb/class/cdc/device/udi_cdc.o
+ .debug_macro   0x00014d35       0x10 src/ASF/common/services/usb/class/cdc/device/udi_cdc.o
+ .debug_macro   0x00014d45       0x1f src/ASF/common/services/usb/class/cdc/device/udi_cdc.o
+ .debug_macro   0x00014d64      0x546 src/ASF/common/services/usb/class/cdc/device/udi_cdc_desc.o
+ .debug_macro   0x000152aa      0x532 src/ASF/common/services/usb/udc/udc.o
+ .debug_macro   0x000157dc      0x4b3 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
+ .debug_macro   0x00015c8f       0x3f src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
+ .debug_macro   0x00015cce      0x4a9 src/ASF/common/utils/stdio/read.o
+ .debug_macro   0x00016177      0x4a9 src/ASF/common/utils/stdio/write.o
+ .debug_macro   0x00016620      0x568 src/ASF/sam/boards/arduino_due_x/init.o
+ .debug_macro   0x00016b88       0x16 src/ASF/sam/boards/arduino_due_x/init.o
+ .debug_macro   0x00016b9e       0x6a src/ASF/sam/boards/arduino_due_x/init.o
+ .debug_macro   0x00016c08      0x4c4 src/ASF/sam/drivers/pio/pio.o
+ .debug_macro   0x000170cc       0x8e src/ASF/sam/drivers/pio/pio.o
+ .debug_macro   0x0001715a      0x4c8 src/ASF/sam/drivers/pio/pio_handler.o
+ .debug_macro   0x00017622      0x4be src/ASF/sam/drivers/pmc/pmc.o
+ .debug_macro   0x00017ae0       0x58 src/ASF/sam/drivers/pmc/pmc.o
+ .debug_macro   0x00017b38      0x4de src/ASF/sam/drivers/pmc/sleep.o
+ .debug_macro   0x00018016      0x4b8 src/ASF/sam/drivers/uart/uart.o
+ .debug_macro   0x000184ce       0x16 src/ASF/sam/drivers/uart/uart.o
+ .debug_macro   0x000184e4      0x689 src/ASF/sam/drivers/uotghs/uotghs_device.o
+ .debug_macro   0x00018b6d      0x1c8 src/ASF/sam/drivers/uotghs/uotghs_device.o
+ .debug_macro   0x00018d35      0x5c7 src/ASF/sam/drivers/uotghs/uotghs_device.o
+ .debug_macro   0x000192fc      0x4f4 src/ASF/sam/drivers/usart/usart.o
+ .debug_macro   0x000197f0       0x28 src/ASF/sam/drivers/usart/usart.o
+ .debug_macro   0x00019818      0x4bd src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
+ .debug_macro   0x00019cd5      0x4cb src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
+ .debug_macro   0x0001a1a0      0x4cb src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
+ .debug_macro   0x0001a66b       0x26 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
+ .debug_macro   0x0001a691      0x129 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x0001a7ba       0x97 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x0001a851       0xef src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x0001a940       0x4a src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x0001a98a       0x52 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x0001a9dc       0x16 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x0001a9f2       0x10 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x0001aa02       0x41 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x0001aa43      0x120 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_macro   0x0001ab63      0x6ce src/ASF/thirdparty/wireless/addons/sio2host/uart/sio2host.o
+ .debug_macro   0x0001b231       0x40 src/ASF/thirdparty/wireless/addons/sio2host/uart/sio2host.o
+ .debug_macro   0x0001b271      0x6c3 src/main.o
 
 .debug_line     0x00000000    0x14efe
  .debug_line    0x00000000     0x11cf src/UltraServo/ultra_servo.o
@@ -8201,57 +8201,57 @@ OUTPUT(Objectify.elf elf32-littlearm)
  .debug_line    0x00012b00     0x1272 src/ASF/thirdparty/wireless/addons/sio2host/uart/sio2host.o
  .debug_line    0x00013d72     0x118c src/main.o
 
-.debug_str      0x00000000    0x6ff41
- .debug_str     0x00000000    0x62c29 src/UltraServo/ultra_servo.o
-                              0x63037 (size before relaxing)
- .debug_str     0x00062c29      0x235 src/ASF/common/services/clock/sam3x/sysclk.o
+.debug_str      0x00000000    0x6ff2b
+ .debug_str     0x00000000    0x62c13 src/UltraServo/ultra_servo.o
+                              0x63021 (size before relaxing)
+ .debug_str     0x00062c13      0x235 src/ASF/common/services/clock/sam3x/sysclk.o
                               0x5e460 (size before relaxing)
- .debug_str     0x00062e5e       0x35 src/ASF/common/services/delay/sam/cycle_counter.o
+ .debug_str     0x00062e48       0x35 src/ASF/common/services/delay/sam/cycle_counter.o
                               0x5a6c2 (size before relaxing)
- .debug_str     0x00062e93      0x36d src/ASF/common/services/serial/usart_serial.o
+ .debug_str     0x00062e7d      0x36d src/ASF/common/services/serial/usart_serial.o
                               0x5e614 (size before relaxing)
- .debug_str     0x00063200       0x97 src/ASF/common/services/sleepmgr/sam/sleepmgr.o
+ .debug_str     0x000631ea       0x97 src/ASF/common/services/sleepmgr/sam/sleepmgr.o
                               0x5a6da (size before relaxing)
- .debug_str     0x00063297     0x1cfd src/ASF/common/services/usb/class/cdc/device/udi_cdc.o
+ .debug_str     0x00063281     0x1cfd src/ASF/common/services/usb/class/cdc/device/udi_cdc.o
                               0x5faa2 (size before relaxing)
- .debug_str     0x00064f94      0x5e8 src/ASF/common/services/usb/class/cdc/device/udi_cdc_desc.o
+ .debug_str     0x00064f7e      0x5e8 src/ASF/common/services/usb/class/cdc/device/udi_cdc_desc.o
                               0x5e376 (size before relaxing)
- .debug_str     0x0006557c      0x69e src/ASF/common/services/usb/udc/udc.o
+ .debug_str     0x00065566      0x69e src/ASF/common/services/usb/udc/udc.o
                               0x5d393 (size before relaxing)
- .debug_str     0x00065c1a       0x65 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
+ .debug_str     0x00065c04       0x65 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
                               0x5a59e (size before relaxing)
- .debug_str     0x00065c7f       0x2c src/ASF/common/utils/stdio/read.o
+ .debug_str     0x00065c69       0x2c src/ASF/common/utils/stdio/read.o
                               0x5a54d (size before relaxing)
- .debug_str     0x00065cab       0x26 src/ASF/common/utils/stdio/write.o
+ .debug_str     0x00065c95       0x26 src/ASF/common/utils/stdio/write.o
                               0x5a54f (size before relaxing)
- .debug_str     0x00065cd1       0xcf src/ASF/sam/boards/arduino_due_x/init.o
+ .debug_str     0x00065cbb       0xcf src/ASF/sam/boards/arduino_due_x/init.o
                               0x5ec1a (size before relaxing)
- .debug_str     0x00065da0      0x432 src/ASF/sam/drivers/pio/pio.o
+ .debug_str     0x00065d8a      0x432 src/ASF/sam/drivers/pio/pio.o
                               0x5aef2 (size before relaxing)
- .debug_str     0x000661d2      0x442 src/ASF/sam/drivers/pio/pio_handler.o
+ .debug_str     0x000661bc      0x442 src/ASF/sam/drivers/pio/pio_handler.o
                               0x5af3a (size before relaxing)
- .debug_str     0x00066614      0x691 src/ASF/sam/drivers/pmc/pmc.o
+ .debug_str     0x000665fe      0x691 src/ASF/sam/drivers/pmc/pmc.o
                               0x5af68 (size before relaxing)
- .debug_str     0x00066ca5      0x189 src/ASF/sam/drivers/pmc/sleep.o
+ .debug_str     0x00066c8f      0x189 src/ASF/sam/drivers/pmc/sleep.o
                               0x5ddef (size before relaxing)
- .debug_str     0x00066e2e      0x2ae src/ASF/sam/drivers/uart/uart.o
+ .debug_str     0x00066e18      0x2ae src/ASF/sam/drivers/uart/uart.o
                               0x5a913 (size before relaxing)
- .debug_str     0x000670dc     0x7683 src/ASF/sam/drivers/uotghs/uotghs_device.o
+ .debug_str     0x000670c6     0x7683 src/ASF/sam/drivers/uotghs/uotghs_device.o
                               0x691ec (size before relaxing)
- .debug_str     0x0006e75f      0xa20 src/ASF/sam/drivers/usart/usart.o
+ .debug_str     0x0006e749      0xa20 src/ASF/sam/drivers/usart/usart.o
                               0x5b1c4 (size before relaxing)
- .debug_str     0x0006f17f       0x4d src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
+ .debug_str     0x0006f169       0x4d src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
                               0x5a567 (size before relaxing)
- .debug_str     0x0006f1cc       0xb2 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
+ .debug_str     0x0006f1b6       0xb2 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
                               0x5a63c (size before relaxing)
- .debug_str     0x0006f27e      0x1a9 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
+ .debug_str     0x0006f268      0x1a9 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
                               0x5a84f (size before relaxing)
- .debug_str     0x0006f427      0x73b src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_str     0x0006f411      0x73b src/ASF/sam/utils/syscalls/gcc/syscalls.o
                                0x4f1e (size before relaxing)
- .debug_str     0x0006fb62      0x360 src/ASF/thirdparty/wireless/addons/sio2host/uart/sio2host.o
+ .debug_str     0x0006fb4c      0x360 src/ASF/thirdparty/wireless/addons/sio2host/uart/sio2host.o
                               0x6359f (size before relaxing)
- .debug_str     0x0006fec2       0x7f src/main.o
-                              0x632de (size before relaxing)
+ .debug_str     0x0006feac       0x7f src/main.o
+                              0x632c8 (size before relaxing)
 
 .debug_frame    0x00000000     0x27ac
  .debug_frame   0x00000000       0xa0 src/UltraServo/ultra_servo.o

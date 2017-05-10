@@ -102,7 +102,7 @@ void servoControll(unsigned long dist)
 		
 		if(dist < (mappingDist*0.80) || dist > (mappingDist*1.20) || dist > 60)
 		{
-			printf(" %d / 5 readings divert to much from mapping distance\n", errors);
+			printf(" %d / 5 readings divert too much from mapping distance\n", errors);
 			errors++;
 			if(errors >5)
 			{

@@ -27,13 +27,13 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
  11 .debug_ranges 00000c78  00000000  00000000  0002ec3f  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_macro  0001b946  00000000  00000000  0002f8b7  2**0
+ 12 .debug_macro  0001b934  00000000  00000000  0002f8b7  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_line   00014efe  00000000  00000000  0004b1fd  2**0
+ 13 .debug_line   00014efe  00000000  00000000  0004b1eb  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_str    0006ff41  00000000  00000000  000600fb  2**0
+ 14 .debug_str    0006ff2b  00000000  00000000  000600e9  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_frame  000027ac  00000000  00000000  000d003c  2**2
+ 15 .debug_frame  000027ac  00000000  00000000  000d0014  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -570,7 +570,7 @@ void servoControll(unsigned long dist)
    803da:	f1b8 0f3c 	cmp.w	r8, #60	; 0x3c
    803de:	d914      	bls.n	8040a <servoControll+0x1aa>
 		{
-			printf(" %d / 5 readings divert to much from mapping distance\n", errors);
+			printf(" %d / 5 readings divert too much from mapping distance\n", errors);
    803e0:	4c35      	ldr	r4, [pc, #212]	; (804b8 <servoControll+0x258>)
    803e2:	4836      	ldr	r0, [pc, #216]	; (804bc <servoControll+0x25c>)
    803e4:	7821      	ldrb	r1, [r4, #0]
@@ -587,7 +587,7 @@ void servoControll(unsigned long dist)
 		
 		if(dist < (mappingDist*0.80) || dist > (mappingDist*1.20) || dist > 60)
 		{
-			printf(" %d / 5 readings divert to much from mapping distance\n", errors);
+			printf(" %d / 5 readings divert too much from mapping distance\n", errors);
 			errors++;
    803f4:	7023      	strb	r3, [r4, #0]
    803f6:	e01d      	b.n	80434 <servoControll+0x1d4>
@@ -15252,14 +15252,14 @@ int main (void)
    86578:	73676e69 	.word	0x73676e69
    8657c:	76696420 	.word	0x76696420
    86580:	20747265 	.word	0x20747265
-   86584:	6d206f74 	.word	0x6d206f74
-   86588:	20686375 	.word	0x20686375
-   8658c:	6d6f7266 	.word	0x6d6f7266
-   86590:	70616d20 	.word	0x70616d20
-   86594:	676e6970 	.word	0x676e6970
-   86598:	73696420 	.word	0x73696420
-   8659c:	636e6174 	.word	0x636e6174
-   865a0:	00000a65 	.word	0x00000a65
+   86584:	206f6f74 	.word	0x206f6f74
+   86588:	6863756d 	.word	0x6863756d
+   8658c:	6f726620 	.word	0x6f726620
+   86590:	616d206d 	.word	0x616d206d
+   86594:	6e697070 	.word	0x6e697070
+   86598:	69642067 	.word	0x69642067
+   8659c:	6e617473 	.word	0x6e617473
+   865a0:	000a6563 	.word	0x000a6563
    865a4:	656a624f 	.word	0x656a624f
    865a8:	6c207463 	.word	0x6c207463
    865ac:	3b74736f 	.word	0x3b74736f
