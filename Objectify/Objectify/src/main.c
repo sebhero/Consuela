@@ -160,7 +160,13 @@ int main (void)
 	//testingUltraSound();
 	
 	//test rfid
-	testingRFID();
+	//testingRFID();
+	
+	while(1)
+	{
+		
+		puts("hello world");
+	}
 	
 	
 
