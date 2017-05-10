@@ -12,6 +12,8 @@
 /* Initialization of extern variables goes only with definition */
  int counterA = 0;
  int counterB = 0;
+ int totA = 0;
+ int totB = 0;
  
 
 void pulseCounter_handlerA(const uint32_t id, const uint32_t index){
@@ -26,7 +28,6 @@ void pulseCounter_handlerB(const uint32_t id, const uint32_t index){
 	if (ioport_get_pin_level(B))
 	{
 		counterB++;
-		
 	}
 	
 }

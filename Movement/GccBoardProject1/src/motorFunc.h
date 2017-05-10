@@ -15,11 +15,11 @@
 #define baseSpeed 1700
 
 //Tested that this 1713 on the left wheel gives a kinda straight line when the other motor is 1750 (forward driving)
-#define baseSpeedLeft 1700
+#define baseSpeedLeft 1660
 
-#define reverseBaseSpeed 1250
+#define reverseBaseSpeed 1280
 #define motorSwitch 1100
-#define timeOut 2000
+#define timeOut 600
 
 
 
@@ -32,7 +32,8 @@ void rotate(void);
 void stop(void);
 void turnLeft(void);
 void turnRight(void);
-void rotateByDegrees(uint8_t degree, uint16_t speed);
+void rotateLeftByDegrees(int degree);
+void rotateRightByDegrees(int degree);
 
 
 

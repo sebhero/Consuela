@@ -22,8 +22,5 @@ void pulseCounter_configA(uint32_t ul_id, Pio *p_pio, const uint32_t ul_mask);
 void pulseCounter_handlerB(const uint32_t id, const uint32_t index);
 void pulseCounter_configB(uint32_t ul_id, Pio *p_pio, const uint32_t ul_mask);
 
- int getA();
-  int getB();
-
 
 #endif /* PULSECOUNTERHANDLER_H_ */
