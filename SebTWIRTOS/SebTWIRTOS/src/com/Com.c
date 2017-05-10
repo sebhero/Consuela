@@ -20,7 +20,7 @@ void initTwi(void){
 	twi_master_setup(TWI1, &opt);
 }
 
-void sendArmCmd(uint8_t cmd)
+uint8_t sendArmCmd(uint8_t cmd)
 {
 		twi_package_t packet = {
 
@@ -35,19 +35,21 @@ void sendArmCmd(uint8_t cmd)
 
 		if(twi_probe(TWI1,SLAVE_ADDR)==TWI_SUCCESS)
 		{
-			puts("Write to slave");
+			//puts("Write to slave");
 			while (twi_master_write(TWI1, &packet) != TWI_SUCCESS);
-			delay_ms(100);
-			puts("Write to slave done");
+			//delay_ms(100);
+			//puts("Write to slave done");
+			return 1;
 		}
 		else{
-			puts("error on write to slave");
+			//puts("error on write to slave");
+			return 0;
 		}
 }
 
 //Send data to Arm with TWI
 //data holds the data, dataLength is how many bytes the data is.
-void sendArm(uint8_t* data,int dataLength)
+int sendArm(uint8_t* data,int dataLength)
 {
 
 	twi_package_t packet = {
@@ -63,13 +65,15 @@ void sendArm(uint8_t* data,int dataLength)
 
 	if(twi_probe(TWI1,SLAVE_ADDR)==TWI_SUCCESS)
 	{
-		puts("Write to slave");
+		//puts("Write to slave");
 		while (twi_master_write(TWI1, &packet) != TWI_SUCCESS);
-		delay_ms(100);
-		puts("Write to slave done");
+		//delay_ms(100);
+		//puts("Write to slave done");
+		return 1;
 	}
 	else{
-		puts("error on write to slave");
+		//puts("error on write to slave");
+		return 0;
 	}
 }
 
@@ -97,13 +101,15 @@ uint8_t* reciveFromArm(uint8_t packageSize)
 	
 	if(twi_probe(TWI1,SLAVE_ADDR)==TWI_SUCCESS)
 	{
-		puts("Read from slave");
+		//puts("Read from slave");
 		// Perform a multi-byte read access then check the result.
 		while (twi_master_read(TWI1, &pkt_rcv) != TWI_SUCCESS);
-		delay_ms(10);
-		puts("Done reading");
+		return package;
+		//delay_ms(10);
+		//puts("Done reading");
 		//printf("got: %s\n",*packet_received.buffer);
 		//int theSize = sizeof(data_received)/sizeof(data_received[0]);//figure out size
+		/*
 		for (xx;xx<packageSize;xx++)
 		{
 			printf("got DATA:%x\n",package[xx]);
@@ -116,10 +122,13 @@ uint8_t* reciveFromArm(uint8_t packageSize)
 		}
 		puts("");
 		delay_ms(100);
+		*/
+		
 		
 	}
 	else{
-		puts("error on write to slave");
+		//puts("error on write to slave");
+		return 0;
 	}
 	
 	return package;
