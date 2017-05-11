@@ -10,6 +10,8 @@ src\ASF\sam\drivers\pwm\pwm.c
 
 src\ASF\sam\drivers\tc\tc.c
 
+src\ASF\sam\drivers\twi\twi.c
+
 src\ASF\sam\drivers\usart\usart.c
 
 src\ASF\thirdparty\freertos\freertos-7.3.0\source\FreeRTOS_CLI.c
@@ -33,6 +35,8 @@ src\ASF\common\utils\stdio\write.c
 src\ASF\common\services\serial\usart_serial.c
 
 src\ASF\sam\drivers\uart\uart.c
+
+src\Com.c
 
 src\communication\communication.c
 

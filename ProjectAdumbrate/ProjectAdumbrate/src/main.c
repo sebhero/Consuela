@@ -10,6 +10,7 @@
 #include <inttypes.h>
 #include "Hjulreglering.h"
 #include <queue.h>
+#include "Com.h"
 
 #include "communication/communication.h"
 
@@ -18,9 +19,11 @@ xTaskHandle *pxTaskLocate;
 xTaskHandle *pxTaskDump;
 xTaskHandle *pxTaskPickup;
 xTaskHandle *pxTaskController;
+xTaskHandle *pxTaskTwi;
 
 xQueueHandle xObjectQueue;
 xSemaphoreHandle xCheckSemaphore;
+xSemaphoreHandle xSemaphoreTWI;
 
 
 #define pulseh_ch 0
@@ -44,6 +47,10 @@ void vGotoTask( void *pvParam) {
 		vTaskDelay(pdMSTOTICKS(100));
 	}
 	
+	printf("\nGiving semaphore");
+	xSemaphoreGive(xCheckSemaphore);
+	
+	/*
 	pulseCounter_configA(ID_PIOC, PIOC, PIO_PC28);
 	pulseCounter_configB(ID_PIOC, PIOC, PIO_PC23);
 
@@ -63,6 +70,7 @@ void vGotoTask( void *pvParam) {
 	degreesToPos = angleToPos();
 	
 	printf("\nRotating %d", degreesToPos);
+	printf("\n");
 	
 	if (degreesToPos < 0){
 		degreesToPos = abs(degreesToPos);
@@ -88,7 +96,7 @@ void vGotoTask( void *pvParam) {
 	
 	printf("\nGiving semaphore");
 	xSemaphoreGive(xCheckSemaphore);
-	
+	*/
 	 /*
 	uint32_t objects;
 	
@@ -180,16 +188,39 @@ void vDumpTask(void *pvParam) {
 	vTaskDelete(NULL);
 }
 
+void vTwiTask(void *pvParameter){
+	uint8_t dum[3];
+	dum[0] = TWI_CMD_FROM_ARM_ID;
+	dum[1] = 0;
+	dum[2] = 0;
+	sendArm(dum, 3);
+	reciveFromArm(3);
+	printf("TESTING TWI!");
+	xSemaphoreGive(xSemaphoreTWI);
+	vTaskDelete(NULL);
+}
+
 void vController(void *pvParam) {
 	uint32_t objectID[] = {0, 1, 2, 3};	
 	for(uint32_t i = 0; i < 4; i++){
 		xTaskCreate(vGotoTask, "GotoObject", 1000, NULL, 1, NULL);
 		xQueueSendToBack(xObjectQueue, (void *) &objectID[i], 0);
+		vTaskDelay(pdMSTOTICKS(100));
 		if (xSemaphoreTake(xCheckSemaphore, pdMSTOTICKS(10000)) == pdTRUE) //wait in Blocked state for semaphore max 10 s
 		{
 			printf("\nSemaphore has been received");
 		}
+		vTaskDelay(pdMSTOTICKS(100));
+		xTaskCreate(vTwiTask, "TWI", 1000, NULL, 1, pxTaskTwi);
+		if(xSemaphoreTake(xSemaphoreTWI, pdMSTOTICKS(10000)) == pdTRUE){
+			printf("\nTWI was successful!");
+		}
 	}
+	printf("\n");
+	printf("\n");
+	printf("\nDRIVING AND TWI FINISHED");
+	
+	
 	
 	/*
 	xSemaphoreHandle xSemaphore;
@@ -271,10 +302,11 @@ int main (void)
 	sysclk_init();
 	board_init();
 	configure_console();
-
+	initTwi();
 	xObjectQueue = xQueueCreate(4, sizeof(uint32_t));
 	xTaskCreate(vController, "Controller", 1000, NULL, 2, pxTaskController);
 	vSemaphoreCreateBinary(xCheckSemaphore);
+	vSemaphoreCreateBinary(xSemaphoreTWI);
 	/*
 	xTaskCreate(vWheelRegulating, "WheelRegulating", 1000, NULL, 1, pxWheelRegulatingHandle);
 	xTaskCreate(vTask2, "Task 2", 1000, NULL, 1, pxTask2Handle);
