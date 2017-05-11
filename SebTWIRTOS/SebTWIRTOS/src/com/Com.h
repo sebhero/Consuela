@@ -65,15 +65,15 @@ void initTwi(void);
 
 //Send data to Arm with TWI
 //data holds the data, dataLength is how many bytes the data is.
-void sendArm(uint8_t* data,int dataLength);
-void sendArmCmd(uint8_t cmd);
+uint8_t sendArm(uint8_t* data,int dataLength);
+uint8_t sendArmCmd(uint8_t cmd);
 
 
 //Recive data from ARM with TWI
 //recives and prints the data out on Uart.
 //packageSize how many bytes expected to recive
 //returns the data recived as array.
-uint8_t* reciveFromArm(uint8_t packageSize);
-
+//uint8_t* reciveFromArm(uint8_t packageSize);
+uint8_t reciveFromArm(uint8_t* package,uint8_t packageSize);
 
 #endif /* COM_H_ */

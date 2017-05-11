@@ -49,7 +49,7 @@ uint8_t sendArmCmd(uint8_t cmd)
 
 //Send data to Arm with TWI
 //data holds the data, dataLength is how many bytes the data is.
-int sendArm(uint8_t* data,int dataLength)
+uint8_t sendArm(uint8_t* data,int dataLength)
 {
 
 	twi_package_t packet = {
@@ -81,7 +81,7 @@ int sendArm(uint8_t* data,int dataLength)
 //recives and prints the data out on Uart.
 //packageSize how many bytes expected to recive
 //returns the data recived as array.
-uint8_t* reciveFromArm(uint8_t packageSize)
+uint8_t reciveFromArm(uint8_t* recv,uint8_t packageSize)
 {
 	int xx=0;
 	//setup reciving package
@@ -104,26 +104,31 @@ uint8_t* reciveFromArm(uint8_t packageSize)
 		//puts("Read from slave");
 		// Perform a multi-byte read access then check the result.
 		while (twi_master_read(TWI1, &pkt_rcv) != TWI_SUCCESS);
-		return package;
+		*(recv)=package[0];
+		*(recv+1)=package[1];
+		*(recv+2)=package[2];
+		
 		//delay_ms(10);
 		//puts("Done reading");
 		//printf("got: %s\n",*packet_received.buffer);
 		//int theSize = sizeof(data_received)/sizeof(data_received[0]);//figure out size
+		
+// 		for (xx;xx<packageSize;xx++)
+// 		{
+// 			//printf("got DATA:%x\n",package[xx]);
+// 			printf("got int:%d\n",package[xx]);
+// 			//printf("got char:%c\n",package[xx]);
+// 			if(package[xx]==120)
+// 			{
+// 				puts("got x from arduino NO DATA");
+// 			}
+// 		}
 		/*
-		for (xx;xx<packageSize;xx++)
-		{
-			printf("got DATA:%x\n",package[xx]);
-			printf("got int:%d\n",package[xx]);
-			printf("got char:%c\n",package[xx]);
-			if(package[xx]==120)
-			{
-				puts("got x from arduino NO DATA");
-			}
-		}
+		
 		puts("");
 		delay_ms(100);
 		*/
-		
+		return 1;
 		
 	}
 	else{
@@ -131,7 +136,7 @@ uint8_t* reciveFromArm(uint8_t packageSize)
 		return 0;
 	}
 	
-	return package;
+	//return package;
 	
 }
 
