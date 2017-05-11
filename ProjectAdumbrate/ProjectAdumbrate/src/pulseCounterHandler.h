@@ -10,8 +10,8 @@
 #ifndef PULSECOUNTERHANDLER_H_
 #define PULSECOUNTERHANDLER_H_
 
-extern int counterA; /* Declaration of the variable */
-extern int counterB;
+extern uint32_t counterA; /* Declaration of the variable */
+extern uint32_t counterB;
 
 #define A IOPORT_CREATE_PIN(PIOC, 28) //digital pin 3
 #define B IOPORT_CREATE_PIN(PIOC, 23) //digital pin 7
