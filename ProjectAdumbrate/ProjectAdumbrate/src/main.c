@@ -24,6 +24,7 @@ xTaskHandle *pxTaskTwi;
 xQueueHandle xObjectQueue;
 xSemaphoreHandle xCheckSemaphore;
 xSemaphoreHandle xSemaphoreTWI;
+#define D7  IOPORT_CREATE_PIN(PIOC, 23)
 
 
 #define pulseh_ch 0
@@ -35,10 +36,21 @@ typedef struct {
 	xSemaphoreHandle *pxSemaphore;
 } gototask_t;
 
-struct Status{
-	int taskStatus;
+enum state{
+	INITIALIZE_ARM,
+	POSITION_ONE,
+	POSITION_TWO,
+	POSITION_THREE,
+	POSITION_FOUR,
+	LOCATE,
+	PICKING_UP,
+	DROP_OFF,
 };
-struct Status *pxStatus;
+
+typedef enum state state_t;
+state_t current_state;
+state_t next_state;
+
 
 void vGotoTask( void *pvParam) {
 	uint32_t receivedValue;
@@ -193,15 +205,36 @@ void vTwiTask(void *pvParameter){
 	dum[0] = TWI_CMD_FROM_ARM_ID;
 	dum[1] = 0;
 	dum[2] = 0;
-	sendArm(dum, 3);
-	reciveFromArm(3);
-	printf("TESTING TWI!");
+	switch ()
+	{
+	case :
+		break;
+	}
+	uint8_t result = sendArm(dum, 3);
+	if (result)
+	{
+		//puts("Send successful");
+	}else{
+		//puts("Fail");
+	}
+	vTaskDelay(pdMSTOTICKS(40));
+	uint8_t rec[3] = {0};
+	result = reciveFromArm(rec,3);
+	if (result)
+	{
+		printf("Receive successful: %u, %u, %u\n", rec[0], rec[1], rec[2]);
+		//vTaskDelay(pdMSTOTICKS(10));
+	}else{
+		puts("Receive failed");
+		//vTaskDelay(pdMSTOTICKS(10));
+	}
 	xSemaphoreGive(xSemaphoreTWI);
 	vTaskDelete(NULL);
 }
 
 void vController(void *pvParam) {
 	uint32_t objectID[] = {0, 1, 2, 3};	
+	/*
 	for(uint32_t i = 0; i < 4; i++){
 		xTaskCreate(vGotoTask, "GotoObject", 1000, NULL, 1, NULL);
 		xQueueSendToBack(xObjectQueue, (void *) &objectID[i], 0);
@@ -210,18 +243,77 @@ void vController(void *pvParam) {
 		{
 			printf("\nSemaphore has been received");
 		}
-		vTaskDelay(pdMSTOTICKS(100));
+		vTaskDelay(pdMSTOTICKS(300));
 		xTaskCreate(vTwiTask, "TWI", 1000, NULL, 1, pxTaskTwi);
 		if(xSemaphoreTake(xSemaphoreTWI, pdMSTOTICKS(10000)) == pdTRUE){
-			printf("\nTWI was successful!");
 		}
 	}
 	printf("\n");
 	printf("\n");
 	printf("\nDRIVING AND TWI FINISHED");
-	
-	
-	
+	*/
+	while (1)
+	{
+		switch (current_state)
+		{
+			case INITIALIZE_ARM:
+			     //get arm info
+			     //get object pos info 1-4 (with goal box)
+				 ioport_set_pin_level(D7, 1);
+			     xTaskCreate(vTwiTask, "TWI", 1000, NULL, 1, pxTaskTwi);
+			     vTaskDelay(pdMSTOTICKS(300));
+			     if(xSemaphoreTake(xSemaphoreTWI, pdMSTOTICKS(10000)) == pdTRUE){
+			     }
+				 ioport_set_pin_level(D7, 0);
+			     next_state = POSITION_ONE;
+			break;
+			case POSITION_ONE:
+			     xTaskCreate(vGotoTask, "GotoObject", 1000, NULL, 1, NULL);
+			     xQueueSendToBack(xObjectQueue, (void *) &objectID[1], 0);
+			     vTaskDelay(pdMSTOTICKS(100));
+			     if (xSemaphoreTake(xCheckSemaphore, pdMSTOTICKS(10000)) == pdTRUE) //wait in Blocked state for semaphore max 10 s
+			     {
+				     printf("\nSemaphore has been received");
+			     }
+				 next_state = LOCATE;
+			break;
+			case POSITION_TWO:
+				xTaskCreate(vGotoTask, "GotoObject", 1000, NULL, 1, NULL);
+				xQueueSendToBack(xObjectQueue, (void *) &objectID[2], 0);
+				vTaskDelay(pdMSTOTICKS(100));
+				if (xSemaphoreTake(xCheckSemaphore, pdMSTOTICKS(10000)) == pdTRUE) //wait in Blocked state for semaphore max 10 s
+				{
+					printf("\nSemaphore has been received");
+				}
+				next_state = LOCATE;
+			case POSITION_THREE:
+				xTaskCreate(vGotoTask, "GotoObject", 1000, NULL, 1, NULL);
+				xQueueSendToBack(xObjectQueue, (void *) &objectID[3], 0);
+				vTaskDelay(pdMSTOTICKS(100));
+				if (xSemaphoreTake(xCheckSemaphore, pdMSTOTICKS(10000)) == pdTRUE) //wait in Blocked state for semaphore max 10 s
+				{
+					printf("\nSemaphore has been received");
+				}
+				next_state = LOCATE;
+			case POSITION_FOUR:
+				xTaskCreate(vGotoTask, "GotoObject", 1000, NULL, 1, NULL);
+				xQueueSendToBack(xObjectQueue, (void *) &objectID[0], 0);
+				vTaskDelay(pdMSTOTICKS(100));
+				if (xSemaphoreTake(xCheckSemaphore, pdMSTOTICKS(10000)) == pdTRUE) //wait in Blocked state for semaphore max 10 s
+				{
+					printf("\nSemaphore has been received");
+				}
+				next_state = DROP_OFF;
+			case LOCATE:
+		        vTaskDelete(NULL);    
+			case PICKING_UP:
+				vTaskDelete(NULL);
+			case DROP_OFF:
+				vTaskDelete(NULL); 
+		}
+		current_state = next_state; 
+	}
+
 	/*
 	xSemaphoreHandle xSemaphore;
 	vSemaphoreCreateBinary( xSemaphore );
@@ -303,6 +395,9 @@ int main (void)
 	board_init();
 	configure_console();
 	initTwi();
+	ioport_set_pin_dir(D7, IOPORT_DIR_OUTPUT);
+	current_state = INITIALIZE_ARM;
+	next_state = INITIALIZE_ARM;
 	xObjectQueue = xQueueCreate(4, sizeof(uint32_t));
 	xTaskCreate(vController, "Controller", 1000, NULL, 2, pxTaskController);
 	vSemaphoreCreateBinary(xCheckSemaphore);
