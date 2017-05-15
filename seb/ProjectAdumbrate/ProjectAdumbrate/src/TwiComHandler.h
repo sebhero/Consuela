@@ -94,7 +94,13 @@ typedef enum _object_t {
 	GLASS = 4
 } Object;
 
-
+typedef enum _twi_cmd_nav_t{
+	XY1=0X50,
+	XY2=0X51,
+	SOCKETXY=0X52,
+	SQUAREXY=0X53,
+	GLASSXY=0X54
+} TwiCmdNav;
 
 
 #endif /* TWICOMHANDLER_H_ */
