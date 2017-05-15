@@ -26,8 +26,8 @@
 #include <inttypes.h>
 
 void pulse(uint16_t motorSpeed);
-void forwardDrive(void);
-void reverseDrive(void);
+void forwardDrive(int);
+void reverseDrive(int);
 void rotate(void);
 void stop(void);
 void turnLeft(void);
