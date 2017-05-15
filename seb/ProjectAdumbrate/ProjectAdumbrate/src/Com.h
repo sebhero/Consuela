@@ -60,6 +60,8 @@ uint8_t twi_dropoffStart(void);
 //get the dropoff status
 DropoffStatus twi_dropoffGetStatus(void);
 
+//send command to nav
+void twi_sendNavCmd(void);
 
 
 #endif /* COM_H_ */

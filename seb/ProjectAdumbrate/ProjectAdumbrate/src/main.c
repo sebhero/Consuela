@@ -20,10 +20,12 @@ xTaskHandle *pxTaskDump;
 xTaskHandle *pxTaskPickup;
 xTaskHandle *pxTaskController;
 xTaskHandle *pxTaskTwi;
+xTaskHandle *pxTaskTwiNav;
 
 xQueueHandle xObjectQueue;
 xSemaphoreHandle xCheckSemaphore;
 xSemaphoreHandle xSemaphoreTWI;
+xSemaphoreHandle xSemaphoreTWINav;
 #define D7  IOPORT_CREATE_PIN(PIOC, 23)
 
 
@@ -45,6 +47,7 @@ enum state{
 	LOCATE,
 	PICKING_UP,
 	DROP_OFF,
+	NAV_COM
 };
 
 typedef enum state state_t;
@@ -282,18 +285,18 @@ void vTwiTask(void *pvParameter){
 //	twi_testCmds();
 
 //	test to cmds send 2 slaves
-	twi_test2slaves();
+//	twi_test2slaves();
 
 // 	puts("REQ arm info");
 // 	vTaskDelay(pdMSTOTICKS(20));
 // 	
 // 	//test get armInfo
-//  	arminfo_t armInfo = twi_getArmInfo();
-// 	if(armInfo.hasData)
-//  	{
-// 		printf("armInfo: boxA: %d boxD: %d objA %d objD %d col: %d",armInfo.boxAngle,armInfo.boxDistance, armInfo.objectAngle, armInfo.objectDistance, armInfo.collectAll);
-//  		vTaskDelay(pdMSTOTICKS(20));
-// 	 }
+ 	arminfo_t armInfo = twi_getArmInfo();
+	if(armInfo.hasData)
+ 	{
+		printf("armInfo: boxA: %d boxD: %d objA %d objD %d col: %d",armInfo.boxAngle,armInfo.boxDistance, armInfo.objectAngle, armInfo.objectDistance, armInfo.collectAll);
+ 		vTaskDelay(pdMSTOTICKS(20));
+	 }
 	
 	//test pick cmds start and status
 //	twi_test_pickup();
@@ -302,6 +305,20 @@ void vTwiTask(void *pvParameter){
 //	twi_test_dropoff();
 	
 	xSemaphoreGive(xSemaphoreTWI);
+	vTaskDelete(NULL);
+}
+
+
+void vTaskTwiNav(void *pvParameter){
+	puts("NAV TASK Started");
+	vTaskDelay(pdMSTOTICKS(20));
+	//maybe not needed
+	twi_changeSlave(SLAVE_ADDR_NAV);
+	//do send to NAV
+	void twi_sendNavCmd();
+	
+	
+	xSemaphoreGive(xSemaphoreTWINav);
 	vTaskDelete(NULL);
 }
 
@@ -321,7 +338,16 @@ void vController(void *pvParam) {
 			     if(xSemaphoreTake(xSemaphoreTWI, pdMSTOTICKS(10000)) == pdTRUE){
 			     }
 				 vTaskDelay(pdMSTOTICKS(100));
-			     next_state = POSITION_ONE;
+			     next_state = NAV_COM;
+			break;
+			case NAV_COM:
+			//handle nav communication							     
+				xTaskCreate(vTaskTwiNav, "TWI NAV", 1000, NULL, 1, pxTaskTwiNav);
+				vTaskDelay(pdMSTOTICKS(300));
+				if(xSemaphoreTake(xSemaphoreTWINav, pdMSTOTICKS(10000)) == pdTRUE){
+				}
+				vTaskDelay(pdMSTOTICKS(100));
+				next_state = INITIALIZE_ARM;
 			break;
 			case POSITION_ONE:
 			     xTaskCreate(vGotoTask, "GotoObject", 1000, NULL, 1, NULL);
@@ -459,6 +485,7 @@ int main (void)
 	xTaskCreate(vController, "Controller", 1000, NULL, 2, pxTaskController);
 	vSemaphoreCreateBinary(xCheckSemaphore);
 	vSemaphoreCreateBinary(xSemaphoreTWI);
+	vSemaphoreCreateBinary(xSemaphoreTWINav);
 	/*
 	xTaskCreate(vWheelRegulating, "WheelRegulating", 1000, NULL, 1, pxWheelRegulatingHandle);
 	xTaskCreate(vTask2, "Task 2", 1000, NULL, 1, pxTask2Handle);
@@ -472,3 +499,4 @@ int main (void)
 	}
 	
 }
+

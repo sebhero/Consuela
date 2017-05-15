@@ -246,8 +246,10 @@ arminfo_t twi_getArmInfo(){
 //change slave. with new slave address
 void twi_changeSlave(uint32_t slave_address)
 {
+	twi_master_disable(TWI_PORT);
 	SLAVE_ADDR=slave_address;
 	twi_set_slave_addr(TWI_PORT,SLAVE_ADDR);
+	twi_master_enable(TWI_PORT);
 
 }
 
@@ -374,4 +376,9 @@ PickupStatus twi_pickupGetMasterStatus(void)
 uint8_t twi_pickupGetMoveCm(void)
 {
 	return twi_move_cm;
+}
+
+void twi_sendNavCmd(void)
+{
+	
 }
