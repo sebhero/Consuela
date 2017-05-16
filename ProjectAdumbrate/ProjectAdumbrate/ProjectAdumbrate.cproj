@@ -562,6 +562,12 @@
     <Folder Include="src\communication" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\ultra_servo.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ultra_servo.h">
+      <SubType>compile</SubType>
+    </Compile>
     <None Include="src\ASF\common\services\delay\delay.h">
       <SubType>compile</SubType>
     </None>
