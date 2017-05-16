@@ -214,6 +214,7 @@ void twi_test_pickup(void)
 				puts("PICKUP_STATUS.PICKUP_BACKWARD:");
 				printf("back: %u\n",twi_pickupGetMoveCm());
 				//should be handle by driving.. to tell that its done
+				
 				twi_pickupSetMasterStatus(PICKUP_DONE_DRIVE);
 			break;
 			case PICKUP_DONE:
@@ -299,7 +300,7 @@ void vTwiTask(void *pvParameter){
 	 }
 	
 	//test pick cmds start and status
-//	twi_test_pickup();
+	twi_test_pickup();
 	
 	//test dropoff cmd start and status
 //	twi_test_dropoff();

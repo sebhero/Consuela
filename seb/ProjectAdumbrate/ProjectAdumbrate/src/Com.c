@@ -378,7 +378,42 @@ uint8_t twi_pickupGetMoveCm(void)
 	return twi_move_cm;
 }
 
-void twi_sendNavCmd(void)
+void twi_sendNavCmd(TwiCmdNav cmd )
 {
-	
+	twi_package_t packet = {
+
+		.addr[0]      = 0, // TWI slave memory address data MSB
+		.addr[1]      = 0,// TWI slave memory address data LSB
+		.addr_length  = 0, //sizeof (uint16_t),    // TWI slave memory address data size
+		.chip         = SLAVE_ADDR_NAV,      // TWI slave bus address
+		.buffer       = cmd, // transfer data source buffer
+		.length       = 1   // transfer data size (bytes)
+	};
+
+
+	if(twi_probe(TWI_PORT,SLAVE_ADDR_NAV)==TWI_SUCCESS)
+	{
+		while (twi_master_write(TWI_PORT, &packet) != TWI_SUCCESS);
+		return 1;
+	}
+	else{
+		return 0;
+	}
+}
+
+//get info from Nav
+uint8_t* twi_reciveNavCmd(void){
+	uint8_t data[5]={0};
+		twi_package_t pkt_rcv = {
+
+			.addr[0]      = 0, // TWI slave memory address data MSB
+			.addr[1]      = 0,// TWI slave memory address data LSB
+			.addr_length  = 0, //sizeof (uint16_t),    // TWI slave memory address data size
+			.chip         = SLAVE_ADDR_NAV,      // TWI slave bus address
+			.buffer       = cmd, // transfer data source buffer
+			.length       = 5  // transfer data size (bytes)
+		};
+		
+		while (twi_master_read(TWI_PORT, &pkt_rcv) != TWI_SUCCESS);
+		return &data;
 }
