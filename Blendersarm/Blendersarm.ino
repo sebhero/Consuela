@@ -1,6 +1,5 @@
 //
 // Created by Sebastian Boreback on 2017-05-12.
-// Edited and modified by: Viktor Malmgren and Robin Johnsson
 //
 
 #include <Wire.h>
@@ -84,6 +83,7 @@ int pwmPin = 3;
 int breakTop = 4;
 int breakBot = 7;
 int onoffPin = 2;
+
 
 void handleReadCmd() {
 
@@ -211,80 +211,58 @@ void receiveEvent(int howMany) {
   //end of receive
 }
 
+
 /*
-  Moves the arm upwards until the switch is pressed
+   Starts the vacuum motor
 */
+void startMotor() {
+  digitalWrite(onoffPin, HIGH);
+  Serial.println("START SUG");
+}
+/*
+   Stops the vacuum motor
+*/
+void stopMotor() {
+  digitalWrite(onoffPin, LOW);
+  Serial.print("STOPP SUG");
+}
+
+void down() {
+  while (digitalRead(breakBot)) {
+    digitalWrite(directionPin, HIGH);
+    analogWrite(pwmPin, 75);
+    Serial.println("NED");
+  }
+  stopMovement();
+}
+
 void up() {
   while (digitalRead(breakTop)) {
+    Serial.println("UPP");
     digitalWrite(directionPin, LOW);
     analogWrite(pwmPin, 130);
   }
   stopMovement();
 }
 /*
- * Speicial function that only should be used when the glass in the current object
- * Moves the arm upwards for a little bit so that the glass an be grabbed
-*/
-void upGlass() {
-  digitalWrite(directionPin, LOW);
-  analogWrite(pwmPin, 130);
-  delay(150);
-  stopMovement();
-}
-/*
-  Moves the arm down until the switch is pressed
-*/
-void down() {
-  while (digitalRead(breakBot)) {
-    digitalWrite(directionPin, HIGH);
-    analogWrite(pwmPin, 75);
-  }
-  stopMovement();
-}
-
-/*
-  Moves the arm down then stops it to fling the carried object off
-*/
-void downDrop() {
-  digitalWrite(directionPin, HIGH);
-  analogWrite(pwmPin, 100);
-  delay(75);
-  stopMovement();
-  stopsugMotor();
-}
-
-/*
- * Starts the vacuum motor
- */
-void startMotor() {
-  digitalWrite(onoffPin, HIGH);
-}
-/*
- * Stops the vacuum motor
- */
-void stopMotor() {
-  digitalWrite(onoffPin, LOW);
-}
-/*
  * Stops the movement of the arm
  */
 void stopMovement() {
   analogWrite(pwmPin, 0);
+  Serial.println("STOP MOVEMENT");
 }
-
 void setup() {
   Wire.begin(2);                // join i2c bus with address #2
   Wire.onRequest(requestEvent); // register event
   Wire.onReceive(receiveEvent); // register event
   Serial.begin(9600);           // start serial for output
 
+  run = 1;
+
   pinMode(directionPin, OUTPUT);
   pinMode(breakBot, INPUT_PULLUP);
   pinMode(breakTop, INPUT_PULLUP);
   pinMode(onoffPin, OUTPUT);
-
-
-  run = 1;
 
   theArm.boxDistance = 30;//cm to goalbox
   theArm.boxAngle = 20;//infront angle
@@ -306,47 +284,98 @@ void loop() {
     // Serial.println("IS running");
     switch (currentState) {
 
+      //WHEN PLATTFORM IS MOVING THIS CODE IS RUNNING
       case ARM_IDLE:
         Serial.println("is idle");
         delay(300);
         //nextState = ARM_IDLE;
         break;
+      //PUT CODE HERE FOR PICKING UP OBJECTS
       case ARM_PICKUP:
-        pickupStatus = PICKUP_RUNNING;
-        
-        down();
-        startMotor();
-        
-        if(){//Needs a check to see if its the glass
-          upGlass();
-          }else{
-            delay(5000);
-            }
-        delay(5000);
-        up();
+        Serial.println("PICKUP");
 
+        //for TWI communicatiion to plattform
+        // set pickupStatus
+        // this will tell plattform about status of arm.
+
+        //when doing pickup
+        pickupStatus = PICKUP_RUNNING;
+
+        down();
+        //uncomment
+        //startMotor();
+        delay(3000);
+        up();
+        delay(3000);
+        
+        //if need to move backwards
+        //pickupStatus = PICKUP_BACKWARD;
+
+        //if need to move forward
+        //pickupStatus = PICKUP_FORWARD;
+
+        //when plattform is done driving
+        //we recive PICKUP_DONE_DRIVE
+        //then
+        //if(pickupStatus ==PICKUP_DONE_DRIVE)
+        //{
+        //then these are set to 1
+        //to indicate movement.
+        //          uint8_t doneBack = 1;
+        //          uint8_t doneFrwd = 1;
+        //}
+
+        //if faild to do pickup
+        //pickupStatus = PICKUP_FAILED;
+
+        //When done with pickup
+        //these to need to be set
         pickupStatus = PICKUP_DONE;
         nextState = ARM_IDLE;
 
-        
-        break;
-        
-      case ARM_DROPOFF:
-        dropoffStatus = DROPOFF_RUNNING;
-        
-        downDrop();
-        delay(500);
-        up();
 
-        dropoffStatus = DROPOFF_DONE;
-        nextState = ARM_IDLE;
+        break;
+
+      //PUT CODE HERE FOR DROPOFF OBJECT
+      case ARM_DROPOFF:
+        Serial.println("DROPOFF");
+        //for TWI communicatiion to plattform
+        // set dropoffStatus
+        // this will tell plattform about status of arm.
+
+        //when start to drop off need to set:
+        dropoffStatus = DROPOFF_RUNNING;
+        //stoppa motor
+        //stopMotor();
+        down();
         
+        delay(3000);
+        up();
+        //uncomment
+        //startMotor();
+        delay(3000);
+        
+        Serial.println("DROPOFF");
+        Serial.println("DROPOFF");
+        Serial.println("DROPOFF");
+
+        //if problem with dropoff
+        //reset arm
+        //and set
+        dropoffStatus = DROPOFF_FAILED;
+
+        //when done with dropoff
+        dropoffStatus = DROPOFF_DONE;
+        //and
+        nextState = ARM_IDLE;
+
         break;
     }
 
     delay(100);
     currentState = nextState;
   }
+
 
 }
 
