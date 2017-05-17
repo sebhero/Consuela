@@ -143,6 +143,7 @@ void handleReadCmd() {
           doneFrwd = 1;
         }
         pickupStatus= (PICKUP_STATUS)recivedData[1];
+        //pickupStatus=PICKUP_RUNNING;
       }
       txBuff[0] = TWI_CMD_PICKUP_STATUS;
       txBuff[1] = pickupStatus;
@@ -191,6 +192,8 @@ void receiveEvent(int howMany) {
       recivedData[i] = (uint8_t) Wire.read();
       i++;
     }
+    Serial.print(recivedData[0],HEX);
+    Serial.println(" got cmd!");
 
     handleReadCmd();
   }
@@ -250,7 +253,7 @@ void loop() {
           case PICKUP_RUNNING:
             Serial.println("PICKUP_RUNNING");
             delay(1000);
-            pickupStatus = PICKUP_BACKWARD;
+            pickupStatus = PICKUP_DONE;
             break;
           case PICKUP_FAILED:
             Serial.println("PICKUP_FAILED");
@@ -282,6 +285,9 @@ void loop() {
           case PICKUP_DONE:
             Serial.println("PICKUP_DONE:");
             delay(1000);
+            txBuff[0] = 0;
+            txBuff[1] = 0;
+            txBuff[2] = 0;
             pickupStatus = PICKUP_IDLE;
             nextState = ARM_IDLE;
             break;

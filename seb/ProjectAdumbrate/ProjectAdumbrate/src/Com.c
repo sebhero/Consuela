@@ -378,7 +378,7 @@ uint8_t twi_pickupGetMoveCm(void)
 	return twi_move_cm;
 }
 
-void twi_sendNavCmd(TwiCmdNav cmd )
+uint8_t twi_sendNavCmd(TwiCmdNav cmd )
 {
 	twi_package_t packet = {
 
@@ -386,7 +386,7 @@ void twi_sendNavCmd(TwiCmdNav cmd )
 		.addr[1]      = 0,// TWI slave memory address data LSB
 		.addr_length  = 0, //sizeof (uint16_t),    // TWI slave memory address data size
 		.chip         = SLAVE_ADDR_NAV,      // TWI slave bus address
-		.buffer       = cmd, // transfer data source buffer
+		.buffer       = &cmd, // transfer data source buffer
 		.length       = 1   // transfer data size (bytes)
 	};
 
@@ -410,7 +410,7 @@ uint8_t* twi_reciveNavCmd(void){
 			.addr[1]      = 0,// TWI slave memory address data LSB
 			.addr_length  = 0, //sizeof (uint16_t),    // TWI slave memory address data size
 			.chip         = SLAVE_ADDR_NAV,      // TWI slave bus address
-			.buffer       = cmd, // transfer data source buffer
+			.buffer       = data, // transfer data source buffer
 			.length       = 5  // transfer data size (bytes)
 		};
 		

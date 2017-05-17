@@ -292,18 +292,18 @@ void vTwiTask(void *pvParameter){
 // 	vTaskDelay(pdMSTOTICKS(20));
 // 	
 // 	//test get armInfo
- 	arminfo_t armInfo = twi_getArmInfo();
-	if(armInfo.hasData)
- 	{
-		printf("armInfo: boxA: %d boxD: %d objA %d objD %d col: %d",armInfo.boxAngle,armInfo.boxDistance, armInfo.objectAngle, armInfo.objectDistance, armInfo.collectAll);
- 		vTaskDelay(pdMSTOTICKS(20));
-	 }
+//  	arminfo_t armInfo = twi_getArmInfo();
+// 	if(armInfo.hasData)
+//  	{
+// 		printf("armInfo: boxA: %d boxD: %d objA %d objD %d col: %d",armInfo.boxAngle,armInfo.boxDistance, armInfo.objectAngle, armInfo.objectDistance, armInfo.collectAll);
+//  		vTaskDelay(pdMSTOTICKS(20));
+// 	 }
 	
 	//test pick cmds start and status
-	twi_test_pickup();
+	//twi_test_pickup();
 	
 	//test dropoff cmd start and status
-//	twi_test_dropoff();
+	twi_test_dropoff();
 	
 	xSemaphoreGive(xSemaphoreTWI);
 	vTaskDelete(NULL);
@@ -316,7 +316,8 @@ void vTaskTwiNav(void *pvParameter){
 	//maybe not needed
 	twi_changeSlave(SLAVE_ADDR_NAV);
 	//do send to NAV
-	void twi_sendNavCmd();
+	//todo fix send cmd
+	//twi_sendNavCmd();
 	
 	
 	xSemaphoreGive(xSemaphoreTWINav);
