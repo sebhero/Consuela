@@ -247,7 +247,7 @@ void down() {
 */
 void downDrop() {
   digitalWrite(directionPin, HIGH);
-  analogWrite(pwmPin, 200);
+  analogWrite(pwmPin, 100);
   delay(75);
   stopMovement();
   stopsugMotor();
