@@ -1,14 +1,9 @@
 //
 // Created by Sebastian Boreback on 2017-05-12.
+// Edited and modified by: Viktor Malmgren and Robin Johnsson
 //
 
 #include <Wire.h>
-
-int breakpin = 9;
-int directionpin = 12;
-int pwmpin = 3;
-int breakTop = 4;
-int breakBot = 7;
 
 typedef struct ArmInfo {
   //distances are in cm
@@ -83,6 +78,12 @@ uint8_t run;
 uint8_t doneBack;
 uint8_t doneFrwd;
 
+//int breakPin = 9;
+int directionPin = 12;
+int pwmPin = 3;
+int breakTop = 4;
+int breakBot = 7;
+int onoffPin = 2;
 
 void handleReadCmd() {
 
@@ -210,35 +211,65 @@ void receiveEvent(int howMany) {
   //end of receive
 }
 
-
-void upp() {
-  while (!digitalRead(breakTop)) {
-    digitalWrite(breakpin, LOW);
-    digitalWrite(directionpin, LOW);
-    analogWrite(pwmpin, 255);
+/*
+  Moves the arm upwards until the switch is pressed
+*/
+void up() {
+  while (digitalRead(breakTop)) {
+    digitalWrite(directionPin, LOW);
+    analogWrite(pwmPin, 130);
   }
-  stoppmovement();
+  stopMovement();
 }
-
-void ned() {
-
-  while (!digitalRead(breakBot)) {
-    digitalWrite(breakpin, LOW);
-    digitalWrite(directionpin, HIGH);
-    analogWrite(pwmpin, 255);
+/*
+ * Speicial function that only should be used when the glass in the current object
+ * Moves the arm upwards for a little bit so that the glass an be grabbed
+*/
+void upGlass() {
+  digitalWrite(directionPin, LOW);
+  analogWrite(pwmPin, 130);
+  delay(150);
+  stopMovement();
+}
+/*
+  Moves the arm down until the switch is pressed
+*/
+void down() {
+  while (digitalRead(breakBot)) {
+    digitalWrite(directionPin, HIGH);
+    analogWrite(pwmPin, 75);
   }
-  stoppmovement();
+  stopMovement();
 }
 
+/*
+  Moves the arm down then stops it to fling the carried object off
+*/
+void downDrop() {
+  digitalWrite(directionPin, HIGH);
+  analogWrite(pwmPin, 200);
+  delay(75);
+  stopMovement();
+  stopsugMotor();
+}
 
-void startsug() {
-  digitalWrite(2, HIGH);
+/*
+ * Starts the vacuum motor
+ */
+void startMotor() {
+  digitalWrite(onoffPin, HIGH);
 }
-void  stoppsug() {
-  digitalWrite(2, LOW);
+/*
+ * Stops the vacuum motor
+ */
+void stopMotor() {
+  digitalWrite(onoffPin, LOW);
 }
-void stoppmovement() {
-  analogWrite(pwmpin, 0);
+/*
+ * Stops the movement of the arm
+ */
+void stopMovement() {
+  analogWrite(pwmPin, 0);
 }
 
 void setup() {
@@ -247,11 +278,10 @@ void setup() {
   Wire.onReceive(receiveEvent); // register event
   Serial.begin(9600);           // start serial for output
 
-  pinMode(2, OUTPUT);
-  pinMode(breakTop, INPUT_PULLUP);
+  pinMode(directionPin, OUTPUT);
   pinMode(breakBot, INPUT_PULLUP);
-  pinMode(9, OUTPUT);
-  pinMode(12, OUTPUT);
+  pinMode(breakTop, INPUT_PULLUP);
+  pinMode(onoffPin, OUTPUT);
 
 
   run = 1;
@@ -283,10 +313,17 @@ void loop() {
         break;
       case ARM_PICKUP:
         pickupStatus = PICKUP_RUNNING;
-        ned();
-        startsug();
+        
+        down();
+        startMotor();
+        
+        if(){//Needs a check to see if its the glass
+          upGlass();
+          }else{
+            delay(5000);
+            }
         delay(5000);
-        upp();
+        up();
 
         pickupStatus = PICKUP_DONE;
         nextState = ARM_IDLE;
@@ -295,11 +332,15 @@ void loop() {
         break;
         
       case ARM_DROPOFF:
-        ned();
-        stoppsug();
-        delay(5000);
-        upp();
-       
+        dropoffStatus = DROPOFF_RUNNING;
+        
+        downDrop();
+        delay(500);
+        up();
+
+        dropoffStatus = DROPOFF_DONE;
+        nextState = ARM_IDLE;
+        
         break;
     }
 
