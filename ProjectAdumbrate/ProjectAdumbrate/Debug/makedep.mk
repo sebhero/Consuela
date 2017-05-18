@@ -6,7 +6,25 @@ src\ASF\common\services\delay\sam\cycle_counter.c
 
 src\ASF\common\utils\stdio\read.c
 
+src\ASF\sam\drivers\pwm\pwm.c
+
+src\ASF\sam\drivers\tc\tc.c
+
 src\ASF\sam\drivers\usart\usart.c
+
+src\ASF\thirdparty\freertos\freertos-7.3.0\source\FreeRTOS_CLI.c
+
+src\ASF\thirdparty\freertos\freertos-7.3.0\source\list.c
+
+src\ASF\thirdparty\freertos\freertos-7.3.0\source\portable\gcc\sam\port.c
+
+src\ASF\thirdparty\freertos\freertos-7.3.0\source\portable\memmang\heap_4.c
+
+src\ASF\thirdparty\freertos\freertos-7.3.0\source\queue.c
+
+src\ASF\thirdparty\freertos\freertos-7.3.0\source\tasks.c
+
+src\ASF\thirdparty\freertos\freertos-7.3.0\source\timers.c
 
 src\ASF\thirdparty\wireless\addons\sio2host\uart\sio2host.c
 
@@ -16,9 +34,23 @@ src\ASF\common\services\serial\usart_serial.c
 
 src\ASF\sam\drivers\uart\uart.c
 
+src\communication\communication.c
+
+src\Controller.c
+
+src\Hjulreglering.c
+
+src\Motorfunc.c
+
+src\navigation.c
+
+src\pulse.c
+
 src\pulseCounterHandler.c
 
 src\RealTimeTimer.c
+
+src\task.c
 
 src\TimerCounter.c
 

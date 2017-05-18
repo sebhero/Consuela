@@ -76,12 +76,12 @@ void servoControll(unsigned long dist)
 		
 		if(dist >= (mappingDist*0.80) && dist <= (mappingDist*1.20)){
 			
-			printf("%d / 5 readings within mapping distance\n", tick);
+			printf("%d / 2 readings within mapping distance\n", tick);
 			tick++;
 			//sum = sum + deg;
 		}
 		
-		if(tick>5){
+		if(tick>2){
 			status = STATUS_FOUND;
 			mappingAngle = angle; //onödig?
 			printf("Found something at angle: %d degrees\n", angle);
@@ -104,7 +104,7 @@ void servoControll(unsigned long dist)
 		{
 			printf(" %d / 5 readings divert too much from mapping distance\n", errors);
 			errors++;
-			if(errors >5)
+			if(errors > 5)
 			{
 				errors = 0;
 				printf("Object lost; starting search \n");

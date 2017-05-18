@@ -9,8 +9,8 @@
 #include "pulseCounterHandler.h" /* Declaration made available here */
 
 /* Initialization of extern variables goes only with definition */
-int counterA = 0;
-int counterB = 0;
+uint32_t counterA = 0;
+uint32_t counterB = 0;
 
 void pulseCounter_handlerA(const uint32_t id, const uint32_t index){
 	if (ioport_get_pin_level(A))

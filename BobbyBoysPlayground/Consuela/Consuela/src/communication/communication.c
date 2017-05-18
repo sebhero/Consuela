@@ -1,4 +1,5 @@
 #include "communication.h"
+#include <asf.h>
 
 void configure_console(void) {
     const usart_serial_options_t uart_serial_options = {
@@ -10,10 +11,12 @@ void configure_console(void) {
 }
 
 
-Pdc *pdc;
+Pdc *pdc = NULL;
+xQueueHandle *sem;
 
-void configure_usart() {
+void configure_usart(Pdc **pdc_to_set, xQueueHandle sem_to_use) {
 
+    sem = sem_to_use;
     Usart *usart = USART0;
     sam_usart_opt_t usart_opt = {
         .baudrate = 115200,
@@ -51,7 +54,8 @@ void configure_usart() {
     usart_enable_interrupt(usart,  usart_IRQ_sources);
 
     pdc = usart_get_pdc_base(usart);
-    pdc_enable_transfer(pdc, PERIPH_PTCR_RXTEN);
+    *pdc_to_set = pdc;
+    pdc_enable_transfer(pdc, PERIPH_PTCR_RXTEN | PERIPH_PTCR_TXTEN);
 
     usart_get_status(USART0);
     NVIC_ClearPendingIRQ(usart_IRQn);
@@ -63,6 +67,6 @@ void USART0_Handler(void) {
     if(status & US_CSR_ENDRX) {
         printf("ISR\n");
         usart_disable_interrupt(USART0, US_IER_ENDRX);
-        xSemaphoreGiveFromISR(sem, pdTRUE);
+        xSemaphoreGiveFromISR(sem, pdFALSE);
     }
 }

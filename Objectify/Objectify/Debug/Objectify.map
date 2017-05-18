@@ -8174,7 +8174,7 @@ OUTPUT(Objectify.elf elf32-littlearm)
  .debug_macro   0x0001b231       0x40 src/ASF/thirdparty/wireless/addons/sio2host/uart/sio2host.o
  .debug_macro   0x0001b271      0x6c3 src/main.o
 
-.debug_line     0x00000000    0x14efe
+.debug_line     0x00000000    0x14f00
  .debug_line    0x00000000     0x11cf src/UltraServo/ultra_servo.o
  .debug_line    0x000011cf      0xc48 src/ASF/common/services/clock/sam3x/sysclk.o
  .debug_line    0x00001e17      0xae0 src/ASF/common/services/delay/sam/cycle_counter.o
@@ -8199,7 +8199,7 @@ OUTPUT(Objectify.elf elf32-littlearm)
  .debug_line    0x00011c43      0xb22 src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
  .debug_line    0x00012765      0x39b src/ASF/sam/utils/syscalls/gcc/syscalls.o
  .debug_line    0x00012b00     0x1272 src/ASF/thirdparty/wireless/addons/sio2host/uart/sio2host.o
- .debug_line    0x00013d72     0x118c src/main.o
+ .debug_line    0x00013d72     0x118e src/main.o
 
 .debug_str      0x00000000    0x6ff2b
  .debug_str     0x00000000    0x62c13 src/UltraServo/ultra_servo.o

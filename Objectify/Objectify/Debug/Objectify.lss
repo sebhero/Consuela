@@ -29,11 +29,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
  12 .debug_macro  0001b934  00000000  00000000  0002f8b7  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_line   00014efe  00000000  00000000  0004b1eb  2**0
+ 13 .debug_line   00014f00  00000000  00000000  0004b1eb  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_str    0006ff2b  00000000  00000000  000600e9  2**0
+ 14 .debug_str    0006ff2b  00000000  00000000  000600eb  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_frame  000027ac  00000000  00000000  000d0014  2**2
+ 15 .debug_frame  000027ac  00000000  00000000  000d0018  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -457,7 +457,7 @@ void servoControll(unsigned long dist)
    80324:	47a0      	blx	r4
    80326:	b138      	cbz	r0, 80338 <servoControll+0xd8>
 			
-			printf("%d / 5 readings within mapping distance\n", tick);
+			printf("%d / 2 readings within mapping distance\n", tick);
    80328:	4c59      	ldr	r4, [pc, #356]	; (80490 <servoControll+0x230>)
    8032a:	485d      	ldr	r0, [pc, #372]	; (804a0 <servoControll+0x240>)
    8032c:	8821      	ldrh	r1, [r4, #0]
@@ -470,10 +470,10 @@ void servoControll(unsigned long dist)
 			//sum = sum + deg;
 		}
 		
-		if(tick>5){
+		if(tick>2){
    80338:	4b55      	ldr	r3, [pc, #340]	; (80490 <servoControll+0x230>)
    8033a:	881b      	ldrh	r3, [r3, #0]
-   8033c:	2b05      	cmp	r3, #5
+   8033c:	2b02      	cmp	r3, #2
    8033e:	d910      	bls.n	80362 <servoControll+0x102>
 			status = STATUS_FOUND;
    80340:	2201      	movs	r2, #1
@@ -580,7 +580,7 @@ void servoControll(unsigned long dist)
    803ea:	7823      	ldrb	r3, [r4, #0]
    803ec:	3301      	adds	r3, #1
    803ee:	b2db      	uxtb	r3, r3
-			if(errors >5)
+			if(errors > 5)
    803f0:	2b05      	cmp	r3, #5
    803f2:	d801      	bhi.n	803f8 <servoControll+0x198>
 		case STATUS_FOUND:
@@ -591,7 +591,7 @@ void servoControll(unsigned long dist)
 			errors++;
    803f4:	7023      	strb	r3, [r4, #0]
    803f6:	e01d      	b.n	80434 <servoControll+0x1d4>
-			if(errors >5)
+			if(errors > 5)
 			{
 				errors = 0;
    803f8:	2400      	movs	r4, #0
@@ -9645,7 +9645,9 @@ int main (void)
 	configureConsole();
    82be6:	4b05      	ldr	r3, [pc, #20]	; (82bfc <main+0x4c>)
    82be8:	4798      	blx	r3
-	//test ultrasound sensor
+	//test rfid
+	//testingRFID();
+
 	while(1)
 	{	
 	testingUltraSound();
@@ -15202,7 +15204,7 @@ int main (void)
    864b0:	0a646574 	.word	0x0a646574
    864b4:	00000000 	.word	0x00000000
    864b8:	2f206425 	.word	0x2f206425
-   864bc:	72203520 	.word	0x72203520
+   864bc:	72203220 	.word	0x72203220
    864c0:	69646165 	.word	0x69646165
    864c4:	2073676e 	.word	0x2073676e
    864c8:	68746977 	.word	0x68746977

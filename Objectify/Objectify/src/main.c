@@ -65,6 +65,11 @@ int main (void)
 	//init serial communication, printf ..
 	configureConsole();
 	//test ultrasound sensor
+	//testingUltraSound();
+	
+	//test rfid
+	//testingRFID();
+
 	while(1)
 	{	
 	testingUltraSound();
