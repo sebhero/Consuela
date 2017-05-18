@@ -31,142 +31,101 @@ Int. low    D6
 #define sweep_motor     A2
 #define solenoid        A3
 
-#define start_sw        2
-#define run_sw          6
-#define done_sw         7
+//#define start_sw        2
+//#define run_sw          6
+//#define done_sw         7
 
-typedef enum {
-  stopped = 0,
-  start = 1,
-  raising = 2,
-  lowering = 3,
-  up = 4,
-  down = 5,
-  sweeping = 6,
-  done = 7,
-  dropping = 8,
-  ending = 9
-} state_t;
+uint8_t sweep_motor_state = LOW;
 
-volatile uint8_t flag = 0;
-volatile state_t state = stopped;
+//void start_sw_handler() {
+//  state = start;
+//}
 
-void start_sw_handler() {
-  state = start;
+// Raise arm into up position
+void arm_raise() {
+  if(digitalRead(high_limit_sw) == LOW) {
+    digitalWrite(dir_A, dir_up);
+    digitalWrite(break_A, break_off);
+    analogWrite(PWM_A, 255);  
+    while(digitalRead(high_limit_sw) == HIGH) {
+      // Arm not up yet, spin...
+    }
+    // Arm is up
+    digitalWrite(break_A, break_on);
+    analogWrite(PWM_A, 0);  
+    Serial.println("Arm: Up");    
+  }
 }
 
+void arm_lower() {
+  if(digitalRead(low_limit_sw) == LOW) {
+    digitalWrite(dir_A, dir_down);
+    digitalWrite(break_A, break_off);
+    analogWrite(PWM_A, 255);   
+    while(digitalRead(low_limit_sw) == HIGH) {
+      // Arm not down yet, spin...
+    }        
+    digitalWrite(break_A, break_on);
+    analogWrite(PWM_A, 0);
+    Serial.println("Arm: Down");
+  }  
+}
 
+void arm_sweep(uint8_t state) {
+  if(state != sweep_motor_state) {    
+    if(state == 1) {
+      digitalWrite(sweep_motor, HIGH);
+      sweep_motor_state = HIGH;
+      Serial.println("Arm: Sweepers are on");
+    } else {
+      digitalWrite(sweep_motor, LOW);
+      sweep_motor_state = LOW;
+      Serial.println("Arm: Sweepers are off");   
+    }    
+  }
+}
 
-void setup() {
+void arm_release() {
+  digitalWrite(solenoid, HIGH);
+  delay(100);
+  digitalWrite(solenoid, LOW);
+  Serial.println("Arm: Released objects");
+}
+
+void arm_setup() {
   pinMode(break_A, OUTPUT);
   pinMode(break_B, OUTPUT);
   pinMode(PWM_A, OUTPUT);
   pinMode(PWM_B, OUTPUT);
   pinMode(dir_A, OUTPUT);
   pinMode(dir_B, OUTPUT);
-
+  
   digitalWrite(break_A, break_on);
   digitalWrite(break_B, break_on);
   analogWrite(PWM_A, 0);
   analogWrite(PWM_B, 0);
 
   pinMode(high_limit_sw, INPUT_PULLUP);
+  
   pinMode(low_limit_sw, INPUT_PULLUP);
 
   pinMode(sweep_motor, OUTPUT);
   digitalWrite(sweep_motor, LOW);
+  sweep_motor_state = LOW;
 
   pinMode(solenoid, OUTPUT);
   digitalWrite(solenoid, LOW);
   
-  pinMode(start_sw, INPUT_PULLUP);  
+  //pinMode(start_sw, INPUT_PULLUP);  
   //attachInterrupt(digitalPinToInterrupt(start_sw), start_sw_handler, FALLING); 
   
-  pinMode(run_sw, INPUT_PULLUP);
+  //pinMode(run_sw, INPUT_PULLUP);
   
-  pinMode(done_sw, INPUT_PULLUP);
+  //pinMode(done_sw, INPUT_PULLUP);
+
+  arm_raise();
   
-  Serial.begin(115200);
-  Serial.println("ok!");
+  Serial.println("Arm setup ok!");
 }
 
-void loop() {
-  switch(state) {
-    case stopped:
-      if(digitalRead(start_sw) == LOW) {
-        Serial.println("Starting...");
-        state = start;
-      }    
-      break;
-    case start:
-      Serial.println("Raising...");
-      delay(300);
-      digitalWrite(dir_A, dir_up);
-      digitalWrite(break_A, break_off);
-      analogWrite(PWM_A, 255);
-      state = raising;
-      break;
-    case raising:
-      if(digitalRead(high_limit_sw) == LOW) {
-        digitalWrite(break_A, break_on);
-        analogWrite(PWM_A, 0);
-        Serial.println("Up! Waiting for run...");
-        delay(300);
-        state = up;
-      }
-      break;
-    case up:
-      if(digitalRead(run_sw) == LOW) {
-        Serial.println("Lowering...");
-        delay(300);
-        digitalWrite(dir_A, dir_down);
-        digitalWrite(break_A, break_off);
-        analogWrite(PWM_A, 255);        
-        state = lowering;        
-      }
-      break;
-    case lowering:
-      if(digitalRead(low_limit_sw) == LOW) {        
-        digitalWrite(break_A, break_on);
-        analogWrite(PWM_A, 0);        
-        digitalWrite(sweep_motor, HIGH);
-        Serial.println("Down! Sweeping...");
-        state = sweeping;
-      }
-      break;
-    case sweeping:
-      if(digitalRead(done_sw) == LOW) {        
-        digitalWrite(sweep_motor, LOW);
-        Serial.println("Done sweeping");
-        digitalWrite(dir_A, dir_up);
-        digitalWrite(break_A, break_off);
-        analogWrite(PWM_A, 255);        
-        state = done;
-      }
-      break;
-    case done:
-      if(digitalRead(high_limit_sw) == LOW) {
-        digitalWrite(break_A, break_on);
-        analogWrite(PWM_A, 0);
-        Serial.println("Up! Dropping off...");
-        delay(300);
-        state = dropping;
-      }
-      break;
-    case dropping:
-      digitalWrite(solenoid, HIGH);
-      delay(100);
-      digitalWrite(solenoid, LOW);
-      Serial.println("Ending...");
-      state = ending;
-      break;
-    case ending:
-      break;
-    default:
-      break;
-  }
-  
-
-
-}
 
