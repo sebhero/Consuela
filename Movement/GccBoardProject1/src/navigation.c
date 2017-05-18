@@ -304,9 +304,14 @@ void setPath(){
 	}
 }
 
-//kollar om framme
-//om framme, returnera 1/2 beroende på om det är obj eller dropoff
-//0 innebär inte framme(kör fortfarande)
+/*
+	Runs EVERYTHING that has to do with navigation.
+	Decides on a travel path if none is existent
+	Turns the platform towards its destination
+	Moves the platform towards the destination
+	Stops when has approached the destination
+	Repeats until all destinations has been reached
+*/
 uint8_t goToNext(){
 	if (!travelPath[0]){
 		//printf("path: ");

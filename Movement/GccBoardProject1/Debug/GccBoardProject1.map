@@ -8570,7 +8570,7 @@ OUTPUT(GccBoardProject1.elf elf32-littlearm)
  .debug_line    0x0000d536      0xfef src/motorFunc.o
  .debug_line    0x0000e525      0xf50 src/main.o
 
-.debug_str      0x00000000    0x62143
+.debug_str      0x00000000    0x62190
  .debug_str     0x00000000    0x5d8a7 src/consoleFunctions.o
                               0x5dc46 (size before relaxing)
  .debug_str     0x0005d8a7       0x2c src/ASF/common/utils/stdio/read.o
@@ -8581,33 +8581,33 @@ OUTPUT(GccBoardProject1.elf elf32-littlearm)
                               0x58f53 (size before relaxing)
  .debug_str     0x0005db86      0x9e4 src/ASF/sam/drivers/usart/usart.o
                               0x59804 (size before relaxing)
- .debug_str     0x0005e56a     0x1b3d src/navigation.o
-                              0x5f207 (size before relaxing)
- .debug_str     0x000600a7      0x599 src/pulseCounterHandler.o
+ .debug_str     0x0005e56a     0x1b8a src/navigation.o
+                              0x5f1fd (size before relaxing)
+ .debug_str     0x000600f4      0x599 src/pulseCounterHandler.o
                               0x5dcf4 (size before relaxing)
- .debug_str     0x00060640      0x24c src/ASF/common/services/clock/sam3x/sysclk.o
+ .debug_str     0x0006068d      0x24c src/ASF/common/services/clock/sam3x/sysclk.o
                               0x5c95d (size before relaxing)
- .debug_str     0x0006088c       0x35 src/ASF/common/services/delay/sam/cycle_counter.o
+ .debug_str     0x000608d9       0x35 src/ASF/common/services/delay/sam/cycle_counter.o
                               0x58cfe (size before relaxing)
- .debug_str     0x000608c1       0x74 src/ASF/sam/boards/arduino_due_x/init.o
+ .debug_str     0x0006090e       0x74 src/ASF/sam/boards/arduino_due_x/init.o
                               0x5d226 (size before relaxing)
- .debug_str     0x00060935      0x424 src/ASF/sam/drivers/pio/pio.o
+ .debug_str     0x00060982      0x424 src/ASF/sam/drivers/pio/pio.o
                               0x59532 (size before relaxing)
- .debug_str     0x00060d59      0x1bf src/ASF/sam/drivers/pio/pio_handler.o
+ .debug_str     0x00060da6      0x1bf src/ASF/sam/drivers/pio/pio_handler.o
                               0x5957a (size before relaxing)
- .debug_str     0x00060f18      0x67e src/ASF/sam/drivers/pmc/pmc.o
+ .debug_str     0x00060f65      0x67e src/ASF/sam/drivers/pmc/pmc.o
                               0x595a8 (size before relaxing)
- .debug_str     0x00061596       0x4d src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
+ .debug_str     0x000615e3       0x4d src/ASF/sam/utils/cmsis/sam3x/source/templates/exceptions.o
                               0x58ba7 (size before relaxing)
- .debug_str     0x000615e3       0xb2 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
+ .debug_str     0x00061630       0xb2 src/ASF/sam/utils/cmsis/sam3x/source/templates/gcc/startup_sam3x.o
                               0x58c7c (size before relaxing)
- .debug_str     0x00061695      0x1cd src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
+ .debug_str     0x000616e2      0x1cd src/ASF/sam/utils/cmsis/sam3x/source/templates/system_sam3x.o
                               0x58e8f (size before relaxing)
- .debug_str     0x00061862      0x741 src/ASF/sam/utils/syscalls/gcc/syscalls.o
+ .debug_str     0x000618af      0x741 src/ASF/sam/utils/syscalls/gcc/syscalls.o
                                0x4f21 (size before relaxing)
- .debug_str     0x00061fa3       0xee src/motorFunc.o
+ .debug_str     0x00061ff0       0xee src/motorFunc.o
                               0x5e9d5 (size before relaxing)
- .debug_str     0x00062091       0xb2 src/main.o
+ .debug_str     0x000620de       0xb2 src/main.o
                               0x5f5b6 (size before relaxing)
 
 .debug_frame    0x00000000     0x23fc
