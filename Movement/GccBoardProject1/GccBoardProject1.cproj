@@ -430,6 +430,8 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Folder Include="unity" />
+    <Folder Include="test" />
     <Folder Include="src\" />
     <Folder Include="src\ASF\" />
     <Folder Include="src\ASF\common\" />
@@ -488,6 +490,30 @@
     <Folder Include="src\config\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\consoleFunctions.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\consoleFunctions.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="test\navigationTest.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="test\navigationTest.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="test\testRunner.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="unity\unity.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="unity\unity.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="unity\unity_internals.h">
+      <SubType>compile</SubType>
+    </Compile>
     <None Include="src\ASF\common\services\serial\sam_uart\uart_serial.h">
       <SubType>compile</SubType>
     </None>
@@ -531,12 +557,6 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\distanceSensor.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\Hjulreglering.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\Hjulreglering.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\motorFunc.h">
@@ -990,6 +1010,9 @@
       <SubType>compile</SubType>
     </None>
     <None Include="src\ASF\thirdparty\CMSIS\README.txt">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="unity\license.txt">
       <SubType>compile</SubType>
     </None>
   </ItemGroup>
