@@ -77,6 +77,8 @@ uint8_t run;
 uint8_t doneBack;
 uint8_t doneFrwd;
 
+#define pickup_done_sw         7
+
 
 void handleReadCmd() {
 
@@ -231,11 +233,21 @@ void setup() {
   uint8_t doneBack = 0;
   uint8_t doneFrwd = 0;
   //todo remove end  
+
+  
+  pinMode(pickup_done_sw, INPUT_PULLUP);
 }
 
 void loop() {
   //check if we are done
   //since we are already in a loop
+  if(digitalRead(pickup_done_sw) == LOW) {
+    pickupStatus = PICKUP_DONE;
+    currentState = ARM_IDLE;
+    arm_sweep(0);
+    arm_raise(); 
+    
+  }
 
   if (run) {
     // Serial.println("IS running");
@@ -249,7 +261,7 @@ void loop() {
         break;
         //PUT CODE HERE FOR PICKING UP OBJECTS
       case ARM_PICKUP:
-        Serial.println("PICKUP");
+       // Serial.println("PICKUP");
 
         //for TWI communicatiion to plattform
         // set pickupStatus
@@ -267,21 +279,20 @@ void loop() {
         //pickupStatus = PICKUP_BACKWARD;
 
         //if need to move forward
-        pickupStatus = PICKUP_FORWARD;
+        //pickupStatus = PICKUP_FORWARD;
 
         //when plattform is done driving
         //we recive PICKUP_DONE_DRIVE
         //then
         if(pickupStatus == PICKUP_DONE_DRIVE)
         {
-          arm_sweep(0);
-          arm_raise();          
+         
           //then these are set to 1
           //to indicate movement.
 //          uint8_t doneBack = 1;
 //          uint8_t doneFrwd = 1;
-          pickupStatus = PICKUP_DONE;
-          nextState = ARM_IDLE;
+        //  pickupStatus = PICKUP_DONE;
+          //nextState = ARM_IDLE;
         }
 
         //if faild to do pickup
