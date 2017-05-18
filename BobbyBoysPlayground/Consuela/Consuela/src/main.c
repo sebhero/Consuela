@@ -47,6 +47,18 @@ void vRead(void *pvParameters) {
         printf("\nrx: %c%c%c%c", rx_buffer[0],rx_buffer[1],rx_buffer[2],rx_buffer[3]);
         vTaskDelay(1000);
     }
+    vTaskDelete(NULL);
+}
+
+void vBlinker(void *pvParam) {
+    ioport_set_pin_dir(PIO_PA15_IDX, IOPORT_DIR_OUTPUT);
+
+    for(;;) {
+        ioport_toggle_pin_level(PIO_PA15_IDX);
+        vTaskDelay(200);
+    }
+
+    vTaskDelete(NULL);
 }
 
 int main (void) {
@@ -62,7 +74,7 @@ int main (void) {
 
     configure_usart(&pdc, sem);
 
-
+    xTaskCreate(vBlinker, "", configMINIMAL_STACK_SIZE + 100, NULL, 4,NULL);
 
     xTaskCreate(vRead, "Reader", configMINIMAL_STACK_SIZE + 100, NULL, 1, &xControllerHandle);
     vTaskStartScheduler();

@@ -147,5 +147,8 @@ header file. */
 #define configASSERT( x ) if( ( x ) == 0 ) { taskDISABLE_INTERRUPTS(); for( ;; ) __asm volatile( "NOP" ); }
 #define INCLUDE_MODULE_TEST 0
 
+
+#define pdMSTOTICKS( xTimeInMs ) ( ( portTickType ) xTimeInMs * ( configTICK_RATE_HZ / ( ( portTickType ) 1000 ) ) )
+
 #endif /* FREERTOS_CONFIG_H */
 

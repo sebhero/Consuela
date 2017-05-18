@@ -76,11 +76,6 @@ static void start_clock(){
 }
 
 uint32_t read_counter_value(){
-	/* if COVFS is equal to 1 an overflow has occurred */	
-	if((*p_TC_SR0 & (1 << COVFS)) == (1 << COVFS)){ // check if overflow has occurred
-		start_clock(); // resets the counter and starts the counter clock anew
-		*p_TC_CV = 0;
-	}
 	/* The current value of the counter is accessible in real time by reading the TC Counter Value Register (TC_CV) */
 	counterValue = *p_TC_CV;
 	return counterValue;

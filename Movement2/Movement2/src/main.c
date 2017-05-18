@@ -35,6 +35,7 @@ int main (void)
 	TC0_init();
 	board_init();
 	
+	
 	configure_console();
 	printf("\nHello, World!");
 	
@@ -58,15 +59,15 @@ int main (void)
 
 	
 	uint32_t channel = 0;
-	uint32_t periodv = 1690; //1660 getpå v hjul ger runt 1700
-	uint32_t periodh = 1280; 
+	uint16_t periodv = 1365; //1660 getpå v hjul ger runt 1700
+	uint16_t periodh = 1635; 
 	double kp = 1; //Förstärkningen
 	double kD = 1.0;
 	double kI = 1.0;
 	double i_del = 0.0; 
 	double d_del = 0.0;
 	int ek_1 = 0;
-	double tS = 0.1;
+	double tS = 0.01;
 	uint8_t fool = 1;
 	
 	double x = 300;
@@ -154,50 +155,56 @@ int main (void)
 	}
 	
 	*/
-			/*
-			delay_ms(2000);
+			
+			
+			delay_ms(3000);
+			//uint32_t start = 0;
+			//uint32_t stop = 0;
+			//uint32_t result = 0;
+			
+			
 			while(1){
-	rotateRightByDegrees(135);
-			delay_ms(2000);	
+			//start = read_counter_value();	
+	        rotateLeftByDegrees(28);
+			//stop = read_counter_value();
+			//result = (stop - start);
+			//printf("\nResult: %u", result);
+			delay_ms(2000);
+	
 			}
+		
 			
-			*/
 			
+			/*
 			while(1){
 			
 				int ek = counterA - counterB; //Counter A är höger hjul, counterB vänster
-				printf("\n\rCOUNTERA: %lu", counterA);//Skriver ut räknarna och felvärdet i konsollen.
-				printf("\n\rCOUNTERB: %lu", counterB);
-				printf("\nEK: %d", ek);
+				printf("\n\rCOUNTERA: %lu", counterA, "\n");//Skriver ut räknarna och felvärdet i konsollen.
+				printf("\n\rCOUNTERB: %lu", counterB, "\n");
+				printf("EK: %d\n", ek);
 				
 				counterA = 0;
 				counterB = 0;
 				
-				if (fool)
-				{
-					i_del = (i_del+ek)*kI/tS;
-					d_del = (ek-ek_1)*tS/kD;
-					fool = 0;
-				}
-				ek_1 = ek;
+		
+				int uk = kp * ek;
 				
-				periodv=min(2000, periodv);
-				periodh=max(1000, periodh);
+				periodv = periodv-uk;
 				
-				int uk = kp * (ek + i_del + d_del); //pid-regleringen
-				
-				periodv = periodv+uk;
+				periodv=max(1350, periodv);
+				periodv=min(1500, periodv);
 				pulse_set_period(pulseh_ch, periodh);
 				pulse_set_period(pulsev_ch, periodv);
 				
 				if(ek == 0){
-					printf("\n\rRIGHTWHEEL: %lu", periodh);
-					printf("\n\rLEFTWHEEL: %lu", periodv);
+					
+					printf("Left Wheel: %d\n", periodv);
 				}
+				delay_ms(8);
 				
 			}
 			
-	
+			*/
 	
 	/*
 	
