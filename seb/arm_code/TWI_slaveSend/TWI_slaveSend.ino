@@ -192,8 +192,8 @@ void receiveEvent(int howMany) {
       recivedData[i] = (uint8_t) Wire.read();
       i++;
     }
-    Serial.print(recivedData[0],HEX);
-    Serial.println(" got cmd!");
+//    Serial.print(recivedData[0],HEX);
+//    Serial.println(" got cmd!");
 
     handleReadCmd();
   }
