@@ -6,7 +6,7 @@ src\ASF\sam\drivers\twi\twi.c
 
 src\ASF\sam\drivers\pwm\pwm.c
 
-src\Com.c
+src\com\Com.c
 
 src\dummyFunc.c
 

@@ -77,6 +77,8 @@ uint8_t run;
 uint8_t doneBack;
 uint8_t doneFrwd;
 
+#define pickup_done_sw         7
+#define start_sw        2
 
 void handleReadCmd() {
 
@@ -133,7 +135,7 @@ void handleReadCmd() {
     case TWI_CMD_PICKUP_STATUS:
       //Serial.println("TWI_CMD_PICKUP_STATUS");
       if (recivedData[1] == PICKUP_DONE_DRIVE) {
-        
+
         //wanted to drive back
         if (pickupStatus == PICKUP_BACKWARD) {
           doneBack = 1;
@@ -143,7 +145,6 @@ void handleReadCmd() {
           doneFrwd = 1;
         }
         pickupStatus= (PICKUP_STATUS)recivedData[1];
-        //pickupStatus=PICKUP_RUNNING;
       }
       txBuff[0] = TWI_CMD_PICKUP_STATUS;
       txBuff[1] = pickupStatus;
@@ -183,8 +184,8 @@ void requestEvent() {
 // this function is registered as an event, see setup()
 void receiveEvent(int howMany) {
 //  Serial.println("Handling new cmd Req");
-//   Serial.print("how many: ");
-//   Serial.println(howMany);
+  // Serial.print("how many: ");
+  // Serial.println(howMany);
 
   if (3 <= howMany) {
     int i = 0;
@@ -192,8 +193,6 @@ void receiveEvent(int howMany) {
       recivedData[i] = (uint8_t) Wire.read();
       i++;
     }
-//    Serial.print(recivedData[0],HEX);
-//    Serial.println(" got cmd!");
 
     handleReadCmd();
   }
@@ -209,10 +208,18 @@ void receiveEvent(int howMany) {
 
 
 void setup() {
+
+  Serial.begin(9600);           // start serial for output
+
+  // This need to happen before TWI is initialized as TWI blocks and
+  // the arm could reach limit while TWI is waiting on data resulting in 
+  // arm collision.
+  Serial.println("Setting up arm...");
+  arm_setup();
+  
   Wire.begin(2);                // join i2c bus with address #2
   Wire.onRequest(requestEvent); // register event
   Wire.onReceive(receiveEvent); // register event
-  Serial.begin(9600);           // start serial for output
 
   run = 1;
 
@@ -225,111 +232,148 @@ void setup() {
   //todo for test remove
   uint8_t doneBack = 0;
   uint8_t doneFrwd = 0;
-  //todo remove end
+  //todo remove end  
+  nextState = ARM_IDLE;
+
+  
+  pinMode(pickup_done_sw, INPUT_PULLUP);
+  pinMode(start_sw, INPUT_PULLUP);
 }
 
 void loop() {
   //check if we are done
   //since we are already in a loop
+  if(digitalRead(pickup_done_sw) == LOW) {
+    //pickupStatus = PICKUP_DONE;
+    //currentState = ARM_IDLE;
+    //arm_sweep(0);
+    Serial.println("arm raise");
+    arm_sweep(0);
+    arm_raise(); 
+    
+    
+  }
+
+
+  if(digitalRead(start_sw) == LOW) {
+    //pickupStatus = PICKUP_DONE;
+    //currentState = ARM_IDLE;
+    //arm_sweep(0);
+    //arm_raise(); 
+    Serial.println("arm lower");
+    arm_lower();
+    arm_sweep(1);
+    Serial.println("DONE arm lower");
+  }
 
   if (run) {
     // Serial.println("IS running");
     switch (currentState) {
 
+      //WHEN PLATTFORM IS MOVING THIS CODE IS RUNNING
       case ARM_IDLE:
-        Serial.println("is idle");
+        //Serial.println("is idle");
+        pickupStatus= PICKUP_IDLE;
+        //Serial.println(currentState);
         delay(300);
         //nextState = ARM_IDLE;
         break;
+        //PUT CODE HERE FOR PICKING UP OBJECTS
       case ARM_PICKUP:
-        // Serial.println("TWI_CMD_PICKUP_START");
-        //todo del
-        switch (pickupStatus) {
-          case PICKUP_IDLE:
-            Serial.println("PICKUP_IDLE");
-            //delay(1000);
-            //pickupStatus=PICKUP_RUNNING;
-            break;
-          case PICKUP_RUNNING:
-            Serial.println("PICKUP_RUNNING");
-            delay(1000);
-            pickupStatus = PICKUP_DONE;
-            break;
-          case PICKUP_FAILED:
-            Serial.println("PICKUP_FAILED");
-            delay(1000);
-            //should be either
-            //idle or running
-            pickupStatus = PICKUP_DONE;
-            break;
-          case PICKUP_FORWARD:
-            Serial.println("PICKUP_FORWARD:");
-            //delay(1000);
-            txBuff[2] = 5;//how much to move back;
-            if (doneFrwd) {
-              delay(1000);
-              //todo just for testning
-              pickupStatus = PICKUP_FAILED;
-            }
-            break;
-          case PICKUP_BACKWARD:
-            Serial.println("PICKUP_BACKWARD::");
-            //delay(1000);
-            txBuff[2] = 15;//how much to move back;
-            if (doneBack) {
-              delay(1000);
-              pickupStatus = PICKUP_FORWARD;
-            }
+        //Serial.println("PICKUP");
 
-            break;
-          case PICKUP_DONE:
-            Serial.println("PICKUP_DONE:");
-            delay(1000);
-            txBuff[0] = 0;
-            txBuff[1] = 0;
-            txBuff[2] = 0;
-            pickupStatus = PICKUP_IDLE;
-            nextState = ARM_IDLE;
-            break;
+        //for TWI communicatiion to plattform
+        // set pickupStatus
+        // this will tell plattform about status of arm.
 
-          case PICKUP_DONE_DRIVE:
-            Serial.println("PICKUP_DONE_DRIVE:");
-            pickupStatus = PICKUP_RUNNING;
-            break;
+        //when doing pickup
+        // Need to lower the arm and start sweepers before we are
+        // signalling that we are picking up
+        //pickupStatus = PICKUP_RUNNING;
+        if(pickupStatus == PICKUP_RUNNING)
+        {
+          Serial.println("PICKUP_RUNNING");
+          arm_lower();
+          arm_sweep(1);
+          Serial.println("DONE arm lower");
+          //first part done.
+          pickupStatus= PICKUP_FORWARD;
+          delay(1000);
         }
+        if(pickupStatus == PICKUP_FORWARD)
+        {
+          Serial.println("PICKUP_FORWARD");
+        }
+        if(pickupStatus == PICKUP_DONE_DRIVE)
+        {
+         Serial.println("PICKUP_DONE_DRIVE");
+          arm_sweep(0);
+          arm_raise();
+          delay(1000);
+          pickupStatus = PICKUP_DONE;
+          //nextState = ARM_IDLE;
+        }
+        if(pickupStatus == PICKUP_DONE)
+        {
+          Serial.println("PICKUP_DONE");
+        }
+
+        //if not moved frwd
+
+        
+        //if need to move backwards
+        //pickupStatus = PICKUP_BACKWARD;
+
+        //if need to move forward
+        //pickupStatus = PICKUP_FORWARD;
+
+        //when plattform is done driving
+        //we recive PICKUP_DONE_DRIVE
+        //then
+        if(pickupStatus == PICKUP_DONE_DRIVE)
+        {
+         Serial.println("PICKUP_DONE_DRIVE");
+          //then these are set to 1
+          //to indicate movement.
+//          uint8_t doneBack = 1;
+//          uint8_t doneFrwd = 1;
+        //  pickupStatus = PICKUP_DONE;
+          //nextState = ARM_IDLE;
+        }
+
+        //if faild to do pickup
+        //pickupStatus = PICKUP_FAILED;
+
+        //When done with pickup
+        //these to need to be set
+        
+
+
+
         break;
+
+        //PUT CODE HERE FOR DROPOFF OBJECT
       case ARM_DROPOFF:
-        switch (dropoffStatus) {
+        Serial.println("DROPOFF");
+        //for TWI communicatiion to plattform
+        // set dropoffStatus
+        // this will tell plattform about status of arm.
 
-          case DROPOFF_RUNNING:
-            Serial.println("DROPOFF_RUNNING:");
-            delay(1000);
-            //if error
-            dropoffStatus = DROPOFF_FAILED;
-            //else
-            //dropoffStatus = DROPOFF_DONE;
-            break;
+        //when start to drop off need to set:
+        dropoffStatus=DROPOFF_RUNNING;
+        arm_raise();
+        arm_release();
 
-          case DROPOFF_FAILED:
-            Serial.println("DROPOFF_FAILED:");
-            delay(1000);
-            //if mange to fix
-            dropoffStatus = DROPOFF_DONE;
-            //else idle
-            //dropoffStatus = DROPOFF_IDLE;
-            break;
+        //if problem with dropoff
+        //reset arm
+        //and set
+        //dropoffStatus = DROPOFF_FAILED;
 
-          case DROPOFF_DONE:
-            Serial.println("DROPOFF_DONE:");
-            dropoffStatus = DROPOFF_IDLE;
-            nextState = ARM_IDLE;
-            break;
-          case DROPOFF_IDLE:
-            Serial.println("DROPOFF_IDLE:");
-            //delay(1000);
-            //dropoffStatus=DROPOFF_RUNNING;
-            break;
-        }
+        //when done with dropoff
+        dropoffStatus = DROPOFF_DONE;
+        //and
+        nextState = ARM_IDLE;
+
         break;
     }
 

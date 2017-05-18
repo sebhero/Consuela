@@ -7,7 +7,7 @@
 #include <inttypes.h>
 #include "dummyFunc.h"
 #include "navigation.h"
-#include "TwiComHandler.h"
+#include "../com/TwiComHandler.h"
 
 int _getall = 0;
 uint8_t _isDonePickup=0;

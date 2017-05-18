@@ -8,14 +8,14 @@
 
 #ifndef DUMMYFUNC_H_
 #define DUMMYFUNC_H_
-#include "TwiComHandler.h"
+#include "../com/TwiComHandler.h"
 
 //drive handle goto next object
 uint8_t goToNext(void);
 
 void setObject(Object object,int x, int y);
 
-setGetAll(uint8_t getall);
+void setGetAll(uint8_t getall);
 
 void setDonePickup(void);
 

@@ -28,14 +28,14 @@ uint32_t SLAVE_ADDR;//twi slave address
 //set the twi port/pins to use
 #define TWI_PORT TWI1
 
-typedef enum {
+typedef enum _object_t {
 	SOCK = 2,
 	SQUARE = 3,
 	GLASS = 4,
 	BOXGOAL = 5
 } Object;
 
-typedef struct {
+typedef struct ArmInfo {
 	//distances are in cm from center of robot
 	uint8_t boxDistance;
 	//angles in degrees
@@ -51,7 +51,7 @@ typedef struct {
 } arminfo_t;
 
 //Holds info about each object position
-typedef struct {
+typedef struct ObjectInfo {
 	//the type of object
 	Object theObject;
 	// x position of object
@@ -62,7 +62,7 @@ typedef struct {
 
 
 //TWI state
-typedef enum  {
+typedef enum _twi_cmd_t {
 
 	TWI_CMD_ARM_INIT = 0x20,
 	TWI_CMD_DROPOFF_START = 0x21,
@@ -72,7 +72,7 @@ typedef enum  {
 	TWI_CMD_ERROR = 0x25,
 } TwiCmd;
 
-typedef enum  {
+typedef enum _twi_cmd_init_req_t {
 	//retuns distance to box goal, and angle to set robot for dropoff
 	TWI_CMD_ARM_REQ_BOX_INFO = 2,
 	//returns distance to object and angle for collect
@@ -80,7 +80,7 @@ typedef enum  {
 	TWI_CMD_ARM_REQ_COLLECT_INFO = 4
 } TwiCmdInitReq;
 
-typedef enum  {
+typedef enum _pickup_status_t {
 	PICKUP_DONE = 2,
 	PICKUP_FORWARD = 3,
 	PICKUP_BACKWARD = 4,
@@ -92,7 +92,7 @@ typedef enum  {
 	PICKUP_ROTATE_R = 10
 } PickupStatus;
 
-typedef enum  {
+typedef enum _dropoff_status_t {
 	DROPOFF_DONE = 2,
 	DROPOFF_RUNNING = 3,
 	DROPOFF_FAILED = 4,
@@ -104,14 +104,13 @@ typedef enum  {
 //we send 1 byte and recive 5x bytes
 // [cmd][x][x][y][y]
 // x,y is int16_t
-typedef enum {
+typedef enum _twi_cmd_nav_t {
 	XY1 = 0X50,
 	XY2 = 0X51,
 	SOCKETXY = 0X52,
 	SQUAREXY = 0X53,
 	GLASSXY = 0X54,
-	BOXGOALXY = 0X55,
-	TWI_ERROR=0x0
+	BOXGOALXY = 0X55
 } TwiCmdNav;
 
 

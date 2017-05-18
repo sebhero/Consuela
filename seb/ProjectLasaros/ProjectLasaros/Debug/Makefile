@@ -102,6 +102,7 @@ SUBDIRS :=  \
 ../src/ASF/thirdparty/wireless/addons/ \
 ../src/ASF/thirdparty/wireless/addons/sio2host/ \
 ../src/ASF/thirdparty/wireless/addons/sio2host/uart/ \
+../src/com/ \
 ../src/config/
 
 
@@ -109,7 +110,7 @@ SUBDIRS :=  \
 C_SRCS +=  \
 ../src/ASF/sam/drivers/twi/twi.c \
 ../src/ASF/sam/drivers/pwm/pwm.c \
-../src/Com.c \
+../src/com/Com.c \
 ../src/dummyFunc.c \
 ../src/Hjulreglering.c \
 ../src/Motorfunc.c \
@@ -157,7 +158,7 @@ ASM_SRCS +=
 OBJS +=  \
 src/ASF/sam/drivers/twi/twi.o \
 src/ASF/sam/drivers/pwm/pwm.o \
-src/Com.o \
+src/com/Com.o \
 src/dummyFunc.o \
 src/Hjulreglering.o \
 src/Motorfunc.o \
@@ -198,7 +199,7 @@ src/main.o
 OBJS_AS_ARGS +=  \
 src/ASF/sam/drivers/twi/twi.o \
 src/ASF/sam/drivers/pwm/pwm.o \
-src/Com.o \
+src/com/Com.o \
 src/dummyFunc.o \
 src/Hjulreglering.o \
 src/Motorfunc.o \
@@ -239,7 +240,7 @@ src/main.o
 C_DEPS +=  \
 src/ASF/sam/drivers/twi/twi.d \
 src/ASF/sam/drivers/pwm/pwm.d \
-src/Com.d \
+src/com/Com.d \
 src/dummyFunc.d \
 src/Hjulreglering.d \
 src/Motorfunc.d \
@@ -280,7 +281,7 @@ src/main.d
 C_DEPS_AS_ARGS +=  \
 src/ASF/sam/drivers/twi/twi.d \
 src/ASF/sam/drivers/pwm/pwm.d \
-src/Com.d \
+src/com/Com.d \
 src/dummyFunc.d \
 src/Hjulreglering.d \
 src/Motorfunc.d \
@@ -420,6 +421,13 @@ src/ASF/sam/drivers/twi/%.o: ../src/ASF/sam/drivers/twi/%.c
 	
 
 src/ASF/sam/drivers/pwm/%.o: ../src/ASF/sam/drivers/pwm/%.c
+	@echo Building file: $<
+	@echo Invoking: ARM/GNU C Compiler : 4.8.4
+	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\ARM GCC\Native\4.8.1443\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAM3X8E__ -DDEBUG -DBOARD=ARDUINO_DUE_X -Dscanf=iscanf -DARM_MATH_CM3=true -Dprintf=iprintf -D__SAM3X8E__ -D__FREERTOS__  -I"../common/applications/user_application/sam3x8e_arduino_due_x/config" -I"../src/ASF/sam/utils/cmsis/sam3x/include" -I"../src/config" -I"../src/ASF/thirdparty/CMSIS/Lib/GCC" -I"../src/ASF/common/utils" -I"../src" -I"../src/ASF/common/services/clock" -I"../src/ASF/common/services/gpio" -I"../src/ASF/sam/drivers/pmc" -I"../src/ASF/sam/utils" -I"../src/ASF/sam/utils/preprocessor" -I"../src/ASF/sam/boards" -I"../src/ASF/common/boards" -I"../src/ASF/sam/drivers/pio" -I"../src/ASF/sam/boards/arduino_due_x" -I"../src/ASF/sam/utils/header_files" -I"../src/ASF/sam/utils/cmsis/sam3x/source/templates" -I"../src/ASF/common/services/ioport" -I"../src/ASF/thirdparty/CMSIS/Include" -I"../src/ASF/sam/drivers/tc" -I"../src/ASF/thirdparty/freertos/freertos-7.3.0/source/include" -I"../src/ASF/thirdparty/freertos/freertos-7.3.0/source/portable/gcc/sam" -I"../src/ASF/sam/drivers/uart" -I"../src/ASF/common/services/serial/sam_uart" -I"../src/ASF/common/services/serial" -I"../src/ASF/common/utils/stdio/stdio_serial" -I"../src/ASF/sam/drivers/usart" -I"../src/ASF/thirdparty/wireless/addons/sio2host/uart" -I"../src/ASF/common/services/delay" -I"../src/ASF/sam/drivers/pwm" -I"../src/ASF/common/services/twi" -I"../src/ASF/sam/drivers/twi"  -O1 -fdata-sections -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m3 -c -pipe -fno-strict-aliasing -Wall -Wstrict-prototypes -Wmissing-prototypes -Werror-implicit-function-declaration -Wpointer-arith -std=gnu99 -ffunction-sections -fdata-sections -Wchar-subscripts -Wcomment -Wformat=2 -Wimplicit-int -Wmain -Wparentheses -Wsequence-point -Wreturn-type -Wswitch -Wtrigraphs -Wunused -Wuninitialized -Wunknown-pragmas -Wfloat-equal -Wundef -Wshadow -Wbad-function-cast -Wwrite-strings -Wsign-compare -Waggregate-return  -Wmissing-declarations -Wformat -Wmissing-format-attribute -Wno-deprecated-declarations -Wpacked -Wredundant-decls -Wnested-externs -Wlong-long -Wunreachable-code -Wcast-align --param max-inline-insns-single=500 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+src/com/%.o: ../src/com/%.c
 	@echo Building file: $<
 	@echo Invoking: ARM/GNU C Compiler : 4.8.4
 	$(QUOTE)C:\Program Files (x86)\Atmel\Atmel Toolchain\ARM GCC\Native\4.8.1443\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAM3X8E__ -DDEBUG -DBOARD=ARDUINO_DUE_X -Dscanf=iscanf -DARM_MATH_CM3=true -Dprintf=iprintf -D__SAM3X8E__ -D__FREERTOS__  -I"../common/applications/user_application/sam3x8e_arduino_due_x/config" -I"../src/ASF/sam/utils/cmsis/sam3x/include" -I"../src/config" -I"../src/ASF/thirdparty/CMSIS/Lib/GCC" -I"../src/ASF/common/utils" -I"../src" -I"../src/ASF/common/services/clock" -I"../src/ASF/common/services/gpio" -I"../src/ASF/sam/drivers/pmc" -I"../src/ASF/sam/utils" -I"../src/ASF/sam/utils/preprocessor" -I"../src/ASF/sam/boards" -I"../src/ASF/common/boards" -I"../src/ASF/sam/drivers/pio" -I"../src/ASF/sam/boards/arduino_due_x" -I"../src/ASF/sam/utils/header_files" -I"../src/ASF/sam/utils/cmsis/sam3x/source/templates" -I"../src/ASF/common/services/ioport" -I"../src/ASF/thirdparty/CMSIS/Include" -I"../src/ASF/sam/drivers/tc" -I"../src/ASF/thirdparty/freertos/freertos-7.3.0/source/include" -I"../src/ASF/thirdparty/freertos/freertos-7.3.0/source/portable/gcc/sam" -I"../src/ASF/sam/drivers/uart" -I"../src/ASF/common/services/serial/sam_uart" -I"../src/ASF/common/services/serial" -I"../src/ASF/common/utils/stdio/stdio_serial" -I"../src/ASF/sam/drivers/usart" -I"../src/ASF/thirdparty/wireless/addons/sio2host/uart" -I"../src/ASF/common/services/delay" -I"../src/ASF/sam/drivers/pwm" -I"../src/ASF/common/services/twi" -I"../src/ASF/sam/drivers/twi"  -O1 -fdata-sections -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m3 -c -pipe -fno-strict-aliasing -Wall -Wstrict-prototypes -Wmissing-prototypes -Werror-implicit-function-declaration -Wpointer-arith -std=gnu99 -ffunction-sections -fdata-sections -Wchar-subscripts -Wcomment -Wformat=2 -Wimplicit-int -Wmain -Wparentheses -Wsequence-point -Wreturn-type -Wswitch -Wtrigraphs -Wunused -Wuninitialized -Wunknown-pragmas -Wfloat-equal -Wundef -Wshadow -Wbad-function-cast -Wwrite-strings -Wsign-compare -Waggregate-return  -Wmissing-declarations -Wformat -Wmissing-format-attribute -Wno-deprecated-declarations -Wpacked -Wredundant-decls -Wnested-externs -Wlong-long -Wunreachable-code -Wcast-align --param max-inline-insns-single=500 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
