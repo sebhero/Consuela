@@ -183,8 +183,8 @@ void requestEvent() {
 // this function is registered as an event, see setup()
 void receiveEvent(int howMany) {
 //  Serial.println("Handling new cmd Req");
-  // Serial.print("how many: ");
-  // Serial.println(howMany);
+//   Serial.print("how many: ");
+//   Serial.println(howMany);
 
   if (3 <= howMany) {
     int i = 0;
@@ -192,8 +192,8 @@ void receiveEvent(int howMany) {
       recivedData[i] = (uint8_t) Wire.read();
       i++;
     }
-    Serial.print(recivedData[0],HEX);
-    Serial.println(" got cmd!");
+//    Serial.print(recivedData[0],HEX);
+//    Serial.println(" got cmd!");
 
     handleReadCmd();
   }

@@ -34,7 +34,7 @@ uint8_t sendArmCmd(uint8_t cmd);
 //uint8_t* reciveFromArm(uint8_t packageSize);
 uint8_t twiReciveData(uint8_t* package,uint8_t packageSize);
 
-arminfo_t twi_getArmInfo();
+arminfo_t twi_getArmInfo(void);
 
 void twi_changeSlave(uint32_t slave_address);
 //start pickup

@@ -23,8 +23,8 @@
 // 'scaling' ?r allts? (3.64 * 2) / 0.34 = 214.
 #define scaling 214;
 extern uint8_t WITHIN_RANGE_FLAG;
-extern unsigned long distanceUltraSensor;
-extern uint8_t angleUltraSensor;
+extern int distanceUltraSensor;
+extern int angleUltraSensor;
 
 long pulseIn(void);
 

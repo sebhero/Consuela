@@ -12,22 +12,36 @@
 #include <math.h>
 #include <stdio_serial.h>
 #include "motorFunc.h"
+#include "pulseCounterHandler.h"
 
-#define sock_x 133
-#define sock_y 186
-#define glass_x 23
-#define glass_y 382
-#define cube_x 472
-#define cube_y 23
-#define dropOff_x 478
-#define dropOff_y 371
+#define sock_x 136
+#define sock_y 200
+#define glass_x 56
+#define glass_y 362
+#define cube_x 434
+#define cube_y 35
+#define dropOff_x 451
+#define dropOff_y 350
 #define PI 3.141592
 
-extern uint16_t x1_pos;
-extern uint16_t y1_pos;
-extern int currentAngle;
+//Temporary
+typedef enum _object_t {
+	SOCK = 2,
+	SQUARE = 3,
+	GLASS = 4
+} Object;
 
-void callForData(uint16_t,uint16_t);
+extern int x1_pos;
+extern int y1_pos;
+
+void setObject(Object obj,int x, int y);
+void setCollectAll(uint8_t getAll);
+void setDonePickup(void);
+void setDropoffDone(void);
+uint8_t goToNext();
+void setPath(void);
+
+void initNav(void);
 void calcMidPos(void);
 double distanceToPosition(uint8_t obj);
 void updatePos(double hyp);

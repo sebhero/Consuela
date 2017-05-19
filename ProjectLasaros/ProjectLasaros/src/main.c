@@ -11,7 +11,7 @@
 #include "conf_board.h"
 #include "pulseCounterHandler.h"
 #include "pulse.h"
-#include "Motorfunc.h"
+#include "MotorfuncViktor.h"
 #include "Hjulreglering.h"
 #include "navigation.h"
 #include "ultra_servo.h"
@@ -23,6 +23,10 @@ xTaskHandle *pxTaskDriveToObject;
 xTaskHandle *pxTaskUltraSensor;
 xTaskHandle *pxTaskCommunication;
 
+void vUltraSensorTask(void *pvParam);
+void vDriveToObjectTask(void *pvParam);
+void vCommunicationTask(void *pvParam);
+
 #define D7  IOPORT_CREATE_PIN(PIOC, 23)
 
 uint8_t booleanDriving = 0;
@@ -33,8 +37,7 @@ uint8_t booleanModifyPosition = 0;
 #define pulseh_ch 0
 #define pulsev_ch 1
 
-// uint8_t nextPos = 0;
-// uint8_t prevPos = 0;
+double distanceToMove;
 
 enum twi_states{
 	INIT_ARM,
@@ -52,6 +55,7 @@ TWI_state next_twi_state;
 static arminfo_t armInfo;
 static void adjustPositionDuringPickup(void);
 
+
 //handles driving the robot to next object/goalbox
 void vDriveToObjectTask(void *pvParam) {
 	
@@ -63,32 +67,26 @@ void vDriveToObjectTask(void *pvParam) {
 			//do moving
 			uint8_t gotoVal = goToNext();
 			if(gotoVal==1)
-			{
-				
+			{	
 				booleanDriving = 0;
 				booleanCommunication = 0;
 				booleanUltraSensor = 1;
 				booleanModifyPosition = 0;
 				current_twi_state = START_PICKUP; 
 				puts("GOTO PICKUP FROM DRIVE");
-				delay_ms(2000);
 
 			}
 			else if(gotoVal == 2)
 			{
-				
-
 				booleanDriving = 0;
 				booleanCommunication = 0;
 				booleanUltraSensor = 1;
 				booleanModifyPosition = 0;
 				current_twi_state = START_DROP_OFF; 
 				puts("GOTO DROPOFF FROM DRIVE");
-				delay_ms(2000);
 
 			}
 			printf("\nGotoVal = %u", gotoVal);
-			delay_ms(1000);
 			
 		}
 		else
@@ -115,24 +113,22 @@ void vUltraSensorTask(void *pvParam) {
 			//todo end del
 			
 			//todo uncomment real code
-// 			for (uint8_t i = 0; i < 180; i++)
-// 			{
-// 				testingUltraSound();
-// 				if (WITHIN_RANGE_FLAG == 1)
-// 				{
-// 					printf("Detected object");
-// 					booleanModifyPosition = 1;
-// 				}
-// 			}
+ 			//for (uint8_t i = 0; i <= 180; i++)
+ 			//{
+ 				//testingUltraSound();
+ 				//if (WITHIN_RANGE_FLAG == 1)
+ 				//{
+ 					//printf("Detected object");
+ 					//booleanModifyPosition = 1;
+ 				//}
+			//}
 
-			//When still locating
-			//booleanUltraSensor == 1 && booleanCommunication == 0 && booleanDriving == 0
-			
-			//when located
 			booleanModifyPosition=1;
 			if (booleanModifyPosition == 1)
 			{
-				//TODO: rotate, drive backwards/forwards
+				
+				
+				forwardDrive(distanceUltraSensor);
 				//activate twi communication
 				printf("Modifying driving\n");
 				booleanDriving=0;
@@ -167,6 +163,7 @@ void vCommunicationTask(void *pvParam)
 			{
 				case INIT_ARM:
 					puts("INIT_ARM");
+					/*
 					armInfo = twi_getArmInfo();	
 					if(armInfo.hasData)
 					{
@@ -180,7 +177,9 @@ void vCommunicationTask(void *pvParam)
 					else
 					{
 						puts("INIT ARM NO DATA");
-					}					
+					}*/
+					booleanCommunication = 0;
+					booleanDriving = 1;					
 				break;
 				case START_PICKUP:
 					
@@ -344,7 +343,7 @@ int main (void)
 	uint32_t value = 0;
 	
 	current_twi_state = INIT_ARM;
-	
+
 	ioport_init();
 	ioport_set_pin_dir(D7, IOPORT_DIR_OUTPUT);
 	
@@ -365,16 +364,13 @@ int main (void)
 		printf("Failed to create Communication-task");
 	}
 	
-// 	nextPos = 0;
-// 	prevPos = 0;
-// 	
 	booleanDriving = 0;
 	booleanUltraSensor = 0;
 	booleanModifyPosition = 0;
 	booleanCommunication = 1;
 	
 	vTaskStartScheduler();
-	
+
 	while (1)
 	{
 		/*

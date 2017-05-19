@@ -7,7 +7,6 @@
 
 #include <asf.h>
 #include "Hjulreglering.h"
-#include "motorFunc.h"
 #include "pulseCounterHandler.h"
 #include "pulse.h"
 
@@ -30,7 +29,6 @@ uint8_t foo = 1;
 #define pulsev_timer 1
 uint32_t periodv = 1660; //1660 getpå v hjul ger runt 1700
 uint32_t periodh = 1700;
-
 
 /*
 void reglerahjul(int ek){
@@ -106,7 +104,7 @@ void reglerahjul3(int ek){
 	
 	
 	int uk = kP * (ek + i_del + d_del); //pid-regleringen
-	periodv + uk;
+	periodv += uk;
 	pulse_set_period(pulsev_ch, periodv); 
 	pulse_set_period(pulseh_ch, periodh); 
 	
