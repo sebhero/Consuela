@@ -7,17 +7,17 @@
 #include <asf.h>
 #include <inttypes.h>
 #include <FreeRTOSConfig.h>
-#include "TimerCounter.h"
+#include "allt/TimerCounter.h"
 #include "conf_board.h"
-#include "pulseCounterHandler.h"
-#include "pulse.h"
-#include "MotorfuncViktor.h"
-#include "Hjulreglering.h"
-#include "navigation.h"
-#include "ultra_servo.h"
-#include "TwiComHandler.h"
-#include "Com.h"
-#include "dummyFunc.h"
+#include "allt/pulseCounterHandler.h"
+#include "allt/pulse.h"
+#include "allt/MotorfuncViktor.h"
+#include "allt/Hjulreglering.h"
+#include "allt/navigation.h"
+#include "allt/ultra_servo.h"
+#include "com/TwiComHandler.h"
+#include "com/Com.h"
+#include "mockup/dummyFunc.h"
 
 xTaskHandle *pxTaskDriveToObject;
 xTaskHandle *pxTaskUltraSensor;
@@ -163,23 +163,25 @@ void vCommunicationTask(void *pvParam)
 			{
 				case INIT_ARM:
 					puts("INIT_ARM");
-					/*
 					armInfo = twi_getArmInfo();	
 					if(armInfo.hasData)
 					{
-						booleanCommunication = 0;
-						booleanDriving = 1;						
+						//todo set to 0
+						booleanCommunication = 1;
+						//todo set to 1
+						booleanDriving = 0;						
 						//todo remove						
 						printf("init arm done\n");
 						printf("arminfo: %u %u %u %u all: %u",armInfo.boxAngle, armInfo.boxDistance, armInfo.objectAngle, armInfo.objectDistance,armInfo.collectAll);
 						setGetAll(armInfo.collectAll);
+						
+						//todo del
+						current_twi_state = START_PICKUP;
 					}
 					else
 					{
 						puts("INIT ARM NO DATA");
-					}*/
-					booleanCommunication = 0;
-					booleanDriving = 1;					
+					}				
 				break;
 				case START_PICKUP:
 					
@@ -233,8 +235,14 @@ void vCommunicationTask(void *pvParam)
 							
 							booleanUltraSensor=0;
 							booleanModifyPosition=0;
-							booleanCommunication=0;
-							booleanDriving=1;
+							//todo set to 0
+							booleanCommunication=1;
+							//todo set to 1
+							booleanDriving=0;
+							
+							
+							//todo del
+							current_twi_state=START_DROP_OFF;
 							
 						break;						
 						case PICKUP_FORWARD:
@@ -245,8 +253,9 @@ void vCommunicationTask(void *pvParam)
 							//if we needed to drive during pickup, check if driving is done
 							adjustPositionDuringPickup();
 							twi_pickupSendMovementDone();
-							current_twi_state = PICKUP_DONE_DRIVE;
+							
 						break;
+						
 						default:
 						//printf("UNHANDLED PICKUP STATUS: %x\n",status);
 						break;
@@ -281,7 +290,8 @@ void vCommunicationTask(void *pvParam)
 							booleanUltraSensor=0;
 							booleanModifyPosition=0;
 							booleanCommunication=0;
-							booleanDriving=0;
+							
+							booleanDriving=1;
 						break;
 						case DROPOFF_RUNNING:
 							printf("DROPOFF_RUNNING\n");
@@ -295,10 +305,13 @@ void vCommunicationTask(void *pvParam)
 					}				
 				break;
 				case IDLE:
-				puts("IDLE");
+					puts("IDLE");
 				break;
 				default:
-				printf("failed twi switch %d\n",current_twi_state);
+					printf("failed twi switch %d\n",current_twi_state);
+					char xx[255];
+					scanf(xx);
+				break;
 			}
 			//end of current_twi_state
 		} 
