@@ -6,7 +6,7 @@
  */ 
 #include <inttypes.h>
 #include "dummyFunc.h"
-#include "navigation.h"
+#include "driving/navigation.h"
 #include "../com/TwiComHandler.h"
 
 int _getall = 0;

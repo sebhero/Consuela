@@ -560,6 +560,10 @@
     <Folder Include="src\ASF\thirdparty\wireless\addons\sio2host\uart\" />
     <Folder Include="src\com\" />
     <Folder Include="src\config\" />
+    <Folder Include="src\driving" />
+    <Folder Include="src\counters" />
+    <Folder Include="src\mockups" />
+    <Folder Include="src\ultrasound" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src\ASF\sam\drivers\twi\twi.c">
@@ -592,58 +596,58 @@
     <Compile Include="src\com\TwiComHandler.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\dummyFunc.c">
+    <Compile Include="src\counters\RealTimeTimer.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\dummyFunc.h">
+    <Compile Include="src\counters\RealTimeTimer.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\Hjulreglering.c">
+    <Compile Include="src\counters\TimerCounter.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\Hjulreglering.h">
+    <Compile Include="src\counters\TimerCounter.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\Motorfunc.c">
+    <Compile Include="src\driving\Hjulreglering.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\Motorfunc.h">
+    <Compile Include="src\driving\Hjulreglering.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\navigation.c">
+    <Compile Include="src\driving\Motorfunc.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\navigation.h">
+    <Compile Include="src\driving\Motorfunc.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\pulse.c">
+    <Compile Include="src\driving\navigation.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\pulse.h">
+    <Compile Include="src\driving\navigation.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\pulseCounterHandler.c">
+    <Compile Include="src\driving\pulse.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\pulseCounterHandler.h">
+    <Compile Include="src\driving\pulse.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\RealTimeTimer.c">
+    <Compile Include="src\driving\pulseCounterHandler.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\RealTimeTimer.h">
+    <Compile Include="src\driving\pulseCounterHandler.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\TimerCounter.c">
+    <Compile Include="src\mockups\dummyFunc.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\TimerCounter.h">
+    <Compile Include="src\mockups\dummyFunc.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\ultra_servo.c">
+    <Compile Include="src\ultrasound\ultra_servo.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="src\ultra_servo.h">
+    <Compile Include="src\ultrasound\ultra_servo.h">
       <SubType>compile</SubType>
     </Compile>
     <None Include="src\ASF\sam\drivers\pwm\pwm.h">

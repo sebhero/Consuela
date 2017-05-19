@@ -35,17 +35,17 @@
 //#include "semphr.h"
 //#include "FreeRTOSConfig.h"
 #include "asf.h"
-#include "TimerCounter.h"
+#include "counters/TimerCounter.h"
 #include "conf_board.h"
-#include "pulseCounterHandler.h"
-#include "pulse.h"
-#include "Motorfunc.h"
-#include "Hjulreglering.h"
-#include "navigation.h"
-#include "ultra_servo.h"
-#include "../com/TwiComHandler.h"
-#include "../com/Com.h"
-#include "dummyFunc.h"
+#include "driving/pulseCounterHandler.h"
+#include "driving/pulse.h"
+#include "driving/Motorfunc.h"
+#include "driving/Hjulreglering.h"
+#include "driving/navigation.h"
+#include "ultrasound/ultra_servo.h"
+#include "com/TwiComHandler.h"
+#include "com/Com.h"
+#include "mockups/dummyFunc.h"
 
 
 
@@ -101,14 +101,28 @@ PickupStatus prevTwiPickupStatus;
 
 //static arminfo_t armInfo;
 
-static void adjustPositionDuringPickup(void);
-static void adjustPosition(void);
+static uint8_t adjustPositionDuringPickup(void);
+static uint8_t adjustPosition(void);
 void vDriveToObjectTask(void *pvParam);
 void vUltraSensorTask(void *pvParam);
 void vCommunicationTask(void *pvParam);
 
 static void configure_console(void);
 
+
+void twi_test_getArminfo()
+{
+	puts("REQ arm info");
+	//vTaskDelay(pdMSTOTICKS(20));
+	
+	//test get armInfo
+	arminfo_t armInfo = twi_getArmInfo();
+	if(armInfo.hasData)
+	{
+		printf("armInfo: boxA: %d boxD: %d objA %d objD %d col: %d",armInfo.boxAngle,armInfo.boxDistance, armInfo.objectAngle, armInfo.objectDistance, armInfo.collectAll);
+		//vTaskDelay(pdMSTOTICKS(20));
+	}
+}
 
 int main(void) {
 	/* Insert system clock initialization code here (sysclk_init()). */
@@ -117,7 +131,7 @@ int main(void) {
 	configure_console();
 	TC0_init();
 	//init twi communication
-	twi_comInit();
+	twi_comInit();	
 
 	//armInfo = twi_getArmInfo();
 
@@ -282,6 +296,7 @@ void vUltraSensorTask(void *pvParam) {
 				booleanModifyPosition = 0;
 				//start pickup. goto communication
 				booleanCommunication = 1;
+				//todo was here
 
 			}
 		} else {
@@ -292,7 +307,7 @@ void vUltraSensorTask(void *pvParam) {
 }
 
 //adjust position during pickup
-static void adjustPositionDuringPickup() {
+static uint8_t adjustPositionDuringPickup() {
 	printf("\nAdjusting position during pickup!!!\n");
 }
 

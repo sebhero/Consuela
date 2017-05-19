@@ -8,23 +8,23 @@ src\ASF\sam\drivers\pwm\pwm.c
 
 src\com\Com.c
 
-src\dummyFunc.c
+src\counters\RealTimeTimer.c
 
-src\Hjulreglering.c
+src\counters\TimerCounter.c
 
-src\Motorfunc.c
+src\driving\Hjulreglering.c
 
-src\navigation.c
+src\driving\Motorfunc.c
 
-src\pulse.c
+src\driving\navigation.c
 
-src\pulseCounterHandler.c
+src\driving\pulse.c
 
-src\RealTimeTimer.c
+src\driving\pulseCounterHandler.c
 
-src\TimerCounter.c
+src\mockups\dummyFunc.c
 
-src\ultra_servo.c
+src\ultrasound\ultra_servo.c
 
 src\ASF\common\services\delay\sam\cycle_counter.c
 

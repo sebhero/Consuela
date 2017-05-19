@@ -6,10 +6,10 @@
  */ 
 
 #include <asf.h>
-#include "Hjulreglering.h"
-#include "motorFunc.h"
-#include "pulseCounterHandler.h"
-#include "pulse.h"
+#include "driving/Hjulreglering.h"
+#include "driving/motorFunc.h"
+#include "driving/pulseCounterHandler.h"
+#include "driving/pulse.h"
 
 //uint16_t bS= baseSpeed;
 //uint16_t bSL= baseSpeedLeft;

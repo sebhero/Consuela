@@ -5,8 +5,8 @@
  *  Author: Viktor
  */ 
 #include <asf.h>
-#include "pulseCounterHandler.h"
-#include "pulse.h"
+#include "driving/pulseCounterHandler.h"
+#include "driving/pulse.h"
 
 #define pulseh_ch 0
 #define pulsev_ch 1
