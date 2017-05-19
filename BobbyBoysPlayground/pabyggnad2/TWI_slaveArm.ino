@@ -19,7 +19,6 @@ typedef struct ArmInfo {
 
 //TWI state
 typedef enum TWI_CMD {
-
   TWI_CMD_ARM_INIT = 0x20,
   TWI_CMD_DROPOFF_START = 0x21,
   TWI_CMD_PICKUP_START = 0x22,
