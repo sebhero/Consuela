@@ -31,10 +31,10 @@ typedef enum _object_t {
 	GLASS = 4
 } Object;
 
-extern uint16_t x1_pos;
-extern uint16_t y1_pos;
+extern int x1_pos;
+extern int y1_pos;
 
-void setObject(Object obj,uint16_t x, uint16_t y);
+void setObject(Object obj,int x, int y);
 void setCollectAll(uint8_t getAll);
 void setDonePickup(void);
 void setDropoffDone(void);
@@ -42,7 +42,6 @@ uint8_t goToNext();
 void setPath(void);
 
 void initNav(void);
-void callForData(uint16_t,uint16_t);
 void calcMidPos(void);
 double distanceToPosition(uint8_t obj);
 void updatePos(double hyp);

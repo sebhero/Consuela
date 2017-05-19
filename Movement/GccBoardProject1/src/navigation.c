@@ -13,10 +13,10 @@
 
 //Start of variables
 //Coordinates of the platform
-uint16_t x1_pos = 0;
-uint16_t y1_pos = 0;
-uint16_t x2_pos = 0;
-uint16_t y2_pos = 0;
+int x1_pos = 0;
+int y1_pos = 0;
+int x2_pos = 0;
+int y2_pos = 0;
 
 //Can be removed?
 double tempVariabel;
@@ -52,17 +52,17 @@ int angleTemp;
 
 
 //Variables for the former position of the platform
-uint16_t last_x;
-uint16_t last_y;
+int last_x;
+int last_y;
 
 //Mid values of the platform, will be x1 and y1 if only one set of coordinates is given
-static uint16_t mid_x;
-static uint16_t mid_y;
+int mid_x;
+int mid_y;
 
 //Struct used to define objects/positions
 typedef struct {
-	uint16_t x_pos;
-	uint16_t y_pos;
+	int x_pos;
+	int y_pos;
 	uint8_t name;
 	} object_pos_t;
 
@@ -92,7 +92,7 @@ object_pos_t objects[] = {
 };*/
 object_pos_t objects[8];
 
-void setObject(Object obj, uint16_t x, uint16_t y){
+void setObject(Object obj, int x, int y){
 	switch(obj){
 		case SOCK:
 		objects[2].x_pos = x;
