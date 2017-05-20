@@ -1,0 +1,96 @@
+/*
+ * Com.h
+ *
+ * Created: 2017-05-09 12:40:28
+ *  Author: trevl
+ */ 
+
+
+#ifndef COM_H_
+#define COM_H_
+
+#include "asf.h"
+#include <stdint.h>
+
+#define TWI_STANDARD_MODE_SPEED 100000U
+#define TWI_FAST_MODE_SPEED 400000U
+
+#define SLAVE_ADDR 0x02 //twi slave FOR ARM
+#define SLAVE_ADDR_NAV 0x03 //twi slave FOR NAVIGATION
+
+#define TWI_SPEED TWI_STANDARD_MODE_SPEED
+
+
+
+//TWI state
+typedef enum TWI_CMD {
+
+	//INIT REQ
+	TWI_CMD_ARM_INIT = 					0x20,
+	TWI_CMD_ARM_REQ_BOX_INFO = 			1,
+	TWI_CMD_ARM_REQ_OBJ_INFO = 			2,
+	TWI_CMD_ARM_REQ_COLLECT_INFO = 		3,
+
+	TWI_CMD_PICKUP_START= 				0x22,
+	TWI_CMD_PICKUP_STATUS= 				0x24,
+	TWI_CMD_DROPOFF_START= 				0x21,
+	TWI_CMD_DROPOFF_STATUS=				0x23,
+	TWI_CMD_ERROR=						0x25,
+} twi_cmd;
+
+typedef struct ArmInfo{
+	uint8_t boxDistance;
+	uint8_t boxAngle;
+	uint8_t objectDistance;
+	uint8_t objectAngle;
+	//Boolean. true that arm can collect all obj. then dropoff
+	//false if need to dropoff each obj. after pickup
+	uint8_t collectAll;
+
+}armInfo;
+
+typedef enum PICKUPSTATUS{
+	PICKUP_DONE,
+	PICKUP_FORWARD,
+	PICKUP_BACKWARD,
+	PICKUP_RUNNING,
+	PICKUP_FAILED,
+	PICKUP_DONE_DRIVE
+}PICKUP_STATUS;
+
+typedef enum DROPOFFSTATUS{
+	DROPOFF_DONE,
+	DROPOFF_RUNNING,
+	DROPOFF_FAILED
+}DROPOFF_STATUS;
+
+typedef enum object{
+	SOCK,
+	SQUARE,
+	GLASS
+}OBJECT;
+
+armInfo theArmInfo;
+
+void initTwi(void);
+
+//Send data to Arm with TWI
+//data holds the data, dataLength is how many bytes the data is.
+uint8_t sendArm(uint8_t* data,int dataLength);
+uint8_t sendArmCmd(uint8_t cmd);
+
+uint8_t twi_writeReadCmd(uint8_t* sendData,uint8_t* reciveData);
+uint8_t twi_writeCmd(uint8_t* data);
+uint8_t twi_read(uint8_t *reciveData);
+
+//Recive data from ARM with TWI
+//recives and prints the data out on Uart.
+//packageSize how many bytes expected to recive
+//returns the data recived as array.
+//uint8_t* reciveFromArm(uint8_t packageSize);
+uint8_t reciveFromArm(uint8_t* package,uint8_t packageSize);
+
+//prints out the command
+void handleCmd(uint8_t cmd);
+
+#endif /* COM_H_ */

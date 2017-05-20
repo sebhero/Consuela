@@ -53,9 +53,9 @@ typedef enum {
 
 typedef enum {
   //retuns distance to box goal, and angle to set robot for dropoff
-  TWI_CMD_ARM_REQ_BOX_INFO = 2,
+      TWI_CMD_ARM_REQ_BOX_INFO = 2,
   //returns distance to object and angle for collect
-  TWI_CMD_ARM_REQ_OBJ_INFO = 3,
+      TWI_CMD_ARM_REQ_OBJ_INFO = 3,
   TWI_CMD_ARM_REQ_COLLECT_INFO = 4
 } TwiCmdInitReq;
 
@@ -109,27 +109,15 @@ DropoffStatus txDropoffStatus;
 uint8_t run;
 
 
-//todo dummy
-int movedArmDown;
-int movedArmUp;
-
-//int breakPin = 9;
-int directionPin = 12;
-int pwmPin = 3;
-int breakTop = 4;
-int breakBot = 7;
-int onoffPin = 2;
-
 void handleReadCmd() {
 
   //data to send
   //uint8_t data[3] = {};
-  //Serial.println("handleReadCmd");
+Serial.println("handleReadCmd");
+
 
   uint8_t cmd = recivedData[0];
-  Serial.print("cmd = ");
-  Serial.println(cmd);
-
+  
 
   switch (cmd) {
     case TWI_CMD_ARM_INIT:
@@ -157,41 +145,37 @@ void handleReadCmd() {
       break;
     case TWI_CMD_DROPOFF_START:
       //todo implement
-      //      //Serial.println("TWI_CMD_DROPOFF_START");
-      //      //set nextstate to dropoff in FSM
-      //      rxCurrent = (TwiCmd) cmd;
-      //      //rxDropoffStatus = DROPOFF_RUNNING;
-      //      txBuff[0] = cmd;
-      //      txBuff[1] = rxDropoffStatus;
+//      //Serial.println("TWI_CMD_DROPOFF_START");
+//      //set nextstate to dropoff in FSM
+//      rxCurrent = (TwiCmd) cmd;
+//      //rxDropoffStatus = DROPOFF_RUNNING;
+//      txBuff[0] = cmd;
+//      txBuff[1] = rxDropoffStatus;
       break;
     case TWI_CMD_PICKUP_START:
-      //Serial.println("TWI_CMD_PICKUP_START");
+      Serial.println("TWI_CMD_PICKUP_START");
       //start pickup in FSM, mainloop
       rxNext = (TwiCmd) cmd;
       //txPickupStatus = PICKUP_RUNNING;
       rxPickupStatus = PICKUP_RUNNING;
       txBuff[0] = TWI_CMD_PICKUP_STATUS;
       txBuff[1] = txPickupStatus;
-
       break;
 
     case TWI_CMD_PICKUP_STATUS:
-      //Serial.println("TWI_CMD_PICKUP_STATUS");
-      rxNext = (TwiCmd) cmd;
+      Serial.println("TWI_CMD_PICKUP_STATUS");
       if (recivedData[1] == PICKUP_DONE_DRIVE) {
         rxPickupStatus = (PickupStatus) recivedData[1];
       }
       txBuff[0] = TWI_CMD_PICKUP_STATUS;
       txBuff[1] = txPickupStatus;
-      Serial.print("Send status= ");
-      Serial.println(txPickupStatus);
       break;
 
     case TWI_CMD_DROPOFF_STATUS:
       //todo implement
-      //      //Serial.println("TWI_CMD_DROPOFF_STATUS");
-      //      txBuff[0] = cmd;
-      //      txBuff[1] = rxDropoffStatus;
+//      //Serial.println("TWI_CMD_DROPOFF_STATUS");
+//      txBuff[0] = cmd;
+//      txBuff[1] = rxDropoffStatus;
 
       break;
 
@@ -214,7 +198,7 @@ void requestEvent() {
   //Serial.println(txBuff[0],HEX);
   //Serial.println(txBuff[1]);
   //Serial.println(txBuff[2]);
-  //todo del
+//todo del
 
   Wire.write(txBuff, 3);
 
@@ -224,10 +208,6 @@ void requestEvent() {
     txPickupStatus = PICKUP_IDLE;
     rxDropoffStatus = DROPOFF_IDLE;
     rxCurrent = IDLE;
-
-    //todo remove
-    movedArmDown = 0;
-    movedArmUp = 0;
   }
   //reset states
   if (txBuff[0] == DROPOFF_DONE) {
@@ -242,34 +222,22 @@ void requestEvent() {
   txBuff[2] = 0;
 
 
-  //end of request
+//end of request
 }
 
 
 // function that executes whenever data is received from master
 // this function is registered as an event, see setup()
 void receiveEvent(int howMany) {
-  //  Serial.println("Handling new cmd Req");
-  //   Serial.print("how many: ");
-  //   Serial.println(howMany);
-
-
+//  Serial.println("Handling new cmd Req");
+   Serial.print("how many: ");
+   Serial.println(howMany);
 
   if (3 <= howMany) {
-    int temp = 0;
     int i = 0;
-    temp = Wire.read();
-    if (temp != 0) {
-      recivedData[i] = (uint8_t) temp;
-      i++;
-    } else {
-      Serial.println("got Zero");
-    }
     while (Wire.available()) {
-
       recivedData[i] = (uint8_t) Wire.read();
       i++;
-
     }
 
     handleReadCmd();
@@ -277,13 +245,16 @@ void receiveEvent(int howMany) {
 
   //if its a command from master.
   if (howMany <= 1) {
-    Serial.println(Wire.read());    // receive byte as an integer
-    Serial.println("on or less");
-
+    Wire.read();    // receive byte as an integer
+    //Serial.println("on or less");
 
   }
-  //end of receive
+//end of receive
 }
+
+//todo dummy
+int movedArmDown;
+int movedArmUp;
 
 
 void setup() {
@@ -293,11 +264,6 @@ void setup() {
   Serial.begin(9600);           // start serial for output
 
   run = 1;
-
-  pinMode(directionPin, OUTPUT);
-  pinMode(breakBot, INPUT_PULLUP);
-  pinMode(breakTop, INPUT_PULLUP);
-  pinMode(onoffPin, OUTPUT);
 
   theArm.boxDistance = 30;//cm to goalbox
   theArm.boxAngle = 20;//infront angle
@@ -318,46 +284,9 @@ void setup() {
   //todo remove end
 
   //cmds that got in -> state for arm
-  Serial.println("SETUP DONE");
+Serial.println("SETUP DONE");
 }
 
-
-void startMotor() {
-  digitalWrite(onoffPin, HIGH);
-  Serial.println("START SUG");
-}
-/*
-   Stops the vacuum motor
-*/
-void stopMotor() {
-  digitalWrite(onoffPin, LOW);
-  Serial.print("STOPP SUG");
-}
-
-void down() {
-  while (digitalRead(breakBot)) {
-    digitalWrite(directionPin, HIGH);
-    analogWrite(pwmPin, 75);
-    Serial.println("NED");
-  }
-  stopMovement();
-}
-
-void up() {
-  while (digitalRead(breakTop)) {
-    Serial.println("UPP");
-    digitalWrite(directionPin, LOW);
-    analogWrite(pwmPin, 130);
-  }
-  stopMovement();
-}
-/*
-   Stops the movement of the arm
-*/
-void stopMovement() {
-  analogWrite(pwmPin, 0);
-  Serial.println("STOP MOVEMENT");
-}
 
 void loop() {
   //check if we are done
@@ -371,28 +300,40 @@ void loop() {
         //do nottin
         break;
       case TWI_CMD_PICKUP_START:
-          txPickupStatus = PICKUP_RUNNING;
+        Serial.println("TWI_CMD_PICKUP_START");
+        txPickupStatus = PICKUP_RUNNING;
+        movedArmDown++;
+        Serial.println("txPickupStatus= PICKUP_RUNNING");
         break;
 
       case TWI_CMD_PICKUP_STATUS:
-        //Serial.println("TWI_CMD_PICKUP_STATUS");
-        
-        txPickupStatus = PICKUP_RUNNING;
-        Serial.println("PICKUP_RUNNING");
-        
-        down();
-        startMotor();
-        delay(3000);
-        up();
-        delay(3000);
+        Serial.println("TWI_CMD_PICKUP_STATUS");
+        movedArmDown++;
+        if (movedArmDown >= 100) {
+          //arm is donw move frwd
+          txPickupStatus = PICKUP_FORWARD;
+          Serial.println("txPickupStatus= PICKUP_FORWARD");
+        }
 
-        txPickupStatus = PICKUP_DONE;
-         Serial.println("PICKUP_DONE");
+        //wait for done moving
+        if (rxPickupStatus == PICKUP_DONE_DRIVE) {
+          Serial.println("rxPickupStatus= PICKUP_DONE_DRIVE");
+          movedArmUp++;
+          txPickupStatus = PICKUP_RUNNING;
+          Serial.println("txPickupStatus= PICKUP_RUNNING");
+        }
+
+        if (movedArmUp >= 100) {
+          //we are done
+          txPickupStatus = PICKUP_DONE;
+          Serial.println("txPickupStatus= PICKUP_DONE");
+          //twi resets status to idle in
+          //requestEvent()
+        }
         break;
 
       case TWI_CMD_DROPOFF_START:
 
-        stopMotor();
         break;
 
       case TWI_CMD_DROPOFF_STATUS:
@@ -406,7 +347,7 @@ void loop() {
         break;
     }
 
-    //delay(100);
+    delay(100);
     rxCurrent = rxNext;
   }
 

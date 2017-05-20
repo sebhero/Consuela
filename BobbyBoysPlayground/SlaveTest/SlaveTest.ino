@@ -41,7 +41,6 @@ typedef struct {
 
 //TWI state
 typedef enum {
-
   TWI_CMD_ARM_INIT = 0x20,
   TWI_CMD_DROPOFF_START = 0x21,
   TWI_CMD_PICKUP_START = 0x22,
@@ -53,9 +52,9 @@ typedef enum {
 
 typedef enum {
   //retuns distance to box goal, and angle to set robot for dropoff
-  TWI_CMD_ARM_REQ_BOX_INFO = 2,
+      TWI_CMD_ARM_REQ_BOX_INFO = 2,
   //returns distance to object and angle for collect
-  TWI_CMD_ARM_REQ_OBJ_INFO = 3,
+      TWI_CMD_ARM_REQ_OBJ_INFO = 3,
   TWI_CMD_ARM_REQ_COLLECT_INFO = 4
 } TwiCmdInitReq;
 
@@ -113,18 +112,11 @@ uint8_t run;
 int movedArmDown;
 int movedArmUp;
 
-//int breakPin = 9;
-int directionPin = 12;
-int pwmPin = 3;
-int breakTop = 4;
-int breakBot = 7;
-int onoffPin = 2;
-
 void handleReadCmd() {
 
   //data to send
   //uint8_t data[3] = {};
-  //Serial.println("handleReadCmd");
+//Serial.println("handleReadCmd");
 
   uint8_t cmd = recivedData[0];
   Serial.print("cmd = ");
@@ -157,18 +149,18 @@ void handleReadCmd() {
       break;
     case TWI_CMD_DROPOFF_START:
       //todo implement
-      //      //Serial.println("TWI_CMD_DROPOFF_START");
-      //      //set nextstate to dropoff in FSM
-      //      rxCurrent = (TwiCmd) cmd;
-      //      //rxDropoffStatus = DROPOFF_RUNNING;
-      //      txBuff[0] = cmd;
-      //      txBuff[1] = rxDropoffStatus;
+      Serial.println("TWI_CMD_DROPOFF_START");
+      //set nextstate to dropoff in FSM
+      rxNext = (TwiCmd) cmd;
+      //rxDropoffStatus = DROPOFF_RUNNING;
+      txBuff[0] = cmd;
+      txBuff[1] = rxDropoffStatus;
       break;
     case TWI_CMD_PICKUP_START:
-      //Serial.println("TWI_CMD_PICKUP_START");
+      Serial.println("TWI_CMD_PICKUP_START");
       //start pickup in FSM, mainloop
       rxNext = (TwiCmd) cmd;
-      //txPickupStatus = PICKUP_RUNNING;
+      txPickupStatus = PICKUP_RUNNING;
       rxPickupStatus = PICKUP_RUNNING;
       txBuff[0] = TWI_CMD_PICKUP_STATUS;
       txBuff[1] = txPickupStatus;
@@ -176,25 +168,23 @@ void handleReadCmd() {
       break;
 
     case TWI_CMD_PICKUP_STATUS:
-      //Serial.println("TWI_CMD_PICKUP_STATUS");
+      Serial.println("TWI_CMD_PICKUP_STATUS");
       rxNext = (TwiCmd) cmd;
       if (recivedData[1] == PICKUP_DONE_DRIVE) {
         rxPickupStatus = (PickupStatus) recivedData[1];
       }
       txBuff[0] = TWI_CMD_PICKUP_STATUS;
       txBuff[1] = txPickupStatus;
-      Serial.print("Send status= ");
-      Serial.println(txPickupStatus);
+      //Serial.print("Send status= ");
+      //Serial.println(txPickupStatus);
       break;
 
     case TWI_CMD_DROPOFF_STATUS:
       //todo implement
-      //      //Serial.println("TWI_CMD_DROPOFF_STATUS");
-      //      txBuff[0] = cmd;
-      //      txBuff[1] = rxDropoffStatus;
-
+      Serial.println("TWI_CMD_DROPOFF_STATUS");
+      txBuff[0] = cmd;
+      txBuff[1] = rxDropoffStatus;
       break;
-
     case TWI_CMD_ERROR:
       Serial.println("TWI_CMD_ERROR");
       break;
@@ -214,7 +204,7 @@ void requestEvent() {
   //Serial.println(txBuff[0],HEX);
   //Serial.println(txBuff[1]);
   //Serial.println(txBuff[2]);
-  //todo del
+//todo del
 
   Wire.write(txBuff, 3);
 
@@ -242,16 +232,16 @@ void requestEvent() {
   txBuff[2] = 0;
 
 
-  //end of request
+//end of request
 }
 
 
 // function that executes whenever data is received from master
 // this function is registered as an event, see setup()
 void receiveEvent(int howMany) {
-  //  Serial.println("Handling new cmd Req");
-  //   Serial.print("how many: ");
-  //   Serial.println(howMany);
+//  Serial.println("Handling new cmd Req");
+//   Serial.print("how many: ");
+//   Serial.println(howMany);
 
 
 
@@ -266,10 +256,8 @@ void receiveEvent(int howMany) {
       Serial.println("got Zero");
     }
     while (Wire.available()) {
-
       recivedData[i] = (uint8_t) Wire.read();
       i++;
-
     }
 
     handleReadCmd();
@@ -279,10 +267,8 @@ void receiveEvent(int howMany) {
   if (howMany <= 1) {
     Serial.println(Wire.read());    // receive byte as an integer
     Serial.println("on or less");
-
-
   }
-  //end of receive
+//end of receive
 }
 
 
@@ -290,19 +276,16 @@ void setup() {
   Wire.begin(2);                // join i2c bus with address #2
   Wire.onRequest(requestEvent); // register event
   Wire.onReceive(receiveEvent); // register event
-  Serial.begin(9600);           // start serial for output
+  Serial.begin(115200);           // start serial for output
+
+  arm_setup();
 
   run = 1;
 
-  pinMode(directionPin, OUTPUT);
-  pinMode(breakBot, INPUT_PULLUP);
-  pinMode(breakTop, INPUT_PULLUP);
-  pinMode(onoffPin, OUTPUT);
-
   theArm.boxDistance = 30;//cm to goalbox
-  theArm.boxAngle = 20;//infront angle
+  theArm.boxAngle = 0;//infront angle
   theArm.objectDistance = 40;//distance from obj
-  theArm.objectAngle = 90;//from behind
+  theArm.objectAngle = 0;//from behind
   theArm.collectAll = 1;//collect all
 
   //init state for data to send
@@ -322,43 +305,6 @@ void setup() {
 }
 
 
-void startMotor() {
-  digitalWrite(onoffPin, HIGH);
-  Serial.println("START SUG");
-}
-/*
-   Stops the vacuum motor
-*/
-void stopMotor() {
-  digitalWrite(onoffPin, LOW);
-  Serial.print("STOPP SUG");
-}
-
-void down() {
-  while (digitalRead(breakBot)) {
-    digitalWrite(directionPin, HIGH);
-    analogWrite(pwmPin, 75);
-    Serial.println("NED");
-  }
-  stopMovement();
-}
-
-void up() {
-  while (digitalRead(breakTop)) {
-    Serial.println("UPP");
-    digitalWrite(directionPin, LOW);
-    analogWrite(pwmPin, 130);
-  }
-  stopMovement();
-}
-/*
-   Stops the movement of the arm
-*/
-void stopMovement() {
-  analogWrite(pwmPin, 0);
-  Serial.println("STOP MOVEMENT");
-}
-
 void loop() {
   //check if we are done
   //since we are already in a loop
@@ -371,28 +317,81 @@ void loop() {
         //do nottin
         break;
       case TWI_CMD_PICKUP_START:
-          txPickupStatus = PICKUP_RUNNING;
+
+        arm_lower();
+        arm_sweep(1);
+        txPickupStatus = PICKUP_RUNNING;
         break;
 
       case TWI_CMD_PICKUP_STATUS:
         //Serial.println("TWI_CMD_PICKUP_STATUS");
-        
-        txPickupStatus = PICKUP_RUNNING;
-        Serial.println("PICKUP_RUNNING");
-        
-        down();
-        startMotor();
-        delay(3000);
-        up();
-        delay(3000);
 
-        txPickupStatus = PICKUP_DONE;
-         Serial.println("PICKUP_DONE");
+
+        //move arm down
+        if(get_state_arm_position() == LOW) {
+          txPickupStatus = PICKUP_FORWARD;
+        }
+        /*
+        if (movedArmDown < 101) {
+          movedArmDown++;
+        }
+        if (movedArmDown < 3) {
+          Serial.println(movedArmDown);
+          txPickupStatus = PICKUP_RUNNING;
+        }
+        if (movedArmDown >= 100 && txPickupStatus == PICKUP_RUNNING) {
+          movedArmDown=101;
+          Serial.println(movedArmDown);
+          Serial.println("PICKUP_FORWARD");
+          //send move
+          txPickupStatus = PICKUP_FORWARD;
+        }
+        */
+
+        //wait for response
+        if (rxPickupStatus == PICKUP_DONE_DRIVE && txPickupStatus != PICKUP_DONE) {
+          
+          txPickupStatus = PICKUP_DONE_DRIVE;
+          arm_sweep(0);
+          arm_raise();          
+          if(get_state_arm_position() == HIGH) {
+            txPickupStatus = PICKUP_DONE;
+          }
+
+          /*
+          //move arm up
+          //Serial.println("moving arm up");
+          //Serial.println(movedArmUp);
+          if (movedArmUp <= 0) {
+            Serial.println("PICKUP_DONE_DRIVE");
+
+          }
+          movedArmUp++;
+
+          if (movedArmUp >= 100) {
+            movedArmUp = 100;
+            //done
+            Serial.println("DONE ARM UP");
+            //movedArmUp = 0;
+            txPickupStatus = PICKUP_DONE;
+          }
+          */
+          
+        }
+        
+        /*
+        if (txPickupStatus == PICKUP_DONE && movedArmUp==100) {
+          movedArmUp=200;
+          Serial.println("PICKUP_DONE");
+        }
+        */
+
+
         break;
 
       case TWI_CMD_DROPOFF_START:
-
-        stopMotor();
+        arm_release();
+        rxNext = IDLE;
         break;
 
       case TWI_CMD_DROPOFF_STATUS:
