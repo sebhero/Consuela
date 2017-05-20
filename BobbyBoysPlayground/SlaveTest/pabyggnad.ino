@@ -28,21 +28,36 @@ Int. low    D6
 #define high_limit_sw   4
 #define low_limit_sw    5
 
+#define sweepers        A2
 #define solenoid        A3
 
 //#define start_sw        2
 //#define run_sw          6
 
 
-uint8_t sweep_motor_state = LOW;
-
+uint8_t state_sweepers = 0;
+uint8_t state_arm_position = LOW;
+uint8_t state_release = 0;
 
 //void start_sw_handler() {
 //  state = start;
 //}
 
+
+int get_state_arm_position() {
+  return state_arm_position;
+}
+
 // Raise arm into up position
 void arm_raise() {
+  /*
+  if(state_arm_position != HIGH) {
+    Serial.println("Arm: Raising");
+    state_arm_position = HIGH;
+    Serial.println("Arm: Up"); 
+  } 
+  */ 
+  if(state_arm_position != HIGH) {
   //if(digitalRead(high_limit_sw) == LOW) {
     digitalWrite(dir_A, dir_up);
     digitalWrite(break_A, break_off);
@@ -53,11 +68,21 @@ void arm_raise() {
     // Arm is up
     digitalWrite(break_A, break_on);
     analogWrite(PWM_A, 0);  
-    Serial.println("Arm: Up");    
+    state_arm_position = HIGH;
+    Serial.println("Arm: Up");   
  // }
+  }
 }
 
 void arm_lower() {
+  /*
+  if(state_arm_position != LOW) {
+    Serial.println("Arm: Lowering");
+    state_arm_position = LOW;
+    Serial.println("Arm: Down"); 
+  }
+  */
+  if(state_arm_position != LOW) {
  // if(digitalRead(low_limit_sw) == LOW) {
     digitalWrite(dir_A, dir_down);
     digitalWrite(break_A, break_off);
@@ -67,34 +92,70 @@ void arm_lower() {
     }        
     digitalWrite(break_A, break_on);
     analogWrite(PWM_A, 0);
+    state_arm_position = LOW;
     Serial.println("Arm: Down");
-  //}  
+  //} 
+  }
 }
 
 void arm_sweep(uint8_t state) {
- // if(state != sweep_motor_state) {    
+  /*
+  if(state != state_sweepers) {
+    if(state = 1) {
+      state_sweepers = 1;
+      Serial.println("Arm: Sweepers are on");      
+    } else {
+      state_sweepers = 0;
+      Serial.println("Arm: Sweepers are off");    
+    }    
+  }
+  */
+  
+   if(state != state_sweepers) { 
+ // if(state != sweep_motor_state) {   
     if(state == 1) {
-      digitalWrite(dir_B, dir_down);
-      digitalWrite(break_B, break_off);
-      analogWrite(PWM_B, 255);  
-      sweep_motor_state = HIGH;
+      //digitalWrite(dir_B, dir_down);
+      //digitalWrite(break_B, break_off);
+      //analogWrite(PWM_B, 155);  
+      digitalWrite(sweepers, HIGH);
+      state_sweepers = HIGH;
       Serial.println("Arm: Sweepers are on");
     } else {
-      digitalWrite(break_B, break_on);
-      analogWrite(PWM_B, 0);
-      sweep_motor_state = LOW;
+      //digitalWrite(break_B, break_on);
+      //analogWrite(PWM_B, 0);
+      digitalWrite(sweepers, LOW);
+      state_sweepers = LOW;
       Serial.println("Arm: Sweepers are off");   
     }    
   //}
+ }
 }
 
 void arm_release() {
-  digitalWrite(solenoid, HIGH);
-  delay(100);
-  digitalWrite(solenoid, LOW);
-  Serial.println("Arm: Released objects");
-  
+  /*
+  if(state_release == 0) {  
+    state_release = 1;
+    Serial.println("Arm: Released objects");  
+  }
+  */
+  if(state_release == 0) { 
+    digitalWrite(solenoid, HIGH);
+    delay(100);
+    digitalWrite(solenoid, LOW);
+    delay(100);
+    digitalWrite(solenoid, HIGH);
+    delay(100);
+    digitalWrite(solenoid, LOW);
+    delay(100);
+    digitalWrite(solenoid, HIGH);
+    delay(100);
+    digitalWrite(solenoid, LOW);    
+    state_release = 1;
+    Serial.println("Arm: Released objects");  
+  }
 }
+
+
 
 void arm_setup() {
   pinMode(break_A, OUTPUT);
@@ -113,12 +174,14 @@ void arm_setup() {
   
   pinMode(low_limit_sw, INPUT_PULLUP);
 
-//  pinMode(sweep_motor, OUTPUT);
-///  digitalWrite(sweep_motor, LOW);
-  sweep_motor_state = LOW;
-
   pinMode(solenoid, OUTPUT);
   digitalWrite(solenoid, LOW);
+
+  pinMode(sweepers, OUTPUT);
+  digitalWrite(sweepers, LOW);
+  
+  state_sweepers = 0;
+  state_release = 0;
   
   //pinMode(start_sw, INPUT_PULLUP);  
   //attachInterrupt(digitalPinToInterrupt(start_sw), start_sw_handler, FALLING); 
