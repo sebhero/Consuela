@@ -10,6 +10,8 @@ src\driving\motorFunc.c
 
 src\driving\navigation.c
 
+src\lcd\lcd.c
+
 src\pulse\pulse.c
 
 src\pulse\pulseCounterHandler.c

@@ -124,19 +124,18 @@ void vUltraSensorTask(void *pvParam) {
 				{
 					printf("\nObject has been detected");
 					booleanModifyPosition = 1;
-					break;
 				}
 			}
-			
+	
 			if (booleanModifyPosition == 1)
 			{
-				if ((angleUltraSensor <= 94) && (angleUltraSensor >= 86))
+				if (angleUltraSensor == 90)
 				{
 					if ((distanceUltraSensor + 32) > armInfo.objectDistance)
 					{
 						int travelDistToObj = (distanceUltraSensor + 32) - armInfo.objectDistance;
 						forwardDrive(travelDistToObj);
-						printf("\nModifying driving: driving forward %d \n", travelDistToObj);
+						printf("\nModifying driving: driving forward %i \n", travelDistToObj);
 						booleanDriving=0;
 						booleanUltraSensor=0;
 						booleanModifyPosition = 0;
@@ -146,7 +145,7 @@ void vUltraSensorTask(void *pvParam) {
 					{
 						int travelDistToObj = armInfo.objectDistance - (distanceUltraSensor + 32);
 						reverseDrive(travelDistToObj);
-						printf("\nModifying driving: driving backward %d \n", travelDistToObj);
+						printf("\nModifying driving: driving backward %i \n", travelDistToObj);
 						booleanDriving=0;
 						booleanUltraSensor=0;
 						booleanModifyPosition = 0;
@@ -155,15 +154,15 @@ void vUltraSensorTask(void *pvParam) {
 				}
 				else //rotation required
 				{
-					if (angleUltraSensor > 94)
+					if (angleUltraSensor > 90)
 					{
-						rotateLeftByDegrees(angleUltraSensor-94);
-						printf("\n----------------Modifying driving: rotating left %d \n", (angleUltraSensor-94) );
+						rotateRightByDegrees(angleUltraSensor-90);
+						printf("\n----------------Modifying driving: rotating right %i \n", (angleUltraSensor-90) );
 						if ((distanceUltraSensor + 32) > armInfo.objectDistance)
 						{
 							int travelDistToObj = (distanceUltraSensor + 32) - armInfo.objectDistance;
-							forwardDrive(travelDistToObj);
-							printf("\nModifying driving: driving forward %d \n", travelDistToObj);
+							forwardDrive(travelDistToObj); 
+							printf("\nModifying driving: driving forward %i \n", travelDistToObj);
 							booleanDriving=0;
 							booleanUltraSensor=0;
 							booleanModifyPosition = 0;
@@ -173,22 +172,22 @@ void vUltraSensorTask(void *pvParam) {
 						{
 							int travelDistToObj = armInfo.objectDistance - (distanceUltraSensor + 32);
 							reverseDrive(travelDistToObj);
-							printf("\n-----------------Modifying driving: driving backward %d \n", travelDistToObj);
+							printf("\n-----------------Modifying driving: driving backward %i \n", travelDistToObj);
 							booleanDriving=0;
 							booleanUltraSensor=0;
 							booleanModifyPosition = 0;
 							booleanCommunication = 1;
 						}
 					}
-					else if (angleUltraSensor < 86)
+					if (angleUltraSensor < 90)
 					{
-						rotateRightByDegrees(86-angleUltraSensor);
-						printf("\n----------------Modifying driving: rotating right %d \n", (86-angleUltraSensor) );
+						rotateLeftByDegrees(90-angleUltraSensor);
+						printf("\n----------------Modifying driving: rotating left %i \n", (90-angleUltraSensor) );
 						if ((distanceUltraSensor + 32) > armInfo.objectDistance)
 						{
 							int travelDistToObj = (distanceUltraSensor + 32) - armInfo.objectDistance;
 							forwardDrive(travelDistToObj);
-							printf("\nModifying driving: driving forward %d \n", travelDistToObj);
+							printf("\nModifying driving: driving forward %i \n", travelDistToObj);
 							booleanDriving=0;
 							booleanUltraSensor=0;
 							booleanModifyPosition = 0;
@@ -198,7 +197,7 @@ void vUltraSensorTask(void *pvParam) {
 						{
 							int travelDistToObj = armInfo.objectDistance - (distanceUltraSensor + 32);
 							reverseDrive(travelDistToObj);
-							printf("\n-----------------Modifying driving: driving backward %d \n", travelDistToObj);
+							printf("\n-----------------Modifying driving: driving backward %i \n", travelDistToObj);
 							booleanDriving=0;
 							booleanUltraSensor=0;
 							booleanModifyPosition = 0;
@@ -207,6 +206,10 @@ void vUltraSensorTask(void *pvParam) {
 					}
 				}
 			}
+			distanceUltraSensor = 0;
+			angleUltraSensor = 0;
+			WITHIN_RANGE_FLAG = 0;
+			setBitLevels(1, 0, 0, 0); // TODO: note to self: remove!
 		}
 		else // continue blocking
 		{
@@ -266,6 +269,8 @@ void vCommunicationTask(void *pvParam)
 					setObject(SOCK, 300, 300);
 					setObject(GLASS, 300, 100);		
 					setCollectAll(armInfo.collectAll);
+					booleanCommunication = 0;
+					booleanDriving = 1;
 				break;
 				case START_PICKUP:
 					
