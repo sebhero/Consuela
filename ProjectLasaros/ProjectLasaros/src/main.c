@@ -7,17 +7,15 @@
 #include <asf.h>
 #include <inttypes.h>
 #include <FreeRTOSConfig.h>
-#include "allt/TimerCounter.h"
+#include "time measurement/TimerCounter.h"
 #include "conf_board.h"
-#include "allt/pulseCounterHandler.h"
-#include "allt/pulse.h"
-#include "allt/MotorfuncViktor.h"
-#include "allt/Hjulreglering.h"
-#include "allt/navigation.h"
-#include "allt/ultra_servo.h"
+#include "pulse/pulseCounterHandler.h"
+#include "pulse/pulse.h"
+#include "driving/motorFunc.h"
+#include "driving/navigation.h"
+#include "detection/ultra_servo.h"
 #include "com/TwiComHandler.h"
 #include "com/Com.h"
-#include "mockup/dummyFunc.h"
 
 xTaskHandle *pxTaskDriveToObject;
 xTaskHandle *pxTaskUltraSensor;
@@ -64,36 +62,45 @@ void vDriveToObjectTask(void *pvParam) {
 		if (booleanDriving == 1 && booleanUltraSensor == 0 && booleanCommunication == 0)
 		{
 			printf("\n>>>>>>>>>>>>DRIVING TO OBJECT<<<<<<<<<<<<\n");
-			//do moving
 			uint8_t gotoVal = goToNext();
 			if(gotoVal==1)
-			{	
-				booleanDriving = 0;
-				booleanCommunication = 0;
-				booleanUltraSensor = 1;
-				booleanModifyPosition = 0;
-				current_twi_state = START_PICKUP; 
-				puts("GOTO PICKUP FROM DRIVE");
-
-			}
-			else if(gotoVal == 2)
 			{
 				booleanDriving = 0;
 				booleanCommunication = 0;
 				booleanUltraSensor = 1;
 				booleanModifyPosition = 0;
-				current_twi_state = START_DROP_OFF; 
-				puts("GOTO DROPOFF FROM DRIVE");
-
+				current_twi_state = START_PICKUP;
+				puts("GOTO PICKUP FROM DRIVE");
+			    printf("\nGotoVal = %u", gotoVal);
 			}
-			printf("\nGotoVal = %u", gotoVal);
+			
+			if(gotoVal == 2)
+			{
+				booleanDriving = 0;
+				booleanCommunication = 0;
+				booleanUltraSensor = 1;
+				booleanModifyPosition = 0;
+				current_twi_state = START_DROP_OFF;
+				puts("GOTO DROPOFF FROM DRIVE");
+			    printf("\nGotoVal = %u", gotoVal);
+			}
+			
+			if(gotoVal == 3)
+			{
+				booleanDriving = 0;
+				booleanCommunication = 0;
+				booleanUltraSensor = 0;
+				booleanModifyPosition = 0;
+				printf("\nGotoVal = %u", gotoVal);
+			}
+			portTickType xLastWakeTime = xTaskGetTickCount();
+			vTaskDelayUntil(&xLastWakeTime, pdMSTOTICKS(250));
 			
 		}
 		else
 		{
 			vTaskDelay(pdMSTOTICKS(200));
 		}
-
 	}
 	vTaskDelete(NULL);
 }
@@ -106,39 +113,32 @@ void vUltraSensorTask(void *pvParam) {
 		if (booleanUltraSensor == 1 && booleanCommunication == 0 && booleanDriving == 0)
 		{
 			
-			//todo del
-			puts("Ultrasound found object distance\n");
-			printf("Distance to object: %u\n", distanceUltraSensor);
-			printf("Angle to object: %u\n", angleUltraSensor);
-			//todo end del
+			puts("\nUltrasound found object distance\n");
+			printf("\nDistance to object: %u\n", distanceUltraSensor);
+			printf("\nAngle to object: %u\n", angleUltraSensor);
 			
-			//todo uncomment real code
- 			//for (uint8_t i = 0; i <= 180; i++)
- 			//{
- 				//testingUltraSound();
- 				//if (WITHIN_RANGE_FLAG == 1)
- 				//{
- 					//printf("Detected object");
- 					//booleanModifyPosition = 1;
- 				//}
-			//}
-
-			booleanModifyPosition=1;
+			/*
+			for (uint8_t i = 0; i <= 180; i++)
+			{
+				testingUltraSound();
+				if (WITHIN_RANGE_FLAG == 1)
+				{
+					printf("Object has been detected");
+					booleanModifyPosition = 1;
+				}
+			}
+			*/
+			booleanModifyPosition = 1; //TODO: instant transition from LOC-task to COM-task, is to be removed
 			if (booleanModifyPosition == 1)
 			{
-				
-				
-				forwardDrive(distanceUltraSensor);
-				//activate twi communication
+				forwardDrive(distanceUltraSensor); 
 				printf("Modifying driving\n");
 				booleanDriving=0;
 				booleanUltraSensor=0;
 				booleanModifyPosition = 0;
-				//start pickup. goto communication
 				booleanCommunication = 1;
-				
 			}
-		} 
+		}
 		else
 		{
 			vTaskDelay(pdMSTOTICKS(100));
@@ -167,13 +167,13 @@ void vCommunicationTask(void *pvParam)
 					if(armInfo.hasData)
 					{
 						//todo set to 0
-						booleanCommunication = 1;
+						booleanCommunication = 0;
 						//todo set to 1
-						booleanDriving = 0;						
+						booleanDriving = 1;						
 						//todo remove						
 						printf("init arm done\n");
 						printf("arminfo: %u %u %u %u all: %u",armInfo.boxAngle, armInfo.boxDistance, armInfo.objectAngle, armInfo.objectDistance,armInfo.collectAll);
-						setGetAll(armInfo.collectAll);
+						setCollectAll(armInfo.collectAll);
 						
 						//todo del
 						current_twi_state = START_PICKUP;
@@ -181,7 +181,10 @@ void vCommunicationTask(void *pvParam)
 					else
 					{
 						puts("INIT ARM NO DATA");
-					}				
+					}	
+					setObject(SQUARE,100,300);
+					setObject(SOCK, 300, 300);
+					setObject(GLASS, 300, 100);		
 				break;
 				case START_PICKUP:
 					
@@ -224,8 +227,7 @@ void vCommunicationTask(void *pvParam)
 							//TODO: done picking up
 							//done with pickup, continue to drive
 							//stop communicating
-						
-							//current_twi_state = IDLE;
+
 						
 							puts("PICKUP_DONE");
 							//tell (set) movement that pickup is done
@@ -236,11 +238,10 @@ void vCommunicationTask(void *pvParam)
 							booleanUltraSensor=0;
 							booleanModifyPosition=0;
 							//todo set to 0
-							booleanCommunication=1;
+							booleanCommunication=0;
 							//todo set to 1
-							booleanDriving=0;
-							
-							
+							booleanDriving=1;
+
 							//todo del
 							current_twi_state=START_DROP_OFF;
 							
@@ -253,7 +254,6 @@ void vCommunicationTask(void *pvParam)
 							//if we needed to drive during pickup, check if driving is done
 							adjustPositionDuringPickup();
 							twi_pickupSendMovementDone();
-							
 						break;
 						
 						default:
@@ -268,6 +268,7 @@ void vCommunicationTask(void *pvParam)
 				case START_DROP_OFF:
 					if (twi_dropoffStart() == 1)
 					{
+						
 						//done starting pickup
 						current_twi_state=GET_STATUS_DROP_OFF;
 					}
@@ -280,18 +281,24 @@ void vCommunicationTask(void *pvParam)
 				break;
 				
 				case GET_STATUS_DROP_OFF:
-					//puts("STATUS DROP OFF");
+					puts("GET_STATUS_DROP_OFF");
 					switch(twi_dropoffGetStatus())
 					{
 						case DROPOFF_DONE:
 						//tell (set)drive that pickup is done.
-							setDoneDropoff();
+							setDropoffDone();
 							printf("DROPOFF_DONE\n");
+							if(armInfo.collectAll)
+							{
+								booleanDriving=0;
+							}
+							else
+							{
+								booleanDriving=1;
+							}
 							booleanUltraSensor=0;
 							booleanModifyPosition=0;
 							booleanCommunication=0;
-							
-							booleanDriving=1;
 						break;
 						case DROPOFF_RUNNING:
 							printf("DROPOFF_RUNNING\n");
@@ -354,6 +361,12 @@ int main (void)
 	//armInfo = twi_getArmInfo();
 	
 	uint32_t value = 0;
+	
+	
+	pulseCounter_configA(ID_PIOC, PIOC, PIO_PC28);
+	pulseCounter_configB(ID_PIOC, PIOC, PIO_PC23);
+	
+	pulse_init();
 	
 	current_twi_state = INIT_ARM;
 

@@ -2,25 +2,21 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
-src\allt\Hjulreglering.c
-
-src\allt\MotorfuncViktor.c
-
-src\allt\navigation.c
-
-src\allt\pulse.c
-
-src\allt\pulseCounterHandler.c
-
-src\allt\RealTimeTimer.c
-
-src\allt\TimerCounter.c
-
-src\allt\ultra_servo.c
-
 src\ASF\sam\drivers\twi\twi.c
 
-src\mockup\dummyFunc.c
+src\detection\ultra_servo.c
+
+src\driving\motorFunc.c
+
+src\driving\navigation.c
+
+src\pulse\pulse.c
+
+src\pulse\pulseCounterHandler.c
+
+src\time measurement\RealTimeTimer.c
+
+src\time measurement\TimerCounter.c
 
 src\ASF\sam\drivers\pwm\pwm.c
 
