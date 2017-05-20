@@ -371,13 +371,7 @@ void loop() {
         //do nottin
         break;
       case TWI_CMD_PICKUP_START:
-
-        if (movedArmDown <= 0) {
-          Serial.println("TWI_CMD_PICKUP_START");
           txPickupStatus = PICKUP_RUNNING;
-          movedArmDown++;
-          Serial.println("txPickupStatus= PICKUP_RUNNING");
-        }
         break;
 
       case TWI_CMD_PICKUP_STATUS:
@@ -393,6 +387,7 @@ void loop() {
         delay(3000);
 
         txPickupStatus = PICKUP_DONE;
+         Serial.println("PICKUP_DONE");
         break;
 
       case TWI_CMD_DROPOFF_START:
