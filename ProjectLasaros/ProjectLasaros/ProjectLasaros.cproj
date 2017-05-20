@@ -560,6 +560,7 @@
     <Folder Include="src\ASF\thirdparty\wireless\addons\sio2host\uart\" />
     <Folder Include="src\config\" />
     <Folder Include="src\com" />
+    <Folder Include="src\lcd" />
     <Folder Include="src\pulse" />
     <Folder Include="src\driving" />
     <Folder Include="src\detection" />
@@ -585,6 +586,15 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\driving\navigation.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\lcd\common.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\lcd\lcd.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\lcd\lcd.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\pulse\pulse.c">
