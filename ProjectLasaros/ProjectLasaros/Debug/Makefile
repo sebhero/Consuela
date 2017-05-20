@@ -112,7 +112,7 @@ C_SRCS +=  \
 ../src/Com.c \
 ../src/dummyFunc.c \
 ../src/Hjulreglering.c \
-../src/Motorfunc.c \
+../src/MotorfuncViktor.c \
 ../src/navigation.c \
 ../src/pulse.c \
 ../src/pulseCounterHandler.c \
@@ -160,7 +160,7 @@ src/ASF/sam/drivers/pwm/pwm.o \
 src/Com.o \
 src/dummyFunc.o \
 src/Hjulreglering.o \
-src/Motorfunc.o \
+src/MotorfuncViktor.o \
 src/navigation.o \
 src/pulse.o \
 src/pulseCounterHandler.o \
@@ -201,7 +201,7 @@ src/ASF/sam/drivers/pwm/pwm.o \
 src/Com.o \
 src/dummyFunc.o \
 src/Hjulreglering.o \
-src/Motorfunc.o \
+src/MotorfuncViktor.o \
 src/navigation.o \
 src/pulse.o \
 src/pulseCounterHandler.o \
@@ -242,7 +242,7 @@ src/ASF/sam/drivers/pwm/pwm.d \
 src/Com.d \
 src/dummyFunc.d \
 src/Hjulreglering.d \
-src/Motorfunc.d \
+src/MotorfuncViktor.d \
 src/navigation.d \
 src/pulse.d \
 src/pulseCounterHandler.d \
@@ -283,7 +283,7 @@ src/ASF/sam/drivers/pwm/pwm.d \
 src/Com.d \
 src/dummyFunc.d \
 src/Hjulreglering.d \
-src/Motorfunc.d \
+src/MotorfuncViktor.d \
 src/navigation.d \
 src/pulse.d \
 src/pulseCounterHandler.d \

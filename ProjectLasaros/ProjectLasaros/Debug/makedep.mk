@@ -12,7 +12,7 @@ src\dummyFunc.c
 
 src\Hjulreglering.c
 
-src\Motorfunc.c
+src\MotorfuncViktor.c
 
 src\navigation.c
 

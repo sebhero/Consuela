@@ -13,6 +13,7 @@
 void stop(void);
 void rotateRightByDegrees(double degree);
 void rotateLeftByDegrees(double degree);
-
+void forwardDrive(int distance);
+void reverseDrive(int distance);
 
 #endif /* MOTORFUNC_H_ */
