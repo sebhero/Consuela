@@ -47,6 +47,9 @@ uint8_t state_release = 0;
 int get_state_arm_position() {
   return state_arm_position;
 }
+int get_state_release() {
+  return state_release;
+}
 
 // Raise arm into up position
 void arm_raise() {

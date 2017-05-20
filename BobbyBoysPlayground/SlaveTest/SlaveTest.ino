@@ -152,9 +152,10 @@ void handleReadCmd() {
       Serial.println("TWI_CMD_DROPOFF_START");
       //set nextstate to dropoff in FSM
       rxNext = (TwiCmd) cmd;
-      //rxDropoffStatus = DROPOFF_RUNNING;
+      txDropoffStatus = DROPOFF_RUNNING;
+      rxDropoffStatus = DROPOFF_RUNNING;
       txBuff[0] = cmd;
-      txBuff[1] = rxDropoffStatus;
+      txBuff[1] = txDropoffStatus;
       break;
     case TWI_CMD_PICKUP_START:
       Serial.println("TWI_CMD_PICKUP_START");
@@ -183,7 +184,8 @@ void handleReadCmd() {
       //todo implement
       Serial.println("TWI_CMD_DROPOFF_STATUS");
       txBuff[0] = cmd;
-      txBuff[1] = rxDropoffStatus;
+      txBuff[1] = txDropoffStatus;
+      rxNext = (TwiCmd) cmd;
       break;
     case TWI_CMD_ERROR:
       Serial.println("TWI_CMD_ERROR");
@@ -208,24 +210,20 @@ void requestEvent() {
 
   Wire.write(txBuff, 3);
 
-  //reset states
-  if (txBuff[0] == PICKUP_DONE) {
+  //Fix this with two nested ifs
+  if ((txBuff[0] == TWI_CMD_PICKUP_STATUS)&&(txBuff[1] == PICKUP_DONE)) {
     Serial.println("Sent to master = PICKUP_DONE");
-    txPickupStatus = PICKUP_IDLE;
-    rxDropoffStatus = DROPOFF_IDLE;
+    txDropoffStatus = DROPOFF_IDLE;
+    rxPickupStatus = PICKUP_IDLE;
     rxCurrent = IDLE;
-
-    //todo remove
-    movedArmDown = 0;
-    movedArmUp = 0;
-  }
-  //reset states
-  if (txBuff[0] == DROPOFF_DONE) {
+  } else if ((txBuff[0] == TWI_CMD_DROPOFF_STATUS)&&(txBuff[1] == DROPOFF_DONE)) {
     Serial.println("Sent to master = DROPOFF_DONE");
     txDropoffStatus = DROPOFF_IDLE;
     rxPickupStatus = PICKUP_IDLE;
     rxCurrent = IDLE;
   }
+  
+
 
   txBuff[0] = 0;
   txBuff[1] = 0;
@@ -395,6 +393,12 @@ void loop() {
         break;
 
       case TWI_CMD_DROPOFF_STATUS:
+        if(get_state_release() == 0) {
+          txDropoffStatus = DROPOFF_RUNNING;
+        } else if(get_state_release() == 1) {
+          txDropoffStatus = DROPOFF_DONE;
+        }
+        rxNext = IDLE;
         break;
 
       case TWI_CMD_ERROR:

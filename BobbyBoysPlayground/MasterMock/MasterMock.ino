@@ -64,7 +64,7 @@ void send_data(byte b1, byte b2, byte b3) {
 }
 
 void setup() {
-  Serial.begin(9600);  
+  Serial.begin(115200);  
   Wire.begin();
   Serial.println("Setup ok");  
   print_menu();
