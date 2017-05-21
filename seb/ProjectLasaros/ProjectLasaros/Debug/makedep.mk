@@ -4,27 +4,25 @@
 
 src\ASF\sam\drivers\twi\twi.c
 
-src\ASF\sam\drivers\pwm\pwm.c
+src\detection\ultra_servo.c
 
-src\com\Com.c
-
-src\counters\RealTimeTimer.c
-
-src\counters\TimerCounter.c
-
-src\driving\Hjulreglering.c
-
-src\driving\Motorfunc.c
+src\driving\motorFunc.c
 
 src\driving\navigation.c
 
-src\driving\pulse.c
+src\lcd\lcd.c
 
-src\driving\pulseCounterHandler.c
+src\pulse\pulse.c
 
-src\mockups\dummyFunc.c
+src\pulse\pulseCounterHandler.c
 
-src\ultrasound\ultra_servo.c
+src\time measurement\RealTimeTimer.c
+
+src\time measurement\TimerCounter.c
+
+src\ASF\sam\drivers\pwm\pwm.c
+
+src\com\Com.c
 
 src\ASF\common\services\delay\sam\cycle_counter.c
 

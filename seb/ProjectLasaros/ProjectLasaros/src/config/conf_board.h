@@ -1,3 +1,4 @@
+
 /**
  * \file
  *
@@ -78,7 +79,9 @@
 #define TC_IRQn     TC2_IRQn
 //! [tc_define_irq_handler]
 
+
 #define CONF_BOARD_TWI0
+
 #define CONF_BOARD_TWI1
 
 #endif /* CONF_BOARD_H_INCLUDED */

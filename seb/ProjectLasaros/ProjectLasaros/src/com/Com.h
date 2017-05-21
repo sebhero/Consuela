@@ -20,7 +20,7 @@ typedef struct {
 } object_pos_t;
 
 arminfo_t theArm;
-uint32_t SLAVE_ADDR;//twi slave address for arm
+//uint32_t SLAVE_ADDR;//twi slave address for arm
 
 void handleCmd(uint8_t cmd);
 
@@ -43,7 +43,7 @@ uint8_t twiReciveData(uint8_t *package, uint8_t packageSize);
 
 arminfo_t twi_getArmInfo();
 
-void twi_changeSlave(uint32_t slave_address);
+//void twi_changeSlave(uint32_t slave_address);
 
 //start pickup
 uint8_t twi_pickupStart(void);
