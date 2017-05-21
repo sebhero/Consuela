@@ -39,7 +39,13 @@ void vUART(void *pvParam) {
 void UART_Handler(void) {
     if ((uart_get_status(UART) & UART_SR_RXBUFF) == UART_SR_RXBUFF) {
         pdc_rx_init(pdc, &rx_packet, NULL);
-        xSemaphoreGiveFromISR(sem, NULL);
+        signed portBASE_TYPE xHigherPriority;
+
+        xSemaphoreGiveFromISR(sem, &xHigherPriority);
+        // Does portYIELD_FROM_ISR exist in the ASF port of FreeRTOS?
+        if(xHigherPriority) {
+            vPortYieldFromISR();
+        }
     }
 }
 

@@ -210,17 +210,15 @@ void requestEvent() {
 
   Wire.write(txBuff, 3);
 
-  //Fix this with two nested ifs
-  if ((txBuff[0] == TWI_CMD_PICKUP_STATUS)&&(txBuff[1] == PICKUP_DONE)) {
-    Serial.println("Sent to master = PICKUP_DONE");
+  if ( (txBuff[0] == TWI_CMD_PICKUP_STATUS) || (txBuff[0] == TWI_CMD_DROPOFF_STATUS)) {
+    if(txBuff[1] == PICKUP_DONE) { 
+      Serial.println("Sent to master = PICKUP_DONE");
+    } else if(txBuff[1] == DROPOFF_DONE) {
+      Serial.println("Sent to master = DROPOFF_DONE");     
+    }
     txDropoffStatus = DROPOFF_IDLE;
     rxPickupStatus = PICKUP_IDLE;
-    rxCurrent = IDLE;
-  } else if ((txBuff[0] == TWI_CMD_DROPOFF_STATUS)&&(txBuff[1] == DROPOFF_DONE)) {
-    Serial.println("Sent to master = DROPOFF_DONE");
-    txDropoffStatus = DROPOFF_IDLE;
-    rxPickupStatus = PICKUP_IDLE;
-    rxCurrent = IDLE;
+    rxCurrent = IDLE; // <==-- This? In the end of the main loop rxCurrent = rxNext
   }
   
 
