@@ -209,7 +209,6 @@ void vUltraSensorTask(void *pvParam) {
 			distanceUltraSensor = 0;
 			angleUltraSensor = 0;
 			WITHIN_RANGE_FLAG = 0;
-			setBitLevels(1, 0, 0, 0); // TODO: note to self: remove!
 		}
 		else // continue blocking
 		{
@@ -243,7 +242,6 @@ void vCommunicationTask(void *pvParam)
 			{
 				case INIT_ARM:
 					puts("INIT_ARM");
-					/*
 					armInfo = twi_getArmInfo();	
 					if(armInfo.hasData)
 					{
@@ -258,19 +256,19 @@ void vCommunicationTask(void *pvParam)
 						
 						//todo del
 						current_twi_state = START_PICKUP;
+						setObject(SQUARE,100,300);
+						setObject(SOCK, 300, 300);
+						setObject(GLASS, 300, 100);
+						setCollectAll(armInfo.collectAll);
+						booleanCommunication = 0;
+						booleanDriving = 1;
 					}
 					else
 					{
 						puts("INIT ARM NO DATA");
 					}	
-					*/
-					setBitLevels(1, 0, 0, 0);
-					setObject(SQUARE,100,300);
-					setObject(SOCK, 300, 300);
-					setObject(GLASS, 300, 100);		
-					setCollectAll(armInfo.collectAll);
-					booleanCommunication = 0;
-					booleanDriving = 1;
+					
+					
 				break;
 				case START_PICKUP:
 					
