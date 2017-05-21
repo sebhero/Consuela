@@ -157,12 +157,14 @@ void handleReadCmd() {
       break;
     case TWI_CMD_DROPOFF_START:
       //todo implement
-      //      //Serial.println("TWI_CMD_DROPOFF_START");
+      Serial.println("TWI_CMD_DROPOFF_START");
       //      //set nextstate to dropoff in FSM
       //      rxCurrent = (TwiCmd) cmd;
-      //      //rxDropoffStatus = DROPOFF_RUNNING;
-      //      txBuff[0] = cmd;
-      //      txBuff[1] = rxDropoffStatus;
+      txDropoffStatus = DROPOFF_RUNNING;
+      Serial.println("DROPOFF RUNNING");
+            txBuff[0] = cmd;
+            txBuff[1] = txDropoffStatus;
+            rxNext = (TwiCmd) cmd;
       break;
     case TWI_CMD_PICKUP_START:
       //Serial.println("TWI_CMD_PICKUP_START");
@@ -189,9 +191,10 @@ void handleReadCmd() {
 
     case TWI_CMD_DROPOFF_STATUS:
       //todo implement
-      //      //Serial.println("TWI_CMD_DROPOFF_STATUS");
-      //      txBuff[0] = cmd;
-      //      txBuff[1] = rxDropoffStatus;
+      Serial.println("TWI_CMD_DROPOFF_STATUS");
+      rxNext = (TwiCmd) cmd;
+            txBuff[0] = cmd;
+            txBuff[1] = txDropoffStatus;
 
       break;
 
@@ -219,23 +222,26 @@ void requestEvent() {
   Wire.write(txBuff, 3);
 
   //reset states
-  if (txBuff[0] == PICKUP_DONE) {
+  if (txBuff[1] == PICKUP_DONE) {
     Serial.println("Sent to master = PICKUP_DONE");
     txPickupStatus = PICKUP_IDLE;
     rxDropoffStatus = DROPOFF_IDLE;
-    rxCurrent = IDLE;
+    rxNext = IDLE;
 
     //todo remove
     movedArmDown = 0;
     movedArmUp = 0;
   }
   //reset states
-  if (txBuff[0] == DROPOFF_DONE) {
+  if (txBuff[1] == DROPOFF_DONE) {
     Serial.println("Sent to master = DROPOFF_DONE");
     txDropoffStatus = DROPOFF_IDLE;
-    rxPickupStatus = PICKUP_IDLE;
-    rxCurrent = IDLE;
+    txPickupStatus = PICKUP_IDLE;
+    rxNext = IDLE;
   }
+
+  
+
 
   txBuff[0] = 0;
   txBuff[1] = 0;
@@ -303,7 +309,7 @@ void setup() {
   theArm.boxAngle = 20;//infront angle
   theArm.objectDistance = 40;//distance from obj
   theArm.objectAngle = 90;//from behind
-  theArm.collectAll = 1;//collect all
+  theArm.collectAll = 0;//collect all
 
   //init state for data to send
   txPickupStatus = PICKUP_IDLE;
@@ -331,7 +337,7 @@ void startMotor() {
 */
 void stopMotor() {
   digitalWrite(onoffPin, LOW);
-  Serial.print("STOPP SUG");
+  Serial.println("STOPP SUG");
 }
 
 void down() {
@@ -371,31 +377,38 @@ void loop() {
         //do nottin
         break;
       case TWI_CMD_PICKUP_START:
-          txPickupStatus = PICKUP_RUNNING;
+        txPickupStatus = PICKUP_RUNNING;
         break;
 
       case TWI_CMD_PICKUP_STATUS:
         //Serial.println("TWI_CMD_PICKUP_STATUS");
-        
+
         txPickupStatus = PICKUP_RUNNING;
         Serial.println("PICKUP_RUNNING");
-        
+
         down();
         startMotor();
-        delay(3000);
+        delay(200);
         up();
-        delay(3000);
-
+        delay(10);
+        
         txPickupStatus = PICKUP_DONE;
-         Serial.println("PICKUP_DONE");
+        txBuff[1] = txPickupStatus;
+        Serial.println("PICKUP_DONE");
         break;
 
       case TWI_CMD_DROPOFF_START:
-
+        Serial.println("SLÄPP OBJEKT");
+        down();
         stopMotor();
+        up();
+        txDropoffStatus = DROPOFF_DONE;
+        rxNext = IDLE;
+        txBuff[1] = txDropoffStatus;
         break;
 
       case TWI_CMD_DROPOFF_STATUS:
+        //txDropoffStatus = DROPOFF_DONE;
         break;
 
       case TWI_CMD_ERROR:
