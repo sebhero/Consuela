@@ -10,7 +10,6 @@
  *	@TODO	Clean up code, remove variables that aren't needed or those that are just duplicates
  */ 
 #include "navigation.h"
-#include "../com/Com.h"
 
 //Start of variables
 //Coordinates of the platform
@@ -344,12 +343,6 @@ uint8_t goToNext(){
 		//Hämta nya koordinater
  		updatePos(tempVariabel);
  		tempVariabel = 0;
-		 
-		 //TODO only testing
-		 int dumx;
-		 int dumy;
-		 twi_navGetXY(XY1,&dumx,&dumy);
-		 twi_navGetXY(XY2,&dumx,&dumy);
 
 		/*
 		twi_navGetXY(XY1,&x1_pos,&y1_pos);

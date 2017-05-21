@@ -456,7 +456,7 @@ void buildXY(uint8_t data[5], uint16_t *ptr_xpos, uint16_t *ptr_ypos) {
 
 
 //gets both xy for one xy cord (either xy1 or xy2)
-void twi_navGetXY(TwiCmdNav whichXY, int16_t *ptr_xpos_1, int16_t *ptr_ypos_1) {
+void twi_navGetXY(TwiCmdNav whichXY, uint16_t *ptr_xpos_1, uint16_t *ptr_ypos_1) {
 	TwiCmdNav cmd;;
 	uint8_t data[5] = {0};
 	if (whichXY == XY1) {

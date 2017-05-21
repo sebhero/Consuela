@@ -74,37 +74,34 @@ void servoControll(unsigned long dist)
 			
 			angle++;
 		break;
+		case STATUS_MAPPING:
+			WITHIN_RANGE_FLAG = 0;
+			if(dist >= (mappingDist*0.80) && dist <= (mappingDist*1.20)){
+			
+				printf("%d / 5 readings within mapping distance\n", tick);
+				tick++;
+				//sum = sum + deg;
+			}
 		
-		//case status_mapping:
-			//within_range_flag = 0;
-			//if(dist >= (mappingdist*0.80) && dist <= (mappingdist*1.20)){
-			//
-				//printf("%d / 5 readings within mapping distance\n", tick);
-				//tick++;
-				////sum = sum + deg;
-			//}
-		//
-			//if(tick>5){
-				//status = status_found;
-				//mappingangle = angle; //onödig?
-				//printf("found something at angle: %d degrees\n", angle);
-				//printf("the distance to object is: %d cm\n", dist);
-				//distanceultrasensor = (int) dist;
-				//angleultrasensor = angle;
-				//tick = 0;
-			//} else if(angle > (mappingangle + 10))
-			//{
-				//printf("too few readings within mapping distance\n");
-				//tick = 0;
-				//status = status_searching;
-				//printf("started search\n");
-			//}
-		//
-			//angle++;
-		//break;
-		
+			if(tick>5){
+				status = STATUS_FOUND;
+				mappingAngle = angle; 
+				printf("found something at angle: %d degrees\n", angle);
+				printf("the distance to object is: %d cm\n", dist);
+				distanceUltraSensor = (int) dist;
+				angleUltraSensor = angle;
+				tick = 0;
+			} 
+			else if(angle > (mappingAngle + 10))
+			{
+				printf("too few readings within mapping distance\n");
+				tick = 0;
+				status = STATUS_SEARCHING;
+				printf("started search\n");
+			}
+			angle++;
+		break;
 		case STATUS_FOUND:
-			distanceUltraSensor = (int) mappingDist;
 			WITHIN_RANGE_FLAG = 1; // object found, alert Controller-task
 			if(dist < (mappingDist*0.80) || dist > (mappingDist*1.20) || dist > 60)
 			{

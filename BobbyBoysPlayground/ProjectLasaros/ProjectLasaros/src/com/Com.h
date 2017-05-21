@@ -12,13 +12,13 @@
 #include "../asf.h"
 #include <stdint.h>
 #include "TwiComHandler.h"
-/*
+
 typedef struct {
 	uint16_t x_pos;
 	uint16_t y_pos;
 	const char *name_p;
 } object_pos_t;
-*/
+
 arminfo_t theArm;
 uint32_t SLAVE_ADDR;//twi slave address for arm
 
@@ -83,7 +83,7 @@ uint8_t twi_navGetObjectsPos(objectinfo_t *ptr_sock, objectinfo_t *ptr_square, o
 
 //gets both xy 1 and xy 2
 //send 1 or 2 for whichXY, then pointer to where to store the data
-void twi_navGetXY(TwiCmdNav whichXY, int16_t *ptr_xpos_1, int16_t *ptr_ypos_1);
+void twi_navGetXY(TwiCmdNav whichXY, uint16_t *ptr_xpos_1, uint16_t *ptr_ypos_1);
 
 
 #endif /* COM_H_ */
