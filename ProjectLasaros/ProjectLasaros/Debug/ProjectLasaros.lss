@@ -17,23 +17,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   6 .comment      0000005b  00000000  00000000  00018acd  2**0
                   CONTENTS, READONLY
-  7 .debug_info   0001c680  00000000  00000000  00018b28  2**0
+  7 .debug_info   0001c681  00000000  00000000  00018b28  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_abbrev 00004c38  00000000  00000000  000351a8  2**0
+  8 .debug_abbrev 00004c38  00000000  00000000  000351a9  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_loc    0000ad95  00000000  00000000  00039de0  2**0
+  9 .debug_loc    0000ad95  00000000  00000000  00039de1  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_aranges 000012e0  00000000  00000000  00044b75  2**0
+ 10 .debug_aranges 000012e0  00000000  00000000  00044b76  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 000011f8  00000000  00000000  00045e55  2**0
+ 11 .debug_ranges 000011f8  00000000  00000000  00045e56  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_macro  0001e02c  00000000  00000000  0004704d  2**0
+ 12 .debug_macro  0001e02c  00000000  00000000  0004704e  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_line   0001b996  00000000  00000000  00065079  2**0
+ 13 .debug_line   0001b996  00000000  00000000  0006507a  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_str    0006cceb  00000000  00000000  00080a0f  2**0
+ 14 .debug_str    0006cce2  00000000  00000000  00080a10  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_frame  000039ac  00000000  00000000  000ed6fc  2**2
+ 15 .debug_frame  000039ac  00000000  00000000  000ed6f4  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -2136,10 +2136,10 @@ void wheelControl(int ek){
    80b0c:	000866ed 	.word	0x000866ed
 
 00080b10 <setObject>:
-void setObjectSimple(objectinfo_t theObj){
-	setObject(theObj.theObject, theObj.xpos, theObj.ypos);
-}
 
+/*
+	Sets the correct objects with their coordinates and object info
+*/
 void setObject(Object obj, int x, int y){
 	switch(obj){
    80b10:	2803      	cmp	r0, #3
@@ -2197,11 +2197,11 @@ void setObject(Object obj, int x, int y){
    80b54:	2007add0 	.word	0x2007add0
 
 00080b58 <setObjectSimple>:
-		.y_pos = dropOff_y,
-		.name_p = "Drop off"
-	}
-};*/
 object_poss_t objects[8];
+
+/*
+	Sets the correct objects with their coordinates and object info
+*/
 void setObjectSimple(objectinfo_t theObj){
    80b58:	b500      	push	{lr}
    80b5a:	b083      	sub	sp, #12
@@ -2219,10 +2219,10 @@ void setObjectSimple(objectinfo_t theObj){
    80b78:	00080b11 	.word	0x00080b11
 
 00080b7c <setCollectAll>:
-	objects[0].y_pos = 0;
-	objects[0].name = 0;
-}
 
+/*
+	Decides if the arm can pick up all objects before dropoff, or if it needs to take one at a time
+*/
 void setCollectAll(uint8_t getAll){
 	getAllObj = getAll;
    80b7c:	4b01      	ldr	r3, [pc, #4]	; (80b84 <setCollectAll+0x8>)
@@ -2232,8 +2232,10 @@ void setCollectAll(uint8_t getAll){
    80b84:	20070ae8 	.word	0x20070ae8
 
 00080b88 <setDonePickup>:
-}
-
+/*
+	Sets a suspension variable to false
+	done after a pickup
+*/
 void setDonePickup(){
 	suspendNav = false;
    80b88:	2200      	movs	r2, #0
@@ -2243,8 +2245,10 @@ void setDonePickup(){
    80b90:	20070ae0 	.word	0x20070ae0
 
 00080b94 <setDropoffDone>:
-}
-
+/*
+	Sets a suspension variable to false
+	done after a dropoff
+*/
 void setDropoffDone(){
 	suspendNav = false;
    80b94:	2200      	movs	r2, #0
@@ -14724,7 +14728,7 @@ static inline void usart_serial_init(usart_if p_usart,
    847dc:	4798      	blx	r3
 	}
 	
-	//todo set to 0
+
 	booleanDriving = 0;
    847de:	2300      	movs	r3, #0
    847e0:	4a29      	ldr	r2, [pc, #164]	; (84888 <main+0x1e0>)
@@ -14735,16 +14739,12 @@ static inline void usart_serial_init(usart_if p_usart,
 	booleanModifyPosition = 0;
    847e8:	4a29      	ldr	r2, [pc, #164]	; (84890 <main+0x1e8>)
    847ea:	7013      	strb	r3, [r2, #0]
-	//todo set to 1
+
 	booleanCommunication = 1;
    847ec:	2201      	movs	r2, #1
    847ee:	4b29      	ldr	r3, [pc, #164]	; (84894 <main+0x1ec>)
    847f0:	701a      	strb	r2, [r3, #0]
-	//todo del
-// 	setObject(SQUARE,100,300);
-// 	setObject(SOCK, 300, 300);
-// 	setObject(GLASS, 300, 100);
-	
+
 	vTaskStartScheduler();
    847f2:	4b29      	ldr	r3, [pc, #164]	; (84898 <main+0x1f0>)
    847f4:	4798      	blx	r3

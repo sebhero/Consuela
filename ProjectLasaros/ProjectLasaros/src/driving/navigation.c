@@ -34,7 +34,7 @@ int radius = 80;
 uint8_t status = 0;
 uint8_t objIndex = 0;
 uint8_t getAllObj = 0;
-Bool suspendNav = 0;
+Bool suspendNav = false;
 uint8_t travelPath[8];
 
 
@@ -92,10 +92,17 @@ object_pos_t objects[] = {
 	}
 };*/
 object_poss_t objects[8];
+
+/*
+	Sets the correct objects with their coordinates and object info
+*/
 void setObjectSimple(objectinfo_t theObj){
 	setObject(theObj.theObject, theObj.xpos, theObj.ypos);
 }
 
+/*
+	Sets the correct objects with their coordinates and object info
+*/
 void setObject(Object obj, int x, int y){
 	switch(obj){
 		case SOCK:
@@ -121,14 +128,25 @@ void setObject(Object obj, int x, int y){
 	objects[0].name = 0;
 }
 
+/*
+	Decides if the arm can pick up all objects before dropoff, or if it needs to take one at a time
+*/
 void setCollectAll(uint8_t getAll){
 	getAllObj = getAll;
 }
 
+/*
+	Sets a suspension variable to false
+	done after a pickup
+*/
 void setDonePickup(){
 	suspendNav = false;
 }
 
+/*
+	Sets a suspension variable to false
+	done after a dropoff
+*/
 void setDropoffDone(){
 	suspendNav = false;
 }
