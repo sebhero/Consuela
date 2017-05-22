@@ -49,9 +49,9 @@ void setup() {
 
   led1[0] = 0x50; 
   led1[1] = 0;
-  led1[2] = 200;
+  led1[2] = 100;
   led1[3] = 0;
-  led1[4] = 200;
+  led1[4] = 100;
 
   led2[0] = 0x51;
   led2[1] = 0;
@@ -60,7 +60,7 @@ void setup() {
   led2[4] = 150;
 
   strumpa[0] = 0x52;
-  strumpa[1] = -1;
+  strumpa[1] = 0;
   strumpa[2] = 0;
   strumpa[3] = 0;
   strumpa[4] = 100;
