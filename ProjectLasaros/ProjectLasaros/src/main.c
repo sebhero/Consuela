@@ -242,33 +242,93 @@ void vCommunicationTask(void *pvParam)
 			{
 				case INIT_ARM:
 					puts("INIT_ARM");
-					armInfo = twi_getArmInfo();	
+					//armInfo = twi_getArmInfo();	
+					arminfo_t armInfo;
+					armInfo.boxAngle=0;
+					armInfo.boxDistance=0;
+					armInfo.collectAll=0;
+					armInfo.hasData=0;
+					armInfo.objectAngle=0;
+					armInfo.objectDistance=0;
+					//twi_getArmInfoBox(&armInfo);
+					armInfo=twi_getArmInfo();
 					if(armInfo.hasData)
 					{
-						//todo set to 0
-						booleanCommunication = 0;
-						//todo set to 1
-						booleanDriving = 1;						
-						//todo remove						
-						printf("init arm done\n");
-						printf("arminfo: %u %u %u %u all: %u",armInfo.boxAngle, armInfo.boxDistance, armInfo.objectAngle, armInfo.objectDistance,armInfo.collectAll);
-						setCollectAll(armInfo.collectAll);
+						//get nav info
+						//get object pos
+						//get Info about objects
+						objectinfo_t sock;
+						sock.theObject = SOCK;
+						sock.xpos=0;
+						sock.ypos=0;
 						
-						//todo del
-						current_twi_state = START_PICKUP;
-						setObject(SQUARE,100,300);
-						setObject(SOCK, 300, 300);
-						setObject(GLASS, 300, 100);
-						setCollectAll(armInfo.collectAll);
-						booleanCommunication = 0;
-						booleanDriving = 1;
+						uint8_t res =twi_navGetSockPos(&sock);
+						printf("sock: x=%d, y=%d.\n",sock.xpos,sock.ypos);
+											
+						objectinfo_t square;
+						square.theObject = SQUARE;
+						square.xpos=0;
+						square.ypos=0;
+						
+						twi_navGetSquarePos(&square);
+						printf("square: x=%d, y=%d.\n",square.xpos,square.ypos);
+						objectinfo_t glass;
+						glass.theObject = GLASS;
+						glass.xpos=0;
+						glass.ypos=0;
+						
+						twi_navGetGlassPos(&glass);
+						printf("glass: x=%d, y=%d.\n",glass.xpos,glass.ypos);
+						objectinfo_t boxgoal;
+						boxgoal.theObject = BOXGOAL;
+						boxgoal.xpos=0;
+						boxgoal.ypos=0;
+						
+						twi_navGetBoxPos(&boxgoal);
+						printf("boxgoal: x=%d, y=%d.\n",boxgoal.xpos,boxgoal.ypos);
+						
+						
+						if(res == 1)
+						{
+							
+							setObjectSimple(sock);
+							setObjectSimple(square);
+							setObjectSimple(glass);
+							setObjectSimple(boxgoal);
+							
+							//todo del
+							printf("so x=%d, y=%d. sq x=%d y=%d. gl x=%d y=%d bo x=%d y=%d",sock.xpos,sock.ypos,
+							square.xpos,square.ypos,glass.xpos,glass.ypos,boxgoal.xpos,boxgoal.ypos);
+							printf("init arm done\n");
+							printf("arminfo: %u %u %u %u all: %u\n",armInfo.boxAngle, armInfo.boxDistance, 
+							armInfo.objectAngle, armInfo.objectDistance,armInfo.collectAll);
+							
+							//todo del
+							//current_twi_state = START_PICKUP;
+							//setObject(SQUARE,100,300);
+							//setObject(SOCK, 300, 300);
+							//setObject(GLASS, 300, 100);
+							
+							
+							setCollectAll(armInfo.collectAll);
+							booleanCommunication = 0;
+							booleanDriving = 1;
+
+						}
+						else
+						{
+							puts("INIT NAV NO DATA");
+							twi_reset(TWI_PORT);
+							vTaskDelay(pdMSTOTICKS(100));
+							booleanCommunication = 1;
+							booleanDriving = 0;
+						}
 					}
 					else
 					{
 						puts("INIT ARM NO DATA");
 					}	
-					
-					
+
 				break;
 				case START_PICKUP:
 					
@@ -290,7 +350,7 @@ void vCommunicationTask(void *pvParam)
 				break;
 				//pick up is started, getting status
 				case GET_STATUS_PICKUP:
-					printf("");
+					;
 					//get current arm status about pickup
 					uint8_t status = twi_pickupGetStatus();
 					
@@ -364,6 +424,7 @@ void vCommunicationTask(void *pvParam)
 							if(armInfo.collectAll)
 							{
 								booleanDriving=0;
+								puts("SUPER DONE! with all!!");
 							}
 							else
 							{
@@ -388,9 +449,7 @@ void vCommunicationTask(void *pvParam)
 					puts("IDLE");
 				break;
 				default:
-					printf("failed twi switch %d\n",current_twi_state);
-					char xx[255];
-					scanf(xx);
+					printf("FAILED twi switch %d\n",current_twi_state);
 				break;
 			}
 			//end of current_twi_state
@@ -463,11 +522,13 @@ int main (void)
 		printf("Failed to create Communication-task");
 	}
 	
+
 	booleanDriving = 0;
 	booleanUltraSensor = 0;
 	booleanModifyPosition = 0;
+
 	booleanCommunication = 1;
-	
+
 	vTaskStartScheduler();
 
 	while (1)

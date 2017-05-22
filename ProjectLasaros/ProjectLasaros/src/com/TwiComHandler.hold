@@ -22,7 +22,7 @@
 #define SLAVE_ADDR_NAV 0x03 //twi slave address for navigation
 #define SLAVE_ADDR_ARM 0x02 //twi slave address for navigation
 
-//uint32_t SLAVE_ADDR;//twi slave address
+uint32_t SLAVE_ADDR;//twi slave address
 
 #define TWI_SPEED TWI_STANDARD_MODE_SPEED
 //set the twi port/pins to use
