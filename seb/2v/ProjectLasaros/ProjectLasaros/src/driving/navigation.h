@@ -50,7 +50,7 @@ double distanceToPosition(uint8_t obj);
 void updatePos(double hyp);
 int angleToPos(void);
 void valuesCalc(uint8_t obj);
-void updateAngle(void);
+void updateAngle(uint8_t update);
 void angleCheck(void);
 void rotationChooser(int degreesToPos);
 

@@ -512,6 +512,8 @@ int main (void)
 	//init twi communication
 	twi_comInit();
 	
+	//navigering screwed up. there system doesnt work good!
+	delay_ms(5000);
 	//armInfo = twi_getArmInfo();
 	
 	uint32_t value = 0;

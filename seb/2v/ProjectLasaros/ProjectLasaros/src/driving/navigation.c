@@ -205,8 +205,8 @@ void valuesCalc(uint8_t obj){
 	Updates the angle of the platform to what it should be according
 	to calculated values.
 */
-void updateAngle(){
-	currentAngle = ((currentAngle - angleVal)+360)%360;
+void updateAngle(uint8_t update){
+	currentAngle = ((currentAngle - update)+360)%360;
 }
 /*
 	Updates the position of the platform by calculating the distance traveled along with 

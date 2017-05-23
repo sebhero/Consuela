@@ -60,22 +60,22 @@ void setup() {
   led2[4] = 150;
 
   strumpa[0] = 0x52;
-  strumpa[1] = -1;
-  strumpa[2] = 0;
+  strumpa[1] = 1;
+  strumpa[2] = 44;
   strumpa[3] = 0;
-  strumpa[4] = 100;
+  strumpa[4] = 251;
 
   kub[0] = 0x53;
   kub[1] = 0;
-  kub[2] = 50;
+  kub[2] = 160;
   kub[3] = 0;
-  kub[4] = 50;
+  kub[4] = 247;
 
   glas[0] = 0x54;
   glas[1] = 0;
-  glas[2] = 10;
-  glas[3] = 0;
-  glas[4] = 10;
+  glas[2] = 85;
+  glas[3] = 1;
+  glas[4] = 52;
 
   Serial.println("Setup ok");
   print_menu();
