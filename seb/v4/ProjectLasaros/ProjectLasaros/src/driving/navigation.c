@@ -375,12 +375,12 @@ uint8_t goToNext(){
 
 //todo fix me
 //todo this is the real get nav info
-		twi_navGetXY(XY1,&x1,&y1);
-		twi_navGetXY(XY2,&x2,&y2);
-		puts("TWi xy");
-		printf("x1 = %d y1= %d\n",x1,y1);
-		printf("x2 = %d y2= %d\n",x2,y2);
-		vTaskDelay(pdMSTOTICKS(20));
+// 		twi_navGetXY(XY1,&x1,&y1);
+// 		twi_navGetXY(XY2,&x2,&y2);
+// 		puts("TWi xy");
+// 		printf("x1 = %d y1= %d\n",x1,y1);
+// 		printf("x2 = %d y2= %d\n",x2,y2);
+// 		vTaskDelay(pdMSTOTICKS(20));
 		 		
 // 		x1_pos=x1;
 // 		y1_pos=y1;
