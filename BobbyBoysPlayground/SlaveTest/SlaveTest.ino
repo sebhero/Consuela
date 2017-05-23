@@ -278,9 +278,9 @@ void setup() {
 
   run = 1;
 
-  theArm.boxDistance = 30;//cm to goalbox
+  theArm.boxDistance = 40;//cm to goalbox
   theArm.boxAngle = 0;//infront angle
-  theArm.objectDistance = 40;//distance from obj
+  theArm.objectDistance = 80;//distance from obj
   theArm.objectAngle = 0;//from behind
   theArm.collectAll = 1;//collect all
 
