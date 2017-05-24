@@ -285,6 +285,8 @@ void twi_test_getArminfo()
 	}
 }
 
+int countObj=0;
+Object theObj=GLASS;
 int superDone =0;
 uint8_t startpickup=0;
 uint8_t drive= 0;
@@ -433,10 +435,11 @@ int main (void)
 	 
 	 while(!superDone)
 	 {
-		//twi_test_getArminfo();
+//		twi_test_getArminfo();
 		twi_test_pickup();
+//		twi_test_dropoff();
 		
-		delay_ms(2000);
+		delay_ms(200);
 	 }
 	 
 	 
