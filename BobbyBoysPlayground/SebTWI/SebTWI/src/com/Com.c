@@ -244,8 +244,8 @@ void twi_changeSlave(uint32_t slave_address) {
 
 //send command for arm to start pickup
 uint8_t twi_pickupStart() {
-
-	uint8_t data[3] = {TWI_CMD_PICKUP_START, 0, 0};
+	Object theObj=GLASS;
+	uint8_t data[3] = {TWI_CMD_PICKUP_START, 0, theObj};
 	//send pickup start cmd
 	return twiSendData(data, 3);
 }
