@@ -49,9 +49,9 @@ void setup() {
 
   led1[0] = 0x50; 
   led1[1] = 0;
-  led1[2] = 200;
+  led1[2] = 0;
   led1[3] = 0;
-  led1[4] = 200;
+  led1[4] = 0;
 
   led2[0] = 0x51;
   led2[1] = 0;
@@ -60,22 +60,22 @@ void setup() {
   led2[4] = 150;
 
   strumpa[0] = 0x52;
-  strumpa[1] = -1;
-  strumpa[2] = 0;
+  strumpa[1] = 0;
+  strumpa[2] = 200;
   strumpa[3] = 0;
-  strumpa[4] = 100;
+  strumpa[4] = 200;
 
   kub[0] = 0x53;
-  kub[1] = 0;
-  kub[2] = 50;
-  kub[3] = 0;
-  kub[4] = 50;
+  kub[1] = 1;
+  kub[2] = 200;
+  kub[3] = 1;
+  kub[4] = 200;
 
   glas[0] = 0x54;
   glas[1] = 0;
-  glas[2] = 10;
+  glas[2] = 100;
   glas[3] = 0;
-  glas[4] = 10;
+  glas[4] = 100;
 
   Serial.println("Setup ok");
   print_menu();
@@ -168,7 +168,7 @@ void requestEvent(){
   if(send_data[0] != 0){
     Wire.write(send_data, 5);
     for(int n = 0; n < 5; n++) {
-      Serial.println(send_data[n]);
+    //  Serial.println(send_data[n]);
     }
   }
 }
@@ -178,8 +178,8 @@ void recieveEvent(int TURNDOWNFORWHAT){
     twi_state = Wire.read();
     rx_buff[0] = twi_state;
   }
-  Serial.print("Kommando: ");
-  Serial.println(rx_buff[0], HEX);
+  //Serial.print("Kommando: ");
+  //Serial.println(rx_buff[0], HEX);
   switch(rx_buff[0]){
     case 0x00:
       send_data[0] = 0;

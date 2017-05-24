@@ -436,8 +436,8 @@ int main (void)
 	 while(!superDone)
 	 {
 //		twi_test_getArminfo();
-//		twi_test_pickup();
-		twi_test_dropoff();
+		twi_test_pickup();
+//		twi_test_dropoff();
 		
 		delay_ms(200);
 	 }

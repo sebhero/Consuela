@@ -75,8 +75,8 @@ void vDriveToObjectTask(void *pvParam) {
 			uint8_t gotoVal = goToNext();
 			if(gotoVal == 1)
 			{
-				setBitLevels(0, 1, 0, 0); // ultrasensor = 1
-				//setBitLevels(0, 0, 0, 1); // COMmunication= 1
+//				setBitLevels(0, 1, 0, 0); // ultrasensor = 1
+				setBitLevels(0, 0, 0, 1); // COMmunication= 1
 				current_twi_state = START_PICKUP;
 				puts("GOTO PICKUP FROM DRIVE");
 			    printf("\nGotoVal = %u", gotoVal);
@@ -85,8 +85,8 @@ void vDriveToObjectTask(void *pvParam) {
 			if(gotoVal == 2)
 			{
 				//todo should be ultra
-				setBitLevels(0, 1, 0, 0); // ultrasensor = 1
-				//setBitLevels(0, 0, 0, 1); // COMmunication= 1
+//				setBitLevels(0, 1, 0, 0); // ultrasensor = 1
+				setBitLevels(0, 0, 0, 1); // COMmunication= 1
 				current_twi_state = START_DROP_OFF;
 				puts("GOTO DROPOFF FROM DRIVE");
 			    printf("\nGotoVal = %u", gotoVal);
@@ -228,7 +228,8 @@ In order to function properly certain arms need to drive forward during pickup-a
 
 static void driveForwardDuringPickup(){
 	printf("\Forward drive during pickup!");
-	forwardDrive(50); //20 cm may suffice
+	 //20 cm may suffice
+	forwardDrive(50);	
 }
 
 /*
@@ -245,7 +246,9 @@ void vCommunicationTask(void *pvParam)
 			switch (current_twi_state)
 			{
 				case INIT_ARM:
-					puts("INIT_ARM");
+					puts("INIT_ARM");							
+
+					
 					//armInfo = twi_getArmInfo();	
 					arminfo_t armInfo;
 					armInfo.boxAngle=0;
@@ -256,6 +259,7 @@ void vCommunicationTask(void *pvParam)
 					armInfo.objectDistance=0;
 					//twi_getArmInfoBox(&armInfo);
 					armInfo=twi_getArmInfo();
+					vTaskDelay(pdMSTOTICKS(200));
 					if(armInfo.hasData)
 					{
 						
@@ -289,11 +293,11 @@ void vCommunicationTask(void *pvParam)
 						printf("glass: x=%d, y=%d.\n",glass.xpos,glass.ypos);
 						objectinfo_t boxgoal;
 						boxgoal.theObject = BOXGOAL;
-						boxgoal.xpos=0;
+						boxgoal.xpos=50;
 						boxgoal.ypos=0;
-						
-						twi_navGetBoxPos(&boxgoal);
-						printf("boxgoal: x=%d, y=%d.\n",boxgoal.xpos,boxgoal.ypos);
+// 						
+// 						twi_navGetBoxPos(&boxgoal);
+ 						printf("boxgoal: x=%d, y=%d.\n",boxgoal.xpos,boxgoal.ypos);
 						
 						
 						if(res == 1)
@@ -305,8 +309,8 @@ void vCommunicationTask(void *pvParam)
 							setObjectSimple(boxgoal);
 							
 							//todo del
-							printf("so x=%d, y=%d. sq x=%d y=%d. gl x=%d y=%d bo x=%d y=%d",sock.xpos,sock.ypos,
-							square.xpos,square.ypos,glass.xpos,glass.ypos,boxgoal.xpos,boxgoal.ypos);
+							printf("so x=%d, y=%d. sq x=%d y=%d. gl x=%d y=%d",sock.xpos,sock.ypos,
+							square.xpos,square.ypos,glass.xpos,glass.ypos);
 							printf("init arm done\n");
 							printf("arminfo: %u %u %u %u all: %u\n",armInfo.boxAngle, armInfo.boxDistance, 
 							armInfo.objectAngle, armInfo.objectDistance,armInfo.collectAll);
@@ -325,36 +329,52 @@ void vCommunicationTask(void *pvParam)
 						}
 						else
 						{
-							puts("INIT NAV NO DATA");
-							twi_reset(TWI_PORT);
+							puts("INIT NAV NO DATA");	
+// 							twi_master_disable(TWI_PORT);
+// 							vTaskDelay(pdMSTOTICKS(20));
+// 							twi_master_enable(TWI_PORT);
+				
 							vTaskDelay(pdMSTOTICKS(100));
 							booleanCommunication = 1;
 							booleanDriving = 0;
+							
 						}
 					}
 					else
 					{
 						puts("INIT ARM NO DATA");
+						
+// 						twi_master_disable(TWI_PORT);						
+// 						vTaskDelay(pdMSTOTICKS(20));
+// 						twi_master_enable(TWI_PORT);
 					}	
 
 				break;
 				case START_PICKUP:
 					;
+					//todo twi quick fix
+					//wild card reset twi.
+// 					twi_master_disable(TWI_PORT);
+// 					vTaskDelay(pdMSTOTICKS(20));
+// 					twi_master_enable(TWI_PORT);
+
 					Object theOjb = getCurrentObject();
 					//start pickup after modify position
 					if (twi_pickupStart(theOjb) == 1)
 					{
 						puts("STARTED PICKUP");
 						//Could start pickup
-						
+
 						current_twi_state=GET_STATUS_PICKUP;
-						
+						vTaskDelay(pdMSTOTICKS(20));
 					}
 					else
 					{
 						//failed to start pickup!! try again!
 						puts("FAILED TO START_PICKUP");
 						current_twi_state=START_PICKUP;
+						vTaskDelay(pdMSTOTICKS(20));
+
 					}
 				break;
 				//pick up is started, getting status
@@ -390,13 +410,19 @@ void vCommunicationTask(void *pvParam)
 						break;						
 						case PICKUP_FORWARD:
 						case PICKUP_BACKWARD:
-							puts("go forward or back");
+							puts("PICKUP_FORWARD");
+							//wait to drive 2 sek
+							//vTaskDelay(pdMSTOTICKS(100));
 							//TODO: call function that drives forward/backwards based on cm
-							printf("Driving forward/backward");
+							//printf("Driving forward/backward");
 							//if we needed to drive during pickup, check if driving is done
 							driveForwardDuringPickup();
-							//vTaskDelay(pdMSTOTICKS(2000));
+							//wait to go to next state 2 sek
+							//vTaskDelay(pdMSTOTICKS(200));
+							vTaskDelay(pdMSTOTICKS(20));
 							twi_pickupSendMovementDone();
+							vTaskDelay(pdMSTOTICKS(20));
+							
 						break;
 						
 						default:
@@ -463,6 +489,7 @@ void vCommunicationTask(void *pvParam)
 				break;
 			}
 			//end of current_twi_state
+			vTaskDelay(pdMSTOTICKS(30));
 		} 
 		else
 		{
@@ -534,10 +561,13 @@ int main (void)
 	
 
 	booleanDriving = 0;
+	//set to 0
 	booleanUltraSensor = 0;
 	booleanModifyPosition = 0;
-
+	//set to 1
 	booleanCommunication = 1;
+	
+	//booleanCommunication = 1;
 
 	vTaskStartScheduler();
 
