@@ -15,17 +15,17 @@ uint8_t twi_move_cm = 0;//cm to move
 
 void buildObject(uint8_t data[5], objectinfo_t *ptr_object);
 
-void buildXY(uint8_t data[5], int16_t *pInt, int16_t *ypos_1);
+void buildXY(uint8_t data[5], uint16_t *pInt, uint16_t *ypos_1);
 
 void twi_comInit(void) {
 	// TWI master initialization options.
 	//set that there is no data;
 	theArm.hasData = 0;
-//	SLAVE_ADDR = SLAVE_ADDR_ARM;//twi slave address for arm
+	SLAVE_ADDR = SLAVE_ADDR_ARM;//twi slave address for arm
 
 	twi_master_options_t opt;
 	opt.speed = TWI_SPEED;
-	opt.chip = SLAVE_ADDR_ARM;
+	opt.chip = SLAVE_ADDR;
 
 	// Initialize the TWI master driver.
 	twi_master_setup(TWI_PORT, &opt);
@@ -37,22 +37,22 @@ uint8_t sendArmCmd(uint8_t cmd) {
 			.addr[0]      = 0, // TWI slave memory address data MSB
 			.addr[1]      = 0,// TWI slave memory address data LSB
 			.addr_length  = 0, //sizeof (uint16_t),    // TWI slave memory address data size
-			.chip         = SLAVE_ADDR_ARM,      // TWI slave bus address
+			.chip         = SLAVE_ADDR,      // TWI slave bus address
 			.buffer       = &cmd, // transfer data source buffer
 			.length       = 3   // transfer data size (bytes)
 	};
 
 
-	if (twi_probe(TWI_PORT, SLAVE_ADDR_ARM) == TWI_SUCCESS) {
+	//if (twi_probe(TWI_PORT, SLAVE_ADDR) == TWI_SUCCESS) {
 		//puts("Write to slave");
 		while (twi_master_write(TWI_PORT, &packet) != TWI_SUCCESS);
 		//delay_ms(100);
 		//puts("Write to slave done");
 		return 1;
-	} else {
+	//} else {
 		//puts("error on write to slave");
-		return 0;
-	}
+		//return 0;
+	//}
 }
 
 //Send data to Arm with TWI
@@ -64,13 +64,13 @@ uint8_t twiSendData(uint8_t *data, int dataLength) {
 			.addr[0]      = 0, // TWI slave memory address data MSB
 			.addr[1]      = 0,// TWI slave memory address data LSB
 			.addr_length  = 0, //sizeof (uint16_t),    // TWI slave memory address data size
-			.chip         = SLAVE_ADDR_ARM,      // TWI slave bus address
+			.chip         = SLAVE_ADDR,      // TWI slave bus address
 			.buffer       = data, // transfer data source buffer
 			.length       = dataLength   // transfer data size (bytes)
 	};
 
 
-	if (twi_probe(TWI_PORT, SLAVE_ADDR_ARM) == TWI_SUCCESS) {
+	if (twi_probe(TWI_PORT, SLAVE_ADDR) == TWI_SUCCESS) {
 		while (twi_master_write(TWI_PORT, &packet) != TWI_SUCCESS);
 		return 1;
 	} else {
@@ -89,7 +89,7 @@ uint8_t twiReciveData(uint8_t *recv, uint8_t packageSize) {
 			.addr[0]      = 0,//EEPROM_MEM_ADDR, // TWI slave memory address data MSB
 			.addr[1]      = 0,//EEPROM_MEM_ADDR,      // TWI slave memory address data LSB
 			.addr_length  = 0, //sizeof (uint16_t),    // TWI slave memory address data size
-			.chip         = SLAVE_ADDR_ARM,      // TWI slave bus address
+			.chip         = SLAVE_ADDR,      // TWI slave bus address
 			.buffer       = recv, // transfer data source buffer
 			.length       = packageSize   // transfer data size (bytes)
 	};
@@ -180,8 +180,7 @@ arminfo_t twi_getArmInfo() {
 		return theArm;
 	}
 
-	
-	vTaskDelay(pdMSTOTICKS(60));
+	//vTaskDelay(pdMSTOTICKS(60));
 
 	//setup for next send
 	data[0] = TWI_CMD_ARM_INIT;
@@ -205,8 +204,6 @@ arminfo_t twi_getArmInfo() {
 		theArm.hasData = 0;
 		return theArm;
 	}
-	
-	vTaskDelay(pdMSTOTICKS(60));
 
 
 	//data[0] = TWI_CMD_ARM_INIT;
@@ -232,18 +229,18 @@ arminfo_t twi_getArmInfo() {
 		theArm.hasData = 0;
 		return theArm;
 	}
-	vTaskDelay(pdMSTOTICKS(60));
+
 	//return the armInfo
 	return theArm;
 }
 
 
-//// change slave. with new slave address
-// void twi_changeSlave(uint32_t slave_address) {
-// 	SLAVE_ADDR = slave_address;
-// 	twi_set_slave_addr(TWI_PORT, SLAVE_ADDR);
-// 
-// }
+//change slave. with new slave address
+void twi_changeSlave(uint32_t slave_address) {
+	SLAVE_ADDR = slave_address;
+	twi_set_slave_addr(TWI_PORT, SLAVE_ADDR);
+
+}
 
 //send command for arm to start pickup
 uint8_t twi_pickupStart() {
@@ -262,10 +259,8 @@ void twi_pickupSetCm(uint8_t cm) {
 PickupStatus twi_pickupGetStatus() {
 	uint8_t data[3] = {TWI_CMD_PICKUP_STATUS, 0, 0};
 	uint8_t recv[3] = {0};
-	//	twi_reset 	//maybe fix out of sync
 	//send pickup start cmd
 	if (twiSendData(data, 3)) {
-		delay_ms(10);
 		//get status
 		twiReciveData(recv, 3);
 		if (recv[0] == TWI_CMD_PICKUP_STATUS) {
@@ -299,7 +294,6 @@ uint8_t twi_pickupSendMovementDone() {
 	if (twiSendData(data, 3)) {
 		twi_masterPickupStatus = PICKUP_RUNNING;
 		//success
-		
 		return 1;
 	} else {
 		//failed
@@ -370,16 +364,16 @@ uint8_t twi_navSendCmd(TwiCmdNav cmd) {
 	};
 
 
-	if (twi_probe(TWI_PORT, SLAVE_ADDR_NAV) == TWI_SUCCESS) {
+/*	if (twi_probe(TWI_PORT, SLAVE_ADDR_NAV) == TWI_SUCCESS) {*/
 	//puts("Write to slave");
 	while (twi_master_write(TWI_PORT, &packet) != TWI_SUCCESS);
-	//delay_ms(10);
+	//delay_ms(100);
 	//puts("Write to slave done");
 	return 1;
-	} else {
-		puts("error on write to slave");
-		return 0;
-	}
+// 	} else {
+// 		//puts("error on write to slave");
+// 		return 0;
+// 	}
 }
 
 //get nav info
@@ -406,94 +400,6 @@ void twi_navRead(uint8_t *readedData) {
 // 	}
 }
 
-uint8_t twi_navGetSockPos(objectinfo_t *ptr_sock)
-{
-	TwiCmdNav cmdSock = SOCKETXY;
-	uint8_t dataSock[5] = {0};
-	if(twi_navSendCmd(cmdSock))
-	{
-		twi_navRead(dataSock);
-	}
-	else{
-		delay_ms(20);
-		puts("NAV FAILed");
-		return 0;
-	}
-// 	for (int i =0; i<5; i++)
-// 	{
-// 		printf("%i = %x",i,dataSock[i]);
-// 	}
-// 	puts("end of SOCK DATA");
-	vTaskDelay(pdMSTOTICKS(40));
-	buildObject(dataSock, ptr_sock);
-	return 1;
-}
-
-uint8_t twi_navGetSquarePos(objectinfo_t *ptr_obj)
-{
-	TwiCmdNav cmd = SQUAREXY;
-	uint8_t data[5] = {0};
-	if(twi_navSendCmd(cmd))
-	{
-		twi_navRead(data);
-	}
-	else{
-		delay_ms(20);
-		puts("NAV FAILed");
-		return 0;
-	}
-// 	for (int i =0; i<5; i++)
-// 	{
-// 		printf("%i = %x",i,data[i]);
-// 	}
-// 	puts("end of SOCK DATA");
-	vTaskDelay(pdMSTOTICKS(40));
-	buildObject(data, ptr_obj);
-}
-uint8_t twi_navGetGlassPos(objectinfo_t *ptr_obj)
-{
-		TwiCmdNav cmd = GLASSXY;
-		uint8_t data[5] = {0};
-		if(twi_navSendCmd(cmd))
-		{
-			twi_navRead(data);
-		}
-		else{
-			delay_ms(20);
-			puts("NAV FAILed");
-			return 0;
-		}
-		
-// 		for (int i =0; i<5; i++)
-// 		{
-// 			printf("%i = %x",i,data[i]);
-// 		}
-// 		puts("end of SOCK DATA");
-		vTaskDelay(pdMSTOTICKS(40));
-		buildObject(data, ptr_obj);
-	
-}
-uint8_t twi_navGetBoxPos(objectinfo_t *ptr_obj)
-{
-			TwiCmdNav cmd = GLASSXY;
-			uint8_t data[5] = {0};
-			if(twi_navSendCmd(cmd))
-			{
-				twi_navRead(data);
-			}
-			else{
-				delay_ms(20);
-				puts("NAV FAILed");
-				return 0;
-			}
-// 			for (int i =0; i<5; i++)
-// 			{
-// 				printf("%i = %x",i,data[i]);
-// 			}
-// 			puts("end of SOCK DATA");
-			vTaskDelay(pdMSTOTICKS(40));
-			buildObject(data, ptr_obj);
-}
 
 //get object info
 uint8_t twi_navGetObjectsPos(objectinfo_t *ptr_sock, objectinfo_t *ptr_square, objectinfo_t *ptr_glass,
@@ -508,60 +414,21 @@ uint8_t twi_navGetObjectsPos(objectinfo_t *ptr_sock, objectinfo_t *ptr_square, o
 	uint8_t dataGlass[5] = {0};
 	uint8_t dataGoal[5] = {0};
 
-	//todo del
 	puts("SEND SOCKETXY");
-	
-	if(twi_navSendCmd(cmdSock))
-	{
-		vTaskDelay(pdMSTOTICKS(20));
-		twi_navRead(dataSock);
-	}
-	else{
-		vTaskDelay(pdMSTOTICKS(20));
-		
-		puts("NAV FAILed");
-		return 0;
-	}
-	
-	//todo del
+	twi_navSendCmd(cmdSock);
+	twi_navRead(dataSock);
+
 	puts("SEND SQUAREXY");
-	vTaskDelay(pdMSTOTICKS(20));
-	if(twi_navSendCmd(cmdSquare))
-	{
-		twi_navRead(dataSquare);
-	}
-	else{
-		delay_ms(20);
-		puts("NAV FAILed");
-		return 0;
-	}
-	
-	//todo del
+	twi_navSendCmd(cmdSquare);
+	twi_navRead(dataSquare);
+
 	puts("SEND GLASSXY");
-	
-	if(twi_navSendCmd(cmdGlass))
-	{
-		twi_navRead(dataGlass);	
-	}
-	else{
-		delay_ms(20);
-		puts("NAV FAILed");
-		return 0;
-	}
-	
-	//todo del
+	twi_navSendCmd(cmdGlass);
+	twi_navRead(dataGlass);
+
 	puts("SEND BoxGoalxy");
-	
-	if(twi_navSendCmd(cmdGoal))
-	{
-		twi_navRead(dataGoal);
-	}
-	else{
-		delay_ms(20);
-		puts("NAV FAILed");
-		return 0;
-	}	
-	return 1;
+	twi_navSendCmd(cmdGoal);
+	twi_navRead(dataGoal);
 
 	buildObject(dataSock, ptr_sock);
 	buildObject(dataSquare, ptr_square);
@@ -571,7 +438,7 @@ uint8_t twi_navGetObjectsPos(objectinfo_t *ptr_sock, objectinfo_t *ptr_square, o
 }
 //build object with cords
 //from uint8 to int16
-void buildObject(uint8_t data[5], objectinfo_t *ptr_object) {	
+void buildObject(uint8_t data[5], objectinfo_t *ptr_object) {
 	int16_t x = (data[1] << 8) | (data[2] << 0);
 	int16_t y = (data[3] << 8) | (data[4] << 0);
 	ptr_object->xpos = x;
@@ -579,7 +446,7 @@ void buildObject(uint8_t data[5], objectinfo_t *ptr_object) {
 
 }
 //build x and y cord from uint8 to int16
-void buildXY(uint8_t data[5], int16_t *ptr_xpos, int16_t *ptr_ypos) {
+void buildXY(uint8_t data[5], uint16_t *ptr_xpos, uint16_t *ptr_ypos) {
 	int16_t x = (data[1] << 8) | (data[2] << 0);
 	int16_t y = (data[3] << 8) | (data[4] << 0);
 	*ptr_xpos = x;
@@ -589,7 +456,7 @@ void buildXY(uint8_t data[5], int16_t *ptr_xpos, int16_t *ptr_ypos) {
 
 
 //gets both xy for one xy cord (either xy1 or xy2)
-void twi_navGetXY(TwiCmdNav whichXY, int16_t *ptr_xpos_1, int16_t *ptr_ypos_1) {
+void twi_navGetXY(TwiCmdNav whichXY, uint16_t *ptr_xpos_1, uint16_t *ptr_ypos_1) {
 	TwiCmdNav cmd;;
 	uint8_t data[5] = {0};
 	if (whichXY == XY1) {
@@ -613,43 +480,5 @@ void twi_navGetXY(TwiCmdNav whichXY, int16_t *ptr_xpos_1, int16_t *ptr_ypos_1) {
 // data[4]=33;
 
 	buildXY(data, ptr_xpos_1, ptr_ypos_1);
-
-}
-
-
-
-void twi_getArmInfoBox(arminfo_t* arm) {
-
-	uint8_t data[3] = {0};
-	uint8_t recv[3] = {0};
-	uint8_t result;
-
-
-	data[0] = TWI_CMD_ARM_INIT;
-	data[1] = TWI_CMD_ARM_REQ_BOX_INFO;
-
-
-	result = twiSendData(data, 3);
-	if (result) {
-
-		vTaskDelay(pdMSTOTICKS(20));
-		twiReciveData(recv, 3);
-		
-		printf("111 Receive successful: %u, %u, %u\n", recv[0], recv[1], recv[2]);
-		vTaskDelay(pdMSTOTICKS(10));
-		
-		arm->boxDistance = recv[1];
-		arm->boxAngle = recv[2];
-
-		//todo remove
-		arm->hasData = 1;
-	} else {
-		puts("Fail 111");
-		//vTaskDelay(pdMSTOTICKS(10));
-		arm->hasData = 0;		
-	}
-
-	
-	//vTaskDelay(pdMSTOTICKS(60));
 
 }
