@@ -66,7 +66,7 @@ static void setBitLevels(int driving, int ultrasensor, int modifyPosition, int c
  *
  */
 void vDriveToObjectTask(void *pvParam) {
-	
+
 	while (1)
 	{
 		if (booleanDriving == 1 && booleanUltraSensor == 0 && booleanCommunication == 0)
@@ -80,7 +80,7 @@ void vDriveToObjectTask(void *pvParam) {
 				puts("GOTO PICKUP FROM DRIVE");
 			    printf("\nGotoVal = %u", gotoVal);
 			}
-			
+
 			if(gotoVal == 2)
 			{
 				setBitLevels(0, 1, 0, 0); // ultrasensor = 1
@@ -88,7 +88,7 @@ void vDriveToObjectTask(void *pvParam) {
 				puts("GOTO DROPOFF FROM DRIVE");
 			    printf("\nGotoVal = %u", gotoVal);
 			}
-			
+
 			if(gotoVal == 3)
 			{
 				// Mission accomplished!
@@ -126,7 +126,7 @@ void vUltraSensorTask(void *pvParam) {
 					booleanModifyPosition = 1;
 				}
 			}
-	
+
 			if (booleanModifyPosition == 1)
 			{
 				if (angleUltraSensor == 90)
@@ -161,7 +161,7 @@ void vUltraSensorTask(void *pvParam) {
 						if ((distanceUltraSensor + 32) > armInfo.objectDistance)
 						{
 							int travelDistToObj = (distanceUltraSensor + 32) - armInfo.objectDistance;
-							forwardDrive(travelDistToObj); 
+							forwardDrive(travelDistToObj);
 							printf("\nModifying driving: driving forward %i \n", travelDistToObj);
 							booleanDriving=0;
 							booleanUltraSensor=0;
@@ -232,7 +232,7 @@ static void driveForwardDuringPickup(){
  */
 void vCommunicationTask(void *pvParam)
 {
-	
+
 	while(1)
 	{
 		if (booleanCommunication == 1 && booleanUltraSensor == 0 && booleanDriving == 0 && booleanModifyPosition == 0)
@@ -242,7 +242,7 @@ void vCommunicationTask(void *pvParam)
 			{
 				case INIT_ARM:
 					puts("INIT_ARM");
-					//armInfo = twi_getArmInfo();	
+					//armInfo = twi_getArmInfo();
 					arminfo_t armInfo;
 					armInfo.boxAngle=0;
 					armInfo.boxDistance=0;
@@ -261,55 +261,55 @@ void vCommunicationTask(void *pvParam)
 						sock.theObject = SOCK;
 						sock.xpos=0;
 						sock.ypos=0;
-						
+
 						uint8_t res =twi_navGetSockPos(&sock);
 						printf("sock: x=%d, y=%d.\n",sock.xpos,sock.ypos);
-											
+
 						objectinfo_t square;
 						square.theObject = SQUARE;
 						square.xpos=0;
 						square.ypos=0;
-						
+
 						twi_navGetSquarePos(&square);
 						printf("square: x=%d, y=%d.\n",square.xpos,square.ypos);
 						objectinfo_t glass;
 						glass.theObject = GLASS;
 						glass.xpos=0;
 						glass.ypos=0;
-						
+
 						twi_navGetGlassPos(&glass);
 						printf("glass: x=%d, y=%d.\n",glass.xpos,glass.ypos);
 						objectinfo_t boxgoal;
 						boxgoal.theObject = BOXGOAL;
 						boxgoal.xpos=0;
 						boxgoal.ypos=0;
-						
+
 						twi_navGetBoxPos(&boxgoal);
 						printf("boxgoal: x=%d, y=%d.\n",boxgoal.xpos,boxgoal.ypos);
-						
-						
+
+
 						if(res == 1)
 						{
-							
+
 							setObjectSimple(sock);
 							setObjectSimple(square);
 							setObjectSimple(glass);
 							setObjectSimple(boxgoal);
-							
+
 							//todo del
 							printf("so x=%d, y=%d. sq x=%d y=%d. gl x=%d y=%d bo x=%d y=%d",sock.xpos,sock.ypos,
 							square.xpos,square.ypos,glass.xpos,glass.ypos,boxgoal.xpos,boxgoal.ypos);
 							printf("init arm done\n");
-							printf("arminfo: %u %u %u %u all: %u\n",armInfo.boxAngle, armInfo.boxDistance, 
+							printf("arminfo: %u %u %u %u all: %u\n",armInfo.boxAngle, armInfo.boxDistance,
 							armInfo.objectAngle, armInfo.objectDistance,armInfo.collectAll);
-							
+
 							//todo del
 							//current_twi_state = START_PICKUP;
 							//setObject(SQUARE,100,300);
 							//setObject(SOCK, 300, 300);
 							//setObject(GLASS, 300, 100);
-							
-							
+
+
 							setCollectAll(armInfo.collectAll);
 							booleanCommunication = 0;
 							booleanDriving = 1;
@@ -327,19 +327,19 @@ void vCommunicationTask(void *pvParam)
 					else
 					{
 						puts("INIT ARM NO DATA");
-					}	
+					}
 
 				break;
 				case START_PICKUP:
-					
+
 					//start pickup after modify position
 					if (twi_pickupStart() == 1)
 					{
 						puts("STARTED PICKUP");
 						//Could start pickup
-						
+
 						current_twi_state=GET_STATUS_PICKUP;
-						
+
 					}
 					else
 					{
@@ -353,7 +353,7 @@ void vCommunicationTask(void *pvParam)
 					;
 					//get current arm status about pickup
 					uint8_t status = twi_pickupGetStatus();
-					
+
 					switch(status)
 					{
 						case PICKUP_FAILED:
@@ -378,7 +378,7 @@ void vCommunicationTask(void *pvParam)
 							booleanModifyPosition=0;
 							booleanCommunication=0;
 							booleanDriving=1;
-						break;						
+						break;
 						case PICKUP_FORWARD:
 						case PICKUP_BACKWARD:
 							puts("go forward or back");
@@ -388,7 +388,7 @@ void vCommunicationTask(void *pvParam)
 							driveForwardDuringPickup();
 							twi_pickupSendMovementDone();
 						break;
-						
+
 						default:
 						//printf("UNHANDLED PICKUP STATUS: %x\n",status);
 						break;
@@ -396,12 +396,12 @@ void vCommunicationTask(void *pvParam)
 					}
 					//end of get status pickup
 				break;
-				
-				
+
+
 				case START_DROP_OFF:
 					if (twi_dropoffStart() == 1)
 					{
-						
+
 						//done starting pickup
 						current_twi_state=GET_STATUS_DROP_OFF;
 					}
@@ -412,7 +412,7 @@ void vCommunicationTask(void *pvParam)
 						current_twi_state=START_DROP_OFF;
 					}
 				break;
-				
+
 				case GET_STATUS_DROP_OFF:
 					puts("GET_STATUS_DROP_OFF");
 					switch(twi_dropoffGetStatus())
@@ -443,7 +443,7 @@ void vCommunicationTask(void *pvParam)
 						case DROPOFF_IDLE:
 							printf("DROPOFF_IDLE\n");
 						break;
-					}				
+					}
 				break;
 				case IDLE:
 					puts("IDLE");
@@ -453,11 +453,11 @@ void vCommunicationTask(void *pvParam)
 				break;
 			}
 			//end of current_twi_state
-		} 
+		}
 		else
 		{
 			vTaskDelay(pdMSTOTICKS(100));
-			
+
 		}
 	}
 	vTaskDelete(NULL);
@@ -475,7 +475,7 @@ static void configure_console(void)
 	/* Configure console UART. */
 	sysclk_enable_peripheral_clock(CONSOLE_UART_ID);
 	stdio_serial_init(CONF_UART, &uart_serial_options);
-	
+
 	printf("Console ready\n");
 	printf("=============\n");
 }
@@ -489,39 +489,43 @@ int main (void)
 	TC0_init();
 	//init twi communication
 	twi_comInit();
-	
+
 	//armInfo = twi_getArmInfo();
-	
+
 	uint32_t value = 0;
-	
-	
+
+
 	pulseCounter_configA(ID_PIOC, PIOC, PIO_PC28);
 	pulseCounter_configB(ID_PIOC, PIOC, PIO_PC23);
-	
+
 	pulse_init();
-	
+
 	current_twi_state = INIT_ARM;
 
 	ioport_init();
-	ioport_set_pin_dir(D7, IOPORT_DIR_OUTPUT);
-	
+    forwardDrive(20);
+    rotateLeftByDegrees(90);
+
+	/*
+    ioport_set_pin_dir(D7, IOPORT_DIR_OUTPUT);
+
 	ioport_set_pin_dir(trig, IOPORT_DIR_OUTPUT);
 	ioport_set_pin_dir(echo, IOPORT_DIR_INPUT);
 	ioport_set_pin_dir(servo, IOPORT_DIR_OUTPUT);
 	ioport_set_pin_level(servo, LOW);
-	
+
 	if(xTaskCreate(vDriveToObjectTask, "DriveToObject", 1000, NULL, 1, pxTaskDriveToObject) != pdPASS){
 		printf("Failed to create DriveToObject-task");
 	}
-	
+
 	if(xTaskCreate(vUltraSensorTask, "UltraSensor", 1000, NULL, 1, pxTaskUltraSensor) != pdPASS){
 		printf("Failed to create UltraSensor-task");
 	}
-	
+
 	if(xTaskCreate(vCommunicationTask, "Communication", 1000, NULL, 1, pxTaskCommunication) != pdPASS){
 		printf("Failed to create Communication-task");
 	}
-	
+
 
 	booleanDriving = 0;
 	booleanUltraSensor = 0;
@@ -530,6 +534,7 @@ int main (void)
 	booleanCommunication = 1;
 
 	vTaskStartScheduler();
+    */
 
 	while (1)
 	{

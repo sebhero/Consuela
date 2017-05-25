@@ -48,7 +48,7 @@ void forwardDrive(int distance){
 	pulse(1560);
 	*/
 	pulse_set_period(pulseh_ch, 1600);
-	pulse_set_period(pulsev_ch, 1560);
+	pulse_set_period(pulsev_ch, 1572);
 
 	pulse_start(pulseh_ch);
 	pulse_start(pulsev_ch);

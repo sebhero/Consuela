@@ -32,6 +32,10 @@
 #include "conf_uart_serial.h"
 #include "com/TwiComHandler.h"
 #include "com/Com.h"
+
+#include "pulse/pulse.h"
+#include "pulse/pulseCounterHandler.h"
+#include "driving/motorFunc.h"
 //#include "seb/SebWire.h"
 // #include <stdio.h>
 // #include <stdio_serial.h>
@@ -85,7 +89,7 @@ twi_package_t packet = {
 // 	TWI_CMD_FROM_ARM_FAILED_DELIVER = 	0x17,
 // 	TWI_CMD_FROM_ARM_ADJUST_POS = 		0x18,
 // 	TWI_CMD_FROM_ARM_ABORT_ADJUST = 	0x19,
-// 
+//
 // 	//commands to arm
 // 	TWI_CMD_TO_ARM_INIT = 				0x20,
 // 	TWI_CMD_TO_ARM_LIFT_SQUARE = 		0x21,
@@ -93,14 +97,14 @@ twi_package_t packet = {
 // 	TWI_CMD_TO_ARM_LIFT_SOCK = 			0x23,
 // 	TWI_CMD_TO_ARM_ABORT_LIFT = 		0x24,
 // 	TWI_CMD_TO_ARM_DELIVER_OBJ = 		0x25,
-// 
+//
 // 	//commands from positioning
 // 	TWI_CMD_FROM_POS_BOX = 				0x30,
 // 	TWI_CMD_FROM_POS_ROBOT = 			0x31,
 // 	TWI_CMD_FROM_POS_SOCK = 			0x32,
 // 	TWI_CMD_FROM_POS_SQUARE = 			0x33,
 // 	TWI_CMD_FROM_POS_GLASS = 			0x34,
-// 
+//
 // 	//commands from positioning
 // 	TWI_CMD_TO_POS_INIT = 				0x40,
 // 	TWI_CMD_TO_POS_ROBOT = 				0x41,
@@ -112,10 +116,10 @@ twi_package_t packet = {
 
 
 // void handleCmd(uint8_t cmd) {
-// 
+//
 // 		printf("got in hex: %x\n",cmd);
 // 		printf("got in dec: %d\n",cmd);
-// 
+//
 // 		switch (cmd) {
 // 			case TWI_CMD_FROM_ARM_ID :
 // 			printf("cmd is TWI_CMD_FROM_ARM_ID: %x \n",cmd);
@@ -200,8 +204,8 @@ twi_package_t packet = {
 // 			break;
 // 			default:
 // 			printf("error\n");
-// 
-// 		
+//
+//
 // 	}
 // }
 
@@ -219,19 +223,19 @@ void sendToArduino2(int cmd)
 		.buffer       = recv, // transfer data source buffer
 		.length       = 1   // transfer data size (bytes)
 	};
-	
+
 	//char* hello = "sebastian";
 	//int hello =;
 	packet.buffer=&cmd;
 	packet.length= 1;
-	
+
  	if(twi_probe(TWI1,SLAVE_ADDR)==TWI_SUCCESS)
  	{
 		puts("Write to slave");
 		while (twi_master_write(TWI1, &packet) != TWI_SUCCESS);
 		delay_ms(100);
 		puts("Write to slave done");
-		
+
 		puts("Read from slave");
 		// Perform a multi-byte read access then check the result.
 		while (twi_master_read(TWI1, &pkt_rcv) != TWI_SUCCESS);
@@ -245,7 +249,7 @@ void sendToArduino2(int cmd)
 		}
 		puts("");
 		delay_ms(100);
-		
+
  	}
 	else{
  		puts("error on write to slave");
@@ -260,8 +264,8 @@ void sendToArduino2(int cmd)
 // 			sendArmCmd(i);
 // 			reciveFromArm(1);
 // //			sendArm("hello",5);
-// 
-// 
+//
+//
 // 			//printf("sent cmd: %x\n",i);
 // 			//handleCmd(i);
 // 			delay_ms(500);
@@ -275,7 +279,7 @@ void twi_test_getArminfo()
 {
 	puts("REQ arm info");
 	//vTaskDelay(pdMSTOTICKS(20));
-	
+
 	//test get armInfo
 	arminfo_t armInfo = twi_getArmInfo();
 	if(armInfo.hasData)
@@ -292,7 +296,7 @@ uint8_t startpickup=0;
 uint8_t drive= 0;
 void twi_test_pickup(void)
 {
-	
+
 	if(superDone)
 	{
 		return;
@@ -300,7 +304,7 @@ void twi_test_pickup(void)
 	puts("twi pick");
 	if(startpickup==0)
 	{
-		
+
 		//RETURN 1 IF success
 		startpickup=twi_pickupStart();
 		if (startpickup ==0)
@@ -311,19 +315,19 @@ void twi_test_pickup(void)
 		{
 			puts("Started pickup");
 		}
-		
+
 		delay_ms(80);
-		
+
 	}
 	else{
-		
-		puts("do tWi status");
-		
-		
 
-		
+		puts("do tWi status");
+
+
+
+
 		PickupStatus pickupStatus=twi_pickupGetStatus();
-		
+
 		switch(pickupStatus){
 			case PICKUP_BACKWARD:
 			puts("PICKUP_STATUS.PICKUP_BACKWARD:");
@@ -332,26 +336,26 @@ void twi_test_pickup(void)
 			twi_pickupSetMasterStatus(PICKUP_DONE_DRIVE);
 			delay_ms(2000);
 			break;
-			case PICKUP_DONE:
+			case PICKUP_DONE: // Arm is up.
 			puts("PICKUP_DONE");
 			//startpickup=0;
 			superDone=1;
 			break;
-			case PICKUP_DONE_DRIVE:
+			case PICKUP_DONE_DRIVE: // Sent done drive to arm, arm is going up...
 			puts("PICKUP_DONE_DRIVE:");
-				
+
 			break;
 			case PICKUP_FAILED:
 			puts("PICKUP_FAILED");
 			break;
-			case PICKUP_FORWARD:
+			case PICKUP_FORWARD: // Arm has told platform to move forward.
 			puts("PICKUP_STATUS.PICKUP_FORWARD:");
 			printf("forward: %u\n",twi_pickupGetMoveCm());
 			//should be handle by driving.. to tell that its done
-			
-			
+
+
 			break;
-			case PICKUP_RUNNING:
+			case PICKUP_RUNNING: // Arm is going down...
 			puts("PICKUP_RUNNING");
 			break;
 			case PICKUP_IDLE:
@@ -366,9 +370,9 @@ void twi_test_pickup(void)
 		if(pickupStatus == PICKUP_BACKWARD || pickupStatus == PICKUP_FORWARD)
 		{
 			puts("MOVING FRWD");
-			delay_ms(7000);
+			forwardDrive(40);
 			twi_pickupSetMasterStatus(PICKUP_DONE_DRIVE);
-			
+
 			if (twi_pickupGetMasterStatus()==PICKUP_DONE_DRIVE)
 			{
 				puts("DONE MOVE");
@@ -379,7 +383,7 @@ void twi_test_pickup(void)
 		}
 	}
 	//vTaskDelay(pdMSTOTICKS(80));
-	
+
 }
 
 uint8_t startDropoff =0;
@@ -425,24 +429,75 @@ int main (void)
   sysclk_init();
 
 	board_init();
-	
+
 	configureConsole();
 
 	 // TWI master initialization options.
 	 //initTwiMaster();
 	 //initTwi();
 	 twi_comInit();
-	 
+
+
+     	//TC0_init();
+
+     	//armInfo = twi_getArmInfo();
+
+     	uint32_t value = 0;
+
+
+     	pulseCounter_configA(ID_PIOC, PIOC, PIO_PC28);
+     	pulseCounter_configB(ID_PIOC, PIOC, PIO_PC23);
+
+     	pulse_init();
+
+     	ioport_init();
+
+     	forwardDrive(40);
+     	rotateRightByDegrees(90);
+        forwardDrive(20);
+        superDone = 0;
+        startpickup=0;
+        while(!superDone) {
+            delay_ms(200);
+            twi_test_pickup();
+        }
+        rotateLeftByDegrees(90);
+        forwardDrive(40);
+        superDone = 0;
+        startpickup=0;
+        while(!superDone) {
+            delay_ms(200);
+            twi_test_pickup();
+        }
+        rotateLeftByDegrees(90);
+        forwardDrive(20);
+        superDone = 0;
+        startpickup=0;
+        while(!superDone) {
+            delay_ms(200);
+            twi_test_pickup();
+        }
+        rotateLeftByDegrees(90);
+        forwardDrive(120);
+
+        twi_test_dropoff();
+        while(!startDropoff) {
+        }
+
+        while(1) {
+        }
+
+
 	 while(!superDone)
 	 {
 //		twi_test_getArminfo();
 		twi_test_pickup();
 //		twi_test_dropoff();
-		
+
 		delay_ms(200);
 	 }
-	 
-	 
+
+
 // 	 send to arduino conf
 // 		 //sendToArduino();
 // 		 //delay_s(5);
@@ -457,14 +512,14 @@ int main (void)
 // 		while(1)
 // 		{
 // 			//delay_ms(1000);
-// 			
+//
 // 			sendArm(dum,3);
 // 			//sendArmCmd(TWI_CMD_FROM_ARM_ID);
 // 			delay_ms(100);
 // 			uint8_t recieved[3]={0};
 // 			reciveFromArm(recieved,3);
-// 			
-// 			
+//
+//
 // 			if(twi_requestArmInfo())
 // 			{
 // 				puts("success req data");
@@ -474,12 +529,12 @@ int main (void)
 // 			else{
 // 				puts("faild to req");
 // 			}
-// 	
-// 	
+//
+//
 // 		}
-	
-	
-	 
+
+
+
 }
 
 void configureConsole()
@@ -489,7 +544,7 @@ void configureConsole()
 		.baudrate = CONF_UART_BAUDRATE,
 		.paritytype = CONF_UART_PARITY
 	};
-	
+
 	sysclk_enable_peripheral_clock(CONSOLE_UART_ID);
 	stdio_serial_init(CONSOLE_UART, &uart_serial_options);
 }
@@ -510,7 +565,7 @@ void configureConsole()
 void readSlave()
 {
 
-	
+
 	int xx=0;
 
 	while(1)
@@ -535,14 +590,14 @@ void readSlave()
 		else{
 			puts("TWI error on probe");
 		}
-		
-	  
+
+
 	}
 }
 
 void sendToArduino()
 {
-	
+
 
 	while(1)
 	{
@@ -570,13 +625,13 @@ void initTwiMaster()
 
 	 // Initialize the TWI master driver.
 	 twi_master_setup(TWI1, &opt);
-	
+
 }
 
 //test read and write commands to arduino slave
 void readWrite(void){
 	int xx=0;
-	
+
 	while(1)
 	{
 		if(twi_probe(TWI1,SLAVE_ADDR)==TWI_SUCCESS)
@@ -603,8 +658,8 @@ void readWrite(void){
 		else{
 			puts("TWI error on probe");
 		}
-		
-		
+
+
 	}
-	
+
 }
