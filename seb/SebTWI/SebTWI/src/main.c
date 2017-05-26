@@ -382,6 +382,184 @@ void twi_test_pickup(void)
 	
 }
 
+void twi_test_nav_send(void) {
+	TwiCmdNav cmd1 = XY1;
+	TwiCmdNav cmd2 = XY2;
+	TwiCmdNav cmd3 = SOCKETXY;
+	TwiCmdNav cmd4 = SQUAREXY;
+	TwiCmdNav cmd5 = GLASSXY;
+	TwiCmdNav cmd6 = BOXGOALXY;
+
+	puts("SEND XY1");
+	twi_navSendCmd(cmd1);
+	delay_ms(500);
+	puts("SEND XY2");
+	twi_navSendCmd(cmd2);
+	delay_ms(500);
+	puts("SEND SOCKETXY");
+	twi_navSendCmd(cmd3);
+	delay_ms(500);
+	puts("SEND SQUAREXY");
+	twi_navSendCmd(cmd4);
+	delay_ms(500);
+	puts("SEND GLASSXY");
+	twi_navSendCmd(cmd5);
+	delay_ms(500);
+
+}
+
+void printData(uint8_t * data)
+{
+	uint8_t dd[5]={0};
+printf("cmd: %x",*data);
+for(int i = 0; i<5;i++)
+{
+	printf("got: %u\n",*data);
+	dd[i]=*data++;
+}
+
+	uint8_t cmd=dd[0];
+	int16_t x= (dd[1]<<8) | (dd[2]<<0);
+	int16_t y= (dd[3]<<8) | (dd[4]<<0);	
+	printf("cmd: %x x= %d y= %d",cmd,x,y);
+	puts("");
+	if(x<0){
+		puts("XXX is less than 0");
+	}
+	if(y<0)
+	{
+		puts("YYY is less than 0");
+	}
+
+puts("");
+puts("");
+vTaskDelay(pdMSTOTICKS(1000));
+
+}
+
+void twi_test_nav_SendRecive(void) {
+	
+ 	TwiCmdNav cmd1 = XY1;
+ 	TwiCmdNav cmd2 = XY2;
+	TwiCmdNav cmd3 = SOCKETXY;
+	TwiCmdNav cmd4 = SQUAREXY;
+	TwiCmdNav cmd5 = GLASSXY;
+	TwiCmdNav cmd6 = BOXGOALXY;
+	uint8_t data1[5] = {0};
+	uint8_t data2[5] = {0};
+	uint8_t data3[5] = {0};
+	uint8_t data4[5] = {0};
+	uint8_t data5[5] = {0};
+	uint8_t data6[5] = {0};
+ 
+	//uint8_t data6[5]={11,0,100,1,0};
+	//printData(data6);
+	
+// 	puts("SEND XY1");
+// 	twi_navSendCmd(cmd1);
+// 	twi_navRead(data1);	
+// 
+// 	puts("SEND XY2");
+// 	twi_navSendCmd(cmd2);
+// 	twi_navRead(data2);
+// 	
+	puts("SEND SOCKETXY");
+	twi_navSendCmd(cmd3);
+	twi_navRead(data3);
+
+	puts("SEND SQUAREXY");
+	twi_navSendCmd(cmd4);
+	twi_navRead(data4);
+
+	puts("SEND GLASSXY");
+	twi_navSendCmd(cmd5);
+	twi_navRead(data5);	
+	
+	puts("SEND BoxGoalxy");
+	twi_navSendCmd(cmd6);
+	twi_navRead(data6);
+	
+// 	
+	printData(data3);		
+	printData(data4);
+	printData(data5);
+	printData(data6);
+// 	printData(data1);
+// 	printData(data2);
+	//vTaskDelay(pdMSTOTICKS(50));
+
+}
+
+void twi_test_nav_SendReciveXY(void) {
+	
+	TwiCmdNav cmd1 = XY1;
+	TwiCmdNav cmd2 = XY2;
+	TwiCmdNav cmd3 = SOCKETXY;
+	TwiCmdNav cmd4 = SQUAREXY;
+	TwiCmdNav cmd5 = GLASSXY;
+	TwiCmdNav cmd6 = BOXGOALXY;
+	uint8_t data1[5] = {0};
+	uint8_t data2[5] = {0};
+	uint8_t data3[5] = {0};
+	uint8_t data4[5] = {0};
+	uint8_t data5[5] = {0};
+	uint8_t data6[5] = {0};
+	
+	//uint8_t data6[5]={11,0,100,1,0};
+	//printData(data6);
+	
+	puts("SEND XY1");
+	twi_navSendCmd(cmd1);
+	twi_navRead(data1);
+
+	puts("SEND XY2");
+	twi_navSendCmd(cmd2);
+	twi_navRead(data2);
+	
+	
+	printData(data1);
+	printData(data2);
+	//vTaskDelay(pdMSTOTICKS(50));
+
+}
+void printObjectInfo(objectinfo_t obj)
+{
+	printf("type %d\n",obj.theObject);
+	printf("x= %d\n",obj.xpos);
+	printf("y= %d\n",obj.ypos);
+}
+
+//test get objects
+twi_test_nav_r_getobjects(){
+	//uint8_t twi_navGetObjectsPos(object_pos_t* ptr_sock, object_pos_t* ptr_square, object_pos_t* ptr_glass, object_pos_t* ptr_boxgoal);
+	objectinfo_t sock;
+	sock.theObject=SOCK;
+
+	objectinfo_t square;
+	square.theObject=SQUARE;
+	
+	objectinfo_t glass;
+	glass.theObject=GLASS;
+	
+	
+	objectinfo_t boxgoal;
+	boxgoal.theObject=BOXGOAL;
+	
+	twi_navGetObjectsPos(&sock,&square,&glass,&boxgoal);
+	
+	puts("GOT info");
+	printObjectInfo(sock);
+	puts("");
+	printObjectInfo(square);
+	puts("");
+	printObjectInfo(glass);
+	puts("");
+	printObjectInfo(boxgoal);
+	puts("");
+	
+}
+
+
 uint8_t startDropoff =0;
 void twi_test_dropoff(void){
 	puts("twi test dropoff");
