@@ -382,6 +382,37 @@ void twi_test_pickup(void)
 	
 }
 
+
+void printData(uint8_t * data)
+{
+	uint8_t dd[5]={0};
+printf("cmd: %x",*data);
+for(int i = 0; i<5;i++)
+{
+	printf("got: %u\n",*data);
+	dd[i]=*data++;
+}
+
+	uint8_t cmd=dd[0];
+	int16_t x= (dd[1]<<8) | (dd[2]<<0);
+	int16_t y= (dd[3]<<8) | (dd[4]<<0);	
+	printf("cmd: %x x= %d y= %d",cmd,x,y);
+	puts("");
+	if(x<0){
+		puts("XXX is less than 0");
+	}
+	if(y<0)
+	{
+		puts("YYY is less than 0");
+	}
+
+puts("");
+puts("");
+vTaskDelay(pdMSTOTICKS(1000));
+
+}
+
+
 void twi_test_nav_send(void) {
 	TwiCmdNav cmd1 = XY1;
 	TwiCmdNav cmd2 = XY2;
