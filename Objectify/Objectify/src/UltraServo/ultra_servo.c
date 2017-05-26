@@ -41,7 +41,9 @@ long pulseIn()
 		}
 	}
 	
-	// wait for the pulse to stop @ here we are measuring the pulse width = incrementing the WIDTH value by one each cycle. atmega328 1 micro second is equal to 16 cycles.
+	// pin for echo is set high when waiting for the sound the return. While the soundpulse is sent numloops is increasing. If it reaches
+	//the maxloops the message "brokenHIGH" is written to indicate that the sensor hasn't retrieved the soundpulse. This can be seen as a timeout 
+	// to make sure the program won't get stuck in the loop.
 	while (ioport_get_pin_level(echo)==HIGH)
 	{
 		if (numloops++ == maxloops)
@@ -53,7 +55,26 @@ long pulseIn()
 	}
 	return width/scaling;
 }
+/**
+This method is used to controll the servo. It has four states:
+STATUS_SEARCHING: in this state the servo is waiting for input to the ultrasound sensor.
+				  While in this state, the servo moves one degree each loop. When an object have been detekted
+				  it moves on to STATUS_MAPPING
+				  
+STATUS_MAPPING:	  If an object have been detekted the program has to make sure it is actually an object and not
+				  bad readings. To make sure it's an object, while in this state, the servo keeps moving and more input
+				  is being checked from the ultrasound sensor to see if the next values are similar to the previous ones.
+				  if there are at least 5 more readings in the same interval it is considered a found object.
+				  
+STATUS_FOUND	  If an object have been flagged as found, it enters this state. Here the servo stoppes moving and focuses on the object
+				  It keeps checking the distance and regularely updates it. If atleast 5 readings in a row are stray from the mapped distance
+				  of the found object it is considered lost and goes back to searching.
+				  
+ANGLE_RESET		  If the servo gets to 180 degrees without finding an object it resets to 0 degrees and starts the search again.
 
+@param dist Distance from ultrasound sensor.
+				  
+**/
 void servoControll(unsigned long dist)
 {
 	switch(status){
@@ -83,7 +104,7 @@ void servoControll(unsigned long dist)
 		
 		if(tick>2){
 			status = STATUS_FOUND;
-			mappingAngle = angle; //onödig?
+			mappingAngle = angle;
 			printf("Found something at angle: %d degrees\n", angle);
 			printf("The distance to object is: %d cm\n", dist);
 			tick = 0;
@@ -136,7 +157,13 @@ void servoControll(unsigned long dist)
 	servoDirection(angle);
 	preDist = dist;
 }
+/**
+This method decides how the servo will move. It uses the increasing angle (0 - 180) and multiplies it
+with 10.6 whereof it then adds it to 500. This translates an angle between 0 - 180 to a pulsewidth to the servo. Which in turn
+rotates to the desired angle.
 
+@param angle The angle the servo should rotate to.
+**/
 void servoDirection(uint8_t angle)
 {
 	
@@ -150,7 +177,10 @@ void servoDirection(uint8_t angle)
 }
 
 
-
+/**
+This method starts the ultrasound - servo combination.
+Reads input from ultrasound and controlls the servo.
+**/
 void testingUltraSound()
 {
 	unsigned long distance;
