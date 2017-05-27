@@ -54,5 +54,6 @@ void lcd_write_str(char *);
 void lcd_clear(void);
 void lcd_set_cursor_mode(enum lcd_cursor);
 void lcd_set_cursor_pos(uint8_t, uint8_t);
+void display_ascii_nbr(uint32_t value);
 
 #endif /* LCD_H_ */

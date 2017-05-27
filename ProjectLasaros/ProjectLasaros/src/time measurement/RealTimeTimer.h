@@ -18,7 +18,7 @@
 extern uint32_t realTimeValue;
 
 static void feed_counter_signal(void);
-uint32_t read_current_value(void);
+uint32_t get_current_value(void);
 void start_RTT(void);
 
 #endif /* REALTIMETIMER_H_ */

@@ -21,17 +21,6 @@ uint16_t bS= baseSpeed;
 uint16_t bSL= baseSpeedLeft;
 
 /*
-	Sends a pulse on the designated pin that varies
-	with the "motorSpeed" input
-*/
-/*
-void pulse(uint16_t motorSpeed){
-	ioport_set_pin_level(pin24, HIGH);
-	delay_us(motorSpeed);
-	ioport_set_pin_level(pin24, LOW);
-};*/
-
-/*
 	Sets both motors to forward direction until the desired
 	distance has been covered
 */
@@ -41,12 +30,7 @@ void forwardDrive(int distance){
 	distanceToMove = distance/1.355;
 	counterA = 0;
 	counterB = 0;
-	/*
-	delay_ms(8);
-	pulse(1600);
-	delay_us(motorSwitch);
-	pulse(1560);
-	*/
+	
 	pulse_set_period(pulseh_ch, 1600);
 	pulse_set_period(pulsev_ch, 1560);
 	
@@ -71,11 +55,6 @@ void reverseDrive(int distance){
 	distanceToMove = distance/1.355;
 	counterA = 0;
 	counterB = 0;
-	/*
-	pulse(reverseBaseSpeed);
-	delay_us(motorSwitch);
-	pulse(reverseBaseSpeed);
-	*/
 	
 	pulse_set_period(pulseh_ch, reverseBaseSpeed);
 	pulse_set_period(pulsev_ch, reverseBaseSpeed);
@@ -97,12 +76,6 @@ void reverseDrive(int distance){
 	Stops both of the motors
 */
 void stop(){
-	/*
-	pulse(1500);
-	delay_us(motorSwitch);
-	pulse(1500);
-	delay_ms(timeOut);
-	*/
 	pulse_set_period(pulseh_ch, 1500);
 	pulse_set_period(pulsev_ch, 1500);
 	
@@ -134,11 +107,6 @@ void rotateRightByDegrees(int degree){
 	degree = max(degree,0);
 	if (degree>0)
 	{
-		/*
-		pulse(reverseBaseSpeed);
-		delay_us(motorSwitch);
-		pulse(baseSpeedLeft);
-		*/
 		pulse_set_period(pulseh_ch, reverseBaseSpeed);
 		pulse_set_period(pulsev_ch, baseSpeedLeft);
 		
@@ -185,11 +153,6 @@ void rotateLeftByDegrees(int degree){
 	degree = max(degree,0);
 	if (degree>0)
 	{
-		/*
-		pulse(baseSpeed);
-		delay_us(motorSwitch);
-		pulse(reverseBaseSpeed);
-		*/
 		pulse_set_period(pulseh_ch, baseSpeed);
 		pulse_set_period(pulsev_ch, reverseBaseSpeed);
 		
@@ -220,11 +183,7 @@ void wheelControl(int ek){
 	
 	//Updates the left wheels speed
 	bSL = bSL+(ek*kP);
-	/*
-	pulse(bS);
-	delay_us(motorSwitch);
-	pulse(bSL);
-	*/
+	
 	pulse_set_period(pulseh_ch, bS);
 	pulse_set_period(pulsev_ch, bSL);
 	

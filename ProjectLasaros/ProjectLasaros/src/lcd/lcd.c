@@ -176,7 +176,7 @@ void lcd_write(enum lcd_register lcd_reg, uint8_t data)
  * parameter:
  *  value: uint32_t value to be compartmentalized, must not exceed 9999
  */
-void show_ascii_converted_nbr_on_LCD(uint32_t value){
+void display_ascii_nbr(uint32_t value){
 	uint8_t ascii_chr = 0;
 	
 	if((value >= 1000) && (value < 10000))

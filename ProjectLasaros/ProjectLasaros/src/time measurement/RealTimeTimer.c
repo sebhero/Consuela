@@ -29,7 +29,7 @@ static void feed_counter_signal(){
 }
 
 /* Returns the current value of the Real-time Timer */
-uint32_t read_current_value(){
+uint32_t get_current_value(){
 	realTimeValue = *p_RTT_VR; // the value can be read any time in the register Real-time Value Register 
 	return realTimeValue;
 }

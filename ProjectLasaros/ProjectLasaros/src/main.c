@@ -1,7 +1,14 @@
 
 /*
- * Include header files for all drivers that have been imported from
- * Atmel Software Framework (ASF).
+ * The robot's system functionalities require a real-time operative system for implementing 
+ * time management and task scheduling. The application tasks running on the processor have 
+ * specified priorities and period cycles. These tasks manage driving, communication and 
+ * localization.
+ *
+ * In total, there are five tasks: vLocalizationTask, vDriveToObjectTask, vCommunicationTask
+ * vModifyPositionTask and vLCDTask
+ *
+ * Made by: Danial Mahmoud 2017-05-15
  */
 
 #include <asf.h>
@@ -16,27 +23,26 @@
 #include "detection/ultra_servo.h"
 #include "com/TwiComHandler.h"
 #include "com/Com.h"
+#include "lcd/lcd.h"
+#include "time measurement/RealTimeTimer.h"
 
 xTaskHandle *pxTaskDriveToObject;
-xTaskHandle *pxTaskUltraSensor;
+xTaskHandle *pxTaskLocalization;
 xTaskHandle *pxTaskCommunication;
+xTaskHandle *pxTaskModifyPosition;
+xTaskHandle *pxTaskLCD;
 
-void vUltraSensorTask(void *pvParam);
+void vLocalizationTask(void *pvParam);
 void vDriveToObjectTask(void *pvParam);
 void vCommunicationTask(void *pvParam);
+void vModifyPositionTask(void *pvParam);
+void vLCDTask(void *pvParam);
 
-#define D7  IOPORT_CREATE_PIN(PIOC, 23)
+uint32_t sec; 
 
-uint8_t booleanDriving = 0;
-uint8_t booleanUltraSensor = 0;
-uint8_t booleanCommunication = 0;
-uint8_t booleanModifyPosition = 0;
-
-#define pulseh_ch 0
-#define pulsev_ch 1
-
-double distanceToMove;
-
+/*
+ * TWI-communication states
+ */
 enum twi_states{
 	INIT_ARM,
 	START_PICKUP,
@@ -50,52 +56,75 @@ typedef enum twi_states TWI_state;
 TWI_state current_twi_state;
 TWI_state next_twi_state;
 
+/*
+ * Robot-system states
+ */
+enum robot_state{
+	DRIVING,
+	LOCALIZATION,
+	MODIFY_POSITION,
+	COMMUNICATION,
+	DO_NOTHING
+};
+
+typedef enum robot_state Robot_states;
+Robot_states current_robot_state;
+
 static arminfo_t armInfo;
 static void driveForwardDuringPickup(void);
-static void setBitLevels(int, int, int, int);
 
-static void setBitLevels(int driving, int ultrasensor, int modifyPosition, int communication){
-	booleanDriving = driving;
-	booleanUltraSensor = ultrasensor;
-	booleanModifyPosition = modifyPosition;
-	booleanCommunication = communication;
+/*
+ * In order to function properly certain arms need to drive forward during pickup-action
+ */
+
+static void driveForwardDuringPickup(){
+	forwardDrive(20); //20 cm may suffice
 }
 
 /*
- * Task that administers entire functionality that concerns robot's automatic transportation and movement-mobilization
+ * LCD-task periodically updates and displays the current value in Real Time Timer-register
+ */
+void vLCDTask(void *pvParam){
+	portTickType xLastWakeTime = xTaskGetTickCount();
+	
+	while(1)
+	{
+		lcd_set_cursor_pos(1, 0);    /* place cursor in second row, first column */
+		sec = get_current_value();   /* retrieve current value in RTT-register */
+		display_ascii_nbr(sec);      /* print out number on LCD-display */
+		vTaskDelayUntil(&xLastWakeTime, pdMSTOTICKS(1000));
+	}
+	vTaskDelete(NULL);
+}
+
+/*
+ * Task that administers entire functionality that concerns robot's automatic self-transportation and
+ * movement-mobilization
  *
  */
 void vDriveToObjectTask(void *pvParam) {
+	portTickType xLastWakeTime = xTaskGetTickCount();
 	
 	while (1)
 	{
-		if (booleanDriving == 1 && booleanUltraSensor == 0 && booleanCommunication == 0)
+		if (current_robot_state == DRIVING)
 		{
-			printf("\n>>>>>>>>>>>>DRIVING TO OBJECT<<<<<<<<<<<<\n");
 			uint8_t gotoVal = goToNext();
 			if(gotoVal == 1)
 			{
-				setBitLevels(0, 1, 0, 0); // ultrasensor = 1
+				current_robot_state = LOCALIZATION;
 				current_twi_state = START_PICKUP;
-				puts("GOTO PICKUP FROM DRIVE");
-			    printf("\nGotoVal = %u", gotoVal);
 			}
-			
-			if(gotoVal == 2)
+			else if(gotoVal == 2)
 			{
-				setBitLevels(0, 1, 0, 0); // ultrasensor = 1
+				current_robot_state = LOCALIZATION;
 				current_twi_state = START_DROP_OFF;
-				puts("GOTO DROPOFF FROM DRIVE");
-			    printf("\nGotoVal = %u", gotoVal);
 			}
-			
-			if(gotoVal == 3)
+			else if(gotoVal == 3)
 			{
 				// Mission accomplished!
-				setBitLevels(0, 0, 0, 0); // do not enter any task!
-				printf("\nGotoVal = %u", gotoVal);
+				current_robot_state = DO_NOTHING;
 			}
-			portTickType xLastWakeTime = xTaskGetTickCount();
 			vTaskDelayUntil(&xLastWakeTime, pdMSTOTICKS(250));
 		}
 		else // continue blocking
@@ -107,108 +136,121 @@ void vDriveToObjectTask(void *pvParam) {
 }
 
 /*
- * The task below handles close-range localization
+ * If the robot detects an object it might need to adjust its position in relation to the object's position
+ * in order to facilitate pick-up. We want the robot to be strategically placed at the desired 
+ * distance and angle for a successful pick-up. 
+ *
+ * The task uses its handle to eliminate itself after the work has been accomplished
  *
  */
-void vUltraSensorTask(void *pvParam) {
-
-	while (1)
-	{
-		if (booleanUltraSensor == 1 && booleanCommunication == 0 && booleanDriving == 0)
-		{
-			for (int i = 0; i <= 360; i++)
-			{
-				testingUltraSound();
-				printf("Searching ...\n");
-				if (WITHIN_RANGE_FLAG == 1)
-				{
-					printf("\nObject has been detected");
-					booleanModifyPosition = 1;
-				}
-			}
+void vModifyPositionTask(void *pvParam) {
 	
-			if (booleanModifyPosition == 1)
+	while(1){
+		
+		if (current_robot_state == MODIFY_POSITION)
+		{
+			if (angleUltraSensor == 90) // object is right in front of robot
 			{
-				if (angleUltraSensor == 90)
+				/* Target farther away than reaching-ability of arm */
+				if ((distanceUltraSensor + 32) > armInfo.objectDistance) 
 				{
+					int travelDistToObj = (distanceUltraSensor + 32) - armInfo.objectDistance;
+					forwardDrive(travelDistToObj); 
+				}
+				/* Robot is too close to object */
+				if ((distanceUltraSensor + 32) < armInfo.objectDistance)
+				{
+					int travelDistToObj = armInfo.objectDistance - (distanceUltraSensor + 32);
+					reverseDrive(travelDistToObj);	
+				}
+				current_robot_state = COMMUNICATION;
+				distanceUltraSensor = 0;
+				angleUltraSensor = 0;
+				WITHIN_RANGE_FLAG = 0;
+				vTaskDelete(NULL);
+			}
+			else //rotation required
+			{
+				if (angleUltraSensor > 90)
+				{
+					rotateRightByDegrees(angleUltraSensor-90);
 					if ((distanceUltraSensor + 32) > armInfo.objectDistance)
 					{
 						int travelDistToObj = (distanceUltraSensor + 32) - armInfo.objectDistance;
 						forwardDrive(travelDistToObj);
-						printf("\nModifying driving: driving forward %i \n", travelDistToObj);
-						booleanDriving=0;
-						booleanUltraSensor=0;
-						booleanModifyPosition = 0;
-						booleanCommunication = 1;
 					}
 					if ((distanceUltraSensor + 32) < armInfo.objectDistance)
 					{
 						int travelDistToObj = armInfo.objectDistance - (distanceUltraSensor + 32);
 						reverseDrive(travelDistToObj);
-						printf("\nModifying driving: driving backward %i \n", travelDistToObj);
-						booleanDriving=0;
-						booleanUltraSensor=0;
-						booleanModifyPosition = 0;
-						booleanCommunication = 1;
 					}
 				}
-				else //rotation required
+				if (angleUltraSensor < 90)
 				{
-					if (angleUltraSensor > 90)
+					rotateLeftByDegrees(90-angleUltraSensor);
+					printf("\n----------------Modifying driving: rotating left %i \n", (90-angleUltraSensor) );
+					if ((distanceUltraSensor + 32) > armInfo.objectDistance)
 					{
-						rotateRightByDegrees(angleUltraSensor-90);
-						printf("\n----------------Modifying driving: rotating right %i \n", (angleUltraSensor-90) );
-						if ((distanceUltraSensor + 32) > armInfo.objectDistance)
-						{
-							int travelDistToObj = (distanceUltraSensor + 32) - armInfo.objectDistance;
-							forwardDrive(travelDistToObj); 
-							printf("\nModifying driving: driving forward %i \n", travelDistToObj);
-							booleanDriving=0;
-							booleanUltraSensor=0;
-							booleanModifyPosition = 0;
-							booleanCommunication = 1;
-						}
-						if ((distanceUltraSensor + 32) < armInfo.objectDistance)
-						{
-							int travelDistToObj = armInfo.objectDistance - (distanceUltraSensor + 32);
-							reverseDrive(travelDistToObj);
-							printf("\n-----------------Modifying driving: driving backward %i \n", travelDistToObj);
-							booleanDriving=0;
-							booleanUltraSensor=0;
-							booleanModifyPosition = 0;
-							booleanCommunication = 1;
-						}
+						int travelDistToObj = (distanceUltraSensor + 32) - armInfo.objectDistance;
+						forwardDrive(travelDistToObj);
 					}
-					if (angleUltraSensor < 90)
+					if ((distanceUltraSensor + 32) < armInfo.objectDistance)
 					{
-						rotateLeftByDegrees(90-angleUltraSensor);
-						printf("\n----------------Modifying driving: rotating left %i \n", (90-angleUltraSensor) );
-						if ((distanceUltraSensor + 32) > armInfo.objectDistance)
-						{
-							int travelDistToObj = (distanceUltraSensor + 32) - armInfo.objectDistance;
-							forwardDrive(travelDistToObj);
-							printf("\nModifying driving: driving forward %i \n", travelDistToObj);
-							booleanDriving=0;
-							booleanUltraSensor=0;
-							booleanModifyPosition = 0;
-							booleanCommunication = 1;
-						}
-						if ((distanceUltraSensor + 32) < armInfo.objectDistance)
-						{
-							int travelDistToObj = armInfo.objectDistance - (distanceUltraSensor + 32);
-							reverseDrive(travelDistToObj);
-							printf("\n-----------------Modifying driving: driving backward %i \n", travelDistToObj);
-							booleanDriving=0;
-							booleanUltraSensor=0;
-							booleanModifyPosition = 0;
-							booleanCommunication = 1;
-						}
+						int travelDistToObj = armInfo.objectDistance - (distanceUltraSensor + 32);
+						reverseDrive(travelDistToObj);
 					}
 				}
+				current_robot_state = COMMUNICATION;
+				distanceUltraSensor = 0;
+				angleUltraSensor = 0;
+				WITHIN_RANGE_FLAG = 0;
+				vTaskDelete(NULL);
 			}
-			distanceUltraSensor = 0;
-			angleUltraSensor = 0;
-			WITHIN_RANGE_FLAG = 0;
+		}
+		else
+		{
+			vTaskDelay(pdMSTOTICKS(200));
+		}
+	}
+	vTaskDelete(NULL);
+}
+
+/*
+ * The task below handles close-range localization. An ultrasonic sensor is used to detect an object
+ * within a pre-defined target distance. Detection of object is indicated by raised flag in servoControll().
+ * 
+ */
+void vLocalizationTask(void *pvParam) {
+	portTickType xLastWakeTime = xTaskGetTickCount();
+	static int rotationCount = 0;
+	int boolean = 0;
+	while (1)
+	{
+		if (current_robot_state == LOCALIZATION)
+		{	
+			testingUltraSound();
+			rotationCount++;
+			
+			/* If true, an object has been detected */
+			if (WITHIN_RANGE_FLAG == 1)
+			{
+				/* Create task that modifies robot position relative to object-position */
+				xTaskCreate(vModifyPositionTask, "Modify Position", 1000, NULL, 1, pxTaskModifyPosition);
+				boolean = 1;
+			}
+			
+			/* Maximum servomotor-rotation: 360 degrees */
+			if (rotationCount > 360)
+			{
+				if (boolean == 1)
+				{
+					current_robot_state = MODIFY_POSITION;
+					boolean = 0;
+				}
+				rotationCount = 0;
+			}
+			/* Max-time for one-degree-sweep is 92 ms, restart task after 100 ms*/
+			vTaskDelayUntil(&xLastWakeTime, pdMSTOTICKS(100)); 
 		}
 		else // continue blocking
 		{
@@ -219,30 +261,23 @@ void vUltraSensorTask(void *pvParam) {
 }
 
 /*
-In order to function properly certain arms need to drive forward during pickup-action
-*/
-
-static void driveForwardDuringPickup(){
-	printf("\Forward drive during pickup!");
-	forwardDrive(20); //20 cm may suffice
-}
-
-/*
- * Task manages TWI-communication
+ * This task manages TWI-communication. When robot-start launches, this is the first task to be entered
+ * To begin with, information from the robot-arm is queried and gathered if present. This start-up takes
+ * highest amount of time. Furthermore the task is responsible for managing the robot-arm before, furing 
+ * and after pick-up of an object.  
  */
 void vCommunicationTask(void *pvParam)
 {
-	
+	portTickType xLastWakeTime = xTaskGetTickCount();
 	while(1)
 	{
-		if (booleanCommunication == 1 && booleanUltraSensor == 0 && booleanDriving == 0 && booleanModifyPosition == 0)
+		if (current_robot_state == COMMUNICATION)
 		{
 			//check state for communication
 			switch (current_twi_state)
 			{
+				/* Gather necessary information about arm, such as desired distance to object, and position of objects */
 				case INIT_ARM:
-					puts("INIT_ARM");
-					//armInfo = twi_getArmInfo();	
 					arminfo_t armInfo;
 					armInfo.boxAngle=0;
 					armInfo.boxDistance=0;
@@ -250,7 +285,6 @@ void vCommunicationTask(void *pvParam)
 					armInfo.hasData=0;
 					armInfo.objectAngle=0;
 					armInfo.objectDistance=0;
-					//twi_getArmInfoBox(&armInfo);
 					armInfo=twi_getArmInfo();
 					if(armInfo.hasData)
 					{
@@ -263,15 +297,13 @@ void vCommunicationTask(void *pvParam)
 						sock.ypos=0;
 						
 						uint8_t res =twi_navGetSockPos(&sock);
-						printf("sock: x=%d, y=%d.\n",sock.xpos,sock.ypos);
-											
+						
 						objectinfo_t square;
 						square.theObject = SQUARE;
 						square.xpos=0;
 						square.ypos=0;
 						
 						twi_navGetSquarePos(&square);
-						printf("square: x=%d, y=%d.\n",square.xpos,square.ypos);
 						objectinfo_t glass;
 						glass.theObject = GLASS;
 						glass.xpos=0;
@@ -281,64 +313,43 @@ void vCommunicationTask(void *pvParam)
 						printf("glass: x=%d, y=%d.\n",glass.xpos,glass.ypos);
 						objectinfo_t boxgoal;
 						boxgoal.theObject = BOXGOAL;
-						boxgoal.xpos=0;
+						boxgoal.xpos=50;
 						boxgoal.ypos=0;
-						
-						twi_navGetBoxPos(&boxgoal);
-						printf("boxgoal: x=%d, y=%d.\n",boxgoal.xpos,boxgoal.ypos);
-						
-						
+
 						if(res == 1)
-						{
-							
+						{	
 							setObjectSimple(sock);
 							setObjectSimple(square);
 							setObjectSimple(glass);
 							setObjectSimple(boxgoal);
-							
-							//todo del
-							printf("so x=%d, y=%d. sq x=%d y=%d. gl x=%d y=%d bo x=%d y=%d",sock.xpos,sock.ypos,
-							square.xpos,square.ypos,glass.xpos,glass.ypos,boxgoal.xpos,boxgoal.ypos);
-							printf("init arm done\n");
-							printf("arminfo: %u %u %u %u all: %u\n",armInfo.boxAngle, armInfo.boxDistance, 
-							armInfo.objectAngle, armInfo.objectDistance,armInfo.collectAll);
-							
-							//todo del
-							//current_twi_state = START_PICKUP;
-							//setObject(SQUARE,100,300);
-							//setObject(SOCK, 300, 300);
-							//setObject(GLASS, 300, 100);
-							
-							
 							setCollectAll(armInfo.collectAll);
-							booleanCommunication = 0;
-							booleanDriving = 1;
-
+							current_robot_state = DRIVING;
 						}
 						else
 						{
-							puts("INIT NAV NO DATA");
-							twi_reset(TWI_PORT);
+							printf("INIT NAV NO DATA");
+							twi_master_disable(TWI_PORT);
+							vTaskDelay(pdMSTOTICKS(20));
+							twi_master_enable(TWI_PORT);
 							vTaskDelay(pdMSTOTICKS(100));
-							booleanCommunication = 1;
-							booleanDriving = 0;
+							current_robot_state = COMMUNICATION;
 						}
 					}
 					else
 					{
-						puts("INIT ARM NO DATA");
-					}	
-
+						printf("INIT ARM NO DATA");			
+ 						twi_master_disable(TWI_PORT);
+ 						vTaskDelay(pdMSTOTICKS(20));
+ 						twi_master_enable(TWI_PORT);
+					}
 				break;
 				case START_PICKUP:
 					
-					//start pickup after modify position
+					//start pickup after modifying position
 					if (twi_pickupStart() == 1)
 					{
-						puts("STARTED PICKUP");
-						//Could start pickup
-						
-						current_twi_state=GET_STATUS_PICKUP;
+						// Able to start pickup
+						current_twi_state = GET_STATUS_PICKUP;
 						
 					}
 					else
@@ -348,9 +359,12 @@ void vCommunicationTask(void *pvParam)
 						current_twi_state=START_PICKUP;
 					}
 				break;
-				//pick up is started, getting status
+				
+				/* Pick-up has been initiated, monitor status during this course */
+				
 				case GET_STATUS_PICKUP:
 					;
+					
 					//get current arm status about pickup
 					uint8_t status = twi_pickupGetStatus();
 					
@@ -365,39 +379,28 @@ void vCommunicationTask(void *pvParam)
 						case PICKUP_IDLE:
 						break;
 						case PICKUP_RUNNING:
-							//puts("pickup RUNNING");
 						break;
 						case PICKUP_DONE:
-							//TODO: done picking up
 							//done with pickup, continue to drive
 							//stop communicating
-							puts("PICKUP_DONE");
 							//tell (set) movement that pickup is done
 							setDonePickup();
-							booleanUltraSensor=0;
-							booleanModifyPosition=0;
-							booleanCommunication=0;
-							booleanDriving=1;
+							current_robot_state = DRIVING;
 						break;						
 						case PICKUP_FORWARD:
 						case PICKUP_BACKWARD:
-							puts("go forward or back");
-							//TODO: call function that drives forward/backwards based on cm
-							printf("Driving forward/backward");
-							//if we needed to drive during pickup, check if driving is done
 							driveForwardDuringPickup();
 							twi_pickupSendMovementDone();
 						break;
 						
 						default:
-						//printf("UNHANDLED PICKUP STATUS: %x\n",status);
+						    printf("UNHANDLED PICKUP STATUS: %x\n",status);
 						break;
 						//end of handling status
 					}
 					//end of get status pickup
 				break;
-				
-				
+
 				case START_DROP_OFF:
 					if (twi_dropoffStart() == 1)
 					{
@@ -418,21 +421,17 @@ void vCommunicationTask(void *pvParam)
 					switch(twi_dropoffGetStatus())
 					{
 						case DROPOFF_DONE:
-						//tell (set)drive that pickup is done.
+						    //tell (set)drive that pickup is done.
 							setDropoffDone();
-							printf("DROPOFF_DONE\n");
 							if(armInfo.collectAll)
 							{
-								booleanDriving=0;
-								puts("SUPER DONE! with all!!");
+								/* If objects were gathered in one drive, do not enter any task */
+								current_robot_state = DO_NOTHING; 
 							}
 							else
 							{
-								booleanDriving=1;
+								current_robot_state = DRIVING;
 							}
-							booleanUltraSensor=0;
-							booleanModifyPosition=0;
-							booleanCommunication=0;
 						break;
 						case DROPOFF_RUNNING:
 							printf("DROPOFF_RUNNING\n");
@@ -449,10 +448,11 @@ void vCommunicationTask(void *pvParam)
 					puts("IDLE");
 				break;
 				default:
-					printf("FAILED twi switch %d\n",current_twi_state);
+					printf("Failed TWI switch %d\n",current_twi_state);
 				break;
 			}
-			//end of current_twi_state
+			
+			vTaskDelayUntil(&xLastWakeTime, pdMSTOTICKS(65));
 		} 
 		else
 		{
@@ -482,61 +482,56 @@ static void configure_console(void)
 
 int main (void)
 {
-	/* Insert system clock initialization code here (sysclk_init()). */
+	/* Initiate system-functionalities */
 	sysclk_init();
 	board_init();
 	configure_console();
 	TC0_init();
-	//init twi communication
 	twi_comInit();
+	pulse_init();
+	lcd_init();
 	
-	//armInfo = twi_getArmInfo();
+	lcd_write_str("RTT Time:");
+	lcd_set_cursor_pos(1, 0);
+	start_RTT(); 
+	sec = 0;
 	
-	uint32_t value = 0;
-	
-	
+	/* Initiate pulse-counter handlers */
 	pulseCounter_configA(ID_PIOC, PIOC, PIO_PC28);
 	pulseCounter_configB(ID_PIOC, PIOC, PIO_PC23);
 	
-	pulse_init();
-	
 	current_twi_state = INIT_ARM;
-
-	ioport_init();
-	ioport_set_pin_dir(D7, IOPORT_DIR_OUTPUT);
+	current_robot_state = COMMUNICATION;
 	
+	ioport_init();
+	
+	/* Pins of Ultrasonic sensor */
 	ioport_set_pin_dir(trig, IOPORT_DIR_OUTPUT);
 	ioport_set_pin_dir(echo, IOPORT_DIR_INPUT);
 	ioport_set_pin_dir(servo, IOPORT_DIR_OUTPUT);
 	ioport_set_pin_level(servo, LOW);
 	
-	if(xTaskCreate(vDriveToObjectTask, "DriveToObject", 1000, NULL, 1, pxTaskDriveToObject) != pdPASS){
-		printf("Failed to create DriveToObject-task");
-	}
-	
-	if(xTaskCreate(vUltraSensorTask, "UltraSensor", 1000, NULL, 1, pxTaskUltraSensor) != pdPASS){
-		printf("Failed to create UltraSensor-task");
-	}
-	
-	if(xTaskCreate(vCommunicationTask, "Communication", 1000, NULL, 1, pxTaskCommunication) != pdPASS){
+	/* Create robot-application tasks */
+	if(xTaskCreate(vCommunicationTask, "Communication", 1000, NULL, 2, pxTaskCommunication) != pdPASS){
 		printf("Failed to create Communication-task");
 	}
 	
+	if(xTaskCreate(vDriveToObjectTask, "DriveToObject", 1000, NULL, 2, pxTaskDriveToObject) != pdPASS){
+		printf("Failed to create DriveToObject-task");
+	}
 
-	booleanDriving = 0;
-	booleanUltraSensor = 0;
-	booleanModifyPosition = 0;
+	if(xTaskCreate(vLocalizationTask, "Localization", 1000, NULL, 2, pxTaskLocalization) != pdPASS){
+		printf("Failed to create Localization-task");
+	}
 
-	booleanCommunication = 1;
-
+	if(xTaskCreate(vLCDTask, "LCD", 1000, NULL, 1, pxTaskLCD) != pdPASS){
+		printf("Failed to create LCD-task");
+	}
+	
 	vTaskStartScheduler();
-
+	
 	while (1)
 	{
-		/*
-		value = read_counter_value();
-		printf("Counter value: %u\n", value);
-		*/
+		
 	}
-	/* Insert application code here, after the board has been initialized. */
 }

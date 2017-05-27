@@ -10,7 +10,7 @@
  *	@TODO	Clean up code, remove variables that aren't needed or those that are just duplicates
  */ 
 #include "navigation.h"
-#include "com/Com.h"
+
 //Start of variables
 //Coordinates of the platform
 int x1_pos = 0;
@@ -34,7 +34,7 @@ int radius = 80;
 uint8_t status = 0;
 uint8_t objIndex = 0;
 uint8_t getAllObj = 0;
-Bool suspendNav = false;
+Bool suspendNav = 0;
 uint8_t travelPath[8];
 
 
@@ -60,12 +60,12 @@ int last_y;
 int mid_x;
 int mid_y;
 
-// Struct used to define objects/positions
-	typedef struct {
-		int x_pos;
-		int y_pos;
-		uint8_t name;
-		} object_poss_t;
+//Struct used to define objects/positions
+typedef struct {
+	int x_pos;
+	int y_pos;
+	uint8_t name;
+	} object_pos_t;
 
 //Array of objects
 /*
@@ -91,18 +91,11 @@ object_pos_t objects[] = {
 		.name_p = "Drop off"
 	}
 };*/
-object_poss_t objects[8];
-
-/*
-	Sets the correct objects with their coordinates and object info
-*/
+object_pos_t objects[8];
 void setObjectSimple(objectinfo_t theObj){
 	setObject(theObj.theObject, theObj.xpos, theObj.ypos);
 }
 
-/*
-	Sets the correct objects with their coordinates and object info
-*/
 void setObject(Object obj, int x, int y){
 	switch(obj){
 		case SOCK:
@@ -119,7 +112,7 @@ void setObject(Object obj, int x, int y){
 		objects[4].x_pos = x;
 		objects[4].y_pos = y;
 		objects[4].name = obj;
-		break;	
+		break;
 		default:
 		break;
 	}
@@ -128,25 +121,14 @@ void setObject(Object obj, int x, int y){
 	objects[0].name = 0;
 }
 
-/*
-	Decides if the arm can pick up all objects before dropoff, or if it needs to take one at a time
-*/
 void setCollectAll(uint8_t getAll){
 	getAllObj = getAll;
 }
 
-/*
-	Sets a suspension variable to false
-	done after a pickup
-*/
 void setDonePickup(){
 	suspendNav = false;
 }
 
-/*
-	Sets a suspension variable to false
-	done after a dropoff
-*/
 void setDropoffDone(){
 	suspendNav = false;
 }
@@ -362,19 +344,6 @@ uint8_t goToNext(){
  		updatePos(tempVariabel);
  		tempVariabel = 0;
 
-		int x1=0;
-		int y1=0;
-		
-		int x2=0;
-		int y2=0;
-
-//todo fix me
-		//twi_navGetXY(XY1,&x1,&y1);
-		//twi_navGetXY(XY2,&x2,&y2);
-		
-		printf("x1 = %d y1= %d\n",x1,y1);
-		printf("x2 = %d y2= %d\n",x2,y2);
-
 		/*
 		twi_navGetXY(XY1,&x1_pos,&y1_pos);
 		twi_navGetXY(XY2,&x2_pos,&y2_pos);
@@ -400,7 +369,7 @@ uint8_t goToNext(){
 	else
 	{
 		dropoffAmount++;
-		if(dropoffAmount >3)
+		if(dropoffAmount >=3)
 			return 3;
 	}
 	objIndex++;

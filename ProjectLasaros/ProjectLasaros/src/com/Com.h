@@ -46,7 +46,7 @@ arminfo_t twi_getArmInfo();
 //void twi_changeSlave(uint32_t slave_address);
 
 //start pickup
-uint8_t twi_pickupStart(void);
+uint8_t twi_pickupStart(Object theOjb);
 
 //get how many cm to move
 uint8_t twi_pickupGetMoveCm(void);

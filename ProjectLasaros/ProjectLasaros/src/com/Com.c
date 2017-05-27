@@ -164,10 +164,10 @@ arminfo_t twi_getArmInfo() {
 	result = twiSendData(data, 3);
 	if (result) {
 
-//		vTaskDelay(pdMSTOTICKS(20));
+		vTaskDelay(pdMSTOTICKS(20));
 		twiReciveData(recv, 3);
 		//printf("111 Receive successful: %u, %u, %u\n", recv[0], recv[1], recv[2]);
-		//vTaskDelay(pdMSTOTICKS(10));
+		vTaskDelay(pdMSTOTICKS(10));
 		theArm.boxDistance = recv[1];
 		theArm.boxAngle = recv[2];
 
@@ -175,7 +175,7 @@ arminfo_t twi_getArmInfo() {
 		theArm.hasData = 1;
 	} else {
 		puts("Fail 111");
-		//vTaskDelay(pdMSTOTICKS(10));
+		vTaskDelay(pdMSTOTICKS(10));
 		theArm.hasData = 0;
 		return theArm;
 	}
@@ -192,7 +192,7 @@ arminfo_t twi_getArmInfo() {
 
 	result = twiSendData(data, 3);
 	if (result) {
-		//vTaskDelay(pdMSTOTICKS(20));
+		vTaskDelay(pdMSTOTICKS(20));
 		twiReciveData(recv, 3);
 // 			//printf("222 Receive successful: %u, %u, %u\n", recv[0], recv[1], recv[2]);
 // 			//vTaskDelay(pdMSTOTICKS(10));
@@ -201,7 +201,7 @@ arminfo_t twi_getArmInfo() {
 		theArm.hasData = 1;
 	} else {
 		puts("Fail 222");
-		//vTaskDelay(pdMSTOTICKS(10));
+		vTaskDelay(pdMSTOTICKS(10));
 		theArm.hasData = 0;
 		return theArm;
 	}
@@ -223,7 +223,7 @@ arminfo_t twi_getArmInfo() {
 
 		twiReciveData(recv, 3);
 		//printf("333 Receive successful: %u, %u, %u\n", recv[0], recv[1], recv[2]);
-		//vTaskDelay(pdMSTOTICKS(10));
+		vTaskDelay(pdMSTOTICKS(20));
 		theArm.collectAll = recv[1];
 		theArm.hasData = 1;
 	} else {
@@ -246,7 +246,7 @@ arminfo_t twi_getArmInfo() {
 // }
 
 //send command for arm to start pickup
-uint8_t twi_pickupStart() {
+uint8_t twi_pickupStart(Object theOjb) {
 
 	uint8_t data[3] = {TWI_CMD_PICKUP_START, 0, 0};
 	//send pickup start cmd
