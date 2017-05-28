@@ -1,6 +1,6 @@
 //
 // Created by Sebastian Boreback on 2017-05-12.
-//
+// Author Viktor Malmgren, Robin Jonsson, Viktor Holmelin, Sebastian Börebäck.
 
 #include <Arduino.h>
 #include <Wire.h>
@@ -162,9 +162,9 @@ void handleReadCmd() {
       //      rxCurrent = (TwiCmd) cmd;
       txDropoffStatus = DROPOFF_RUNNING;
       Serial.println("DROPOFF RUNNING");
-            txBuff[0] = cmd;
-            txBuff[1] = txDropoffStatus;
-            rxNext = (TwiCmd) cmd;
+      txBuff[0] = cmd;
+      txBuff[1] = txDropoffStatus;
+      rxNext = (TwiCmd) cmd;
       break;
     case TWI_CMD_PICKUP_START:
       //Serial.println("TWI_CMD_PICKUP_START");
@@ -182,6 +182,7 @@ void handleReadCmd() {
       rxNext = (TwiCmd) cmd;
       if (recivedData[1] == PICKUP_DONE_DRIVE) {
         rxPickupStatus = (PickupStatus) recivedData[1];
+
       }
       txBuff[0] = TWI_CMD_PICKUP_STATUS;
       txBuff[1] = txPickupStatus;
@@ -193,8 +194,8 @@ void handleReadCmd() {
       //todo implement
       Serial.println("TWI_CMD_DROPOFF_STATUS");
       rxNext = (TwiCmd) cmd;
-            txBuff[0] = cmd;
-            txBuff[1] = txDropoffStatus;
+      txBuff[0] = cmd;
+      txBuff[1] = txDropoffStatus;
 
       break;
 
@@ -240,7 +241,7 @@ void requestEvent() {
     rxNext = IDLE;
   }
 
-  
+
 
 
   txBuff[0] = 0;
@@ -300,6 +301,8 @@ void setup() {
 
   run = 1;
 
+
+  //Olika pinnar vi använder, initieras här
   pinMode(directionPin, OUTPUT);
   pinMode(breakBot, INPUT_PULLUP);
   pinMode(breakTop, INPUT_PULLUP);
@@ -328,41 +331,57 @@ void setup() {
 }
 
 
-void startMotor() {
+void startMotor() { //Startar dammsugarens insug
   digitalWrite(onoffPin, HIGH);
   Serial.println("START SUG");
 }
 /*
    Stops the vacuum motor
 */
-void stopMotor() {
+void stopMotor() { //Stannar dammsugarens insug
   digitalWrite(onoffPin, LOW);
   Serial.println("STOPP SUG");
 }
 
 void down() {
-  while (digitalRead(breakBot)) {
+  while (digitalRead(breakBot)) { //När den nedre mikrobrytaren inte är nedtryckt körs loopen
     digitalWrite(directionPin, HIGH);
-    analogWrite(pwmPin, 75);
+    analogWrite(pwmPin, 75); 
     Serial.println("NED");
   }
   stopMovement();
 }
 
-void up() {
-  while (digitalRead(breakTop)) {
+void up() { //Lyfter armen
+  while (digitalRead(breakTop)) { //När den övre mikrobrytaren inte är nedtryckt körs loopen
     Serial.println("UPP");
-    digitalWrite(directionPin, LOW);
-    analogWrite(pwmPin, 130);
+    digitalWrite(directionPin, LOW); //motorn snurrar åt vänster, alltså upp
+    analogWrite(pwmPin, 130); //hastigheten till motorn
   }
   stopMovement();
 }
 /*
    Stops the movement of the arm
 */
-void stopMovement() {
-  analogWrite(pwmPin, 0);
+void stopMovement() { //Stannar motorn
+  analogWrite(pwmPin, 0); //0 i hastighet till motorn
   Serial.println("STOP MOVEMENT");
+}
+
+void downDrop() { //Metod för att snabbt sänka armen så att objektet inte sitter kvar
+  digitalWrite(directionPin, HIGH);
+  analogWrite(pwmPin, 255);
+  stopMotor();
+  Serial.println("DOWNDROP");
+  delay(75);
+  stopMovement();
+}
+
+void upGlass() {
+  digitalWrite(directionPin, LOW);
+  analogWrite(pwmPin, 130);
+  delay(150);
+  stopMovement();
 }
 
 void loop() {
@@ -373,38 +392,73 @@ void loop() {
     //handle pickup request
     switch (rxCurrent) {
 
-      case TWI_CMD_ARM_INIT:
+      case TWI_CMD_ARM_INIT: //Initiera armen, skicka specifikation för armen
         //do nottin
         break;
-      case TWI_CMD_PICKUP_START:
-        txPickupStatus = PICKUP_RUNNING;
+      case TWI_CMD_PICKUP_START: //Tillstånd för att börja plocka upp
+
+        down(); //Sänker armen till den slår i en mikrobrytare
+        startMotor(); //Startar insuget
+        delay(200); //delay så att den hinner suga in objektet
+
+       /*
+        if(txbuff[2] == GLASS){
+          upGlass();
+        }
+        
+       */
+
+        txPickupStatus = PICKUP_FORWARD; //Tillstånd som inte gör något men säger till roboten att köra fram en bit
+        rxNext = IDLE; //Nästa tillstånd är idle
+        txBuff[1] = txPickupStatus; //Uppdaterar tillstånd
         break;
 
       case TWI_CMD_PICKUP_STATUS:
         //Serial.println("TWI_CMD_PICKUP_STATUS");
+        if (PICKUP_DONE_DRIVE ==  rxPickupStatus) {
+          up(); //Efter att vi har kört klart den sträcka för att göra det lättare att plocka upp objektet så höjer vi armen
+          txPickupStatus = PICKUP_DONE; //Säger att vi har plockat upp objektet
+          txBuff[1] = txPickupStatus; //Uppdaterar tillstånd
+        }
 
-        txPickupStatus = PICKUP_RUNNING;
-        Serial.println("PICKUP_RUNNING");
+      
+        /*
+          txPickupStatus = PICKUP_RUNNING;
+          Serial.println("PICKUP_RUNNING");
+          txBuff[1] = txPickupStatus;
 
-        down();
-        startMotor();
-        delay(200);
-        up();
-        delay(10);
-        
-        txPickupStatus = PICKUP_DONE;
-        txBuff[1] = txPickupStatus;
-        Serial.println("PICKUP_DONE");
+
+          down();
+          startMotor();
+          delay(200);
+          up();
+          delay(10);
+        */
+
         break;
 
-      case TWI_CMD_DROPOFF_START:
-        Serial.println("SLÄPP OBJEKT");
+      /*
+        Serial.println("PICKUP_FORWARD");
+        txPickupStatus = PICKUP_FORWARD;
         down();
-        stopMotor();
-        up();
-        txDropoffStatus = DROPOFF_DONE;
-        rxNext = IDLE;
-        txBuff[1] = txDropoffStatus;
+        startMotor();
+        txBuff[1] = txPickupStatus;
+        break;
+      */
+
+
+      case TWI_CMD_DROPOFF_START: //Tillstånd för att släppa objektet
+        Serial.println("SLÄPP OBJEKT");
+
+        downDrop(); //Sänker armen snabbt
+        stopMotor(); //Stannar insuget
+        stopMovement(); //Stannar motorn
+        up(); //Höjer armen igen
+        
+        txDropoffStatus = DROPOFF_DONE; //Säger att vi är klara med dro
+        Serial.println("DROPOFF DONE");
+        rxNext = IDLE; //Går till idle-tillståndet
+        txBuff[1] = txDropoffStatus; //Uppdaterar vårt tillstånd
         break;
 
       case TWI_CMD_DROPOFF_STATUS:
