@@ -21,7 +21,7 @@ double kI = 1.0;
 double i_del = 0.0;
 double d_del = 0.0;
 int ek_1 = 0;
-double tS = 0.01;
+double tS = 0.01; //Framtestat sampelfrekvens
 uint8_t foo = 1;
 
 
@@ -29,7 +29,7 @@ uint8_t foo = 1;
 #define pulsev_ch 1
 #define pulseh_timer 0
 #define pulsev_timer 1
-uint32_t periodv = 1660; //1660 getpå v hjul ger runt 1700
+uint32_t periodv = 1660; //1660 på vänster hjul ger runt 1700
 uint32_t periodh = 1700;
 
 
@@ -90,26 +90,26 @@ void reglerahjul2(int ek){ //Den som fungerar
 }
 */
 //simpel P-reglering
-void reglerahjul3(int ek){
+void reglerahjul3(int ek){ //Kör roboten fram med hjälp av en PID
 	int fool = 1;
 	counterA = 0; //Nollställer räknarna
 	counterB = 0;
 	
 	if (fool)
 	{
-		i_del = (i_del+ek)*kI/tS;
-		d_del = (ek-ek_1)*tS/kD;
+		i_del = (i_del+ek)*kI/tS; //Integrerande delen
+		d_del = (ek-ek_1)*tS/kD; //Deriverande delen
 		fool = 0;
 	}
-	ek_1 = ek;
+	ek_1 = ek; 
 	
-	periodh=min(2000, periodh);
+	periodh=min(2000, periodh); //Får inte gå över 2000 i pulslängd till motorn
 	
 	
 	int uk = kP * (ek + i_del + d_del); //pid-regleringen
-	periodv + uk;
-	pulse_set_period(pulsev_ch, periodv); 
-	pulse_set_period(pulseh_ch, periodh); 
+	periodv + uk; //Reglerar vänster hjul, sätter nya pulslängden som ska sen skickas till vänstra hjulets motor
+	pulse_set_period(pulsev_ch, periodv); //Skickar hastigheten på vänster hjulet genom att skicka pulslängden till motorn
+	pulse_set_period(pulseh_ch, periodh); //Skickar hastigheten på höger hjulet genom att skicka pulslängden till motorn
 	
 }
 

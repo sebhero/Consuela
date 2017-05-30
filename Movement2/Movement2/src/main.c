@@ -86,7 +86,7 @@ int main (void)
 	/*
 	while(1) {
 			
-			
+			//Kod för test av PID-reglering för att kunna åka rakt
 			
 			ioport_get_pin_level(A);
 			ioport_get_pin_level(B);
@@ -177,7 +177,7 @@ int main (void)
 			
 			/*
 			while(1){
-			
+				//Metod för att få fram när hjulen går lika snabbt fast åt olika håll
 				int ek = counterA - counterB; //Counter A är höger hjul, counterB vänster
 				printf("\n\rCOUNTERA: %lu", counterA, "\n");//Skriver ut räknarna och felvärdet i konsollen.
 				printf("\n\rCOUNTERB: %lu", counterB, "\n");
@@ -207,7 +207,7 @@ int main (void)
 			*/
 	
 	/*
-	
+	//Kod för test av navigering
 	uint8_t foo = 0;
 	int degreesToPos;
 	double tempVariabel = 0;
