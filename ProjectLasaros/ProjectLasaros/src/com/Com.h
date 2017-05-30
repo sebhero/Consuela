@@ -81,9 +81,17 @@ void twi_navRead(uint8_t *readedData);
 uint8_t twi_navGetObjectsPos(objectinfo_t *ptr_sock, objectinfo_t *ptr_square, objectinfo_t *ptr_glass,
 							 objectinfo_t *ptr_boxgoal);
 
+//get Sock position from nav system
+//provide with pointer to object struct for each typ of object.x							 
 uint8_t twi_navGetSockPos(objectinfo_t *ptr_sock);
+//get Square position from nav system
+//provide with pointer to object struct for each typ of object.x							 
 uint8_t twi_navGetSquarePos(objectinfo_t *ptr_square);
+//get Glass position from nav system
+//provide with pointer to object struct for each typ of object.x							 
 uint8_t twi_navGetGlassPos(objectinfo_t *ptr_glass);
+//get goalbox position from nav system
+//provide with pointer to object struct for each typ of object.x							 
 uint8_t twi_navGetBoxPos(objectinfo_t *ptr_boxgoal);
 
 
@@ -92,6 +100,7 @@ uint8_t twi_navGetBoxPos(objectinfo_t *ptr_boxgoal);
 //send 1 or 2 for whichXY, then pointer to where to store the data
 void twi_navGetXY(TwiCmdNav whichXY, int16_t *ptr_xpos_1, int16_t *ptr_ypos_1);
 
+//Get information from the arm about distance to the goalbox and angle.
 void twi_getArmInfoBox(arminfo_t* arm);
 
 #endif /* COM_H_ */

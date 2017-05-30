@@ -21,7 +21,7 @@ void twi_comInit(void) {
 	// TWI master initialization options.
 	//set that there is no data;
 	theArm.hasData = 0;
-//	SLAVE_ADDR = SLAVE_ADDR_ARM;//twi slave address for arm
+
 
 	twi_master_options_t opt;
 	opt.speed = TWI_SPEED;
@@ -44,13 +44,12 @@ uint8_t sendArmCmd(uint8_t cmd) {
 
 
 	if (twi_probe(TWI_PORT, SLAVE_ADDR_ARM) == TWI_SUCCESS) {
-		//puts("Write to slave");
+
 		while (twi_master_write(TWI_PORT, &packet) != TWI_SUCCESS);
-		//delay_ms(100);
-		//puts("Write to slave done");
+
 		return 1;
 	} else {
-		//puts("error on write to slave");
+
 		return 0;
 	}
 }
@@ -94,16 +93,11 @@ uint8_t twiReciveData(uint8_t *recv, uint8_t packageSize) {
 			.length       = packageSize   // transfer data size (bytes)
 	};
 
-// 	if(twi_probe(TWI_PORT,SLAVE_ADDR)==TWI_SUCCESS)
-// 	{
+
 	while (twi_master_read(TWI_PORT, &pkt_rcv) != TWI_SUCCESS);
 	//return 1 success and recv has gotten the twi data.
 	return 1;
 
-// 	}
-// 	else{
-// 		return 0;
-// 	}
 
 }
 
@@ -144,11 +138,6 @@ void handleCmd(uint8_t cmd) {
 }
 
 arminfo_t twi_getArmInfo() {
-	//if the data is allready collected
-// 	if(theArm.hasData)
-// 	{
-// 		return theArm;
-// 	}
 
 	uint8_t data[3] = {0};
 	uint8_t recv[3] = {0};
@@ -158,15 +147,11 @@ arminfo_t twi_getArmInfo() {
 	data[0] = TWI_CMD_ARM_INIT;
 	data[1] = TWI_CMD_ARM_REQ_BOX_INFO;
 
-	//TWI_CMD_ARM_REQ_COLLECT_INFO;
-	//TWI_CMD_ARM_REQ_OBJ_INFO
-
 	result = twiSendData(data, 3);
 	if (result) {
 
 		vTaskDelay(pdMSTOTICKS(20));
-		twiReciveData(recv, 3);
-		//printf("111 Receive successful: %u, %u, %u\n", recv[0], recv[1], recv[2]);
+		twiReciveData(recv, 3);		
 		vTaskDelay(pdMSTOTICKS(10));
 		theArm.boxDistance = recv[1];
 		theArm.boxAngle = recv[2];
@@ -194,8 +179,6 @@ arminfo_t twi_getArmInfo() {
 	if (result) {
 		vTaskDelay(pdMSTOTICKS(20));
 		twiReciveData(recv, 3);
-// 			//printf("222 Receive successful: %u, %u, %u\n", recv[0], recv[1], recv[2]);
-// 			//vTaskDelay(pdMSTOTICKS(10));
 		theArm.objectDistance = recv[1];
 		theArm.objectAngle = recv[2];
 		theArm.hasData = 1;
@@ -208,8 +191,6 @@ arminfo_t twi_getArmInfo() {
 	
 	vTaskDelay(pdMSTOTICKS(60));
 
-
-	//data[0] = TWI_CMD_ARM_INIT;
 	data[1] = TWI_CMD_ARM_REQ_COLLECT_INFO;
 	recv[0] = 0;
 	recv[1] = 0;
@@ -219,16 +200,12 @@ arminfo_t twi_getArmInfo() {
 	result = twiSendData(data, 3);
 	if (result) {
 
-		//delay_ms(20);
-
 		twiReciveData(recv, 3);
-		//printf("333 Receive successful: %u, %u, %u\n", recv[0], recv[1], recv[2]);
 		vTaskDelay(pdMSTOTICKS(20));
 		theArm.collectAll = recv[1];
 		theArm.hasData = 1;
 	} else {
 		puts("Fail 333");
-		//vTaskDelay(pdMSTOTICKS(10));
 		theArm.hasData = 0;
 		return theArm;
 	}
@@ -237,13 +214,6 @@ arminfo_t twi_getArmInfo() {
 	return theArm;
 }
 
-
-//// change slave. with new slave address
-// void twi_changeSlave(uint32_t slave_address) {
-// 	SLAVE_ADDR = slave_address;
-// 	twi_set_slave_addr(TWI_PORT, SLAVE_ADDR);
-// 
-// }
 
 //send command for arm to start pickup
 uint8_t twi_pickupStart(Object theOjb) {
@@ -269,8 +239,7 @@ PickupStatus twi_pickupGetStatus() {
 		//get status
 		twiReciveData(recv, 3);
 		if (recv[0] == TWI_CMD_PICKUP_STATUS) {
-			//printf("pickupstatus %x %u",recv[0],recv[1]);
-			//vTaskDelay(pdMSTOTICKS(10));
+
 
 			//when slave want to move
 			if (recv[1] == PICKUP_FORWARD || recv[1] == PICKUP_BACKWARD) {
@@ -281,9 +250,9 @@ PickupStatus twi_pickupGetStatus() {
 		} else {
 			puts("ERROR pickup status");
 			printf("got: %x %u\n", recv[0], recv[0]);
-			//vTaskDelay(pdMSTOTICKS(10));
+
 			handleCmd(recv[0]);
-			//vTaskDelay(pdMSTOTICKS(10));
+
 		}
 
 	} else {
@@ -333,9 +302,8 @@ DropoffStatus twi_dropoffGetStatus(void) {
 		} else {
 			puts("ERROR pickup status");
 			printf("got: %x %u\n", recv[0], recv[0]);
-			//vTaskDelay(pdMSTOTICKS(10));
 			handleCmd(recv[0]);
-			//vTaskDelay(pdMSTOTICKS(10));
+
 		}
 
 	} else {
@@ -371,10 +339,9 @@ uint8_t twi_navSendCmd(TwiCmdNav cmd) {
 
 
 	if (twi_probe(TWI_PORT, SLAVE_ADDR_NAV) == TWI_SUCCESS) {
-	//puts("Write to slave");
+
 	while (twi_master_write(TWI_PORT, &packet) != TWI_SUCCESS);
-	//delay_ms(10);
-	//puts("Write to slave done");
+
 	return 1;
 	} else {
 		puts("error on write to slave");
@@ -395,15 +362,9 @@ void twi_navRead(uint8_t *readedData) {
 			.length       = 5   // transfer data size (bytes)
 	};
 
-//TODO FIX TWI0 TO TWI_PORT
 
-/*	if (twi_probe(TWI_PORT, SLAVE_ADDR_NAV) == TWI_SUCCESS) {*/
 	while (twi_master_read(TWI_PORT, &pkt_rcv) != TWI_SUCCESS);
-	//return 1 success and recv has gotten the twi data.
-	//return 1;
-// 	} else {
-// 		puts("Error on NAV READ");
-// 	}
+
 }
 
 uint8_t twi_navGetSockPos(objectinfo_t *ptr_sock)
@@ -419,11 +380,7 @@ uint8_t twi_navGetSockPos(objectinfo_t *ptr_sock)
 		puts("NAV FAILed");
 		return 0;
 	}
-// 	for (int i =0; i<5; i++)
-// 	{
-// 		printf("%i = %x",i,dataSock[i]);
-// 	}
-// 	puts("end of SOCK DATA");
+
 	vTaskDelay(pdMSTOTICKS(40));
 	buildObject(dataSock, ptr_sock);
 	return 1;
@@ -442,11 +399,7 @@ uint8_t twi_navGetSquarePos(objectinfo_t *ptr_obj)
 		puts("NAV FAILed");
 		return 0;
 	}
-// 	for (int i =0; i<5; i++)
-// 	{
-// 		printf("%i = %x",i,data[i]);
-// 	}
-// 	puts("end of SOCK DATA");
+
 	vTaskDelay(pdMSTOTICKS(40));
 	buildObject(data, ptr_obj);
 }
@@ -464,11 +417,6 @@ uint8_t twi_navGetGlassPos(objectinfo_t *ptr_obj)
 			return 0;
 		}
 		
-// 		for (int i =0; i<5; i++)
-// 		{
-// 			printf("%i = %x",i,data[i]);
-// 		}
-// 		puts("end of SOCK DATA");
 		vTaskDelay(pdMSTOTICKS(40));
 		buildObject(data, ptr_obj);
 	
@@ -486,11 +434,7 @@ uint8_t twi_navGetBoxPos(objectinfo_t *ptr_obj)
 				puts("NAV FAILed");
 				return 0;
 			}
-// 			for (int i =0; i<5; i++)
-// 			{
-// 				printf("%i = %x",i,data[i]);
-// 			}
-// 			puts("end of SOCK DATA");
+
 			vTaskDelay(pdMSTOTICKS(40));
 			buildObject(data, ptr_obj);
 }
@@ -508,8 +452,6 @@ uint8_t twi_navGetObjectsPos(objectinfo_t *ptr_sock, objectinfo_t *ptr_square, o
 	uint8_t dataGlass[5] = {0};
 	uint8_t dataGoal[5] = {0};
 
-	//todo del
-	puts("SEND SOCKETXY");
 	
 	if(twi_navSendCmd(cmdSock))
 	{
@@ -523,8 +465,7 @@ uint8_t twi_navGetObjectsPos(objectinfo_t *ptr_sock, objectinfo_t *ptr_square, o
 		return 0;
 	}
 	
-	//todo del
-	puts("SEND SQUAREXY");
+
 	vTaskDelay(pdMSTOTICKS(20));
 	if(twi_navSendCmd(cmdSquare))
 	{
@@ -535,9 +476,7 @@ uint8_t twi_navGetObjectsPos(objectinfo_t *ptr_sock, objectinfo_t *ptr_square, o
 		puts("NAV FAILed");
 		return 0;
 	}
-	
-	//todo del
-	puts("SEND GLASSXY");
+
 	
 	if(twi_navSendCmd(cmdGlass))
 	{
@@ -549,8 +488,7 @@ uint8_t twi_navGetObjectsPos(objectinfo_t *ptr_sock, objectinfo_t *ptr_square, o
 		return 0;
 	}
 	
-	//todo del
-	puts("SEND BoxGoalxy");
+
 	
 	if(twi_navSendCmd(cmdGoal))
 	{
@@ -594,23 +532,15 @@ void twi_navGetXY(TwiCmdNav whichXY, int16_t *ptr_xpos_1, int16_t *ptr_ypos_1) {
 	uint8_t data[5] = {0};
 	if (whichXY == XY1) {
 		cmd = XY1;
-		//todo del
-		//data[0]=XY1;
+
 	} else if (whichXY == XY2) {
 		cmd = XY2;
-		//todo del
-		//data[0]=XY2;
+
 	}
 
-//todo uncom
+
 	twi_navSendCmd(cmd);
 	twi_navRead(data);
-// todo uncom
-// todo del
-// data[1]=0;
-// data[2]=100;
-// data[3]=0;
-// data[4]=33;
 
 	buildXY(data, ptr_xpos_1, ptr_ypos_1);
 
@@ -645,11 +575,8 @@ void twi_getArmInfoBox(arminfo_t* arm) {
 		arm->hasData = 1;
 	} else {
 		puts("Fail 111");
-		//vTaskDelay(pdMSTOTICKS(10));
 		arm->hasData = 0;		
 	}
 
-	
-	//vTaskDelay(pdMSTOTICKS(60));
 
 }

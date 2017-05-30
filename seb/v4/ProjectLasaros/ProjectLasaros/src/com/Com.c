@@ -419,11 +419,7 @@ uint8_t twi_navGetSockPos(objectinfo_t *ptr_sock)
 		puts("NAV FAILed");
 		return 0;
 	}
-// 	for (int i =0; i<5; i++)
-// 	{
-// 		printf("%i = %x",i,dataSock[i]);
-// 	}
-// 	puts("end of SOCK DATA");
+
 	vTaskDelay(pdMSTOTICKS(40));
 	buildObject(dataSock, ptr_sock);
 	return 1;
